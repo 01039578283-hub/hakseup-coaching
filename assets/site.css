@@ -1604,6 +1604,79 @@ h1 {
   text-transform: uppercase;
 }
 
+.home-region-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(47, 196, 167, 0.12), transparent 30%),
+    radial-gradient(circle at 88% 12%, rgba(240, 207, 131, 0.18), transparent 32%),
+    linear-gradient(180deg, rgba(255, 250, 240, 0.94), rgba(255, 255, 255, 0.78));
+}
+
+.home-region-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.home-region-card {
+  display: grid;
+  gap: 7px;
+  min-height: 132px;
+  padding: 18px;
+  border: 1px solid rgba(94, 71, 45, 0.12);
+  border-radius: 22px;
+  color: var(--ink);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 250, 240, 0.72)),
+    rgba(255, 255, 255, 0.64);
+  box-shadow: 0 16px 36px rgba(64, 52, 33, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.home-region-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(47, 196, 167, 0.42);
+  box-shadow: 0 24px 48px rgba(64, 52, 33, 0.12);
+}
+
+.home-region-card span {
+  color: var(--gold-3);
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+}
+
+.home-region-card strong {
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+.home-region-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+  word-break: keep-all;
+}
+
+.home-region-card.is-all {
+  grid-column: span 2;
+  color: #fffaf0;
+  background:
+    linear-gradient(135deg, rgba(18, 31, 26, 0.96), rgba(23, 54, 47, 0.92)),
+    var(--bg);
+}
+
+.home-region-card.is-all span,
+.home-region-card.is-all p {
+  color: rgba(255, 250, 240, 0.72);
+}
+
+.home-region-card.is-all strong {
+  color: #fffaf0;
+}
+
 .site-footer {
   padding: 44px 0 168px;
   color: rgba(255, 250, 240, 0.72);
@@ -1811,7 +1884,8 @@ h1 {
   .wawa-school-grid,
   .parent-review-grid,
   .hub-grid,
-  .hub-cloud {
+  .hub-cloud,
+  .home-region-grid {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -1892,8 +1966,13 @@ h1 {
   .wawa-school-grid,
   .parent-review-grid,
   .hub-grid,
-  .hub-cloud {
+  .hub-cloud,
+  .home-region-grid {
     grid-template-columns: 1fr;
+  }
+
+  .home-region-card.is-all {
+    grid-column: auto;
   }
 
   .feature-card,
