@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://학습코칭.kr/sitemap.xml
+Sitemap: https://xn--ru4bi8s1tac0p.kr/sitemap.xml
