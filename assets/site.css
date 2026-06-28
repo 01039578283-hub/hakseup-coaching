@@ -882,6 +882,12 @@ h1 {
   line-height: 1.2;
 }
 
+.article-main .article-hero h2 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.2;
+}
+
 .article-main h2 {
   margin-top: 34px;
   font-size: clamp(24px, 3vw, 34px);
