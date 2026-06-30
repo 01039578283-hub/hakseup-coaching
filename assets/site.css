@@ -2268,3 +2268,119 @@ h1 {
   }
 }
 /* End Hub SEO uniqueness refinements */
+
+/* SEO/GEO enhancement blocks */
+.seo-geo-section,
+.seo-answer-section,
+.seo-checklist-section {
+  width: min(var(--wrap), calc(100% - 40px));
+  margin: 30px auto 0;
+  padding: clamp(24px, 4vw, 34px);
+  border: 1px solid rgba(94, 71, 45, 0.14);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(240, 207, 131, 0.18), transparent 30%),
+    radial-gradient(circle at 96% 8%, rgba(98, 210, 187, 0.12), transparent 28%),
+    rgba(255, 255, 255, 0.86);
+  box-shadow: 0 22px 56px rgba(64, 52, 33, 0.09);
+}
+
+.seo-geo-head,
+.seo-answer-copy {
+  max-width: 840px;
+  margin-bottom: 22px;
+}
+
+.seo-geo-head h2,
+.seo-answer-copy h2 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-size: clamp(24px, 3vw, 34px);
+  letter-spacing: -0.045em;
+}
+
+.seo-geo-head p:not(.parent-faq-eyebrow),
+.seo-answer-copy p {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 700;
+  line-height: 1.75;
+}
+
+.seo-geo-grid,
+.seo-answer-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.seo-geo-card,
+.seo-answer-list article {
+  padding: 20px;
+  border: 1px solid rgba(94, 71, 45, 0.12);
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,250,240,0.78));
+}
+
+.seo-geo-card span,
+.seo-answer-list b {
+  display: inline-flex;
+  margin-bottom: 9px;
+  color: var(--gold-3);
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.seo-geo-card strong {
+  display: block;
+  color: var(--ink);
+  font-size: 19px;
+  line-height: 1.4;
+}
+
+.seo-geo-card p,
+.seo-answer-list p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.seo-checklist {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seo-checklist li {
+  padding: 18px;
+  border: 1px solid rgba(94, 71, 45, 0.12);
+  border-radius: 20px;
+  background: rgba(247, 242, 230, 0.72);
+}
+
+.seo-checklist b {
+  display: block;
+  color: var(--ink);
+  font-size: 17px;
+}
+
+.seo-checklist span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 860px) {
+  .seo-geo-grid,
+  .seo-answer-list,
+  .seo-checklist {
+    grid-template-columns: 1fr;
+  }
+}
+

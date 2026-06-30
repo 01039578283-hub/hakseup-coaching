@@ -7,7 +7,7 @@ from xml.sax.saxutils import escape
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE_URL = "https://학습코칭.kr"
+BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
 EXCLUDED_DIRS = {".git", ".vercel", "__pycache__"}
 
 
