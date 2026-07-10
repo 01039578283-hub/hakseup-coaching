@@ -3,10 +3,27 @@ from __future__ import annotations
 import html
 import json
 import os
+import random
 import re
 from datetime import date
 from pathlib import Path
 from urllib.parse import quote
+
+from content_banks_site2 import (
+    FAQ_GENERAL_BANK,
+    FAQ_GRADE_BANK,
+    FAQ_OPENER_BANK,
+    GEO_ANSWER_INTRO_BANK,
+    GEO_CHECKLIST_INTRO_BANK,
+    GEO_SUMMARY_INTRO_BANK,
+    REVIEW_BANK_4,
+    REVIEW_BANK_5,
+    eul_reul,
+    i_ga,
+    pick,
+    pick_unique,
+    seed_for,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,7 +32,7 @@ BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
 SITE_NAME = "학습코칭 연구소"
 PHONE = "010-3957-8283"
 PHONE_INTL = "+82-10-3957-8283"
-TODAY = "2026-06-30"
+TODAY = "2026-07-06"
 
 
 def clean_text(value: str) -> str:
@@ -170,52 +187,40 @@ def mention_items(ctx: dict) -> list[dict]:
     ]
 
 
-def faq_pairs(ctx: dict) -> list[tuple[str, str]]:
+def faq_pairs(ctx: dict, seen_faq: set) -> list[tuple[str, str]]:
     title = ctx["title"]
-    area = ctx["neighborhood"]
-    subject = subject_label(title)
     grade = grade_label(title)
-    return [
-        (
-            f"{title} 상담은 어떤 순서로 진행되나요?",
-            f"{title} 상담은 현재 교재와 학습 습관을 먼저 확인한 뒤, {subject} 학습에서 보완이 필요한 부분을 진단하고 플래너 관리와 오답 재학습 순서로 정리합니다.",
-        ),
-        (
-            f"{area}에서 학원을 알아볼 때 어떤 기준을 보면 좋나요?",
-            f"{area}에서 학원을 비교할 때는 수업 설명만 보기보다 학생별 진단, 주간 계획 확인, 오답을 다시 점검하는 방식이 실제로 이어지는지 확인하는 것이 좋습니다.",
-        ),
-        (
-            "상담 전에 무엇을 준비하면 도움이 되나요?",
-            "최근 시험지나 문제집, 현재 공부 시간, 자주 틀리는 단원, 숙제 수행 정도를 함께 준비하면 상담에서 필요한 관리 방향을 더 구체적으로 잡을 수 있습니다.",
-        ),
-        (
-            f"{grade} 학생에게 어떤 관리가 필요한가요?",
-            f"{grade}은 개념 이해와 문제 풀이의 연결, 시험 전 복습 순서, 반복되는 오답 유형을 함께 봐야 합니다. 학생 상황에 맞춰 무리 없는 관리 기준을 정리합니다.",
-        ),
-        (
-            "학부모는 어떤 내용을 확인할 수 있나요?",
-            "수업 진행 상황, 플래너 실행 여부, 반복 오답, 다음 주 관리 포인트를 중심으로 학생의 학습 흐름을 이해하기 쉽게 확인할 수 있습니다.",
-        ),
-    ]
+    path_seed = ctx["url"]
+
+    subs = {
+        "title": title,
+        "title_eul_reul": f"{title}{eul_reul(title)}",
+        "title_i_ga": f"{title}{i_ga(title)}",
+    }
+    opener_q, opener_a = pick(FAQ_OPENER_BANK, 1, path_seed, "opener")[0]
+    opener = (opener_q.format(**subs), opener_a.format(**subs))
+
+    general = pick_unique(FAQ_GENERAL_BANK, 3, seen_faq, path_seed, "general")
+    grade_bank = FAQ_GRADE_BANK.get(grade, FAQ_GRADE_BANK["초등·중등·고등"])
+    grade_pick = pick(grade_bank, 1, path_seed, "grade")[0]
+
+    return [opener, *general, grade_pick]
 
 
-def review_items(ctx: dict) -> list[tuple[int, str]]:
-    title = ctx["title"]
-    area = ctx["neighborhood"]
-    subject = subject_label(title)
-    return [
-        (5, f"{title} 상담에서 아이가 어디에서 막히는지 차분하게 정리해줘서 관리 방향을 잡기 쉬웠습니다."),
-        (5, f"{area} 기준으로 상담 내용을 확인해보니 플래너와 오답 관리가 함께 설명되어 안심이 됐습니다."),
-        (5, f"{subject} 공부를 단순히 많이 시키는 방식이 아니라 부족한 부분부터 확인하는 점이 좋았습니다."),
-        (5, "시험 전에는 복습 순서와 자주 틀리는 문제를 따로 확인해줘서 아이가 무엇을 해야 할지 알게 됐습니다."),
-        (5, "학부모 입장에서도 수업 후 어떤 부분을 봐야 하는지 설명이 분명해서 관리 흐름을 이해하기 좋았습니다."),
-        (4, "처음 상담 때부터 아이의 공부 습관을 먼저 살펴보고 필요한 부분을 차근차근 잡아줘서 도움이 됐습니다."),
-    ]
+def review_items(ctx: dict, seen_reviews: set) -> list[tuple[int, str]]:
+    path_seed = ctx["url"]
+    five_star = pick_unique(REVIEW_BANK_5, 5, seen_reviews, path_seed, "review5")
+    four_star = pick(REVIEW_BANK_4, 1, path_seed, "review4")[0]
+    rng = random.Random(seed_for(path_seed, "review-pos"))
+    position = rng.randrange(6)
+    items = [(5, body) for body in five_star]
+    items.insert(position, (4, four_star))
+    return items
 
 
-def render_faq_section(ctx: dict) -> str:
+def render_faq_section(ctx: dict, faqs: list[tuple[str, str]]) -> str:
     details = []
-    for i, (question, answer) in enumerate(faq_pairs(ctx)):
+    for i, (question, answer) in enumerate(faqs):
         open_attr = " open" if i == 0 else ""
         details.append(
             f"""    <details class="parent-faq-item"{open_attr}>
@@ -235,9 +240,9 @@ def render_faq_section(ctx: dict) -> str:
 </section>"""
 
 
-def render_review_section(ctx: dict) -> str:
+def render_review_section(ctx: dict, reviews: list[tuple[int, str]]) -> str:
     cards = []
-    for rating, body in review_items(ctx):
+    for rating, body in reviews:
         stars = "★" * rating + "☆" * (5 - rating)
         cards.append(
             f"""    <article class="parent-review-card">
@@ -263,12 +268,23 @@ def render_geo_section(ctx: dict) -> str:
     area = ctx["neighborhood"]
     subject = subject_label(title)
     grade = grade_label(title)
+    path_seed = ctx["url"]
+    subs = {
+        "title": title,
+        "title_eul_reul": f"{title}{eul_reul(title)}",
+        "region": ctx["region"],
+        "district": ctx["district"],
+        "area": area,
+    }
+    summary_intro = pick(GEO_SUMMARY_INTRO_BANK, 1, path_seed, "geo-summary")[0].format(**subs)
+    answer_intro = pick(GEO_ANSWER_INTRO_BANK, 1, path_seed, "geo-answer")[0].format(**subs)
+    checklist_intro = pick(GEO_CHECKLIST_INTRO_BANK, 1, path_seed, "geo-checklist")[0]
     return f"""<!-- seo-geo-enhancement:start -->
 <section class="seo-geo-section" aria-labelledby="seo-geo-summary-title">
   <div class="seo-geo-head">
     <p class="parent-faq-eyebrow">SEO · GEO SUMMARY</p>
     <h2 id="seo-geo-summary-title">{html.escape(title)} 핵심 요약</h2>
-    <p>{html.escape(ctx['region'])} {html.escape(ctx['district'])} {html.escape(area)}에서 {html.escape(title)} 정보를 찾는 학부모를 위해, 기존 페이지의 상담·진단·플래너·오답 관리 내용을 질문에 바로 답할 수 있는 형태로 정리했습니다.</p>
+    <p>{html.escape(summary_intro)}</p>
   </div>
   <div class="seo-geo-grid">
     <article class="seo-geo-card"><span>지역 기준</span><strong>{html.escape(ctx['region'])} {html.escape(ctx['district'])} {html.escape(area)}</strong><p>페이지 경로와 기존 안내 내용을 기준으로 지역명을 명확하게 연결했습니다.</p></article>
@@ -280,8 +296,8 @@ def render_geo_section(ctx: dict) -> str:
 <section class="seo-answer-section" aria-labelledby="seo-answer-title">
   <div class="seo-answer-copy">
     <p class="parent-faq-eyebrow">ANSWER READY</p>
-    <h2 id="seo-answer-title">{html.escape(title)}를 알아볼 때 바로 확인할 내용</h2>
-    <p>{html.escape(title)} 페이지는 단순 소개보다 “어떤 학생에게 필요한지, 상담 때 무엇을 확인하는지, 학부모가 어떤 기준으로 비교하면 좋은지”를 한눈에 이해할 수 있도록 구성했습니다.</p>
+    <h2 id="seo-answer-title">{html.escape(title)}{eul_reul(title)} 알아볼 때 바로 확인할 내용</h2>
+    <p>{html.escape(answer_intro)}</p>
   </div>
   <div class="seo-answer-list">
     <article><b>추천 학생</b><p>계획은 세우지만 실행이 흔들리거나, 같은 유형의 오답이 반복되는 학생에게 적합합니다.</p></article>
@@ -294,7 +310,7 @@ def render_geo_section(ctx: dict) -> str:
   <div class="seo-geo-head">
     <p class="parent-faq-eyebrow">CONSULTING CHECKLIST</p>
     <h2 id="seo-checklist-title">{html.escape(title)} 상담 전 체크리스트</h2>
-    <p>실제 상담 전 아래 항목을 확인하면 학생에게 필요한 수업 방향을 더 빠르게 정리할 수 있습니다.</p>
+    <p>{html.escape(checklist_intro)}</p>
   </div>
   <ol class="seo-checklist">
     <li><b>현재 교재</b><span>사용 중인 교재와 진도를 확인합니다.</span></li>
@@ -406,7 +422,13 @@ def find_node(graph: list[dict], type_name: str) -> dict | None:
     return None
 
 
-def upsert_json_ld(source: str, ctx: dict, image_url: str) -> str:
+def upsert_json_ld(
+    source: str,
+    ctx: dict,
+    image_url: str,
+    faqs: list[tuple[str, str]],
+    reviews: list[tuple[int, str]],
+) -> str:
     match = re.search(r'<script type="application/ld\+json">(.*?)</script>', source, re.S | re.I)
     if match:
         try:
@@ -470,7 +492,7 @@ def upsert_json_ld(source: str, ctx: dict, image_url: str) -> str:
                     "reviewBody": body,
                     "reviewRating": {"@type": "Rating", "ratingValue": str(rating), "bestRating": "5"},
                 }
-                for rating, body in review_items(ctx)
+                for rating, body in reviews
             ],
             "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "bestRating": "5", "ratingCount": "6", "reviewCount": "6"},
         }
@@ -591,7 +613,7 @@ def upsert_json_ld(source: str, ctx: dict, image_url: str) -> str:
             "@id": faq_id,
             "mainEntity": [
                 {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
-                for q, a in faq_pairs(ctx)
+                for q, a in faqs
             ],
         }
     )
@@ -611,10 +633,16 @@ def replace_section(source: str, class_name: str, replacement: str) -> str:
     return source
 
 
-def upsert_visible_sections(source: str, page_dir: Path, ctx: dict) -> str:
+def upsert_visible_sections(
+    source: str,
+    page_dir: Path,
+    ctx: dict,
+    faqs: list[tuple[str, str]],
+    reviews: list[tuple[int, str]],
+) -> str:
     source = re.sub(r"\n?\s*<!-- seo-geo-enhancement:start -->[\s\S]*?<!-- seo-geo-enhancement:end -->", "", source, flags=re.I)
-    source = replace_section(source, "parent-faq-section", render_faq_section(ctx))
-    source = replace_section(source, "parent-review-section", render_review_section(ctx))
+    source = replace_section(source, "parent-faq-section", render_faq_section(ctx, faqs))
+    source = replace_section(source, "parent-review-section", render_review_section(ctx, reviews))
     links = render_internal_links(page_dir, ctx)
     source = re.sub(r"\n?\s*<!-- child-page-links:start -->[\s\S]*?<!-- child-page-links:end -->", "", source, flags=re.I)
 
@@ -756,16 +784,18 @@ def ensure_css() -> None:
         css_path.write_text(css.rstrip() + SEO_GEO_CSS + "\n", encoding="utf-8")
 
 
-def process_page(page_dir: Path) -> bool:
+def process_page(page_dir: Path, seen_faq: set, seen_reviews: set) -> bool:
     path = page_dir / "index.html"
     source = path.read_text(encoding="utf-8", errors="ignore")
     ctx = page_context(page_dir, source)
     image_url = absolutize_image(first_image_src(source), page_dir)
+    faqs = faq_pairs(ctx, seen_faq)
+    reviews = review_items(ctx, seen_reviews)
     updated = source
     updated = ensure_single_h1(updated, ctx["title"])
     updated = upsert_head(updated, ctx, image_url)
-    updated = upsert_json_ld(updated, ctx, image_url)
-    updated = upsert_visible_sections(updated, page_dir, ctx)
+    updated = upsert_json_ld(updated, ctx, image_url, faqs, reviews)
+    updated = upsert_visible_sections(updated, page_dir, ctx, faqs, reviews)
     if updated != source:
         path.write_text(updated, encoding="utf-8")
         return True
@@ -776,8 +806,10 @@ def main() -> None:
     ensure_css()
     changed = 0
     targets = target_page_dirs()
+    seen_faq: set = set()
+    seen_reviews: set = set()
     for page_dir in targets:
-        if process_page(page_dir):
+        if process_page(page_dir, seen_faq, seen_reviews):
             changed += 1
     print(json.dumps({"targets": len(targets), "changed": changed, "date": TODAY}, ensure_ascii=False))
 
