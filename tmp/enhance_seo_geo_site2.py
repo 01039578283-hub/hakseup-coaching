@@ -19,6 +19,7 @@ from content_banks_site2 import (
     REVIEW_BANK_4,
     REVIEW_BANK_5,
     eul_reul,
+    eun_neun,
     i_ga,
     pick,
     pick_unique,
@@ -32,7 +33,7 @@ BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
 SITE_NAME = "학습코칭 연구소"
 PHONE = "010-3957-8283"
 PHONE_INTL = "+82-10-3957-8283"
-TODAY = "2026-07-06"
+TODAY = date.today().isoformat()
 
 
 def clean_text(value: str) -> str:
@@ -196,6 +197,7 @@ def faq_pairs(ctx: dict, seen_faq: set) -> list[tuple[str, str]]:
         "title": title,
         "title_eul_reul": f"{title}{eul_reul(title)}",
         "title_i_ga": f"{title}{i_ga(title)}",
+        "title_eun_neun": f"{title}{eun_neun(title)}",
     }
     opener_q, opener_a = pick(FAQ_OPENER_BANK, 1, path_seed, "opener")[0]
     opener = (opener_q.format(**subs), opener_a.format(**subs))
