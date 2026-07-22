@@ -4051,3 +4051,32 @@ h3 {
     font-size: 10.5px;
   }
 }
+
+/* Subject academy menu shell: content will be added in a later phase. */
+.empty-subject-page {
+  min-height: clamp(360px, 54vh, 620px);
+  background:
+    radial-gradient(circle at 18% 22%, rgba(47, 111, 219, .06), transparent 30%),
+    radial-gradient(circle at 82% 72%, rgba(43, 159, 146, .06), transparent 28%),
+    #f8fbfe;
+}
+
+@media (max-width: 720px) {
+  html {
+    scroll-padding-top: 164px;
+  }
+
+  .nav-links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .nav-links a {
+    min-height: 38px;
+    font-size: 11.5px;
+    letter-spacing: -.035em;
+  }
+
+  .empty-subject-page {
+    min-height: 46vh;
+  }
+}
