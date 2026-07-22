@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import date
 from pathlib import Path
+import re
 from urllib.parse import quote
 from xml.sax.saxutils import escape
 
@@ -13,7 +14,16 @@ EXCLUDED_DIRS = {".git", ".vercel", "__pycache__"}
 
 def is_public_html(path: Path) -> bool:
     parts = set(path.relative_to(ROOT).parts)
-    return path.suffix.lower() == ".html" and not parts.intersection(EXCLUDED_DIRS)
+    if path.suffix.lower() != ".html" or parts.intersection(EXCLUDED_DIRS):
+        return False
+    page = path.read_text(encoding="utf-8", errors="ignore")
+    return not bool(
+        re.search(
+            r'<meta\s+name=["\']robots["\']\s+content=["\'][^"\']*noindex',
+            page,
+            re.IGNORECASE,
+        )
+    )
 
 
 def public_url(path: Path) -> str:
@@ -44,7 +54,7 @@ def main() -> None:
             ]
         )
     lines.append("</urlset>")
-    (ROOT / "sitemap.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (ROOT / "sitemap.xml").write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
     print(f"Generated sitemap.xml with {len(urls)} URLs")
 
 
