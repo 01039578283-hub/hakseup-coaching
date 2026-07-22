@@ -90,6 +90,124 @@ def parse_review(value: str) -> tuple[str, str]:
     return note, compact(" ".join(body))
 
 
+def individualize_high_faq(
+    faq: list[tuple[str, str]], locality: str, title: str, source: dict, index: int,
+) -> list[tuple[str, str]]:
+    area = compact(f"{source['region']} {source['city']} {locality}")
+    schools = source.get("target_schools", [])
+    first_questions = [
+        f"{title}을 선택할 때 가장 먼저 확인할 학습 기준은 무엇인가요?",
+        f"{locality} 고등학생에게 맞는 학원인지 어떤 자료로 판단하나요?",
+        f"{area}에서 고등학생 학원을 비교할 때 무엇부터 살펴봐야 하나요?",
+        f"{title} 상담에서 학생의 현재 수준을 어떻게 확인하나요?",
+        f"{locality} 고등학생의 내신·모의평가 상황은 상담에 어떻게 반영하나요?",
+        f"{title} 선택 전에 최근 시험지와 학습 기록을 왜 확인해야 하나요?",
+        f"{area} 고등학생에게 필요한 수업과 관리를 어떻게 구분하나요?",
+        f"{locality}에서 고등학생 학습 계획을 세울 때 우선순위는 무엇인가요?",
+        f"{title}이 학생에게 맞는지 첫 상담에서 무엇으로 살펴보나요?",
+        f"{area} 고등학생의 약점을 찾을 때 성적 외에 무엇을 함께 보나요?",
+        f"{locality} 고등학생 학원 선택은 어떤 순서로 비교하면 좋나요?",
+        f"{title} 상담 전 준비하면 좋은 학교 자료와 학습 기록은 무엇인가요?",
+        f"{area}에서 내신과 수능 준비 방향을 어떻게 나눠 확인하나요?",
+        f"{locality} 고등학생의 오답과 공부 습관은 학원 선택에 왜 중요한가요?",
+        f"{title}을 알아볼 때 수업 이후의 관리 흐름은 어떻게 확인하나요?",
+        f"{area} 고등학생에게 맞는 진도와 학습량은 무엇으로 정하나요?",
+    ]
+    commute_questions = [
+        f"{locality} 센터 주소까지 통학 가능성은 어떻게 확인하면 좋나요?",
+        f"{title} 상담 전에 등원 거리와 이동 시간을 어떻게 점검하나요?",
+        f"{area}에서 학교·집과 센터 사이의 통학 동선은 어떻게 판단하나요?",
+        f"{locality} 고등학생의 등원 일정은 주간 학습 계획과 어떻게 맞추나요?",
+        f"{title}을 비교할 때 실제 주소와 수업 시간을 함께 봐야 하는 이유는 무엇인가요?",
+        f"{area} 고등학생이 꾸준히 등원할 수 있는지 어떤 기준으로 확인하나요?",
+        f"{locality} 센터 방문 전 주소와 이동 경로를 어떻게 확인해야 하나요?",
+        f"{title} 상담 시 통학 시간과 자습 시간을 어떻게 함께 계산하나요?",
+        f"{area}에서 늦은 수업 뒤 귀가 동선은 무엇을 확인해야 하나요?",
+        f"{locality} 고등학생의 학교 일정과 등원 시간을 어떻게 조정하나요?",
+        f"{title} 선택에서 거리보다 먼저 확인할 통학 조건이 있나요?",
+        f"{area} 센터의 실제 위치와 방문 가능 시간은 어디에서 확인하나요?",
+        f"{locality} 학생의 이동 부담이 학습 계획에 무리가 없는지 어떻게 보나요?",
+        f"{title} 상담 전에 주중·주말 통학 시간을 따로 확인해야 하나요?",
+        f"{area} 고등학생의 등원 횟수와 이동 시간을 어떻게 비교하나요?",
+        f"{locality} 센터까지의 통학 계획을 세울 때 필요한 정보는 무엇인가요?",
+    ]
+    grade_questions = [
+        "{locality} {grade} 학생은 선행과 복습의 비중을 어떤 기준으로 정해야 하나요?",
+        "{locality} {grade} 학생이 선행보다 복습을 먼저 해야 하는 경우는 언제인가요?",
+        "{title} 상담에서 {grade} 진도와 취약 단원을 어떻게 함께 확인하나요?",
+        "{area} {grade} 학생의 선행 범위는 무엇을 확인한 뒤 정하나요?",
+        "{locality} {grade} 학생에게 현재 단원 복습이 필요한지 어떻게 판단하나요?",
+        "{title}에서 {grade} 학습 계획을 세울 때 내신과 선행을 어떻게 나누나요?",
+        "{area} {grade} 학생의 최근 시험 결과는 다음 진도에 어떻게 반영하나요?",
+        "{locality} {grade} 학생이 선행 진도를 늦춰야 하는 신호는 무엇인가요?",
+    ]
+    closing_variants = [
+        f"이 기준은 {locality} 학생의 최근 학습 기록과 함께 확인해야 합니다.",
+        f"최종 판단은 {title} 상담에서 학생 자료를 대조한 뒤 정하세요.",
+        f"{area} 고등학생의 학교 일정과 현재 진도까지 함께 살펴보는 것이 좋습니다.",
+        f"학부모가 {locality}에서 비교할 때에는 말보다 실제 관리 기록을 확인하세요.",
+        f"{locality} 학생의 시험지와 교재를 함께 놓고 확인하면 판단이 구체적입니다.",
+        f"이 내용은 {locality} 학생의 주간 계획과 연결해 실제 실행 가능성을 점검해야 합니다.",
+        f"{title} 상담에서는 학생이 혼자 공부하는 시간까지 포함해 확인하세요.",
+        f"{title}의 관리 기준이 현재 학생에게 적용되는지는 상담 자료로 다시 확인해야 합니다.",
+        f"{locality} 학생의 진도 차이를 고려해 수업 전후의 확인 방법까지 질문해 보세요.",
+        f"{area}의 확인 가능한 학교 자료와 학생 답안을 함께 대조하는 것이 안전합니다.",
+        f"{locality}에서 내신과 장기 학습을 함께 준비한다면 계획의 수정 기준도 확인하세요.",
+        f"{locality} 고등학생의 오답 기록을 기준으로 다음 확인 시점까지 정하는 편이 좋습니다.",
+        f"{title} 상담에서는 수업 전후의 학습 흐름이 실제로 이어지는지 확인하세요.",
+        f"{locality} 학생이 혼자 공부하는 시간까지 고려해 학습량을 조정해야 합니다.",
+        f"{title} 선택 조건은 학생의 현재 자료로 구체화한 뒤 비교하는 것이 좋습니다.",
+        f"{area} 고등학생이 상담 뒤 실행할 계획과 점검 시점까지 확인해야 합니다.",
+    ]
+    school_variants = [
+        "학교명이 같아도 학년과 시험 범위는 다를 수 있습니다. {evidence} 학생이 받은 범위표·학교 자료·최근 시험지를 확인해 준비 순서를 다시 정하세요.",
+        "학교 정보는 내신 계획의 출발점입니다. {evidence} 실제 범위표와 수업 자료, 최근 시험 결과를 대조해 우선순위를 조정해야 합니다.",
+        "같은 학교 학생도 현재 범위와 취약 단원은 다릅니다. {evidence} 학교 프린트와 시험지까지 확인한 뒤 복습과 다음 진도를 나누세요.",
+        "학교명만으로 진도를 결정하지 않습니다. {evidence} 학생에게 안내된 시험 범위와 최근 답안을 기준으로 필요한 학습부터 구분하세요.",
+        "내신 준비는 확인된 학교 자료에서 시작해야 합니다. {evidence} 범위표·교재 진도·최근 시험지를 함께 보고 학습 순서를 구체화하세요.",
+        "학교별 안내는 참고 정보이며 학생의 실제 범위가 최종 기준입니다. {evidence} 최근 자료를 확인해 개념 보완과 문제 연습의 비중을 정합니다.",
+        "학년과 시험 시기에 따라 같은 학교의 준비 내용도 달라집니다. {evidence} 현재 범위와 오답 기록을 바탕으로 계획을 다시 맞추세요.",
+        "학교를 추정하거나 운영 방식을 단정하지 않습니다. {evidence} 학생이 직접 받은 자료 안에서 내신 준비 순서를 정하는 편이 안전합니다.",
+        "지역 학교 정보보다 학생의 실제 답안이 더 구체적인 근거가 됩니다. {evidence} 범위표와 최근 시험지를 함께 살펴 먼저 해결할 부분을 가리세요.",
+        "상담에서는 학교명 확인에 그치지 않습니다. {evidence} 현재 진도와 배부 자료, 최근 평가 결과를 대조해 주간 계획으로 옮겨야 합니다.",
+        "학교 정보가 제공되어도 평가 범위를 임의로 가정해서는 안 됩니다. {evidence} 확인된 자료와 학생 답안을 기준으로 준비 단계를 나누세요.",
+        "내신 계획은 학교별 일반 정보가 아니라 학생에게 주어진 실제 자료를 중심으로 세웁니다. {evidence} 최근 오답까지 확인해 학습량을 조정하세요.",
+        "학교가 같아도 과목별 이해도와 준비 시점은 다릅니다. {evidence} 범위표와 교재, 최근 시험 결과를 근거로 우선순위를 정하세요.",
+        "학교 관련 정보는 확인 가능한 범위에서만 활용합니다. {evidence} 학생이 받은 자료와 최근 시험지를 바탕으로 복습 순서를 구체화하세요.",
+        "시험 대비 범위는 학교 이름만으로 판단할 수 없습니다. {evidence} 실제 공지와 수업 자료, 학생 답안을 확인해 계획을 조정해야 합니다.",
+        "상담 때에는 학교 정보와 학생의 현재 기록을 분리해 확인합니다. {evidence} 범위표·프린트·시험지를 근거로 다음 학습을 정하세요.",
+    ]
+    evidence = (
+        f"현재 {locality} 센터 자료에 안내된 고등 참고 학교는 {'·'.join(schools)}이며,"
+        if schools else
+        f"현재 {locality} 센터 자료에 고등 참고 학교명이 준비되지 않은 경우에는 학교를 임의로 추가하지 말고,"
+    )
+    revised: list[tuple[str, str]] = []
+    for position, (question, answer) in enumerate(faq):
+        if position == 0:
+            question = first_questions[index % len(first_questions)]
+        elif "통학 가능성" in question or "제공 주소" in question:
+            question = commute_questions[(index + 7) % len(commute_questions)]
+        elif "선행과 복습" in question:
+            grade_match = re.search(r"(예비고1|고[1-3])", question)
+            grade = grade_match.group(1) if grade_match else "고등학생"
+            question = grade_questions[index % len(grade_questions)].format(
+                grade=grade, locality=locality, title=title, area=area,
+            )
+        elif position == 2 and locality not in question:
+            question = f"{locality}에서 {question}"
+        if locality not in question and title not in question:
+            question = f"{locality}에서 {question}"
+        if "페이지에 제공된 학교들도" in answer or "학교명을 추정하지 말고" in answer:
+            answer = school_variants[index % len(school_variants)].format(evidence=evidence)
+        else:
+            answer = compact(
+                answer + " " + closing_variants[(index * 5 + position) % len(closing_variants)]
+            )
+        revised.append((question, answer))
+    return revised
+
+
 def individualize_high_body(value: str, locality: str, index: int) -> str:
     """Disperse one source-bank sentence without changing its factual meaning."""
     repeated = (
@@ -199,6 +317,19 @@ def normalize_slug(value: str) -> str:
     return re.sub(r"[\s-]+", "", value)
 
 
+def extract_target_schools(snippet: str, level: str) -> list[str]:
+    card = re.search(
+        rf'<article class="wawa-school-card is-{re.escape(level)}">(.*?)</article>',
+        snippet, re.S,
+    )
+    if not card:
+        return []
+    names = [compact(re.sub(r"<[^>]+>", "", value)) for value in re.findall(
+        r'<span class="wawa-pill">(.*?)</span>', card.group(1), re.S,
+    )]
+    return list(dict.fromkeys(name for name in names if name and "준비중" not in name))
+
+
 def extract_source_pages() -> dict[str, dict]:
     nation = ROOT / "전국학원"
     child_names = ["고등영수학원", "중등영수학원", "초등영수학원"]
@@ -220,6 +351,7 @@ def extract_source_pages() -> dict[str, dict]:
         if not rep_match:
             rep_match = re.search(r'<meta property="og:image" content="([^"]+)"', page)
         snippet_match = re.search(r'(<section class="wawa-center-snippet".*?</section>)', page, re.S)
+        snippet = snippet_match.group(1) if snippet_match else ""
         result[normalize_slug(source_slug)] = {
             "region": region,
             "city": city,
@@ -227,7 +359,8 @@ def extract_source_pages() -> dict[str, dict]:
             "source_url": canonical_match.group(1) if canonical_match else absolute_url("전국학원", region, city, source_slug),
             "map_file": map_match.group(1) if map_match else "",
             "representative": rep_match.group(1) if rep_match else "",
-            "center_snippet": snippet_match.group(1) if snippet_match else "",
+            "center_snippet": snippet,
+            "target_schools": extract_target_schools(snippet, "high"),
             "organization": org,
         }
     return result
@@ -293,6 +426,10 @@ def make_graph(
         {"@type": "Thing", "name": "오답 재학습"},
         {"@type": "Thing", "name": "고등학생 학원 선택 기준"},
     ]
+    mentions.extend(
+        {"@type": "EducationalOrganization", "name": school}
+        for school in source.get("target_schools", [])
+    )
     offers = [
         {"@type": "Offer", "name": "고등학생 학습 진단", "itemOffered": {"@type": "Service", "name": f"{title} 학습 진단"}},
         {"@type": "Offer", "name": "고등학생 학습관리", "itemOffered": {"@type": "Service", "name": f"{title} 플래너·오답 관리"}},
@@ -372,7 +509,9 @@ def render_local_page(record: dict, all_records: list[dict], index: int) -> str:
     slug = record["slug"]
     body_value = individualize_high_body(sections["본문"], locality, index)
     intro, body_sections = parse_body(body_value)
-    faq = parse_faq(sections["FAQ"])
+    faq = individualize_high_faq(
+        parse_faq(sections["FAQ"]), locality, title, source, index,
+    )
     _, review_text = parse_review(sections["학부모후기"])
     review_note = varied_review_note(locality, title, index)
     if len(faq) != 5 or len(body_sections) < 5:

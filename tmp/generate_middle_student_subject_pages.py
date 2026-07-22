@@ -90,6 +90,111 @@ def parse_review(value: str) -> tuple[str, str]:
     return note, compact(" ".join(body))
 
 
+def individualize_middle_faq(
+    faq: list[tuple[str, str]], locality: str, title: str, source: dict, index: int,
+) -> list[tuple[str, str]]:
+    """Vary repeated FAQ prompts and add only verified middle-school evidence."""
+    if CATEGORY != "중학생학원":
+        return faq
+    area = compact(f"{source['region']} {source['city']} {locality}")
+    schools = source.get("target_schools", [])
+    fit_questions = [
+        f"{title}은 어떤 학습 상태의 학생에게 맞는지 어떻게 판단하나요?",
+        f"{locality} 중학생에게 필요한 관리인지 무엇을 보고 확인하나요?",
+        f"{area}에서 중학생 학원을 비교할 때 학생 상황은 어떻게 진단하나요?",
+        f"{title} 상담에서는 현재 진도와 공부 습관을 어떻게 살펴보나요?",
+        f"{locality} 중학생의 개념 이해와 문제 적용 수준은 어떻게 구분하나요?",
+        f"{title}이 학생에게 맞는지 첫 상담에서 어떤 자료를 확인하나요?",
+        f"{area} 중학생의 부족한 과목과 학습 습관을 어떻게 함께 점검하나요?",
+        f"{locality}에서 학습관리가 필요한 학생의 신호는 무엇인가요?",
+        f"{title} 선택 전에 최근 시험지와 교재를 확인하는 이유는 무엇인가요?",
+        f"{area} 중학생의 현재 학습량이 적절한지 어떻게 판단하나요?",
+        f"{locality} 중학생에게 복습 중심 수업이 필요한 경우는 언제인가요?",
+        f"{title} 상담에서 학생별 진도 차이를 어떻게 반영하나요?",
+        f"{area}에서 중학생 학습 계획을 세울 때 가장 먼저 보는 기준은 무엇인가요?",
+        f"{locality} 학생의 오답과 과제 수행 상태는 학원 선택에 왜 중요한가요?",
+        f"{title}의 수업과 학습관리가 학생에게 맞는지 어떻게 비교하나요?",
+        f"{area} 중학생에게 필요한 수업 강도는 어떤 기록을 근거로 정하나요?",
+    ]
+    exam_questions = [
+        f"{locality} 중학생 내신 대비는 어떤 학교 자료부터 확인해야 하나요?",
+        f"{title}에서 중간·기말고사 준비 순서를 어떻게 정하나요?",
+        f"{area} 중학생의 시험 범위와 취약 단원은 어떻게 함께 점검하나요?",
+        f"{locality} 학교 내신 준비에서 교과서와 프린트를 어떻게 활용하나요?",
+        f"{title} 상담 시 최근 시험지에서 무엇을 먼저 확인하나요?",
+        f"{area} 중학생의 시험 대비 기간과 학습량은 어떻게 조정하나요?",
+        f"{locality} 중학생이 같은 실수를 반복할 때 내신 계획을 어떻게 바꾸나요?",
+        f"{title}에서 학교 진도와 학생의 이해도 차이를 어떻게 맞추나요?",
+        f"{area} 중학생 내신 준비는 암기와 문제풀이 비중을 어떻게 나누나요?",
+        f"{locality} 학교 시험을 준비할 때 범위표 외에 무엇을 챙겨야 하나요?",
+        f"{title}의 내신 대비 계획은 어떤 확인 자료를 근거로 세우나요?",
+        f"{area} 중학생의 서술형과 오답 준비는 어떤 순서로 진행하나요?",
+        f"{locality} 학생의 최근 평가 결과를 다음 시험 계획에 어떻게 반영하나요?",
+        f"{title} 상담에서 학교별 시험 범위를 임의로 단정하지 않는 이유는 무엇인가요?",
+        f"{area} 중학생이 시험 직전에 먼저 정리해야 할 학습 기록은 무엇인가요?",
+        f"{locality} 내신 준비에서 개념 복습과 실전 문제를 언제 전환하나요?",
+    ]
+    consult_questions = [
+        "{title} 상담에서 ‘{topic}’ 안내는 어떤 근거로 확인해야 하나요?",
+        "{locality} 중학생 상담에서 ‘{topic}’ 설명이 학생 계획과 이어지는지 어떻게 보나요?",
+        "{area} 학습 상담에서 ‘{topic}’의 적용 조건은 무엇을 질문해야 하나요?",
+        "{title}의 ‘{topic}’ 안내는 어떤 기록으로 검토하면 좋나요?",
+        "{locality} 학부모가 ‘{topic}’ 설명을 들을 때 확인할 핵심은 무엇인가요?",
+        "{title} 상담에서 ‘{topic}’의 담당자와 점검 절차도 물어봐야 하나요?",
+        "{area} 중학생에게 ‘{topic}’이 실제로 적용되는지 어떻게 확인하나요?",
+        "{locality} 학습 상담에서 ‘{topic}’과 주간 계획을 어떻게 연결해 질문하나요?",
+        "{title} 상담 중 ‘{topic}’ 설명이 홍보 문구인지 어떻게 구분하나요?",
+        "{area}에서 ‘{topic}’ 안내를 비교할 때 적용 범위도 확인해야 하나요?",
+        "{locality} 중학생 상담에서 ‘{topic}’의 변경 절차는 왜 확인해야 하나요?",
+        "{title}의 ‘{topic}’ 설명이 현재 학생에게 맞는지 무엇으로 판단하나요?",
+        "{area} 중학생 상담에서 ‘{topic}’의 확인 시점은 어떻게 질문하나요?",
+        "{locality} 학부모가 ‘{topic}’ 관련 답변을 들은 뒤 무엇을 기록해야 하나요?",
+        "{title} 상담에서 ‘{topic}’의 실제 운영 예시를 요청해도 되나요?",
+        "{area} 중학생의 학습 상황과 ‘{topic}’ 안내를 어떻게 함께 검토하나요?",
+    ]
+    answer_closings = [
+        f"이 답변은 {locality} 학생의 실제 기록과 함께 확인해야 합니다.",
+        f"{title} 상담에서는 관련 자료를 직접 대조한 뒤 판단하세요.",
+        f"{area} 중학생의 학교 일정과 현재 진도까지 함께 살펴보는 것이 좋습니다.",
+        f"학부모가 {locality}에서 비교할 때에는 설명을 실제 관리 계획으로 연결해 보세요.",
+        f"{locality} 학생의 시험지와 현재 교재를 함께 보면 판단이 더 구체적입니다.",
+        f"{locality} 학생의 주간 일정까지 고려해 지속 가능한 방식인지 확인해야 합니다.",
+        f"{title} 상담 뒤 누가 언제 다시 점검하는지도 함께 질문해 보세요.",
+        f"{title}의 학습관리 기준이 현재 학생에게 맞는지는 실제 자료로 확인해야 합니다.",
+        f"{locality} 학생의 진도와 습관에 따라 적용 방법이 달라질 수 있습니다.",
+        f"{area}의 확인 가능한 학교 자료와 학생 답안을 함께 대조하는 것이 안전합니다.",
+        f"{locality}에서 내신과 다음 학기를 함께 준비한다면 계획 수정 기준도 확인하세요.",
+        f"{locality} 중학생의 오답 기록을 중심으로 다음 확인 시점까지 정하는 편이 좋습니다.",
+        f"{title} 상담에서는 수업 전후의 실행 흐름이 실제로 이어지는지 확인하세요.",
+        f"{locality} 학생이 혼자 공부하는 시간까지 포함해 학습량을 조정해야 합니다.",
+        f"{title} 선택 조건은 학생의 현재 자료로 구체화한 뒤 비교하는 것이 좋습니다.",
+        f"{area} 중학생의 현재 수준을 과장 없이 확인할 수 있는 근거를 요청하세요.",
+    ]
+    school_evidence = (
+        f"현재 센터 자료에 안내된 중등 참고 학교는 {'·'.join(schools)}입니다. "
+        if schools else
+        "현재 센터 자료에 중등 참고 학교명이 준비되지 않은 경우에는 학교를 임의로 추가하지 않습니다. "
+    )
+    revised: list[tuple[str, str]] = []
+    for position, (question, answer) in enumerate(faq):
+        if position == 0:
+            question = fit_questions[index % len(fit_questions)]
+        elif position == 1:
+            question = exam_questions[index % len(exam_questions)]
+            answer = school_evidence + answer
+        elif position == 2:
+            topic_match = re.search(r"‘([^’]+)’", answer)
+            topic = topic_match.group(1) if topic_match else "학습관리 안내"
+            question = consult_questions[index % len(consult_questions)].format(
+                title=title, locality=locality, area=area, topic=topic,
+            )
+        answer = compact(
+            answer + " " + answer_closings[(index * 7 + position) % len(answer_closings)]
+        )
+        revised.append((question, compact(answer)))
+    return revised
+
+
 def build_middle_meta(title: str, source: dict, index: int) -> str:
     area = compact(f"{source['region']} {source['city']}")
     variants = [
@@ -185,6 +290,19 @@ def normalize_slug(value: str) -> str:
     return re.sub(r"[\s-]+", "", value)
 
 
+def extract_target_schools(snippet: str, level: str) -> list[str]:
+    card = re.search(
+        rf'<article class="wawa-school-card is-{re.escape(level)}">(.*?)</article>',
+        snippet, re.S,
+    )
+    if not card:
+        return []
+    names = [compact(re.sub(r"<[^>]+>", "", value)) for value in re.findall(
+        r'<span class="wawa-pill">(.*?)</span>', card.group(1), re.S,
+    )]
+    return list(dict.fromkeys(name for name in names if name and "준비중" not in name))
+
+
 def extract_source_pages() -> dict[str, dict]:
     nation = ROOT / "전국학원"
     child_names = ["고등영수학원", "중등영수학원", "초등영수학원"]
@@ -206,6 +324,7 @@ def extract_source_pages() -> dict[str, dict]:
         if not rep_match:
             rep_match = re.search(r'<meta property="og:image" content="([^"]+)"', page)
         snippet_match = re.search(r'(<section class="wawa-center-snippet".*?</section>)', page, re.S)
+        snippet = snippet_match.group(1) if snippet_match else ""
         result[normalize_slug(source_slug)] = {
             "region": region,
             "city": city,
@@ -213,7 +332,8 @@ def extract_source_pages() -> dict[str, dict]:
             "source_url": canonical_match.group(1) if canonical_match else absolute_url("전국학원", region, city, source_slug),
             "map_file": map_match.group(1) if map_match else "",
             "representative": rep_match.group(1) if rep_match else "",
-            "center_snippet": snippet_match.group(1) if snippet_match else "",
+            "center_snippet": snippet,
+            "target_schools": extract_target_schools(snippet, "middle"),
             "organization": org,
         }
     return result
@@ -279,6 +399,11 @@ def make_graph(
         {"@type": "Thing", "name": "오답 재학습"},
         {"@type": "Thing", "name": "중학생 학원 선택 기준"},
     ]
+    if CATEGORY == "중학생학원":
+        mentions.extend(
+            {"@type": "EducationalOrganization", "name": school}
+            for school in source.get("target_schools", [])
+        )
     offers = [
         {"@type": "Offer", "name": "중학생 학습 진단", "itemOffered": {"@type": "Service", "name": f"{title} 학습 진단"}},
         {"@type": "Offer", "name": "중학생 학습관리", "itemOffered": {"@type": "Service", "name": f"{title} 플래너·오답 관리"}},
@@ -357,7 +482,9 @@ def render_local_page(record: dict, all_records: list[dict], index: int) -> str:
     locality = record["locality"]
     slug = record["slug"]
     intro, body_sections = parse_body(sections["본문"])
-    faq = parse_faq(sections["FAQ"])
+    faq = individualize_middle_faq(
+        parse_faq(sections["FAQ"]), locality, title, source, index,
+    )
     _, review_text = parse_review(sections["학부모후기"])
     review_note = varied_review_note(locality, title, index)
     if len(faq) != 4 or len(body_sections) < 5:
