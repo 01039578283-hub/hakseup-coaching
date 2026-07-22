@@ -1447,6 +1447,23 @@ h3 {
   color: #315da6;
 }
 
+.subject-feature-card-elementary {
+  border-color: #eadfc9;
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, .98), rgba(255, 248, 231, .96)),
+    #fff;
+}
+
+.subject-feature-card-elementary .subject-category-number {
+  background: linear-gradient(145deg, #c77b24, #e29b42);
+  box-shadow: 0 12px 26px rgba(199, 123, 36, .22);
+}
+
+.subject-feature-card-elementary i {
+  border-color: #ead9bb;
+  color: #b66b19;
+}
+
 .subject-feature-card .subject-category-number {
   width: 68px;
   height: 68px;
