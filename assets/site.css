@@ -3799,3 +3799,255 @@ h3 {
     transition-duration: .01ms !important;
   }
 }
+
+/* ===== 2026-07 integrated learning guide and compact navigation ===== */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px;
+  border: 1px solid #e1e9f2;
+  border-radius: 14px;
+  background: #f5f8fc;
+}
+
+.nav-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  line-height: 1;
+}
+
+.integrated-guide-hero {
+  background:
+    radial-gradient(circle at 84% 20%, rgba(48, 164, 151, .17), transparent 28%),
+    linear-gradient(145deg, #f6faff 0%, #edf5ff 55%, #effbf8 100%);
+}
+
+.integrated-guide-head {
+  align-items: end;
+}
+
+.integrated-flow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.integrated-flow-grid article {
+  position: relative;
+  min-height: 238px;
+  padding: 25px 22px;
+  overflow: hidden;
+  border: 1px solid #dce8f4;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 15px 34px rgba(37, 69, 105, .08);
+}
+
+.integrated-flow-grid article::after {
+  content: "";
+  position: absolute;
+  right: -26px;
+  bottom: -34px;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  background: rgba(47, 111, 219, .06);
+}
+
+.integrated-flow-grid span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 22px;
+  color: #fff;
+  border-radius: 11px;
+  background: linear-gradient(145deg, #2f6fdb, #2b9f92);
+  font-size: 13px;
+  font-weight: 850;
+  box-shadow: 0 8px 20px rgba(47, 111, 219, .2);
+}
+
+.integrated-flow-grid h3 {
+  margin: 0 0 11px;
+  color: #183755;
+}
+
+.integrated-flow-grid p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #5b6d80;
+  line-height: 1.72;
+}
+
+.integrated-guide-principles {
+  padding-top: 8px;
+}
+
+.integrated-guide-principles .plain-card {
+  border-top: 3px solid #6da5eb;
+}
+
+.integrated-wrong-answer {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: 54px;
+  align-items: center;
+  padding: 38px;
+  border: 1px solid #dce8f4;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #fff, #f4f9ff);
+  box-shadow: 0 18px 44px rgba(37, 69, 105, .08);
+}
+
+.integrated-wrong-answer h2 {
+  margin-bottom: 16px;
+}
+
+.integrated-wrong-answer > div > p:last-child {
+  color: #5a6d81;
+  line-height: 1.78;
+}
+
+.integrated-wrong-answer .check-list {
+  margin: 0;
+  padding: 22px;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.integrated-guide-links {
+  background: #f6f9fd;
+}
+
+.integrated-guide-links .guide-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.redirect-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #f4f8fc;
+}
+
+.redirect-card {
+  width: min(620px, 100%);
+  padding: 42px;
+  border: 1px solid #dce6f1;
+  border-radius: 22px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(37, 69, 105, .1);
+}
+
+.redirect-card h1 {
+  margin: 12px 0 16px;
+  font-size: clamp(28px, 5vw, 42px);
+}
+
+.redirect-card .btn {
+  margin-top: 12px;
+}
+
+@media (max-width: 980px) {
+  .integrated-flow-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .integrated-flow-grid article {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  html {
+    scroll-padding-top: 116px;
+  }
+
+  .nav-links {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 2px;
+    padding: 3px;
+    border-radius: 11px;
+  }
+
+  .nav-links a {
+    min-height: 39px;
+    padding: 0 2px;
+    border-radius: 8px;
+    font-size: clamp(10.5px, 2.95vw, 12px);
+    letter-spacing: -.055em;
+  }
+
+  .integrated-guide-hero h1 br,
+  .integrated-guide-head h2 br,
+  .detail-section h2 br,
+  .integrated-wrong-answer h2 br {
+    display: none;
+  }
+
+  .integrated-flow-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .integrated-flow-grid article {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
+    column-gap: 14px;
+    padding: 19px 17px;
+    border-radius: 14px;
+  }
+
+  .integrated-flow-grid span {
+    grid-row: 1 / 3;
+    margin: 0;
+  }
+
+  .integrated-flow-grid h3 {
+    margin: 1px 0 5px;
+    font-size: 17px;
+  }
+
+  .integrated-flow-grid p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .integrated-wrong-answer {
+    width: calc(100% - 28px);
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 23px 17px;
+    border-radius: 16px;
+  }
+
+  .integrated-wrong-answer .check-list {
+    padding: 17px 15px;
+    border-radius: 12px;
+  }
+
+  .integrated-guide-links .guide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .redirect-card {
+    padding: 28px 20px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .nav-links a {
+    font-size: 10.5px;
+  }
+}

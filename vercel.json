@@ -11,5 +11,12 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/학습관리/",
+      "destination": "/학습가이드/",
+      "permanent": true
+    }
   ]
 }
