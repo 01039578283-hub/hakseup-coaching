@@ -187,7 +187,8 @@ def asset_src(root_rel: str, folder: str, filename: str) -> str:
         return ""
     stem = Path(filename).stem
     suffix = Path(filename).suffix
-    suffixes = [suffix] if suffix else []
+    prefer_webp = folder.rstrip("/").endswith("assets/centers/common") and stem.lower() in {"local", "seoul"}
+    suffixes = [".webp"] if prefer_webp else ([suffix] if suffix else [])
     suffixes.extend(ext for ext in [".jpg", ".jpeg", ".png", ".webp"] if ext not in suffixes)
     stems = [stem, re.sub(r"\s+", "-", stem)]
     for candidate_stem in dict.fromkeys(stems):
@@ -550,10 +551,10 @@ def header(root_rel: str, active: str = "전국학원") -> str:
       <a class="brand" href="{root_rel}/"><span class="brand-mark">L</span><span>{SITE_NAME}</span></a>
       <div class="nav-links">
         {nav("홈", root_rel + "/")}
-        {nav("학습관리", root_rel + "/학습관리/")}
         {nav("진단상담", root_rel + "/진단상담/")}
         {nav("학습가이드", root_rel + "/학습가이드/")}
         {nav("전국학원", root_rel + "/전국학원/")}
+        {nav("과목별학원", root_rel + "/과목별학원/")}
         {nav("상담문의", root_rel + "/상담문의/")}
       </div>
       <a class="nav-cta" href="{root_rel}/상담문의/">상담 신청</a>
@@ -578,7 +579,7 @@ def consult_footer(root_rel: str, title: str) -> str:
     </div>
   </section>
 
-  <footer class="site-footer"><div class="wrap footer-inner"><strong>{SITE_NAME}</strong><div class="footer-links"><a href="{root_rel}/학습관리/">학습관리</a><a href="{root_rel}/진단상담/">진단상담</a><a href="{root_rel}/전국학원/">전국학원</a><a href="{root_rel}/상담문의/">상담문의</a></div><div class="footer-contact"><span>상담 전화</span><a href="tel:{PHONE}">{PHONE}</a></div></div></footer>
+  <footer class="site-footer"><div class="wrap footer-inner"><strong>{SITE_NAME}</strong><div class="footer-links"><a href="{root_rel}/학습가이드/">학습가이드</a><a href="{root_rel}/진단상담/">진단상담</a><a href="{root_rel}/전국학원/">전국학원</a><a href="{root_rel}/상담문의/">상담문의</a></div><div class="footer-contact"><span>상담 전화</span><a href="tel:{PHONE}">{PHONE}</a></div></div></footer>
   <div class="floating-actions" aria-label="빠른 상담 메뉴">
     <a href="tel:{PHONE}" class="fab-call"><span class="fab-icon">&#128222;</span><span class="fab-text">전화문의</span></a>
     <a href="https://blogsms.net/01039578283" target="_blank" rel="noopener" class="fab-sms"><span class="fab-icon">&#128172;</span><span class="fab-text">문자문의</span></a>
@@ -685,11 +686,11 @@ def hub_child_html(names: list[str], limit: int = 8) -> str:
 def guide_preview_section(root_rel: str) -> str:
     items = [
         ("학습 진단 상담 준비", "성적표, 오답, 공부 습관을 상담 전 어떻게 정리하면 좋은지 안내합니다.", f"{root_rel}/진단상담/"),
-        ("플래너 관리 방법", "계획표를 쓰는 데서 끝나지 않고 실행률을 높이는 관리 기준을 설명합니다.", f"{root_rel}/학습관리/"),
-        ("오답 관리 방법", "틀린 문제를 점수로 연결하기 위해 원인을 나누고 반복 주기를 정합니다.", f"{root_rel}/학습관리/"),
+        ("플래너 관리 방법", "계획표를 쓰는 데서 끝나지 않고 실행률을 높이는 관리 기준을 설명합니다.", f"{root_rel}/학습가이드/"),
+        ("오답 관리 방법", "틀린 문제를 점수로 연결하기 위해 원인을 나누고 반복 주기를 정합니다.", f"{root_rel}/학습가이드/"),
         ("시험 기간 계획표", "시험 4주 전부터 직전까지 영어·수학 공부 순서를 나누는 기준을 정리합니다.", f"{root_rel}/학습가이드/"),
         ("지역별 학원 선택 기준", "가까운 위치뿐 아니라 상담 구조와 학습관리 방식을 함께 비교합니다.", f"{root_rel}/전국학원/"),
-        ("중고등 영어수학 관리", "학년이 올라갈수록 필요한 내신 대비, 개념 정리, 오답 루틴을 구분합니다.", f"{root_rel}/학습관리/"),
+        ("중고등 영어수학 관리", "학년이 올라갈수록 필요한 내신 대비, 개념 정리, 오답 루틴을 구분합니다.", f"{root_rel}/학습가이드/"),
     ]
     cards = "\n".join(
         f"""        <a class="guide-card hub-guide-card" href="{html.escape(href)}"><small>GUIDE</small><h3>{html.escape(title)}</h3><p>{html.escape(desc)}</p></a>"""

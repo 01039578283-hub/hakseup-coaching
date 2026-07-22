@@ -25,7 +25,7 @@
 
 ## 3. local / seoul 이미지 alt 규칙
 
-앞으로 `assets/centers/common/local.jpg`, `assets/centers/common/seoul.jpg` 또는 CSV에서 `local`, `seoul` 본문 이미지가 사용되면 alt는 아래 형식으로 처리한다.
+앞으로 `assets/centers/common/local.webp`, `assets/centers/common/seoul.webp` 또는 CSV에서 `local`, `seoul` 본문 이미지가 사용되면 alt는 아래 형식으로 처리한다. 본문 이미지는 원본 해상도를 유지한 WebP 품질 92 파일을 우선 사용한다.
 
 ```text
 {페이지 타이틀} {홈페이지 제목}
@@ -34,8 +34,8 @@
 예시:
 
 ```html
-<img src="../../assets/centers/common/local.jpg" alt="구파발 중2 영어학원 학습코칭 연구소">
-<img src="../../assets/centers/common/seoul.jpg" alt="명일동 고1 수학학원 학습코칭 연구소">
+<img src="../../assets/centers/common/local.webp" alt="구파발 중2 영어학원 학습코칭 연구소">
+<img src="../../assets/centers/common/seoul.webp" alt="명일동 고1 수학학원 학습코칭 연구소">
 ```
 
 - 여기서 `홈페이지 제목`은 현재 기준 `학습코칭 연구소`다.
@@ -99,4 +99,3 @@
 - `local`, `seoul` 이미지 alt가 `{페이지 타이틀} {홈페이지 제목}`인지
 - 내부 링크/이미지 경로가 깨지지 않았는지
 - `????` 같은 깨진 문자가 없는지
-
