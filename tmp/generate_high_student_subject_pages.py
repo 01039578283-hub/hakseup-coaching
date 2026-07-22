@@ -12,7 +12,7 @@ from zipfile import ZipFile
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ZIP_PATH = Path.home() / "Desktop" / "새로 만들 원고" / "고등학생학원.zip"
+ZIP_PATH = Path.home() / "Desktop" / "학습코칭.kr 추가 원고" / "고등학생학원.zip"
 BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
 SITE_NAME = "학습코칭 연구소"
 CATEGORY = "고등학생학원"
@@ -88,6 +88,56 @@ def parse_review(value: str) -> tuple[str, str]:
     if not note:
         note = "아래 내용은 상담 상황을 이해하기 위한 사례형 문구이며, 실제 이용자의 성적 결과를 보장하는 내용이 아닙니다."
     return note, compact(" ".join(body))
+
+
+def individualize_high_body(value: str, locality: str, index: int) -> str:
+    """Disperse one source-bank sentence without changing its factual meaning."""
+    repeated = (
+        f"{locality} 페이지에 제공된 학교들도 학년과 시험 범위가 다를 수 있으므로 "
+        "학생이 받은 범위표, 학교 자료, 최근 시험지를 기준으로 준비 순서를 다시 나눠야 합니다."
+    )
+    variants = [
+        f"{locality}에서 같은 학교를 다니더라도 학년과 시험 범위는 달라질 수 있습니다. 학생이 받은 범위표와 학교 자료, 최근 시험지를 먼저 대조한 뒤 준비 순서를 정합니다.",
+        f"{locality} 학교 정보는 상담의 출발점으로만 활용합니다. 실제 계획은 학생의 학년, 학교 범위표, 배부 자료와 최근 시험지를 확인해 다시 세웁니다.",
+        f"학교명이 같아도 {locality} 학생마다 학년과 시험 범위가 다릅니다. 범위표·학교 자료·최근 시험지를 함께 놓고 현재 필요한 준비부터 구분합니다.",
+        f"{locality}의 학교별 일정만 보고 진도를 정하지 않습니다. 학생이 받은 시험 범위와 수업 자료, 최근 시험 결과를 확인해 우선순위를 조정합니다.",
+        f"상담에서는 {locality} 학교명보다 학생에게 안내된 실제 범위를 먼저 봅니다. 범위표와 프린트, 최근 시험지를 바탕으로 준비 단계를 나눕니다.",
+        f"{locality} 페이지에 안내된 학교 학생이라도 준비 내용은 서로 다를 수 있습니다. 학년별 범위표와 학교 자료, 최근 시험지를 확인한 뒤 순서를 정리합니다.",
+        f"시험 준비는 {locality}의 학교 정보만으로 결정하지 않습니다. 학생의 학년과 현재 범위, 학교 배부물, 최근 시험지를 기준으로 학습 순서를 다시 맞춥니다.",
+        f"{locality} 학생의 내신 계획은 실제 학교 자료에서 시작합니다. 범위표와 수업 프린트, 최근 시험지를 비교해 먼저 보완할 내용을 가립니다.",
+        f"같은 {locality} 생활권 안에서도 학년과 시험 범위가 달라집니다. 상담 시 범위표·학교 자료·최근 시험지를 확인하고 준비 순서를 학생별로 조정합니다.",
+        f"{locality} 학교 안내는 참고 정보이며, 최종 계획은 학생이 받은 시험 범위와 학교 자료를 기준으로 합니다. 최근 시험지까지 살펴 학습 순서를 구체화합니다.",
+        f"학생별 계획을 세울 때에는 {locality} 학교명만 확인하지 않습니다. 학년, 실제 시험 범위, 배부 자료와 최근 시험지를 함께 검토합니다.",
+        f"{locality}에서 내신을 준비한다면 먼저 학생의 범위표와 학교 자료를 확인해야 합니다. 최근 시험 결과를 더해 지금 필요한 순서로 계획을 다시 배열합니다.",
+    ]
+    return value.replace(repeated, variants[index % len(variants)])
+
+
+def compact_high_meta(value: str) -> str:
+    meta = compact(value)
+    if len(meta) > 100:
+        meta = meta.replace("주소·통학, ", "").replace("상담 질문", "상담")
+    if len(meta) > 100:
+        meta = meta[:97].rstrip(" ,·") + "…"
+    return meta
+
+
+def varied_review_note(locality: str, title: str, index: int) -> str:
+    variants = [
+        f"※ {locality} 학부모가 상담 기준을 이해하도록 구성한 가상 사례이며, 실제 수강생의 발언이나 성적 결과를 의미하지 않습니다.",
+        f"※ 이 문구는 {title} 상담에서 확인할 관점을 설명하기 위한 예시입니다. 실제 후기 또는 성과 보장 사례가 아닙니다.",
+        f"※ {locality} 학생의 학습 상황을 가정해 정리한 상담 예시로, 특정 이용자의 경험이나 결과를 재현한 내용이 아닙니다.",
+        f"※ 아래 사례는 {title} 선택 기준을 이해하기 위한 설명용 구성입니다. 실제 수강 후기와는 구분해 읽어 주세요.",
+        f"※ {locality} 상담 과정에서 살펴볼 항목을 보여 주는 가상 문구이며, 개인의 성적 향상을 보장하지 않습니다.",
+        f"※ 학부모의 이해를 돕기 위해 {title} 상담 상황을 재구성한 예시입니다. 실제 학생의 발언이나 결과가 아닙니다.",
+        f"※ 이 사례는 {locality} 고등 학습 상담의 확인 순서를 설명하려고 작성했으며, 실제 이용 후기로 제시한 내용이 아닙니다.",
+        f"※ {title} 페이지의 상담 메모는 정보 제공을 위한 가상 사례입니다. 특정 학생의 경험이나 성과를 뜻하지 않습니다.",
+        f"※ 아래 내용은 {locality} 학생에게 필요한 상담 질문을 보여 주기 위한 예시이며, 실제 후기나 결과 보장 표현이 아닙니다.",
+        f"※ {title} 상담 시 확인할 학습 조건을 이해하기 쉽게 구성한 사례형 문구입니다. 실제 수강생 사례와는 다릅니다.",
+        f"※ {locality} 학부모가 준비 항목을 살펴볼 수 있도록 만든 설명용 사례이며, 실제 성적 변화나 이용 경험을 나타내지 않습니다.",
+        f"※ 다음 문구는 {title}의 상담 흐름을 설명하기 위해 가정한 내용입니다. 실제 학생 후기 또는 성과 자료가 아닙니다.",
+    ]
+    return variants[index % len(variants)]
 
 
 def inline_markup(value: str) -> str:
@@ -316,13 +366,15 @@ def render_local_page(record: dict, all_records: list[dict], index: int) -> str:
     sections = record["sections"]
     source = record["source"]
     title = compact(sections["페이지타이틀"])
-    meta = compact(sections["메타설명"])
+    meta = compact_high_meta(sections["메타설명"])
     json_summary = compact(sections["JSON-LD 요약"])
     locality = record["locality"]
     slug = record["slug"]
-    intro, body_sections = parse_body(sections["본문"])
+    body_value = individualize_high_body(sections["본문"], locality, index)
+    intro, body_sections = parse_body(body_value)
     faq = parse_faq(sections["FAQ"])
-    review_note, review_text = parse_review(sections["학부모후기"])
+    _, review_text = parse_review(sections["학부모후기"])
+    review_note = varied_review_note(locality, title, index)
     if len(faq) != 5 or len(body_sections) < 5:
         raise ValueError(f"Invalid manuscript structure: {title}")
     category_url = absolute_url("과목별학원", CATEGORY)
@@ -358,6 +410,7 @@ def render_local_page(record: dict, all_records: list[dict], index: int) -> str:
         rep_html = f'<img class="subject-hidden-representative" src="{esc(source["representative"])}" alt="{esc(title)} {SITE_NAME} 대표" style="display:none;">'
     body_kind = "seoul" if source["region"] == "서울" else "local"
     body_src = f"../../../assets/centers/common/{body_kind}.webp"
+    body_mobile_src = f"../../../assets/centers/common/{body_kind}-mobile.webp"
     map_src = f"../../../assets/maps/{source['map_file']}" if source["map_file"] else ""
     map_card = ""
     if map_src:
@@ -381,7 +434,7 @@ def render_local_page(record: dict, all_records: list[dict], index: int) -> str:
   <meta property="og:url" content="{page_url}">
   {f'<meta property="og:image" content="{esc(source["representative"])}">' if source["representative"] else ''}
   <link rel="icon" type="image/png" href="../../../assets/favicon.png">
-  <link rel="stylesheet" href="../../../assets/site.css">
+  <link rel="stylesheet" href="../../../assets/subject.css">
   <script type="application/ld+json">{schema}</script>
 </head>
 <body class="subject-academy-page">
@@ -397,7 +450,7 @@ def render_local_page(record: dict, all_records: list[dict], index: int) -> str:
     </div></section>
     <section class="subject-media-section"><div class="wrap">
       {rep_html}
-      <figure class="subject-body-card"><div class="subject-media-label"><span>01</span><strong>{esc(locality)} 수업 안내</strong></div><img src="{body_src}" alt="{esc(title)} 본문 {SITE_NAME}" loading="eager" fetchpriority="high"></figure>
+      <figure class="subject-body-card"><div class="subject-media-label"><span>01</span><strong>{esc(locality)} 수업 안내</strong></div><picture><source media="(max-width: 720px)" srcset="{body_mobile_src}"><img src="{body_src}" alt="{esc(title)} 본문 {SITE_NAME}" width="918" height="16116" loading="lazy" decoding="async"></picture></figure>
       {map_card}
     </div></section>
     <article class="subject-manuscript wrap" aria-labelledby="manuscript-title">
@@ -457,7 +510,7 @@ def render_hub(records: list[dict]) -> str:
   <title>전국 {CATEGORY} 지역별 안내 | {SITE_NAME}</title>
   <meta name="description" content="{description}"><meta name="robots" content="index, follow">
   <link rel="canonical" href="{hub_url}"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="{SITE_NAME}"><meta property="og:type" content="website"><meta property="og:title" content="전국 {CATEGORY} 지역별 안내 | {SITE_NAME}"><meta property="og:description" content="{description}"><meta property="og:url" content="{hub_url}">
-  <link rel="icon" type="image/png" href="../../assets/favicon.png"><link rel="stylesheet" href="../../assets/site.css"><script type="application/ld+json">{schema}</script>
+  <link rel="icon" type="image/png" href="../../assets/favicon.png"><link rel="stylesheet" href="../../assets/subject.css"><script type="application/ld+json">{schema}</script>
 </head><body class="subject-hub-page"><a class="skip-link" href="#main">본문 바로가기</a>{root_nav("과목별학원")}<main id="main">
   <section class="subject-hub-hero"><div class="wrap"><nav class="subject-breadcrumb" aria-label="현재 위치"><a href="/">홈</a><span>›</span><a href="/과목별학원/">과목별학원</a><span>›</span><strong>{CATEGORY}</strong></nav><p class="subject-kicker">HIGH SCHOOL ACADEMY DIRECTORY</p><h1>동네별 {CATEGORY} 선택 기준</h1><p>{description}</p><div class="subject-hub-stats"><span><strong>371</strong>지역 안내</span><span><strong>1:1</strong>원고 반영</span><span><strong>5</strong>페이지별 FAQ</span></div></div></section>
   <section class="subject-directory-section"><div class="wrap"><div class="subject-directory-head"><div><p>LOCAL DIRECTORY</p><h2>지역명으로 고등학생학원 찾기</h2></div><label class="subject-search"><span class="sr-only">지역명 검색</span><input id="subject-local-search" type="search" placeholder="예: 명일동, 불당동" autocomplete="off"></label></div><p id="subject-search-status" class="subject-search-status" aria-live="polite"></p><div id="subject-region-list">{"".join(region_html)}</div></div></section>
@@ -477,7 +530,7 @@ def render_parent() -> str:
         {"@type": "ItemList", "@id": parent_url + "#categories", "name": "과목별학원 카테고리", "numberOfItems": 1, "itemListElement": [{"@type": "ListItem", "position": 1, "name": CATEGORY, "url": category_url}]},
     ]}
     schema = json.dumps(graph, ensure_ascii=False, separators=(",", ":"))
-    return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>과목별학원 | {SITE_NAME}</title><meta name="description" content="{description}"><meta name="robots" content="index, follow"><link rel="canonical" href="{parent_url}"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="{SITE_NAME}"><meta property="og:type" content="website"><meta property="og:title" content="과목별학원 | {SITE_NAME}"><meta property="og:description" content="{description}"><meta property="og:url" content="{parent_url}"><link rel="icon" type="image/png" href="../assets/favicon.png"><link rel="stylesheet" href="../assets/site.css"><script type="application/ld+json">{schema}</script></head><body class="subject-parent-page"><a class="skip-link" href="#main">본문 바로가기</a>{root_nav("과목별학원")}<main id="main"><section class="subject-hub-hero"><div class="wrap"><nav class="subject-breadcrumb"><a href="/">홈</a><span>›</span><strong>과목별학원</strong></nav><p class="subject-kicker">ACADEMY BY LEARNING GOAL</p><h1>학년과 목표에 맞는 학원 안내</h1><p>{description}</p></div></section><section class="subject-category-section"><div class="wrap"><div class="subject-section-head"><p>CATEGORY</p><h2>학습 대상별 지역 안내</h2><span>원고가 준비된 카테고리부터 정확하게 연결합니다.</span></div><a class="subject-category-card" href="/{quote("과목별학원")}/{quote(CATEGORY)}/"><span class="subject-category-number">01</span><div><p>HIGH SCHOOL</p><h3>{CATEGORY}</h3><strong>371개 동네별 안내</strong><small>내신·플래너·오답 재학습 기준</small></div><i aria-hidden="true">→</i></a></div></section></main>{footer()}</body></html>'''
+    return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>과목별학원 | {SITE_NAME}</title><meta name="description" content="{description}"><meta name="robots" content="index, follow"><link rel="canonical" href="{parent_url}"><meta property="og:locale" content="ko_KR"><meta property="og:site_name" content="{SITE_NAME}"><meta property="og:type" content="website"><meta property="og:title" content="과목별학원 | {SITE_NAME}"><meta property="og:description" content="{description}"><meta property="og:url" content="{parent_url}"><link rel="icon" type="image/png" href="../assets/favicon.png"><link rel="stylesheet" href="../assets/subject.css"><script type="application/ld+json">{schema}</script></head><body class="subject-parent-page"><a class="skip-link" href="#main">본문 바로가기</a>{root_nav("과목별학원")}<main id="main"><section class="subject-hub-hero"><div class="wrap"><nav class="subject-breadcrumb"><a href="/">홈</a><span>›</span><strong>과목별학원</strong></nav><p class="subject-kicker">ACADEMY BY LEARNING GOAL</p><h1>학년과 목표에 맞는 학원 안내</h1><p>{description}</p></div></section><section class="subject-category-section"><div class="wrap"><div class="subject-section-head"><p>CATEGORY</p><h2>학습 대상별 지역 안내</h2><span>원고가 준비된 카테고리부터 정확하게 연결합니다.</span></div><a class="subject-category-card" href="/{quote("과목별학원")}/{quote(CATEGORY)}/"><span class="subject-category-number">01</span><div><p>HIGH SCHOOL</p><h3>{CATEGORY}</h3><strong>371개 동네별 안내</strong><small>내신·플래너·오답 재학습 기준</small></div><i aria-hidden="true">→</i></a></div></section></main>{footer()}</body></html>'''
 
 
 def load_records() -> list[dict]:
@@ -526,7 +579,6 @@ def main() -> None:
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(render_local_page(record, records, index).rstrip() + "\n", encoding="utf-8", newline="\n")
     (TARGET_ROOT / "index.html").write_text(render_hub(records).rstrip() + "\n", encoding="utf-8", newline="\n")
-    (SUBJECT_ROOT / "index.html").write_text(render_parent().rstrip() + "\n", encoding="utf-8", newline="\n")
     update_llms()
     print(json.dumps({"local_pages": len(records), "hub": str(TARGET_ROOT / 'index.html'), "parent": str(SUBJECT_ROOT / 'index.html')}, ensure_ascii=True))
 

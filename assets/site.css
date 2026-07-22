@@ -3848,6 +3848,23 @@ h3 {
   box-shadow: 0 28px 70px rgba(22, 71, 83, .16);
 }
 
+.subject-feature-card-middle {
+  border-color: #d7dfef;
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, .98), rgba(238, 244, 255, .96)),
+    #fff;
+}
+
+.subject-feature-card-middle .subject-category-number {
+  background: linear-gradient(145deg, #315da6, #527ccb);
+  box-shadow: 0 12px 26px rgba(49, 93, 166, .22);
+}
+
+.subject-feature-card-middle i {
+  border-color: #d4deef;
+  color: #315da6;
+}
+
 .subject-feature-card .subject-category-number {
   width: 68px;
   height: 68px;
