@@ -324,8 +324,8 @@ def old_page_fallback() -> None:
 def update_vercel() -> None:
     path = ROOT / "vercel.json"
     data = json.loads(path.read_text(encoding="utf-8"))
-    redirects = [r for r in data.get("redirects", []) if r.get("source") != "/학습관리/"]
-    redirects.insert(0, {"source": "/학습관리/", "destination": "/학습가이드/", "permanent": True})
+    redirects = [r for r in data.get("redirects", []) if r.get("source") not in {"/학습관리", "/학습관리/"}]
+    redirects.insert(0, {"source": "/학습관리", "destination": "/학습가이드", "permanent": True})
     data["redirects"] = redirects
     write_if_changed(path, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
 
