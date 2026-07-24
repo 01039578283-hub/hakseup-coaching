@@ -457,7 +457,7 @@ def breadcrumb_chain(page_dir: Path, title: str) -> list[dict]:
     current = ROOT
     for part in parts:
         current = current / part
-        items.append({"name": strip_academy_suffix(title) if current == page_dir else part, "url": root_url_for(current)})
+        items.append({"name": title if current == page_dir else part, "url": root_url_for(current)})
     return items
 
 
@@ -624,7 +624,7 @@ def create_page(row: list[str]) -> dict:
     <section class="page-hero generated-page-hero">
       <div class="wrap page-hero-inner">
         <div>
-          <div class="breadcrumb"><a href="{root_rel}/">홈</a> › <a href="{root_rel}/전국학원/">전국학원</a> › {html.escape(strip_academy_suffix(title))}</div>
+          <div class="breadcrumb"><a href="{root_rel}/">홈</a> › <a href="{root_rel}/전국학원/">전국학원</a> › {html.escape(title)}</div>
           <p class="eyebrow">local academy guide</p>
           <h1>{html.escape(title)} 학습 안내</h1>
           <p>{html.escape(strip_academy_suffix(title))}에서 학원을 찾는 학생과 학부모를 위해 상담, 진단, 플래너, 오답 관리 기준을 정리했습니다.</p>
