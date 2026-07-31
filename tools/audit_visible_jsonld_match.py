@@ -36,8 +36,9 @@ def find(graph, type_name):
 def main() -> None:
     files = target_files()
     faq_mismatch = 0
-    review_mismatch = 0
-    rating_bad = 0
+    unsupported_review_schema = 0
+    visible_star_ratings = 0
+    evidence_card_bad = 0
 
     for f in files:
         text = f.read_text(encoding="utf-8", errors="ignore")
@@ -53,20 +54,26 @@ def main() -> None:
             print("FAQ MISMATCH", f)
 
         org_node = find(graph, "EducationalOrganization")
-        visible_reviews = re.findall(r'parent-review-card">.*?<p>(.*?)</p>', text, re.S)
-        jsonld_reviews = [r["reviewBody"] for r in org_node["review"]]
-        if visible_reviews != jsonld_reviews:
-            review_mismatch += 1
-            print("REVIEW MISMATCH", f)
+        if "review" in org_node or "aggregateRating" in org_node:
+            unsupported_review_schema += 1
+            print("UNSUPPORTED REVIEW SCHEMA", f)
 
         visible_ratings = re.findall(r'aria-label="(\d)점 후기"', text)
-        five_count = visible_ratings.count("5")
-        four_count = visible_ratings.count("4")
-        if not (five_count == 5 and four_count == 1 and len(visible_ratings) == 6):
-            rating_bad += 1
-            print("RATING RATIO BAD", f, visible_ratings)
+        if visible_ratings:
+            visible_star_ratings += 1
+            print("VISIBLE STAR RATING", f, visible_ratings)
 
-    print(f"total={len(files)} faq_mismatch={faq_mismatch} review_mismatch={review_mismatch} rating_bad={rating_bad}")
+        evidence_cards = re.findall(r'parent-review-card">.*?<p>(.*?)</p>', text, re.S)
+        if len(evidence_cards) != 4 or "학습관리 확인 정보" not in text:
+            evidence_card_bad += 1
+            print("EVIDENCE CARD BAD", f)
+
+    print(
+        f"total={len(files)} faq_mismatch={faq_mismatch} "
+        f"unsupported_review_schema={unsupported_review_schema} "
+        f"visible_star_ratings={visible_star_ratings} "
+        f"evidence_card_bad={evidence_card_bad}"
+    )
 
 
 if __name__ == "__main__":

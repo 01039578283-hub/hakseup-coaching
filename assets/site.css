@@ -3771,6 +3771,17 @@ h3 {
   }
 }
 
+.bulk-responsive-picture {
+  display: block;
+  width: 100%;
+}
+
+.bulk-responsive-picture img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 @media (max-width: 380px) {
   .brand span:last-child {
     font-size: 14px;
@@ -4461,7 +4472,6 @@ h3 {
 
 /* ===== 2026-07 integrated learning guide and compact navigation ===== */
 .nav-links {
-  display: flex;
   align-items: center;
   gap: 3px;
   padding: 4px;
@@ -5868,5 +5878,158 @@ h3 {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     width: 100%;
+  }
+}
+
+/*
+ * Final mobile stability layer
+ * The integrated-guide rules are intentionally display-agnostic so the
+ * three-column mobile navigation declared above cannot be reset to flex.
+ */
+@media (max-width: 720px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .nav {
+    width: calc(100% - 24px);
+    max-width: 100%;
+  }
+
+  .nav-links,
+  .subject-parent-page .nav-links,
+  .subject-hub-page .nav-links,
+  .subject-academy-page .nav-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .nav-links a {
+    width: 100%;
+    min-width: 0;
+    min-height: 40px;
+    padding: 6px 4px;
+    line-height: 1.25;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .hero,
+  .page-hero,
+  .hub-hero,
+  .generated-page-hero,
+  .subject-local-hero,
+  .subject-hub-hero {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .hero-grid,
+  .hero-panel,
+  .page-hero-inner,
+  .hub-hero-head,
+  .generated-page-hero .page-hero-inner {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .hero h1,
+  .page-hero h1,
+  .hub-hero h1,
+  .generated-page-hero h1,
+  .hero-copy,
+  .page-hero p,
+  .breadcrumb {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .bulk-image-grid,
+  .bulk-image-card,
+  .article-main,
+  .generated-support-section,
+  .wawa-center-snippet,
+  .parent-faq-section,
+  .parent-review-section,
+  .child-page-links,
+  .seo-geo-section,
+  .seo-answer-section,
+  .seo-checklist-section,
+  .coaching-identity-section {
+    min-width: 0;
+    max-width: calc(100% - 28px);
+  }
+
+  .bulk-image-card {
+    max-width: 100%;
+  }
+
+  .article-hero,
+  .article-section,
+  .article-closing,
+  .seo-geo-card,
+  .seo-answer-list article,
+  .seo-checklist li,
+  .coaching-loop-grid article,
+  .parent-review-card,
+  .child-link-card {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .article-intro,
+  .article-section p,
+  .article-section li,
+  .article-closing p,
+  .seo-geo-card p,
+  .seo-answer-list p,
+  .seo-checklist li,
+  .coaching-loop-grid p,
+  .parent-review-card p,
+  .child-link-card p {
+    line-height: 1.8;
+    text-wrap: pretty;
+  }
+
+  /* 모바일에서는 세로형 빠른 상담 버튼이 본문을 가리지 않도록
+     한 줄 하단 바 형태로 축소한다. */
+  body {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+
+  .floating-actions {
+    right: 10px;
+    left: 10px;
+    bottom: max(8px, env(safe-area-inset-bottom));
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: auto;
+    gap: 6px;
+    padding: 6px;
+    border: 1px solid rgba(205, 218, 234, 0.92);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 12px 32px rgba(18, 42, 70, 0.2);
+    backdrop-filter: blur(12px);
+  }
+
+  .floating-actions a {
+    width: 100%;
+    min-width: 0;
+    min-height: 42px;
+    padding: 0 6px;
+    border-radius: 10px;
+  }
+
+  .floating-actions .fab-text {
+    font-size: 11px;
+    white-space: nowrap;
   }
 }
