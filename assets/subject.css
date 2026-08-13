@@ -1506,6 +1506,23 @@ h3 {
   color: #8d4b9f;
 }
 
+.subject-feature-card-high-math {
+  border-color: #cbdde8;
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, .98), rgba(235, 247, 252, .97)),
+    #fff;
+}
+
+.subject-feature-card-high-math .subject-category-number {
+  background: linear-gradient(145deg, #176783, #2396aa);
+  box-shadow: 0 12px 26px rgba(23, 103, 131, .23);
+}
+
+.subject-feature-card-high-math i {
+  border-color: #c8dfe8;
+  color: #176783;
+}
+
 .subject-feature-card h3 {
   margin: 5px 0 9px;
   font-size: clamp(27px, 4vw, 38px);
