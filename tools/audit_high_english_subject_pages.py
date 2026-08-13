@@ -210,7 +210,8 @@ def main() -> int:
         if len(re.findall(r"<img\b", source, re.I)) != 3:
             errors.append(f"{slug}: img count")
 
-        grade_match = re.search(r"<dt>영어 가능 고등 학년</dt><dd>(.*?)</dd>", source, re.I | re.S)
+        grade_stage = generator.CATEGORY_LABEL.split()[0]
+        grade_match = re.search(rf"<dt>영어 가능 {re.escape(grade_stage)} 학년</dt><dd>(.*?)</dd>", source, re.I | re.S)
         displayed_grade = html.unescape(re.sub(r"<[^>]+>", "", grade_match.group(1))).strip() if grade_match else ""
         expected_grades = "·".join(generator.high_grades(record)) if generator.high_grades(record) else "상담 확인 필요"
         if displayed_grade != expected_grades:
@@ -296,5 +297,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-
 

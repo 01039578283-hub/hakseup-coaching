@@ -25,6 +25,8 @@ CORE_PATHS = (
     Path("과목별학원/영수학원/index.html"),
     Path("과목별학원/고등수학학원/index.html"),
     Path("과목별학원/고등영어학원/index.html"),
+    Path("과목별학원/중등수학학원/index.html"),
+    Path("과목별학원/중등영어학원/index.html"),
     Path("과목별학원/와와학습코칭센터/index.html"),
     Path("전국학원/index.html"),
 )

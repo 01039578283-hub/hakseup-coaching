@@ -218,9 +218,10 @@ def school_cards(profile: dict) -> str:
 def locality_links(profile: dict) -> list[tuple[str, str]]:
     result = []
     for locality in profile["localities"][:6]:
-        result.append((f"{locality} 고등학생학원", absolute_url("과목별학원", "고등학생학원", locality)))
-        result.append((f"{locality} 중학생학원", absolute_url("과목별학원", "중학생학원", locality)))
-        result.append((f"{locality} 초등학생학원", absolute_url("과목별학원", "초등학생학원", locality)))
+        locality_slug = locality.replace(" ", "")
+        result.append((f"{locality} 고등학생학원", absolute_url("과목별학원", "고등학생학원", locality_slug)))
+        result.append((f"{locality} 중학생학원", absolute_url("과목별학원", "중학생학원", locality_slug)))
+        result.append((f"{locality} 초등학생학원", absolute_url("과목별학원", "초등학생학원", locality_slug)))
     return result
 
 

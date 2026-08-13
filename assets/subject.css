@@ -1540,6 +1540,40 @@ h3 {
   color: #6650a3;
 }
 
+.subject-feature-card-middle-math {
+  border-color: #cbded5;
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, .98), rgba(237, 249, 243, .97)),
+    #fff;
+}
+
+.subject-feature-card-middle-math .subject-category-number {
+  background: linear-gradient(145deg, #247052, #3d9a72);
+  box-shadow: 0 12px 26px rgba(36, 112, 82, .23);
+}
+
+.subject-feature-card-middle-math i {
+  border-color: #c9e1d6;
+  color: #247052;
+}
+
+.subject-feature-card-middle-english {
+  border-color: #ead2c4;
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, .98), rgba(255, 244, 237, .97)),
+    #fff;
+}
+
+.subject-feature-card-middle-english .subject-category-number {
+  background: linear-gradient(145deg, #a2532f, #d0794f);
+  box-shadow: 0 12px 26px rgba(162, 83, 47, .23);
+}
+
+.subject-feature-card-middle-english i {
+  border-color: #eed7ca;
+  color: #a2532f;
+}
+
 .subject-feature-card h3 {
   margin: 5px 0 9px;
   font-size: clamp(27px, 4vw, 38px);
