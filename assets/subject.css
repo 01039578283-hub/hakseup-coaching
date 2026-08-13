@@ -1523,6 +1523,23 @@ h3 {
   color: #176783;
 }
 
+.subject-feature-card-high-english {
+  border-color: #d9d1ef;
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, .98), rgba(246, 240, 255, .97)),
+    #fff;
+}
+
+.subject-feature-card-high-english .subject-category-number {
+  background: linear-gradient(145deg, #6650a3, #8c6cc4);
+  box-shadow: 0 12px 26px rgba(102, 80, 163, .23);
+}
+
+.subject-feature-card-high-english i {
+  border-color: #ddd2f0;
+  color: #6650a3;
+}
+
 .subject-feature-card h3 {
   margin: 5px 0 9px;
   font-size: clamp(27px, 4vw, 38px);
