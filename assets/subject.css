@@ -1489,6 +1489,23 @@ h3 {
   box-shadow: 0 12px 26px rgba(8, 137, 120, .24);
 }
 
+.subject-feature-card-yeongsu {
+  border-color: #e2d5ea;
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, .98), rgba(250, 240, 255, .96)),
+    #fff;
+}
+
+.subject-feature-card-yeongsu .subject-category-number {
+  background: linear-gradient(145deg, #8d4b9f, #b36bc2);
+  box-shadow: 0 12px 26px rgba(141, 75, 159, .22);
+}
+
+.subject-feature-card-yeongsu i {
+  border-color: #e2d5ea;
+  color: #8d4b9f;
+}
+
 .subject-feature-card h3 {
   margin: 5px 0 9px;
   font-size: clamp(27px, 4vw, 38px);
@@ -2291,6 +2308,15 @@ h3 {
   background: #fff;
 }
 
+.subject-quick-answer {
+  padding: 28px 0 0;
+  background: #fff;
+}
+
+.subject-quick-answer .subject-answer-box {
+  margin-bottom: 0;
+}
+
 .subject-media-section > .wrap {
   width: min(980px, calc(100% - 40px));
 }
@@ -2814,7 +2840,7 @@ h3 {
 }
 
 .subject-local-button span {
-  color: #7a889b;
+  color: #53657a;
   font-size: 10px;
 }
 
@@ -2842,10 +2868,14 @@ h3 {
 
 .subject-guide-grid article > span,
 .subject-category-number {
-  color: #0a8c7d;
+  color: #087568;
   font-size: 12px;
   font-weight: 900;
   letter-spacing: .1em;
+}
+
+.subject-hub-page .floating-actions .fab-sms {
+  color: #fff;
 }
 
 .subject-guide-grid h3 {
@@ -3015,6 +3045,10 @@ h3 {
 
   .subject-media-section {
     padding: 12px 0 46px;
+  }
+
+  .subject-quick-answer {
+    padding-top: 14px;
   }
 
   .subject-media-section > .wrap,
