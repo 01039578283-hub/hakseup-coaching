@@ -194,7 +194,13 @@ def main() -> int:
             )
             if not body_image or not all(name in body_image.group(1) for name in ("width=", "height=", "decoding=")):
                 errors.append((relative, "body image dimensions/decoding missing"))
-            map_image = re.search(r'assets/maps/[^"\']+["\'][^>]*>', source)
+            # og:image may also point at the same map asset. Inspect the
+            # rendered <img>, not the first arbitrary assets/maps reference.
+            map_image = re.search(
+                r'<img\b[^>]*src=["\'][^"\']*assets/maps/[^"\']+["\'][^>]*>',
+                source,
+                re.I,
+            )
             if not map_image or not all(name in map_image.group(0) for name in ("width=", "height=", "decoding=")):
                 errors.append((relative, "map image dimensions/decoding missing"))
             descriptions.extend(description)

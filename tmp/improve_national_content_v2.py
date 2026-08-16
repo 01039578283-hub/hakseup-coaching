@@ -376,7 +376,15 @@ class PageFacts:
 
     @property
     def region_line(self) -> str:
-        return f"{self.region} {self.district} {self.neighborhood}"
+        return f"{self.display_region} {self.display_district} {self.neighborhood}"
+
+    @property
+    def display_region(self) -> str:
+        return "충청·세종" if self.address.startswith("세종특별자치시") else self.region
+
+    @property
+    def display_district(self) -> str:
+        return "세종특별자치시" if self.address.startswith("세종특별자치시") else self.district
 
     @property
     def grade_subject(self) -> str:
@@ -516,7 +524,9 @@ def extract_school_groups(source: str) -> dict[str, list[str]]:
         values = [
             clean_text(value)
             for value in pills
-            if clean_text(value) and "정보 준비중" not in clean_text(value)
+            if clean_text(value)
+            and "정보 준비중" not in clean_text(value)
+            and clean_text(value) != "지역내 모든 고등학교 가능"
         ]
         result[level] = unique_preserving_order(values)
     return result
@@ -597,12 +607,12 @@ def extract_facts(path: Path, root: Path, source: str) -> PageFacts:
     registration_name = first_match(
         source,
         r'<p\b[^>]*class=["\'][^"\']*\bwawa-register-line\b[^"\']*["\'][^>]*>'
-        r"\s*<strong>\s*교육지원청\s*</strong>\s*:\s*(.*?)</p>",
+        r"\s*<strong>\s*(?:교육지원청|등록 학원명)\s*</strong>\s*:\s*(.*?)</p>",
     )
     registration_number = first_match(
         source,
         r'<p\b[^>]*class=["\'][^"\']*\bwawa-register-line\b[^"\']*["\'][^>]*>'
-        r"\s*<strong>\s*등록번호\s*</strong>\s*:\s*(.*?)</p>",
+        r"\s*<strong>\s*(?:등록번호|교육청 등록번호)\s*</strong>\s*:\s*(.*?)</p>",
     )
     tuition_url_match = re.search(
         r'<a\b[^>]*class=["\'][^"\']*\bwawa-tuition-link\b[^"\']*["\'][^>]*'
@@ -671,10 +681,15 @@ def relevant_grade_fact(facts: PageFacts) -> str:
     if not subject_names:
         subject_names = [name for name in ("영어", "수학") if name in facts.available_grades]
     fragments: list[str] = []
+    prefix = {"초등": "초", "중등": "중", "고등": "고"}.get(facts.grade, "")
     for subject in subject_names:
         grades = facts.available_grades.get(subject, [])
+        if facts.is_child:
+            grades = [grade for grade in grades if prefix and grade.startswith(prefix)]
         if grades:
             fragments.append(f"{subject} {grade_span(grades)}")
+        elif facts.is_child and subject in {"영어", "수학"}:
+            fragments.append(f"{subject} 상담 시 확인")
     return ", ".join(fragments[:3])
 
 
@@ -684,8 +699,8 @@ def actual_fact_text(facts: PageFacts, key: str) -> tuple[str, str]:
         shown = "·".join(schools[:3])
         return (
             "학교 참고",
-            f"페이지의 {facts.relevant_school_level or '학년별'} 학교 정보에는 {shown}"
-            f"{' 등이' if len(schools) > 3 else '이'} 표시되어 있습니다.",
+            f"페이지의 {facts.relevant_school_level or '학년별'} 참고 학교 목록은 {shown}"
+            f"{' 등입니다' if len(schools) > 3 else '입니다'}.",
         )
     grades = relevant_grade_fact(facts)
     if grades:
@@ -707,7 +722,7 @@ def local_summary_text(facts: PageFacts, key: str) -> str:
     variants: list[str] = []
     if schools:
         shown = "·".join(schools[:2])
-        variants.append(f"{facts.relevant_school_level or '학년별'} 학교 참고 정보에 {shown}이 포함되어 있습니다.")
+        variants.append(f"{facts.relevant_school_level or '학년별'} 참고 학교 목록은 {shown}입니다.")
     if facts.address:
         variants.append(f"센터 위치는 {facts.address}로 안내되어 있습니다.")
     if facts.registration_number:
@@ -744,39 +759,36 @@ def school_and_grade_text(facts: PageFacts) -> str:
     schools = facts.relevant_schools()
     if schools:
         shown = "·".join(schools[:3])
-        suffix = " 등이" if len(schools) > 3 else "이"
         fragments.append(
-            f"{facts.relevant_school_level or '학년별'} 학교 참고 정보에는 {shown}{suffix} 포함되어 있습니다"
+            f"{facts.relevant_school_level or '학년별'} 참고 학교 목록은 {shown}"
+            f"{' 등입니다' if len(schools) > 3 else '입니다'}"
         )
     grades = relevant_grade_fact(facts)
     if grades:
         fragments.append(f"{facts.title}의 수강 가능 학년은 {grades}로 표시되어 있습니다")
     if not fragments:
         return (
-            "구체 학교나 가능 학년이 페이지에 등록되지 않은 경우에는 "
-            "현재 학교·학년·진도를 상담에서 먼저 확인합니다."
+            "센터 제공 자료에서 학교 정보가 확인되지 않았습니다. "
+            "실제 학교별 수업·시험 대비 가능 여부와 학년 범위는 상담 시 확인해 주세요."
         )
     return ". ".join(fragments).rstrip(".") + "."
 
 
 def build_description(facts: PageFacts, scenario: str, focus: str, key: str) -> str:
-    values = {
-        "title": facts.title,
-        "region_line": facts.region_line,
-        "grade_subject": facts.grade_subject,
-        # 현재 문구 뱅크의 학생 상황은 최대 46자, 학습 초점은 최대 41자다.
-        # 이를 중간에서 자르면 “학생…이라면”처럼 부자연스러운 메타 설명이
-        # 생기므로 각각 완결된 문장 성분을 그대로 사용한다.
-        "scenario_short": shorten_phrase(scenario, 50),
-        "focus_short": shorten_phrase(focus, 45),
-    }
-    start = stable_index(key, "meta-pattern", len(META_PATTERNS))
-    candidates = list(META_PATTERNS[start:]) + list(META_PATTERNS[:start])
-    descriptions = [pattern.format(**values) for pattern in candidates]
-    selected = next((value for value in descriptions if 70 <= len(value) <= 120), "")
-    if not selected:
-        selected = min(descriptions, key=lambda value: abs(len(value) - 95))
-    return re.sub(r"\s+", " ", selected).strip()
+    # title + 실제 경로 사실을 포함해 1,484개가 고유하면서도 검색결과에서
+    # 잘리지 않도록 80자 이하의 짧은 문장으로 고정한다.
+    selected = (
+        f"{facts.title} | {facts.display_region} {facts.display_district} {facts.neighborhood} "
+        "학년·과목, 참고 학교, 센터 위치와 상담 기준 안내."
+    )
+    if len(selected) > 80:
+        selected = (
+            f"{facts.title} | {facts.display_region} {facts.display_district} "
+            "학년·과목, 센터 위치와 상담 기준 안내."
+        )
+    if len(selected) > 80:
+        raise ValueError(f"80자 메타 설명 생성 실패: {facts.relative} ({len(selected)}자)")
+    return selected
 
 
 def build_checklist(facts: PageFacts, scenario: str, focus: str, key: str) -> list[ChecklistItem]:
@@ -1349,7 +1361,7 @@ def transform_page(path: Path, root: Path) -> PagePlan:
             issues.append(f"확인된 {fact_name} 정보가 핵심 안내에서 누락됨")
     if visible_checklist_names(new_source) != schema_checklist_names(new_source):
         issues.append("화면 체크리스트와 ItemList가 일치하지 않음")
-    if not 60 <= len(description) <= 130:
+    if not 20 <= len(description) <= 80:
         issues.append(f"메타 설명 길이 범위 이탈({len(description)}자)")
 
     return PagePlan(

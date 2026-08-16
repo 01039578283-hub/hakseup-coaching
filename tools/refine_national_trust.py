@@ -8,7 +8,12 @@ import json
 import re
 from pathlib import Path
 from typing import Any
-from urllib.parse import quote
+from urllib.parse import quote, urljoin
+
+from finalize_national_details import (
+    center_directory_identity as dereferenceable_center_identity,
+    postal_geography,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,6 +21,8 @@ NATIONAL_ROOT = ROOT / "전국학원"
 REFERENCE_CSV = ROOT.parent / "참고자료" / "공통자료" / "센터정보 정리.csv"
 BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
 ROOT_ORGANIZATION_ID = f"{BASE_URL}/#organization"
+CENTER_DIRECTORY_ROOT = ROOT / "과목별학원" / "와와학습코칭센터"
+DATA_REVIEW_DATE = "2026-08-16"
 
 JSON_LD_RE = re.compile(
     r'(<script\s+type=["\']application/ld\+json["\'][^>]*>)(.*?)(</script>)',
@@ -51,6 +58,20 @@ def normalize_neighborhood(value: str) -> str:
     return re.sub(r"\s+", " ", value).strip()
 
 
+def display_geography(region: str, district: str, address: str) -> tuple[str, str]:
+    """경로 호환성은 유지하면서 실제 주소에 맞는 표시용 지리값을 돌려준다."""
+    if address.startswith("세종특별자치시"):
+        return "충청·세종", "세종특별자치시"
+    return region, district
+
+
+def center_identity(
+    center_name: str, registration_number: str, address: str
+) -> tuple[str, str]:
+    """프로필 182개/대표 locality 6개에 실제로 연결되는 stable @id."""
+    return dereferenceable_center_identity(center_name, registration_number, address)
+
+
 def stable_index(seed: str, size: int, namespace: str) -> int:
     digest = hashlib.sha256(f"{namespace}|{seed}".encode("utf-8")).hexdigest()
     return int(digest[:12], 16) % size
@@ -61,7 +82,11 @@ def pick(seed: str, namespace: str, values: list[str]) -> str:
 
 
 def split_csv_list(value: str) -> list[str]:
-    return [part.strip() for part in (value or "").split(",") if part.strip()]
+    return [
+        part.strip()
+        for part in (value or "").split(",")
+        if part.strip() and part.strip() != "지역내 모든 고등학교 가능"
+    ]
 
 
 def load_centers() -> dict[tuple[str, str, str], dict[str, str]]:
@@ -122,11 +147,22 @@ def context_for(
     parent_dir = NATIONAL_ROOT / region / district / neighborhood
     parent_url = page_url(parent_dir / "index.html")
     current_url = page_url(path)
+    map_match = re.search(
+        r'<img\b[^>]*src=["\']([^"\']*assets/maps/[^"\']+)["\']',
+        source,
+        re.I | re.S,
+    )
+    map_url = urljoin(current_url, html.unescape(map_match.group(1))) if map_match else ""
     center_name = center.get("센터명", "").strip() or f"와와학습코칭센터 {neighborhood}점"
     address = center.get("센터 주소", "").strip()
     registration_name = center.get("교육지원청명칭", "").strip()
     registration_number = center.get("교육지원청 등록번호", "").strip()
     tuition_url = center.get("센터 교습비", "").strip()
+    display_region, display_district = display_geography(region, district, address)
+    address_region, address_locality = postal_geography(address)
+    organization_id, organization_url = center_identity(
+        center_name, registration_number, address
+    )
 
     available_grades = {
         "국어": split_csv_list(center.get("가능학년\n(국어)", "")),
@@ -161,6 +197,10 @@ def context_for(
         "seed": path.relative_to(ROOT).as_posix(),
         "region": region,
         "district": district,
+        "display_region": display_region,
+        "display_district": display_district,
+        "address_region": address_region,
+        "address_locality": address_locality,
         "neighborhood": neighborhood,
         "child": child,
         "is_child": bool(child),
@@ -179,8 +219,55 @@ def context_for(
         "learning_focus": learning_focus,
         "url": current_url,
         "parent_url": parent_url,
-        "organization_id": f"{parent_url}#organization",
+        "map_url": map_url,
+        "organization_id": organization_id,
+        "organization_url": organization_url,
     }
+
+
+def breadcrumb_items(ctx: dict[str, Any]) -> list[dict[str, str]]:
+    def absolute(*parts: str) -> str:
+        suffix = "/" + "/".join(part.strip("/") for part in parts if part) + "/"
+        return BASE_URL + quote(suffix, safe="/")
+
+    items = [
+        {"name": "홈", "item": BASE_URL + "/"},
+        {"name": "전국학원", "item": absolute("전국학원")},
+        {
+            "name": ctx["display_region"],
+            "item": absolute("전국학원", ctx["region"]),
+        },
+        {
+            "name": ctx["display_district"],
+            "item": absolute("전국학원", ctx["region"], ctx["district"]),
+        },
+    ]
+    if ctx["is_child"]:
+        items.append(
+            {
+                "name": f"{ctx['neighborhood']} 학원",
+                "item": ctx["parent_url"],
+            }
+        )
+    items.append({"name": ctx["title"], "item": ctx["url"]})
+    return items
+
+
+def update_visible_breadcrumb(source: str, ctx: dict[str, Any]) -> str:
+    items = breadcrumb_items(ctx)
+    values = [
+        f'<a href="{html.escape(item["item"], quote=True)}">{html.escape(item["name"])}</a>'
+        for item in items[:-1]
+    ]
+    values.append(html.escape(items[-1]["name"]))
+    rendered = '<div class="breadcrumb">' + " › ".join(values) + "</div>"
+    return re.sub(
+        r'<div\b[^>]*class=["\'][^"\']*\bbreadcrumb\b[^"\']*["\'][^>]*>.*?</div>',
+        rendered,
+        source,
+        count=1,
+        flags=re.I | re.S,
+    )
 
 
 def types_of(node: dict[str, Any]) -> set[str]:
@@ -203,12 +290,17 @@ def replace_exact(value: Any, old: str, new: str) -> Any:
 def grade_availability_text(ctx: dict[str, Any]) -> str:
     available = ctx["available_grades"]
     if ctx["is_child"]:
+        prefix = {"초등": "초", "중등": "중", "고등": "고"}.get(ctx["grade"], "")
         parts: list[str] = []
         for subject in ("영어", "수학"):
-            values = available.get(subject, [])
+            values = [
+                value for value in available.get(subject, []) if prefix and value.startswith(prefix)
+            ]
             if values:
                 parts.append(f"{subject} {', '.join(values)}")
-        return " · ".join(parts) if parts else "영어·수학 수강 가능 학년은 상담 시 확인"
+            else:
+                parts.append(f"{subject} 상담 시 확인")
+        return " · ".join(parts)
 
     parts = []
     for subject in ("국어", "영어", "수학"):
@@ -224,8 +316,8 @@ def school_text(ctx: dict[str, Any]) -> str:
         visible = ", ".join(schools[:4])
         return f"페이지에 제공된 참고 학교는 {visible}이며, 실제 학교별 진도와 시험 범위는 상담 시 확인합니다."
     return (
-        f"{ctx['title']} 상담에서는 재학 학교와 최근 학습 자료를 기준으로 "
-        "학교별 진도와 시험 범위를 확인합니다."
+        "센터 제공 자료에서 학교 정보가 확인되지 않았습니다. "
+        "실제 학교별 수업·시험 대비 가능 여부는 상담 시 확인해 주세요."
     )
 
 
@@ -335,8 +427,10 @@ def build_faq(ctx: dict[str, Any]) -> list[tuple[str, str]]:
         ],
     )
     fee_answer = (
-        f"{title} 페이지의 교습비 안내 버튼에서 {center_name}의 제공 자료를 확인할 수 있습니다. "
-        "실제 수강료와 횟수는 지역, 학년, 수업 구성에 따라 달라질 수 있어 상담 시 최종 확인이 필요합니다."
+        f"{title} 페이지의 센터 제공 교습비 링크에서 안내 자료를 확인할 수 있습니다. "
+        "실제 수강료와 횟수는 상담 시 최종 확인해 주세요."
+        if ctx["tuition_url"]
+        else "센터 제공 교습비 자료가 확인되지 않아 실제 금액·횟수와 개설 과목은 상담 시 확인해 주세요."
     )
 
     location_index = stable_index(seed, len(location_questions), "location")
@@ -409,13 +503,13 @@ def guidance_cards(ctx: dict[str, Any]) -> list[tuple[str, str]]:
         "proof-preparation",
         [
             f"{grade_material}를 준비하고, {scenario}에 해당하는 모습을 함께 정리합니다.",
-            f"{focus}을 확인할 수 있도록 {grade_material}와 최근 공부 기록을 함께 살펴봅니다.",
+            f"{focus}을 확인할 수 있도록 {grade_material} 및 최근 공부 기록을 함께 살펴봅니다.",
             f"{title} 상담 전 {grade_material}에서 반복된 어려움과 스스로 해결한 범위를 구분합니다.",
             f"{grade_material} 가운데 {focus}과 관련된 부분을 표시해 상담 질문을 구체화합니다.",
             f"{scenario}인지 판단할 수 있게 {grade_material}와 숙제·복습 기록을 함께 준비합니다.",
             f"{title} 학습 방향을 정하기 위해 {grade_material}와 학생이 어려워한 단원을 간단히 적습니다.",
             f"{grade_material}를 최근 순서로 정리하고, 계획대로 끝낸 범위와 남은 범위를 구분합니다.",
-            f"{focus}을 상담에서 확인하려면 {grade_material}와 오답을 다시 본 날짜를 함께 준비하면 좋습니다.",
+            f"{focus}을 상담에서 확인하려면 {grade_material} 및 오답을 다시 본 날짜를 함께 준비하면 좋습니다.",
         ],
     )
 
@@ -451,7 +545,7 @@ def render_guidance(ctx: dict[str, Any]) -> str:
             f"{ctx['title']} 선택 시 확인할 사실 정보와 학생별로 달라지는 상담 준비 항목을 나누어 정리했습니다.",
             f"{ctx['center_name']}의 위치·수강 범위와 {ctx['student_scenario']} 상황에 필요한 준비 자료를 함께 확인할 수 있습니다.",
             f"{ctx['title']} 상담을 구체적으로 진행할 수 있도록 센터 제공 정보와 {ctx['learning_focus']} 기준을 정리했습니다.",
-            f"{ctx['region']} {ctx['district']}의 센터 정보와 {ctx['grade']} {ctx['subjects']} 상담 전에 살펴볼 자료를 한곳에 모았습니다.",
+            f"{ctx['display_region']} {ctx['display_district']}의 센터 정보와 {ctx['grade']} {ctx['subjects']} 상담 전에 살펴볼 자료를 한곳에 모았습니다.",
             f"{ctx['title']} 페이지에 확인된 위치·학교·학년 정보와 학생 상황을 설명할 자료를 항목별로 살펴보세요.",
             f"{ctx['neighborhood']}에서 {ctx['grade']} 학습 상담을 준비할 때 확인할 센터 정보와 최근 학습 자료를 정리했습니다.",
         ],
@@ -462,6 +556,7 @@ def render_guidance(ctx: dict[str, Any]) -> str:
     <h2 id="parent-review-title">{html.escape(ctx['title'])} 상담 전에 확인할 내용</h2>
     <p>{html.escape(lead)}</p>
   </div>
+  <p class="national-source-note"><strong>정보 기준</strong> 사이트가 보유한 센터 제공 자료를 {DATA_REVIEW_DATE} 재검토했습니다. 현재 개설 과목·반 편성·운영 여부는 상담 시 최종 확인해 주세요. 편집: 학습코칭 연구소.</p>
   <div class="parent-review-grid">
 {chr(10).join(cards)}
   </div>
@@ -528,7 +623,10 @@ def update_jsonld(
             if {"EducationalOrganization", "LocalBusiness"} & node_types:
                 node["@id"] = ctx["organization_id"]
                 node["name"] = ctx["center_name"]
-                node["url"] = ctx["parent_url"]
+                if ctx["organization_url"]:
+                    node["url"] = ctx["organization_url"]
+                else:
+                    node.pop("url", None)
                 node["branchOf"] = {"@id": ROOT_ORGANIZATION_ID}
                 node["areaServed"] = {
                     "@type": "Place",
@@ -537,21 +635,29 @@ def update_jsonld(
                 node["address"] = {
                     "@type": "PostalAddress",
                     "streetAddress": ctx["address"],
-                    "addressRegion": ctx["region"],
-                    "addressLocality": ctx["district"],
+                    "addressRegion": ctx["address_region"],
+                    "addressLocality": ctx["address_locality"],
                     "addressCountry": "KR",
                 }
+                node.pop("hasOfferCatalog", None)
+                if ctx["map_url"]:
+                    node["image"] = ctx["map_url"]
                 node.pop("aggregateRating", None)
                 node.pop("review", None)
+                node.pop("telephone", None)
+                node.pop("openingHours", None)
+                node.pop("contactPoint", None)
                 if ctx["registration_number"]:
                     node["identifier"] = {
                         "@type": "PropertyValue",
-                        "propertyID": "교육지원청 등록번호",
+                        "propertyID": "교육청 등록번호",
                         "value": ctx["registration_number"],
                     }
 
             if "WebPage" in node_types:
-                node["publisher"] = {"@id": ctx["organization_id"]}
+                node["author"] = {"@id": ROOT_ORGANIZATION_ID}
+                node["publisher"] = {"@id": ROOT_ORGANIZATION_ID}
+                node["dateModified"] = DATA_REVIEW_DATE
                 parts = node.get("hasPart")
                 if isinstance(parts, list):
                     for part in parts:
@@ -559,8 +665,11 @@ def update_jsonld(
                             part["name"] = "학습관리 확인 정보"
 
             if "Article" in node_types:
-                node["author"] = {"@id": ctx["organization_id"]}
-                node["publisher"] = {"@id": ctx["organization_id"]}
+                node["author"] = {"@id": ROOT_ORGANIZATION_ID}
+                node["publisher"] = {"@id": ROOT_ORGANIZATION_ID}
+                node["dateModified"] = DATA_REVIEW_DATE
+                if ctx["map_url"]:
+                    node["image"] = ctx["map_url"]
                 sections = node.get("articleSection")
                 if isinstance(sections, list):
                     node["articleSection"] = [
@@ -570,6 +679,7 @@ def update_jsonld(
 
             if "Service" in node_types:
                 node["provider"] = {"@id": ctx["organization_id"]}
+                node.pop("hasOfferCatalog", None)
                 node["areaServed"] = {
                     "@type": "Place",
                     "name": ctx["neighborhood"],
@@ -577,6 +687,17 @@ def update_jsonld(
 
             if "FAQPage" in node_types:
                 node["mainEntity"] = faq_schema(pairs)
+
+            if "BreadcrumbList" in node_types:
+                node["itemListElement"] = [
+                    {
+                        "@type": "ListItem",
+                        "position": position,
+                        "name": item["name"],
+                        "item": item["item"],
+                    }
+                    for position, item in enumerate(breadcrumb_items(ctx), start=1)
+                ]
 
             if "ItemList" in node_types and str(node.get("@id", "")).endswith(
                 "#checklist"
@@ -601,6 +722,34 @@ def update_jsonld(
 
 
 def clean_pending_information(source: str) -> str:
+    # 결과 보장 문구와 중복 원고가 집중된 legacy 블록만 정확한 다음 section
+    # 경계까지 제거한다. 파일 끝까지 탐욕적으로 지우지 않는다.
+    article_start = source.find('<section class="article-main">')
+    if article_start >= 0:
+        article_end = source.find(
+            '<section class="generated-support-section">', article_start
+        )
+        if article_end < 0:
+            raise ValueError("article-main 다음 generated-support-section 경계 없음")
+        source = source[:article_start] + source[article_end:]
+    source = re.sub(
+        r'\s*<img\b(?=[^>]*class=["\'][^"\']*\bgenerated-hidden-image\b[^"\']*["\'])[^>]*>\s*',
+        "\n",
+        source,
+        flags=re.I | re.S,
+    )
+    source = re.sub(
+        r'\s*<details\b(?=[^>]*class=["\'][^"\']*\bwawa-fee-accordion\b[^"\']*["\'])[^>]*>.*?</details>\s*',
+        '\n    <p class="wawa-fee-note">교습비 링크는 센터 제공 자료이며, 실제 개설 과목·횟수·금액은 상담 시 최종 확인해 주세요.</p>\n',
+        source,
+        flags=re.I | re.S,
+    )
+    source = source.replace("<strong>교육지원청</strong>", "<strong>등록 학원명</strong>")
+    source = source.replace("<strong>등록번호</strong>", "<strong>교육청 등록번호</strong>")
+    source = source.replace("주요 타깃학교(이외 학교도 수업 가능)", "참고 학교 정보")
+    source = source.replace("초등 타깃학교", "초등 참고 학교")
+    source = source.replace("중등 타깃학교", "중등 참고 학교")
+    source = source.replace("고등 타깃학교", "고등 참고 학교")
     source = re.sub(
         r'\s*<p class="wawa-register-line">\s*<strong>운영등록일</strong>\s*:\s*정보 준비중\s*</p>',
         "",
@@ -613,8 +762,48 @@ def clean_pending_information(source: str) -> str:
     )
     source = source.replace(
         '<span class="wawa-empty">정보 준비중</span>',
-        '<span class="wawa-empty">학교별 수업 가능 여부는 상담 시 확인</span>',
+        '<span class="wawa-empty">센터 제공 자료에서 학교 정보가 확인되지 않았습니다. 실제 학교별 수업·시험 대비 가능 여부는 상담 시 확인해 주세요.</span>',
     )
+    source = source.replace(
+        '<span class="wawa-empty">학교별 수업 가능 여부는 상담 시 확인</span>',
+        '<span class="wawa-empty">센터 제공 자료에서 학교 정보가 확인되지 않았습니다. 실제 학교별 수업·시험 대비 가능 여부는 상담 시 확인해 주세요.</span>',
+    )
+    source = re.sub(
+        r'<span\b[^>]*class=["\'][^"\']*\bwawa-pill\b[^"\']*["\'][^>]*>\s*'
+        r'지역내 모든 고등학교 가능\s*</span>',
+        '<span class="wawa-empty">센터 제공 자료에서 고등학교 정보가 확인되지 않았습니다. 실제 학교별 수업 가능 여부는 상담 시 확인해 주세요.</span>',
+        source,
+        flags=re.I,
+    )
+    source = source.replace(
+        "교습비 안내 준비중",
+        "센터 제공 교습비 자료가 확인되지 않아 실제 금액·횟수는 상담 시 확인해 주세요.",
+    )
+    source = source.replace("기록와", "기록과")
+    source = re.sub(
+        r"(초등|중등|고등)\s+영수\s+학습\s+상담",
+        r"\1 영어·수학 학습 상담",
+        source,
+    )
+    for old, new in (
+        ("성적 상승", "학습 과정 개선"),
+        ("성적상승", "학습 과정 개선"),
+        ("성적 향상", "학습 과정 개선"),
+        ("성적향상", "학습 과정 개선"),
+        ("점수 상승", "취약 단원 보완"),
+        ("점수상승", "취약 단원 보완"),
+        ("점수 향상", "취약 단원 보완"),
+        ("점수향상", "취약 단원 보완"),
+    ):
+        source = source.replace(old, new)
+    source = re.sub(r"성적이\s*오르는", "학습 과정이 안정되는", source)
+    source = re.sub(r"성적이\s*오르도록", "학습 과정이 안정되도록", source)
+    source = re.sub(r"성적이\s*오르게", "학습 과정이 안정되게", source)
+    source = re.sub(r"점수가\s*오르는", "취약 단원 대응이 나아지는", source)
+    source = re.sub(r"점수가\s*오르도록", "취약 단원 대응이 나아지도록", source)
+    source = re.sub(r"점수가\s*오르게", "취약 단원 대응이 나아지게", source)
+    source = source.replace("성적을 올리", "학습 과정을 개선하")
+    source = source.replace("점수를 올리", "취약 단원을 보완하")
     source = source.replace("~ 와와학습코칭센터", "와와학습코칭센터")
     return source
 
@@ -630,6 +819,7 @@ def process_page(
     updated = FAQ_SECTION_RE.sub(render_faq(ctx, pairs), source, count=1)
     updated = REVIEW_SECTION_RE.sub(render_guidance(ctx), updated, count=1)
     updated = clean_pending_information(updated)
+    updated = update_visible_breadcrumb(updated, ctx)
     updated, json_changes = update_jsonld(updated, ctx, pairs)
 
     changed = updated != source

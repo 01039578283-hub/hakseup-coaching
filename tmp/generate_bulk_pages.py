@@ -1,3 +1,9 @@
+"""Legacy full-regeneration script.
+
+전국학원 URL baseline을 다시 만드는 용도로 이번 보정 파이프라인에서는 실행하지
+않는다. 명시적 확인 플래그 없이는 어떤 파일도 쓰기 전에 종료한다.
+"""
+
 import csv
 import hashlib
 import html
@@ -5,8 +11,9 @@ import json
 import os
 import random
 import re
+import sys
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import quote, urljoin
 
 
 ROOT = Path.cwd()
@@ -14,6 +21,8 @@ CSV_PATH = Path.home() / "Desktop" / "홈페이지 새로할거 자료" / "대�
 CONTENT_POOL_PATH = ROOT / "tmp" / "page_content_pool.json"
 
 SITE_NAME = "학습코칭 연구소"
+BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
+CENTER_DIRECTORY_ROOT = ROOT / "과목별학원" / "와와학습코칭센터"
 SITE_DESCRIPTION = "학생별 학습 진단, 플래너 관리, 오답 재학습을 중심으로 영어·수학·국어 학습 방향을 안내하는 상담형 학원 정보 사이트입니다."
 PHONE = "010-3957-8283"
 PHONE_INTL = "+82-10-3957-8283"
@@ -205,11 +214,8 @@ def img_src_from_html(value: str) -> str:
 
 
 def hidden_image_markup(raw: str, title: str) -> str:
-    src = img_src_from_html(raw)
-    if not src:
-        return ""
-    alt = f"{title} {SITE_NAME}"
-    return f'<img class="generated-hidden-image" src="{html.escape(src)}" alt="{html.escape(alt)}">'
+    """외부 대표 이미지는 메타 추출에만 쓰고 화면 DOM에는 넣지 않는다."""
+    return ""
 
 
 def image_alt(title: str, filename: str, kind: str) -> str:
@@ -421,6 +427,52 @@ def extract_address(center_html: str) -> str:
     return clean_text(match.group(1)) if match else ""
 
 
+def extract_center_name(center_html: str) -> str:
+    match = re.search(
+        r'<section\b[^>]*class=["\'][^"\']*\bwawa-center-snippet\b[^"\']*["\'][^>]*'
+        r'aria-label=["\'](.*?)\s+센터 안내["\']',
+        center_html or "",
+        re.I | re.S,
+    )
+    return clean_text(match.group(1)) if match else ""
+
+
+def stable_center_identity(center_html: str, fallback_url: str) -> tuple[str, str]:
+    center_name = extract_center_name(center_html)
+    address = extract_address(center_html)
+    registration = extract_registration(center_html)
+    slug = center_name.removeprefix("와와학습코칭센터 ").strip()
+    if slug and (CENTER_DIRECTORY_ROOT / slug / "index.html").is_file():
+        encoded = "/".join(
+            quote(part, safe="") for part in ("과목별학원", "와와학습코칭센터", slug)
+        )
+        url = f"{BASE_URL}/{encoded}/"
+        return url + "#organization", url
+    seed = "|".join(value for value in (registration, address, center_name) if value)
+    digest = hashlib.sha256((seed or fallback_url).encode("utf-8")).hexdigest()[:20]
+    return f"{BASE_URL}/#center-{digest}", fallback_url
+
+
+def normalize_center_fragment(value: str) -> str:
+    value = re.sub(
+        r'\s*<details\b(?=[^>]*class=["\'][^"\']*\bwawa-fee-accordion\b[^"\']*["\'])[^>]*>.*?</details>\s*',
+        '\n<p class="wawa-fee-note">교습비 링크는 센터 제공 자료이며, 실제 개설 과목·횟수·금액은 상담 시 최종 확인해 주세요.</p>\n',
+        value,
+        flags=re.I | re.S,
+    )
+    value = value.replace("<strong>교육지원청</strong>", "<strong>등록 학원명</strong>")
+    value = value.replace("<strong>등록번호</strong>", "<strong>교육청 등록번호</strong>")
+    value = value.replace("주요 타깃학교(이외 학교도 수업 가능)", "참고 학교 정보")
+    value = value.replace("초등 타깃학교", "초등 참고 학교")
+    value = value.replace("중등 타깃학교", "중등 참고 학교")
+    value = value.replace("고등 타깃학교", "고등 참고 학교")
+    value = value.replace(
+        '<span class="wawa-empty">정보 준비중</span>',
+        '<span class="wawa-empty">센터 제공 자료에서 학교 정보가 확인되지 않았습니다. 실제 학교별 수업·시험 대비 가능 여부는 상담 시 확인해 주세요.</span>',
+    )
+    return value
+
+
 def extract_registration(center_html: str) -> str:
     text = clean_text(center_html)
     if "교육지원청" not in text:
@@ -453,7 +505,7 @@ def tuition_catalog() -> dict:
 
 def breadcrumb_chain(page_dir: Path, title: str) -> list[dict]:
     parts = page_dir.relative_to(ROOT).parts
-    items = [{"name": SITE_NAME, "url": "/"}]
+    items = [{"name": "홈", "url": "/"}]
     current = ROOT
     for part in parts:
         current = current / part
@@ -472,9 +524,19 @@ def breadcrumb_json(items: list[dict]) -> dict:
     }
 
 
+def breadcrumb_html(page_dir: Path, title: str) -> str:
+    items = breadcrumb_chain(page_dir, title)
+    values = [
+        f'<a href="{html.escape(item["url"], quote=True)}">{html.escape(item["name"])}</a>'
+        for item in items[:-1]
+    ]
+    values.append(html.escape(items[-1]["name"]))
+    return '<div class="breadcrumb">' + " › ".join(values) + "</div>"
+
+
 def page_json_ld(page_dir: Path, title: str, article_html: str, center_html: str, faqs: list[dict], reviews: list[dict], image_url: str) -> dict:
     url = root_url_for(page_dir)
-    org_id = url + "#educational-organization"
+    org_id, organization_url = stable_center_identity(center_html, url)
     address = extract_address(center_html)
     registration = extract_registration(center_html)
     description = f"{title} 안내입니다. 상담, 학습 진단, 플래너 관리, 오답 재학습과 센터 위치 정보를 확인해보세요."
@@ -483,7 +545,7 @@ def page_json_ld(page_dir: Path, title: str, article_html: str, center_html: str
         "@type": "EducationalOrganization",
         "@id": org_id,
         "name": f"{strip_academy_suffix(title)} 학습관리 안내",
-        "url": url,
+        "url": organization_url,
         "telephone": PHONE,
         "openingHours": "Mo-Sa 12:00-24:00",
         "areaServed": {"@type": "Place", "name": strip_academy_suffix(title)},
@@ -498,12 +560,22 @@ def page_json_ld(page_dir: Path, title: str, article_html: str, center_html: str
             }
             for item in reviews
         ],
-        "hasOfferCatalog": tuition_catalog(),
     }
     if address:
-        org["address"] = {"@type": "PostalAddress", "streetAddress": address, "addressCountry": "KR"}
+        parts = page_dir.relative_to(ROOT).parts
+        region = parts[1] if len(parts) > 1 else ""
+        district = parts[2] if len(parts) > 2 else ""
+        if address.startswith("세종특별자치시"):
+            region, district = "세종특별자치시", "세종시"
+        org["address"] = {
+            "@type": "PostalAddress",
+            "streetAddress": address,
+            "addressRegion": region,
+            "addressLocality": district,
+            "addressCountry": "KR",
+        }
     if registration:
-        org["identifier"] = {"@type": "PropertyValue", "propertyID": "교육지원청 등록번호", "value": registration}
+        org["identifier"] = {"@type": "PropertyValue", "propertyID": "교육청 등록번호", "value": registration}
 
     items = breadcrumb_chain(page_dir, title)
     graph = [
@@ -600,10 +672,18 @@ def create_page(row: list[str]) -> dict:
     reviews = selected_reviews(page_dir)
     class_src = asset_src(root_rel, "assets/centers/common", class_image)
     map_src = asset_src(root_rel, "assets/maps", map_image)
-    image_url = img_src_from_html(hidden) or urljoin(url, class_src)
-    article_html = normalize_article_heading(normalize_fragment(article_raw) or fallback_article(title), title, page_dir)
-    center_html = normalize_fragment(center_raw)
+    # 화면에 실제로 노출되는 로컬 지도 이미지를 대표 이미지로 사용한다.
+    image_url = urljoin(BASE_URL + url, map_src or class_src)
+    # legacy 원고에는 근거 없는 성과 단정과 대량 중복이 집중되어 있어 신규
+    # 전국학원 상세에는 주입하지 않는다. fact-based 후속 섹션이 본문 역할을 한다.
+    article_html = ""
+    center_html = normalize_center_fragment(normalize_fragment(center_raw))
     ld = page_json_ld(page_dir, title, article_html, center_html, faqs, reviews, image_url)
+    parts = page_dir.relative_to(ROOT).parts
+    location = " ".join(parts[-3:])
+    description = f"{title} | {location} 학년·과목, 참고 학교, 센터 위치와 상담 기준 안내."
+    if len(description) > 80:
+        description = f"{title} | {location} 학년·과목, 센터 위치와 상담 기준 안내."
 
     page = f"""<!doctype html>
 <html lang="ko">
@@ -611,7 +691,7 @@ def create_page(row: list[str]) -> dict:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{html.escape(title)} | {SITE_NAME}</title>
-  <meta name="description" content="{html.escape(title)} 안내입니다. 학습 진단, 플래너 관리, 오답 재학습과 센터 위치 정보를 확인해보세요.">
+  <meta name="description" content="{html.escape(description)}">
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="{root_rel}/assets/favicon.png">
   <link rel="stylesheet" href="{root_rel}/assets/site.css">
@@ -624,24 +704,23 @@ def create_page(row: list[str]) -> dict:
     <section class="page-hero generated-page-hero">
       <div class="wrap page-hero-inner">
         <div>
-          <div class="breadcrumb"><a href="{root_rel}/">홈</a> › <a href="{root_rel}/전국학원/">전국학원</a> › {html.escape(title)}</div>
+          {breadcrumb_html(page_dir, title)}
           <p class="eyebrow">local academy guide</p>
           <h1>{html.escape(title)} 학습 안내</h1>
           <p>{html.escape(strip_academy_suffix(title))}에서 학원을 찾는 학생과 학부모를 위해 상담, 진단, 플래너, 오답 관리 기준을 정리했습니다.</p>
         </div>
       </div>
     </section>
-    {hidden_image_markup(hidden, title)}
     <section class="section">
       <div class="wrap bulk-image-grid">
 {image_card(title, class_src, image_alt(title, class_image, "class"), f"{title} 수업 안내")}{image_card(title, map_src, image_alt(title, map_image, "map"), f"{title} 위치 안내")}
       </div>
     </section>
-    {article_html}
     {support_section(title)}
     {center_html}
     {faq_section(title, faqs)}
     {review_section(title, reviews)}
+    <p class="national-source-note"><strong>정보 기준</strong> 사이트가 보유한 센터 제공 자료를 2026-08-16 재검토했습니다. 현재 개설 과목·반 편성·운영 여부는 상담 시 최종 확인해 주세요. 편집: 학습코칭 연구소.</p>
   </main>
 {consult_footer(root_rel, title)}
 </body>
@@ -818,4 +897,11 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    if "--legacy-regenerate-confirm" not in sys.argv:
+        raise SystemExit(
+            "실행 차단: 기존 URL baseline을 전면 재생성하는 legacy 스크립트입니다. "
+            "이번 작업은 tools/finalize_national_details.py와 "
+            "tools/refine_national_hubs.py만 사용하세요."
+        )
+    sys.argv.remove("--legacy-regenerate-confirm")
     main()
