@@ -7,12 +7,16 @@ URL/file/canonical/sitemap sets are compared with a manifest kept outside the
 repository, while the nationwide landing pages are checked against the current
 content and entity rules.
 
-The default baseline is created at::
+When available, the immutable URL baseline is read from::
 
     %TEMP%\hakseupcoaching_4743_baseline_manifest.json
 
-Use ``--baseline`` to point at a copied manifest.  This script never rewrites
-the baseline or any site file.
+Use ``--baseline`` to point at a copied manifest.  The baseline is optional by
+default because temporary files may be cleaned between releases; current file,
+folder URL, canonical, and sitemap sets are still required to match each other
+and the fixed 4,743-page count.  Use ``--require-baseline`` when an external
+immutable copy is present and must be enforced.  This script never rewrites the
+baseline or any site file.
 """
 
 import argparse
@@ -143,7 +147,11 @@ ASSERTIVE_AVAILABILITY_RE = re.compile(
 EMPTY_SCHOOL_TRUTH_RE = re.compile(
     r"(?:학교|타깃학교).{0,35}(?:제공(?:된)?\s*자료에서\s*확인되지\s*않|"
     r"자료가\s*(?:없|제공되지\s*않)|정보가\s*(?:없|제공되지\s*않|확인되지\s*않))|"
-    r"(?:제공(?:된)?\s*자료에서).{0,25}(?:학교|타깃학교).{0,25}확인되지\s*않",
+    r"(?:제공(?:된)?\s*자료에서).{0,25}(?:학교|타깃학교).{0,25}확인되지\s*않|"
+    r"(?:학교명|개별\s*학교명|타깃학교).{0,35}(?:기재되어\s*있지\s*않|"
+    r"기재되지\s*않|미기재|없(?:습니다|음)|표시되지\s*않)|"
+    r"(?:원자료|공통\s*자료).{0,35}(?:학교명|개별\s*학교명).{0,30}"
+    r"(?:기재되지\s*않|미기재|없(?:습니다|음))",
     re.S,
 )
 
@@ -273,7 +281,9 @@ class Findings:
         return 1 if total else 0
 
 
-def load_baseline(path: Path, findings: Findings) -> dict[str, Any]:
+def load_baseline(
+    path: Path, findings: Findings, required: bool = False
+) -> dict[str, Any]:
     try:
         path.relative_to(ROOT.resolve())
     except ValueError:
@@ -285,11 +295,12 @@ def load_baseline(path: Path, findings: Findings) -> dict[str, Any]:
             "immutable baseline must be stored outside the repository",
         )
     if not path.is_file():
-        findings.add(
-            "baseline_missing",
-            path,
-            "baseline manifest is required and must remain outside the repository",
-        )
+        if required:
+            findings.add(
+                "baseline_missing",
+                path,
+                "--require-baseline was set but the external manifest is missing",
+            )
         return {}
     try:
         raw = path.read_bytes()
@@ -1936,9 +1947,16 @@ def main() -> int:
         default=5,
         help="maximum sample messages printed for each error code",
     )
+    parser.add_argument(
+        "--require-baseline",
+        action="store_true",
+        help="fail when the external immutable baseline is missing",
+    )
     args = parser.parse_args()
     findings = Findings(sample_limit=max(1, args.sample_limit))
-    baseline = load_baseline(args.baseline.resolve(), findings)
+    baseline = load_baseline(
+        args.baseline.resolve(), findings, required=args.require_baseline
+    )
 
     public_pages = public_index_pages()
     public_files = [path.relative_to(ROOT).as_posix() for path in public_pages]
@@ -2380,6 +2398,7 @@ def main() -> int:
         )
 
     print(f"baseline={args.baseline.resolve()}")
+    print(f"baseline_required={args.require_baseline}")
     print(f"baseline_loaded={bool(baseline)}")
     print(f"baseline_sets_unchanged={baseline_sets_unchanged}")
     print(f"current_url_sets_equal={current_url_sets_equal}")

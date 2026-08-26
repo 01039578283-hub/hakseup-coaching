@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import html
+import itertools
 import json
 import re
 from collections import Counter
 from pathlib import Path
 from urllib.parse import quote, unquote, urlparse
+
+import generate_wawa_center_pages as generator
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -33,8 +36,45 @@ def local_target(href: str) -> Path | None:
     return ROOT / route / "index.html" if route else ROOT / "index.html"
 
 
+def visible_text(source: str) -> str:
+    source = re.sub(
+        r"<(?:script|style|header|footer|nav)\b.*?</(?:script|style|header|footer|nav)>",
+        " ",
+        source,
+        flags=re.I | re.S,
+    )
+    return clean(source)
+
+
+def normalized_copy(value: str, profile: dict) -> str:
+    facts = [
+        profile["title"],
+        profile["slug"],
+        profile.get("address", ""),
+        profile.get("location_note", ""),
+        profile["region"],
+        profile["city"],
+        *profile["localities"],
+        *profile["schools"],
+        *profile["subjects"].keys(),
+        *profile["subjects"].values(),
+    ]
+    for fact in sorted({item for item in facts if item}, key=len, reverse=True):
+        value = value.replace(fact, " VAR ")
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def shingles(value: str, size: int = 4) -> set[tuple[str, ...]]:
+    words = re.findall(r"[가-힣A-Za-z0-9]+", value.lower())
+    return {
+        tuple(words[index : index + size])
+        for index in range(max(0, len(words) - size + 1))
+    }
+
+
 def main() -> None:
     pages = sorted(path for path in TARGET.glob("*/index.html"))
+    profiles = {profile["slug"]: profile for profile in generator.build_profiles()}
     errors: list[str] = []
     warnings: list[str] = []
     metas: list[str] = []
@@ -43,11 +83,44 @@ def main() -> None:
     representative_urls: list[str] = []
     review_notes: list[str] = []
     all_urls: set[str] = set()
+    visible_lengths: list[int] = []
+    normalized_shingles: list[set[tuple[str, ...]]] = []
+    normalized_paragraphs: Counter[str] = Counter()
 
     for page in pages:
         source = page.read_text(encoding="utf-8")
         slug = page.parent.name
+        profile = profiles.get(slug)
         label = str(page.relative_to(ROOT))
+        if profile is None:
+            errors.append(f"{label}: 원자료 프로필 없음")
+            continue
+        if source.count('<section class="center-profile-context">') != 1:
+            errors.append(f"{label}: 센터별 상담 자료 섹션 수 오류")
+        main_match = re.search(r"<main\b.*?</main>", source, re.I | re.S)
+        main = main_match.group(0) if main_match else ""
+        text = visible_text(main)
+        visible_lengths.append(len(text))
+        normalized_shingles.append(shingles(normalized_copy(text, profile)))
+        for attrs, body in re.findall(r"<p\b([^>]*)>(.*?)</p>", main, re.I | re.S):
+            if any(
+                marker in attrs
+                for marker in ("subject-kicker", "subject-review-label", "eyebrow")
+            ):
+                continue
+            paragraph = normalized_copy(clean(body), profile)
+            if len(paragraph) >= 30:
+                normalized_paragraphs[paragraph] += 1
+        source_facts = [
+            profile.get("address", ""),
+            *profile["localities"],
+            *profile["subjects"].keys(),
+            *profile["subjects"].values(),
+            *profile["schools"][:14],
+        ]
+        missing_facts = [fact for fact in source_facts if fact and fact not in text]
+        if missing_facts:
+            errors.append(f"{label}: 화면 원자료 누락 {missing_facts[:4]}")
         expected = BASE_URL + quote(f"/과목별학원/와와학습코칭센터/{slug}/", safe="/")
         h1 = re.findall(r"<h1\b[^>]*>(.*?)</h1>", source, re.I | re.S)
         if len(h1) != 1:
@@ -127,6 +200,26 @@ def main() -> None:
     if len(set(representative_urls)) != len(pages):
         errors.append(f"대표이미지 중복 {len(pages) - len(set(representative_urls))}개")
 
+    similarities = [
+        len(left & right) / len(left | right)
+        for left, right in itertools.combinations(normalized_shingles, 2)
+        if left or right
+    ]
+    sorted_similarities = sorted(similarities)
+    similarity_average = sum(similarities) / len(similarities)
+    similarity_p90 = sorted_similarities[int(len(sorted_similarities) * 0.9)]
+    similarity_max = max(similarities)
+    paragraph_max_df = max(normalized_paragraphs.values())
+    if sum(visible_lengths) / len(visible_lengths) < 2900:
+        errors.append("센터 본문 평균 글자수 2900자 미만")
+    if similarity_average > 0.25 or similarity_p90 > 0.30 or similarity_max > 0.45:
+        errors.append(
+            "정규화 본문 유사도 초과 "
+            f"avg={similarity_average:.4f} p90={similarity_p90:.4f} max={similarity_max:.4f}"
+        )
+    if paragraph_max_df > 30:
+        errors.append(f"정규화 문단 최대 반복 {paragraph_max_df}/30")
+
     report = {
         "hub_pages": 1,
         "detail_pages": len(pages),
@@ -137,6 +230,24 @@ def main() -> None:
         "unique_faq_sets": len(set(faq_signatures)),
         "unique_representative_images": len(set(representative_urls)),
         "unique_consultation_scenarios": len(set(review_notes)),
+        "visible_chars": {
+            "min": min(visible_lengths),
+            "max": max(visible_lengths),
+            "average": round(sum(visible_lengths) / len(visible_lengths), 1),
+        },
+        "normalized_similarity": {
+            "average": round(similarity_average, 4),
+            "p90": round(similarity_p90, 4),
+            "max": round(similarity_max, 4),
+        },
+        "normalized_paragraphs": {
+            "instances": sum(normalized_paragraphs.values()),
+            "unique": len(normalized_paragraphs),
+            "max_document_frequency": paragraph_max_df,
+            "families_used_20_plus": sum(
+                count >= 20 for count in normalized_paragraphs.values()
+            ),
+        },
         "meta_length": {"min": min(map(len, metas)), "max": max(map(len, metas)), "average": round(sum(map(len, metas)) / len(metas), 1)},
         "error_samples": errors[:20],
         "warning_samples": warnings[:20],

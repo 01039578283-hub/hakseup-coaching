@@ -99,3 +99,31 @@
 - `local`, `seoul` 이미지 alt가 `{페이지 타이틀} {홈페이지 제목}`인지
 - 내부 링크/이미지 경로가 깨지지 않았는지
 - `????` 같은 깨진 문자가 없는지
+
+### 지역별 내부 링크 후처리
+
+- 모든 페이지 생성이 끝난 다음 `tools/strengthen_internal_links.py --apply`를 실행한다.
+- 371개 지역의 핵심 12페이지는 자기 자신을 제외한 11개 페이지를 모두 연결한다.
+- 확인된 센터 상세 페이지가 있으면 같은 블록에 센터 링크를 추가한다.
+- 화면 링크와 `#local-study-network` ItemList JSON-LD는 정확히 일치해야 한다.
+- `tools/audit_internal_link_network.py`에서 클러스터 유입 링크 최솟값 11, 끊어진 링크 0, 화면/JSON-LD 불일치 0을 확인한다.
+
+### 센터 상세 187개 본문 차별화
+
+- `tools/generate_wawa_center_pages.py`는 기본 실행이 dry-run이고 `--apply`일 때만 파일을 변경한다.
+- 주소, 위치안내, 가능 과목·학년, 학교명은 `센터정보 정리.csv`의 실제 값만 사용한다.
+- 원자료가 비어 있으면 미기재 사실과 상담 확인 필요성을 밝히며 인근 학교나 가능 학년을 추정하지 않는다.
+- 지점별 본문은 위치 근거, 과목·학년 근거, 학교 근거, 학습계획, 오답 재확인을 서로 다른 문장 계열로 구성한다.
+- 화면 FAQ 5개와 `FAQPage` JSON-LD는 항상 동일해야 한다.
+- 생성 후 `tools/audit_wawa_center_pages.py`에서 187개 H1·메타·FAQ 세트의 고유성, 원자료 보존, 본문 유사도, 내부 링크와 이미지 경로를 전수 확인한다.
+
+### 검색 의도가 강한 중등 과목 742개 차별화
+
+- 대상은 `중등영어학원` 371개와 `중등수학학원` 371개 상세 페이지로 고정한다.
+- 기존 과목 생성기, 학교 원고, 브랜드 신호, 지역별 내부 링크 후처리를 마친 다음 `tools/differentiate_priority_subject_pages.py --apply`를 마지막에 실행한다.
+- 새 영역은 현재 답안 진단, 학교 시험 자료 반영, 첫 2주 재확인, 상담 결정 기준의 네 질문으로 구성한다.
+- 센터명·주소·가능 학년·학교명은 현재 페이지의 확인된 값만 재사용하고, 미기재 학교를 주변 학교로 추정하지 않는다.
+- `<!-- school-reference:start/end -->` 원자료 블록은 byte-for-byte 보존한다.
+- 화면 카드와 JSON-LD `#priority-search-intent` ItemList의 제목·설명은 일치해야 한다.
+- dry-run에서 정확히 742개, `changed: 0`, `errors: 0`을 확인하고 `tools/audit_national_naver_strict.py`를 포함한 전체 릴리스 감사를 실행한다.
+- 엄격 감사의 임시 baseline 파일은 기본 선택 사항이다. 과거 URL 세트 자체를 릴리스 조건으로 동결할 때만 `--require-baseline`을 명시한다.
