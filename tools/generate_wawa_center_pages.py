@@ -69,6 +69,12 @@ def compact(value: object) -> str:
     return re.sub(r"\s+", " ", str(value or "")).strip()
 
 
+def with_particle(value: str, consonant: str, vowel: str) -> str:
+    last = next((char for char in reversed(value) if "가" <= char <= "힣"), "")
+    has_batchim = bool(last) and (ord(last) - ord("가")) % 28 != 0
+    return value + (consonant if has_batchim else vowel)
+
+
 def unique(values: list[str]) -> list[str]:
     return list(dict.fromkeys(value for value in values if value))
 
@@ -379,7 +385,7 @@ def overview_copy(profile: dict) -> str:
         f"{localities} 안내와 연결된 {title}의 자료를 주소·수업 범위·학교 정보 순서로 정리했습니다. 실제 반 편성이나 시간표를 뜻하는 정보는 아니므로 현재 운영 내용은 별도로 확인해야 합니다.",
         f"상담 전에는 {title}의 위치를 먼저 확정하고 {subjects} 가운데 필요한 과목의 학년 표시를 찾아보세요. 이후 {local} 학생이 받은 학교 시험 자료를 참고 학교 목록과 함께 확인하면 됩니다.",
         f"{city} {title} 자료에는 방문 주소와 과목별 가능 학년, 학교 참고 항목이 포함되어 있습니다. 이 세 정보를 학생의 현재 학년·과목·시험 일정과 나란히 비교해 질문 순서를 정해 보세요.",
-        f"{title}를 검토하는 출발점은 {localities} 지역 표시와 실제 주소의 일치 여부입니다. 그다음 {subjects} 학년 범위와 학교 자료를 확인하면 상담에서 꼭 물어볼 내용을 빠르게 추릴 수 있습니다.",
+        f"{with_particle(title, '을', '를')} 검토하는 출발점은 {localities} 지역 표시와 실제 주소의 일치 여부입니다. 그다음 {subjects} 학년 범위와 학교 자료를 확인하면 상담에서 꼭 물어볼 내용을 빠르게 추릴 수 있습니다.",
         f"{local} 학부모가 {title} 상담을 준비할 때 필요한 확인 항목을 위치, 과목, 학년, 학교 자료로 나누었습니다. 자료에 없는 운영 내용은 추정하지 않고 상담 시점에 확인하는 것이 좋습니다.",
     ]
     return choose(profile, "overview", options)
@@ -532,7 +538,7 @@ def meta_description(profile: dict) -> str:
         f"{profile['title']} 방문을 준비하는 {local} 학생을 위해 주소, 과목별 학년, 학교 정보와 상담 질문을 분리해 정리했습니다. 현재 운영 내용은 상담 시 확인하세요.",
         f"{local} {profile['title']}의 주소와 위치 설명, {subject_names(profile)} 학년 정보, 학교 참고 목록을 살펴보고 최근 답안과 학습 기록을 준비하세요.",
         f"{profile['title']}에 관한 센터 제공 자료를 위치·과목·학년·학교 기준으로 확인하세요. {local} 학생의 상담 전 점검 순서와 오답 재확인 방법도 담았습니다.",
-        f"{profile['city']}에서 {profile['title']}를 찾는 학부모를 위해 실제 주소와 가능 학년·과목, 학교 자료, 상담 준비 체크리스트를 한 페이지에 정리했습니다.",
+        f"{profile['city']}에서 {with_particle(profile['title'], '을', '를')} 찾는 학부모를 위해 실제 주소와 가능 학년·과목, 학교 자료, 상담 준비 체크리스트를 한 페이지에 정리했습니다.",
         f"{profile['title']}의 {local} 안내 범위, 센터 주소, {subject_names(profile)} 정보와 학교 참고 항목을 확인하고 시험 범위·교재·주간 계획을 함께 준비하세요.",
         f"{local} 학습 상담 전 {profile['title']}의 위치와 과목별 학년, 학교 참고 정보를 확인하세요. 페이지에 없는 반 편성·시간표는 상담 시 다시 확인해야 합니다.",
         f"{profile['title']} 센터 자료에서 확인되는 주소, {subject_names(profile)} 학년 범위와 학교 정보를 정리했습니다. {local} 학생의 최근 시험지와 오답도 함께 준비하세요.",

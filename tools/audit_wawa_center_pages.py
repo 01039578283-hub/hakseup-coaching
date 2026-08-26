@@ -100,6 +100,8 @@ def main() -> None:
         main_match = re.search(r"<main\b.*?</main>", source, re.I | re.S)
         main = main_match.group(0) if main_match else ""
         text = visible_text(main)
+        if "점를" in text:
+            errors.append(f"{label}: 센터명 조사 오류 '점를'")
         visible_lengths.append(len(text))
         normalized_shingles.append(shingles(normalized_copy(text, profile)))
         for attrs, body in re.findall(r"<p\b([^>]*)>(.*?)</p>", main, re.I | re.S):
