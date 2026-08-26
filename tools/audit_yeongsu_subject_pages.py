@@ -982,7 +982,7 @@ def audit_detail(
         audit.error("body_contract", page, f"body class에 {sorted(expected_body_classes)}가 모두 필요합니다")
 
     expected_h1 = f"{fact.locality} 영수학원"
-    expected_title = f"{fact.locality} 영수학원 | 학습코칭 연구소"
+    expected_title = f"{fact.locality} 영수학원 | 학습코칭 학원 안내"
     canonical = expected_url(fact.slug)
     titles = element_texts(source, "title")
     h1s = element_texts(source, "h1")

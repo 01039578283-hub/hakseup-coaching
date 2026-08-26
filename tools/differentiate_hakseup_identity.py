@@ -11,7 +11,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
 SITE_NAME = "학습코칭.kr"
-BRAND_NAME = "학습코칭 연구소"
+BRAND_NAME = "학습코칭 학원 안내"
 
 SKIP_DIRS = {".git", ".vercel", "tmp"}
 SERVICE_SLUGS = {"고등영수학원", "중등영수학원", "초등영수학원"}

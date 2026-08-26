@@ -37,7 +37,7 @@ DEFAULT_COMMON = ROOT.parent / "참고자료" / "공통자료"
 SOURCE_NAME = "타깃학교.csv"
 BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
 SITEMAP = "sitemap.xml"
-MODIFIED_DATE = "2026-08-19"
+MODIFIED_DATE = "2026-08-27"
 
 START_MARKER = "<!-- school-reference:start -->"
 END_MARKER = "<!-- school-reference:end -->"

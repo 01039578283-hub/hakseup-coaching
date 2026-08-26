@@ -16,11 +16,13 @@ from urllib.parse import quote
 from openpyxl import load_workbook
 from PIL import Image
 
+from source_copy_utils import distribute_source_paragraphs, source_paragraphs, source_theme
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DESKTOP = Path.home() / "Desktop"
 COMMON = DESKTOP / "홈페이지 정리" / "참고자료" / "공통자료"
-DEFAULT_WORKBOOK = DESKTOP / "영수학원 원고.xlsx"
+DEFAULT_WORKBOOK = DESKTOP / "구글시트로 뽑은거" / "영수학원 원고.xlsx"
 CENTER_CSV = COMMON / "센터정보 정리.csv"
 IMAGE_CSV = COMMON / "이미지링크.csv"
 NATIONAL_ROOT = ROOT / "전국학원"
@@ -28,7 +30,7 @@ SUBJECT_ROOT = ROOT / "과목별학원"
 TARGET_ROOT = SUBJECT_ROOT / "영수학원"
 
 BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
-SITE_NAME = "학습코칭 연구소"
+SITE_NAME = "학습코칭 학원 안내"
 CATEGORY = "영수학원"
 PHONE = "010-3957-8283"
 SMS_URL = "https://blogsms.net/01039578283"
@@ -37,6 +39,7 @@ FORM_URL = (
     "1FAIpQLSdb2oE5Qk5YS0TfYDxyV1w-IOTkhkjOCmmpAKTI9FmqpVj6Yg/viewform"
 )
 TODAY = date.today().isoformat()
+PUBLISHED_DATE = "2026-08-13"
 
 GRADE_ORDER = [
     "초1", "초2", "초3", "초4", "초5", "초6",
@@ -248,6 +251,7 @@ class Record:
     common_grades: tuple[str, ...]
     schools: tuple[str, ...]
     source_text: str
+    source_html: str
     source_url: str
     organization_id: str
     representative: str
@@ -429,6 +433,7 @@ def make_records(workbook_path: Path) -> list[Record]:
                 common_grades=tuple(common_grades),
                 schools=tuple(schools),
                 source_text=source_text,
+                source_html=source_html,
                 source_url=source["source_url"],
                 organization_id=source["organization_id"] or source["source_url"] + "#organization",
                 representative=representative,
@@ -602,6 +607,20 @@ def content_sections(record: Record) -> tuple[str, list[dict[str, object]]]:
         {"heading": choose(record.key, school_headings, "h5"), "paragraphs": school_paragraphs},
         {"heading": choose(record.key, checklist_headings, "h6"), "paragraphs": [checklist_intro], "items": checklist},
     ]
+    theme = source_theme(
+        record.source_html,
+        record.locality,
+        "영수학원",
+        f"{with_josa(record.english_focus, '과', '와')} {record.math_focus}의 연결",
+    )
+    sections[0]["heading"] = f"{record.locality} 영수학원, {theme}"
+    authored = source_paragraphs(
+        record.source_html,
+        useful_terms=("영어", "수학", "학습", "학생", "상담", "복습", "오답", "시험", "과제"),
+        blocked_terms=("국어",),
+        limit=6,
+    )
+    distribute_source_paragraphs(sections, authored)
     for section in sections:
         heading = str(section["heading"])
         if record.locality not in heading:
@@ -820,7 +839,7 @@ def schema_graph(
         "mainEntityOfPage": {"@id": page_url + "#webpage"},
         "author": {"@id": record.organization_id},
         "publisher": {"@id": record.organization_id},
-        "datePublished": TODAY,
+        "datePublished": PUBLISHED_DATE,
         "dateModified": TODAY,
         "image": [record.representative, body_url, map_url],
         "articleSection": [

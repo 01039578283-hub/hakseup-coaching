@@ -22,7 +22,7 @@ REFERENCE_CSV = ROOT.parent / "참고자료" / "공통자료" / "센터정보 �
 BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
 ROOT_ORGANIZATION_ID = f"{BASE_URL}/#organization"
 CENTER_DIRECTORY_ROOT = ROOT / "과목별학원" / "와와학습코칭센터"
-DATA_REVIEW_DATE = "2026-08-16"
+DATA_REVIEW_DATE = "2026-08-27"
 
 JSON_LD_RE = re.compile(
     r'(<script\s+type=["\']application/ld\+json["\'][^>]*>)(.*?)(</script>)',
@@ -556,7 +556,7 @@ def render_guidance(ctx: dict[str, Any]) -> str:
     <h2 id="parent-review-title">{html.escape(ctx['title'])} 상담 전에 확인할 내용</h2>
     <p>{html.escape(lead)}</p>
   </div>
-  <p class="national-source-note"><strong>정보 기준</strong> 사이트가 보유한 센터 제공 자료를 {DATA_REVIEW_DATE} 재검토했습니다. 현재 개설 과목·반 편성·운영 여부는 상담 시 최종 확인해 주세요. 편집: 학습코칭 연구소.</p>
+  <p class="national-source-note"><strong>정보 기준</strong> 사이트가 보유한 센터 제공 자료를 {DATA_REVIEW_DATE} 재검토했습니다. 현재 개설 과목·반 편성·운영 여부는 상담 시 최종 확인해 주세요. 편집: 학습코칭.kr.</p>
   <div class="parent-review-grid">
 {chr(10).join(cards)}
   </div>

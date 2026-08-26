@@ -403,7 +403,7 @@ def add_hub_og_image(source: str) -> tuple[str, bool]:
         source,
         re.IGNORECASE | re.DOTALL,
     )
-    title = clean_text(title_match.group(1)) if title_match else "학습코칭 연구소"
+    title = clean_text(title_match.group(1)) if title_match else "학습코칭 학원 안내"
     tags = (
         f'\n  <meta property="og:image" content="{DEFAULT_OG_IMAGE}">'
         f'\n  <meta property="og:image:alt" content="{html.escape(title, quote=True)} 대표 이미지">'

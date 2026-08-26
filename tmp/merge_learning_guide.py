@@ -67,7 +67,7 @@ def schema_graph() -> dict:
     organization = {
         "@type": "EducationalOrganization",
         "@id": f"{SITE}/#organization",
-        "name": "학습코칭 연구소",
+        "name": "학습코칭 학원 안내",
         "url": f"{SITE}/",
         "logo": f"{SITE}/assets/favicon.png",
         "image": f"{SITE}/assets/generated/academy-hero-v2.webp",
@@ -112,7 +112,7 @@ def schema_graph() -> dict:
             {
                 "@type": "WebSite",
                 "@id": f"{SITE}/#website",
-                "name": "학습코칭 연구소",
+                "name": "학습코칭 학원 안내",
                 "url": f"{SITE}/",
                 "inLanguage": "ko-KR",
                 "publisher": {"@id": f"{SITE}/#organization"},
@@ -122,7 +122,7 @@ def schema_graph() -> dict:
                 "@type": "BreadcrumbList",
                 "@id": f"{GUIDE_URL}#breadcrumb",
                 "itemListElement": [
-                    {"@type": "ListItem", "position": 1, "name": "학습코칭 연구소", "item": f"{SITE}/"},
+                    {"@type": "ListItem", "position": 1, "name": "학습코칭 학원 안내", "item": f"{SITE}/"},
                     {"@type": "ListItem", "position": 2, "name": "학습가이드", "item": GUIDE_URL},
                 ],
             },
@@ -271,10 +271,10 @@ MAIN = '''<main id="main">
 def rebuild_guide() -> None:
     html = GUIDE.read_text(encoding="utf-8")
     replacements = {
-        r"<title>.*?</title>": "<title>학습관리·학습가이드 | 학습코칭 연구소</title>",
+        r"<title>.*?</title>": "<title>학습관리·학습가이드 | 학습코칭 학원 안내</title>",
         r'<meta name="description" content="[^"]*">': '<meta name="description" content="학생의 현재 상태를 진단하고 주간 플래너, 실행 점검, 오답 재학습, 학부모 피드백까지 연결하는 초중고 영어·수학 학습관리 가이드입니다.">',
         r'<meta property="og:description" content="[^"]*">': '<meta property="og:description" content="진단, 계획, 실행 확인, 오답 재학습을 한 흐름으로 정리한 초중고 영어·수학 학습관리 가이드입니다.">',
-        r'<meta property="og:title" content="[^"]*">': '<meta property="og:title" content="학습관리·학습가이드 | 학습코칭 연구소">',
+        r'<meta property="og:title" content="[^"]*">': '<meta property="og:title" content="학습관리·학습가이드 | 학습코칭 학원 안내">',
     }
     for pattern, value in replacements.items():
         html = re.sub(pattern, value, html, count=1, flags=re.DOTALL)
@@ -300,7 +300,7 @@ def old_page_fallback() -> None:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>학습가이드로 이동합니다 | 학습코칭 연구소</title>
+  <title>학습가이드로 이동합니다 | 학습코칭 학원 안내</title>
   <meta name="robots" content="noindex, follow">
   <meta http-equiv="refresh" content="0; url=../학습가이드/">
   <link rel="canonical" href="{GUIDE_URL}">

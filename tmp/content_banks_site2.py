@@ -1,7 +1,7 @@
 """AEO/GEO content banks for 학습코칭.kr 전국학원 local pages.
 
 Adapted from 참고자료/공통자료/FAQ.txt and 학부모 후기.txt, reworded to the
-"학습코칭 연구소" register (국어·영어·수학, 진단상담, 플래너 관리, 오답 재학습).
+"학습코칭 학원 안내" register (국어·영어·수학, 진단상담, 플래너 관리, 오답 재학습).
 Not verbatim copies of the source files.
 """
 from __future__ import annotations

@@ -40,7 +40,7 @@ from typing import Iterable, Mapping, Sequence
 from urllib.parse import unquote
 
 
-RELEASE_DATE = "2026-08-19"
+RELEASE_DATE = "2026-08-27"
 SCHOOL_CSV_NAME = "타깃학교.csv"
 SUBJECT_ROOT_NAME = "과목별학원"
 SITEMAP_NAME = "sitemap.xml"
@@ -593,7 +593,7 @@ MISSING_STATE_TEMPLATES = (
     "{locality}의 {level_label} 실제 수업 가능 학교는 공통 원자료 칸에 개별 학교명으로 기재되지 않았습니다.",
     "학교 단위로 {locality} {service} 범위를 확인했지만 원자료의 {level_label} 목록에는 이름이 없습니다.",
     "{locality} 페이지와 연결된 {level_label} 타깃학교 원자료는 학교명 미기재 상태입니다.",
-    "공통자료의 {locality} 행에서 {level_label} 칸은 특정 학교명을 제시하지 않습니다.",
+    "학교 원자료의 {locality} 행에서 {level_label} 칸은 특정 학교명을 제시하지 않습니다.",
     "{locality} {category}의 {level_label} 실제 학교 목록은 이번 원자료에 따로 기록되지 않았습니다.",
     "{locality}에서 {service} 학교 범위를 대조할 원자료의 {level_label} 항목은 비어 있습니다.",
     "원자료의 {locality} {level_label} 타깃학교 셀에는 확인 가능한 개별 학교명이 없습니다.",
@@ -636,7 +636,7 @@ COVERAGE_STATE_TEMPLATES = (
     "{locality}의 {level_label} 타깃학교 칸에는 개별 학교명 대신 ‘{coverage}’이라는 실제 수업 가능 범위가 적혀 있습니다.",
     "학교별 이름을 열거하지 않은 {locality} {level_label} 원자료는 ‘{coverage}’으로 가능 범위를 명시합니다.",
     "{locality} {category}의 {level_label} 근거는 원자료상 ‘{coverage}’으로, 실제 수업 가능 상태를 나타냅니다.",
-    "공통자료의 {locality} 행은 {level_label} 실제 수업 가능 학교를 ‘{coverage}’ 범위로 제시합니다.",
+    "학교 원자료의 {locality} 행은 {level_label} 실제 수업 가능 학교를 ‘{coverage}’ 범위로 제시합니다.",
     "{locality}에서 {service} 수업 가능 학교를 확인하면 {level_label} 항목은 ‘{coverage}’으로 기록되어 있습니다.",
     "원자료가 제시한 {locality} {level_label} 수업 가능 상태는 ‘{coverage}’입니다.",
     "{locality}의 {level_label} 범위에는 원자료의 ‘{coverage}’ 수업 가능 표시가 적용됩니다.",
@@ -1789,8 +1789,20 @@ def _transform_schema(
         if section not in owned_section_names
     ]
     article["articleSection"] = sections + [heading]
-    webpage["dateModified"] = RELEASE_DATE
-    article["dateModified"] = RELEASE_DATE
+    # Never move a page's modification date backwards when verified school
+    # references are re-applied after a newer category regeneration.
+    modified_candidates = [
+        str(value)
+        for value in (
+            RELEASE_DATE,
+            webpage.get("dateModified"),
+            article.get("dateModified"),
+        )
+        if value and re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(value))
+    ]
+    effective_modified = max(modified_candidates)
+    webpage["dateModified"] = effective_modified
+    article["dateModified"] = effective_modified
 
     graph.append(
         _schema_webpage_element(canonical, webpage_id, config, row, heading)
@@ -1874,8 +1886,11 @@ def _render_group(
         lines.append(f"  <p>{html.escape(guidance)}</p>")
     else:
         template = _choose(key, f"missing-state-{level}", MISSING_STATE_TEMPLATES)
+        state_text = template.format(**common)
+        if config.directory == "중등영어학원":
+            state_text = state_text.replace("공통자료", "확인 자료")
         state, state_guidance = _state_with_boundary(
-            template.format(**common),
+            state_text,
             key,
             level,
             "missing",
@@ -2195,8 +2210,12 @@ def _transform_sitemap(
         lastmods = list(SITEMAP_LASTMOD_RE.finditer(block))
         if len(lastmods) != 1:
             raise PlanError(f"sitemap 대상 lastmod cardinality 오류: {loc}: {len(lastmods)}")
+        current_lastmod = lastmods[0].group(2).strip()
+        effective_lastmod = RELEASE_DATE
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}", current_lastmod):
+            effective_lastmod = max(RELEASE_DATE, current_lastmod)
         new_block = SITEMAP_LASTMOD_RE.sub(
-            lambda item: item.group(1) + RELEASE_DATE + item.group(3),
+            lambda item: item.group(1) + effective_lastmod + item.group(3),
             block,
             count=1,
         )

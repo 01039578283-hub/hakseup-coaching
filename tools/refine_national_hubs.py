@@ -104,7 +104,10 @@ def render_breadcrumb(path: Path) -> str:
 def hub_description(path: Path) -> str:
     parts = raw_parts(path)
     if not parts:
-        return "13개 광역·76개 시군구·371개 동네 학원과 센터 위치, 학년·과목, 학교 참고 정보를 안내합니다."
+        return (
+            "전국 13개 광역·76개 시군구·371개 동네의 영어·수학 학원, "
+            "센터 위치, 학년·과목, 학교 참고 정보와 상담 기준을 안내합니다."
+        )
     if len(parts) == 1:
         districts = [
             child for child in path.parent.iterdir()
@@ -114,19 +117,30 @@ def hub_description(path: Path) -> str:
             1 for candidate in path.parent.glob("*/*/index.html")
             if len(candidate.parent.relative_to(path.parent).parts) == 2
         )
-        return (
+        value = (
             f"{display_region(parts[0])}의 {len(districts)}개 시군구·{neighborhoods}개 동네 학원과 "
-            "센터 위치, 학년·과목, 학교 참고 정보를 안내합니다."
+            "영어·수학 학년 범위, 센터 위치, 학교 참고 정보와 상담 전 확인사항을 안내합니다."
         )
-    region, district = parts
-    neighborhoods = [
-        child for child in path.parent.iterdir()
-        if child.is_dir() and (child / "index.html").is_file()
-    ]
-    return (
-        f"{display_region(region)} {display_district(region, district)}의 "
-        f"{len(neighborhoods)}개 동네 학원, 센터 위치, 학년·과목과 상담 확인사항 안내."
-    )
+    else:
+        region, district = parts
+        neighborhoods = [
+            child for child in path.parent.iterdir()
+            if child.is_dir() and (child / "index.html").is_file()
+        ]
+        value = (
+            f"{display_region(region)} {display_district(region, district)}의 "
+            f"{len(neighborhoods)}개 동네 영어·수학 학원, 센터 위치, 학년·과목, "
+            "학교 참고 정보와 학습 상담 기준을 안내합니다."
+        )
+        if len(value) > 80:
+            value = (
+                f"{display_region(region)} {display_district(region, district)} "
+                f"{len(neighborhoods)}개 동네의 영어·수학 학원, 센터 위치와 "
+                "학년·과목별 상담 기준을 안내합니다."
+            )
+    if not 55 <= len(value) <= 80:
+        raise ValueError(f"허브 meta description 길이 오류({len(value)}): {path}")
+    return value
 
 
 def meta_content(source: str, kind: str, key: str) -> str:
@@ -441,7 +455,7 @@ def validate(plans: list[Plan]) -> list[str]:
     if len(set(descriptions)) != len(plans):
         errors.append(f"collection: unique descriptions {len(set(descriptions))}/{len(plans)}")
     lengths = [len(value) for value in descriptions]
-    if not lengths or min(lengths) < 20 or max(lengths) > 80:
+    if not lengths or min(lengths) < 55 or max(lengths) > 80:
         errors.append(f"collection: description lengths {min(lengths, default=0)}~{max(lengths, default=0)}")
     return errors
 

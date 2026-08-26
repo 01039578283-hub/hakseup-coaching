@@ -20,12 +20,12 @@ def enhance_root(index_file: Path) -> bool:
     if "alternateName" in text:
         return False
     old = (
-        '      "name": "학습코칭 연구소",\n'
+        '      "name": "학습코칭 학원 안내",\n'
         '      "url": "https://학습코칭.kr/",\n'
         '      "logo":'
     )
     new = (
-        '      "name": "학습코칭 연구소",\n'
+        '      "name": "학습코칭 학원 안내",\n'
         '      "alternateName": ["와와학습코칭센터", "와와학습코칭학원", "와와학원"],\n'
         '      "url": "https://학습코칭.kr/",\n'
         '      "logo":'

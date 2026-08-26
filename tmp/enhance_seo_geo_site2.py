@@ -30,7 +30,7 @@ from content_banks_site2 import (
 ROOT = Path(__file__).resolve().parents[1]
 CENTER_ROOT = ROOT / "전국학원"
 BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
-SITE_NAME = "학습코칭 연구소"
+SITE_NAME = "학습코칭 학원 안내"
 PHONE = "010-3957-8283"
 PHONE_INTL = "+82-10-3957-8283"
 TODAY = date.today().isoformat()

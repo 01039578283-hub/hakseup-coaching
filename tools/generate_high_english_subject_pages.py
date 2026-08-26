@@ -11,15 +11,17 @@ from pathlib import Path
 from urllib.parse import quote
 
 import generate_yeongsu_subject_pages as base
+from source_copy_utils import distribute_source_paragraphs, source_paragraphs, source_theme
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DESKTOP = Path.home() / "Desktop"
-DEFAULT_WORKBOOK = DESKTOP / "고등 영어학원.xlsx"
+DEFAULT_WORKBOOK = DESKTOP / "구글시트로 뽑은거" / "고등 영어학원.xlsx"
 CATEGORY = "고등영어학원"
 CATEGORY_LABEL = "고등 영어학원"
 TARGET_ROOT = ROOT / "과목별학원" / CATEGORY
 HIGH_GRADES = tuple(base.GRADE_ORDER[-3:])
+PUBLISHED_DATE = "2026-08-13"
 
 
 def title(record: base.Record) -> str:
@@ -346,6 +348,20 @@ def content_sections(record: base.Record) -> tuple[str, list[dict[str, object]]]
         {"heading": fifth_heading, "paragraphs": [fifth_p1, fifth_p2]},
         {"heading": sixth_heading, "paragraphs": [sixth_p], "items": list(checklist)},
     ]
+    theme = source_theme(record.source_html, record.locality, CATEGORY_LABEL, record.english_focus)
+    sections[0]["heading"] = f"{record.locality} 고등 영어, {theme}"
+    excluded_schools = tuple(
+        school for school in record.schools
+        if not (school.endswith("고") or school.endswith("고등학교"))
+    )
+    authored = source_paragraphs(
+        record.source_html,
+        useful_terms=("영어", "어휘", "문법", "문장", "독해", "학습", "학생", "오답", "시험", "상담"),
+        blocked_terms=("수학", "국어", "초등", "중등", "중학교"),
+        excluded_school_names=excluded_schools,
+        limit=8,
+    )
+    distribute_source_paragraphs(sections, authored)
     return answer, sections
 def build_faqs(record: base.Record) -> list[tuple[str, str]]:
     grades = "·".join(high_grades(record))
@@ -544,7 +560,7 @@ def schema_graph(
             "@type": "Article", "@id": article_id, "headline": title(record), "description": meta,
             "abstract": answer, "inLanguage": "ko-KR", "mainEntityOfPage": {"@id": url + "#webpage"},
             "author": {"@id": record.organization_id}, "publisher": {"@id": record.organization_id},
-            "datePublished": base.TODAY, "dateModified": base.TODAY,
+            "datePublished": PUBLISHED_DATE, "dateModified": base.TODAY,
             "image": [record.representative, body_url, map_url],
             "articleSection": [CATEGORY_LABEL, record.service_region, record.service_city, record.locality, *[str(s["heading"]) for s in sections]],
             "about": about, "mentions": mentions, "hasPart": parts,

@@ -34,11 +34,11 @@
 예시:
 
 ```html
-<img src="../../assets/centers/common/local.webp" alt="구파발 중2 영어학원 학습코칭 연구소">
-<img src="../../assets/centers/common/seoul.webp" alt="명일동 고1 수학학원 학습코칭 연구소">
+<img src="../../assets/centers/common/local.webp" alt="구파발 중2 영어학원 학습 안내">
+<img src="../../assets/centers/common/seoul.webp" alt="명일동 고1 수학학원 학습 안내">
 ```
 
-- 여기서 `홈페이지 제목`은 현재 기준 `학습코칭 연구소`다.
+- 여기서 `홈페이지 제목`은 현재 기준 `학습코칭 학원 안내`다.
 - 나중에 사이트명이 바뀌면 alt도 `{페이지 타이틀} {새 홈페이지 제목}`으로 일괄 변경한다.
 - 지도 이미지는 별도 규칙으로 `{페이지 타이틀} 위치 안내`를 사용한다.
 

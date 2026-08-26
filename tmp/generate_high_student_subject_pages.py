@@ -14,7 +14,7 @@ from zipfile import ZipFile
 ROOT = Path(__file__).resolve().parents[1]
 ZIP_PATH = Path.home() / "Desktop" / "학습코칭.kr 추가 원고" / "고등학생학원.zip"
 BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
-SITE_NAME = "학습코칭 연구소"
+SITE_NAME = "학습코칭 학원 안내"
 CATEGORY = "고등학생학원"
 SUBJECT_ROOT = ROOT / "과목별학원"
 TARGET_ROOT = SUBJECT_ROOT / CATEGORY

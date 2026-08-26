@@ -20,7 +20,7 @@ from urllib.parse import quote
 
 
 BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
-SITE_SUFFIX = "학습코칭 연구소"
+SITE_SUFFIX = "학습코칭 학원 안내"
 TODAY = "2026-07-16"
 SEO_START = "<!-- seo-geo-enhancement:start -->"
 SEO_END = "<!-- seo-geo-enhancement:end -->"

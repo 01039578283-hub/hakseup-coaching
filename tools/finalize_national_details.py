@@ -30,7 +30,7 @@ REFERENCE_CSV = ROOT.parent / "참고자료" / "공통자료" / "센터정보 �
 BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
 ROOT_ORGANIZATION_ID = f"{BASE_URL}/#organization"
 EXPECTED_DETAIL_COUNT = 1_484
-REVIEW_DATE = "2026-08-16"
+REVIEW_DATE = "2026-08-27"
 
 JSON_LD_RE = re.compile(
     r'(<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>)(.*?)(</script>)',
@@ -541,18 +541,25 @@ def facts_for(path: Path) -> Facts:
 
 
 def description_for(facts: Facts) -> str:
-    value = (
-        f"{facts.title} | {facts.display_region} {facts.display_district} {facts.display_neighborhood} "
-        "학년·과목, 참고 학교, 센터 위치와 상담 기준 안내."
+    location = (
+        f"{facts.display_region} {facts.display_district} "
+        f"{facts.display_neighborhood}"
     )
-    if len(value) > 80:
-        value = (
-            f"{facts.title} | {facts.display_region} {facts.display_district} "
-            "학년·과목, 센터 위치와 상담 기준 안내."
-        )
-    if len(value) > 80:
-        raise ValueError(f"80자 메타 설명을 만들 수 없습니다({len(value)}자): {facts.relative}")
-    return value
+    candidates = (
+        f"{facts.title} | {location} 영어·수학 학년 범위, 참고 학교, "
+        "센터 위치와 상담 전 학습 점검 기준을 안내합니다.",
+        f"{facts.title} | {facts.display_region} {facts.display_district} "
+        "영어·수학 학년 범위, 센터 위치와 상담 전 확인 기준을 안내합니다.",
+        f"{facts.title} | {facts.display_region} 영어·수학 학년 범위, "
+        "센터 위치와 학생별 학습 상담 준비 기준을 안내합니다.",
+    )
+    for value in candidates:
+        if 55 <= len(value) <= 80:
+            return value
+    raise ValueError(
+        "55~80자 메타 설명을 만들 수 없습니다"
+        f"({[len(value) for value in candidates]}): {facts.relative}"
+    )
 
 
 def leaf_grade(facts: Facts) -> tuple[str, str]:
@@ -560,6 +567,15 @@ def leaf_grade(facts: Facts) -> tuple[str, str]:
         if label in facts.title:
             return label, prefix
     return "", ""
+
+
+def missing_school_information(facts: Facts) -> str:
+    grade = leaf_grade(facts)[0] or "학년별"
+    return (
+        f"{facts.display_neighborhood} {grade} 페이지에는 센터 제공 자료의 학교명이 "
+        "별도로 표시되지 않았습니다. 실제 학교별 수업·시험 대비 가능 여부는 "
+        "상담 시 확인해 주세요."
+    )
 
 
 def leaf_availability_summary(facts: Facts) -> str:
@@ -588,10 +604,7 @@ def school_information_answer(facts: Facts) -> str:
             f"{', '.join(facts.school_names)}입니다. 실제 학교별 수업·시험 대비 가능 여부는 "
             "상담 시 확인해 주세요."
         )
-    return (
-        "센터 제공 자료에서 학교 정보가 확인되지 않았습니다. "
-        "실제 학교별 수업·시험 대비 가능 여부는 상담 시 확인해 주세요."
-    )
+    return missing_school_information(facts)
 
 
 def rewrite_leaf_availability(source: str, facts: Facts) -> str:
@@ -668,7 +681,7 @@ def rewrite_leaf_availability(source: str, facts: Facts) -> str:
     school_sentence = (
         f"{grade} 참고 학교 목록은 {'·'.join(facts.school_names)}입니다. "
         if facts.school_names
-        else "센터 제공 자료에서 학교 정보가 확인되지 않았습니다. "
+        else missing_school_information(facts) + " "
     )
     combined = (
         school_sentence
@@ -762,6 +775,11 @@ def rewrite_visible_outcome_elements(source: str, facts: Facts) -> str:
 
 def normalize_text(value: str, facts: Facts) -> str:
     value = normalize_claims(value)
+    value = value.replace(
+        "센터 제공 자료에서 학교 정보가 확인되지 않았습니다. "
+        "실제 학교별 수업·시험 대비 가능 여부는 상담 시 확인해 주세요.",
+        missing_school_information(facts),
+    )
     value = value.replace("기록와", "기록과")
     value = value.replace("평소 공부 기록를", "평소 공부 기록을")
     value = re.sub(
@@ -773,7 +791,7 @@ def normalize_text(value: str, facts: Facts) -> str:
     value = re.sub(r"(초등|중등|고등)\s+영수\s+학습\s+상담", r"\1 영어·수학 학습 상담", value)
     value = value.replace(
         GENERIC_SCHOOL,
-        "센터 제공 자료에서 고등학교 정보가 확인되지 않았습니다",
+        missing_school_information(facts),
     )
     value = value.replace(
         "교습비 안내 준비중",
@@ -790,7 +808,7 @@ def normalize_text(value: str, facts: Facts) -> str:
         value = re.sub(
             rf"{re.escape(facts.title)} 상담에서는 재학 학교와 최근 학습 자료를 기준으로 "
             r"학교별 진도와 시험 범위를 확인합니다\.",
-            "센터 제공 자료에서 학교 정보가 확인되지 않았습니다. 실제 학교별 수업·시험 대비 가능 여부는 상담 시 확인해 주세요.",
+            missing_school_information(facts),
             value,
         )
     if not facts.tuition_url:
@@ -1127,7 +1145,7 @@ def source_note() -> str:
         '<p class="national-source-note"><strong>정보 기준</strong> '
         f"사이트가 보유한 센터 제공 자료를 {REVIEW_DATE} 재검토했습니다. "
         "현재 개설 과목·반 편성·운영 여부는 상담 시 최종 확인해 주세요. "
-        "편집: 학습코칭 연구소.</p>"
+        "편집: 학습코칭.kr.</p>"
     )
 
 
@@ -1170,11 +1188,15 @@ def transform(path: Path) -> Plan:
     source = source.replace("고등 타깃학교", "고등 참고 학교")
     source = source.replace(
         '<span class="wawa-empty">학교별 수업 가능 여부는 상담 시 확인</span>',
-        '<span class="wawa-empty">센터 제공 자료에서 학교 정보가 확인되지 않았습니다. 실제 학교별 수업·시험 대비 가능 여부는 상담 시 확인해 주세요.</span>',
+        '<span class="wawa-empty">'
+        + html.escape(missing_school_information(facts))
+        + "</span>",
     )
     source = re.sub(
         rf'<span\b[^>]*class=["\']wawa-pill["\'][^>]*>\s*{re.escape(GENERIC_SCHOOL)}\s*</span>',
-        '<span class="wawa-empty">센터 제공 자료에서 고등학교 정보가 확인되지 않았습니다. 실제 학교별 수업 가능 여부는 상담 시 확인해 주세요.</span>',
+        '<span class="wawa-empty">'
+        + html.escape(missing_school_information(facts))
+        + "</span>",
         source,
         flags=re.I,
     )
@@ -1352,7 +1374,7 @@ def strict_validate(plans: list[Plan]) -> tuple[list[str], dict[str, int]]:
             errors.append(f"{facts.relative}: 잘못된 등록 학원명 라벨 잔존")
         if "주요 타깃학교(이외 학교도 수업 가능)" in source or "타깃학교" in source:
             errors.append(f"{facts.relative}: blanket 타깃학교 문구 잔존")
-        if not facts.has_school_names and "센터 제공 자료에서 학교 정보가 확인되지 않았습니다" not in source:
+        if not facts.has_school_names and missing_school_information(facts) not in html.unescape(source):
             errors.append(f"{facts.relative}: 학교 공란 명시 분기 없음")
         if "기록와" in source:
             errors.append(f"{facts.relative}: 기록와 문장 오류 잔존")
@@ -1372,7 +1394,7 @@ def strict_validate(plans: list[Plan]) -> tuple[list[str], dict[str, int]]:
             errors.append(f"{facts.relative}: 학교명 조사 오류 잔존")
         if source.count("national-source-note") != 1 or REVIEW_DATE not in source:
             errors.append(f"{facts.relative}: 정보 기준/검증일 고지 오류")
-        if "편집: 학습코칭 연구소" not in source:
+        if "편집: 학습코칭.kr" not in source:
             errors.append(f"{facts.relative}: 편집 주체 고지 없음")
         if "교습비 안내 준비중" in source:
             errors.append(f"{facts.relative}: 교습비 준비중 placeholder 잔존")

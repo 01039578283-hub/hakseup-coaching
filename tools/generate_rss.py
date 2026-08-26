@@ -217,7 +217,7 @@ def build_feed(items: list[dict[str, object]]) -> ET.Element:
     ET.register_namespace("content", CONTENT_NAMESPACE)
     rss = ET.Element("rss", {"version": "2.0"})
     channel = ET.SubElement(rss, "channel")
-    ET.SubElement(channel, "title").text = "학습코칭 연구소"
+    ET.SubElement(channel, "title").text = "학습코칭 학원 안내"
     ET.SubElement(channel, "link").text = f"{BASE_URL}/"
     ET.SubElement(channel, "description").text = (
         "학습 진단, 플래너 관리, 오답 재학습과 학년별·지역별 학원 선택 기준을 안내합니다."

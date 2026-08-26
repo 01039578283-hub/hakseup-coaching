@@ -20,7 +20,7 @@ ROOT = Path.cwd()
 CSV_PATH = Path.home() / "Desktop" / "홈페이지 새로할거 자료" / "대량 등록할 파일.csv"
 CONTENT_POOL_PATH = ROOT / "tmp" / "page_content_pool.json"
 
-SITE_NAME = "학습코칭 연구소"
+SITE_NAME = "학습코칭 학원 안내"
 BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
 CENTER_DIRECTORY_ROOT = ROOT / "과목별학원" / "와와학습코칭센터"
 SITE_DESCRIPTION = "학생별 학습 진단, 플래너 관리, 오답 재학습을 중심으로 영어·수학·국어 학습 방향을 안내하는 상담형 학원 정보 사이트입니다."
@@ -720,7 +720,7 @@ def create_page(row: list[str]) -> dict:
     {center_html}
     {faq_section(title, faqs)}
     {review_section(title, reviews)}
-    <p class="national-source-note"><strong>정보 기준</strong> 사이트가 보유한 센터 제공 자료를 2026-08-16 재검토했습니다. 현재 개설 과목·반 편성·운영 여부는 상담 시 최종 확인해 주세요. 편집: 학습코칭 연구소.</p>
+    <p class="national-source-note"><strong>정보 기준</strong> 사이트가 보유한 센터 제공 자료를 2026-08-27 재검토했습니다. 현재 개설 과목·반 편성·운영 여부는 상담 시 최종 확인해 주세요. 편집: 학습코칭.kr.</p>
   </main>
 {consult_footer(root_rel, title)}
 </body>
