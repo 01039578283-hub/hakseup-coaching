@@ -20,7 +20,13 @@ def load_base():
 
 
 base = load_base()
-base.ZIP_PATH = Path.home() / "Desktop" / "학습코칭.kr 추가 원고" / "초등학생학원.zip"
+base.ZIP_PATH = (
+    ROOT.parent
+    / "참고자료"
+    / "사용한 원고"
+    / "학습코칭.kr 추가 원고"
+    / "초등학생학원.zip"
+)
 base.CATEGORY = "초등학생학원"
 base.TARGET_ROOT = base.SUBJECT_ROOT / base.CATEGORY
 

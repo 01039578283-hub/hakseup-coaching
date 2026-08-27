@@ -21,6 +21,7 @@ import sys
 import unicodedata
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
+from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
 from types import ModuleType
@@ -37,7 +38,6 @@ DEFAULT_COMMON = ROOT.parent / "참고자료" / "공통자료"
 SOURCE_NAME = "타깃학교.csv"
 BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
 SITEMAP = "sitemap.xml"
-MODIFIED_DATE = "2026-08-27"
 
 START_MARKER = "<!-- school-reference:start -->"
 END_MARKER = "<!-- school-reference:end -->"
@@ -1283,6 +1283,7 @@ class ManuscriptMetrics:
     guidance_lead_repeat_pages: int = 0
     guidance_context_ownership_pages: int = 0
     ownership_samples: list[dict[str, Any]] = field(default_factory=list)
+    modified_by_url: dict[str, str] = field(default_factory=dict)
 
 
 def audit_manuscript_page(
@@ -1746,16 +1747,35 @@ def audit_manuscript_page(
         audit.error("article_count", location, f"count={len(articles)}")
         return
     article = articles[0]
-    if article.get("dateModified") != MODIFIED_DATE:
-        audit.error("article_date_modified", location, repr(article.get("dateModified")))
+    article_modified = norm(article.get("dateModified"))
+    published = norm(article.get("datePublished"))
+    try:
+        parsed_modified = date.fromisoformat(article_modified)
+        if parsed_modified > date.today():
+            audit.error("article_date_modified_future", location, article_modified)
+        if published and date.fromisoformat(published) > parsed_modified:
+            audit.error(
+                "article_date_modified_before_published",
+                location,
+                f"published={published}, modified={article_modified}",
+            )
+    except ValueError:
+        audit.error("article_date_modified", location, repr(article_modified))
     before_articles = one_type(before_nodes, "Article")
     if len(before_articles) == 1 and before_articles[0].get("datePublished") != article.get("datePublished"):
         audit.error("article_date_published", location, "datePublished changed")
     webpages = one_type(nodes, "WebPage")
-    if len(webpages) != 1 or webpages[0].get("dateModified") != MODIFIED_DATE:
-        audit.error("webpage_date_modified", location, f"count={len(webpages)}, date={webpages[0].get('dateModified') if webpages else None}")
+    webpage_modified = norm(webpages[0].get("dateModified")) if len(webpages) == 1 else ""
+    if len(webpages) != 1 or webpage_modified != article_modified:
+        audit.error(
+            "webpage_date_modified",
+            location,
+            f"count={len(webpages)}, article={article_modified}, webpage={webpage_modified}",
+        )
     elif not isinstance(webpages[0].get("hasPart"), list) or {"@id": url + "#school-reference"} not in webpages[0]["hasPart"]:
         audit.error("webpage_school_haspart", location, repr(webpages[0].get("hasPart")))
+    if article_modified:
+        metrics.modified_by_url[url] = article_modified
     if faq_schema(nodes) != faq_visible(final):
         audit.error("faq_schema_parity", location, f"visible={len(faq_visible(final))}, schema={len(faq_schema(nodes))}")
 
@@ -1965,7 +1985,12 @@ def sitemap_rows(source: str, audit: Audit, location: str) -> list[dict[str, str
     return result
 
 
-def audit_sitemap(before: str, final: str, target_urls: set[str], audit: Audit) -> None:
+def audit_sitemap(
+    before: str,
+    final: str,
+    target_dates: Mapping[str, str],
+    audit: Audit,
+) -> None:
     old = sitemap_rows(before, audit, "sitemap:before")
     new = sitemap_rows(final, audit, "sitemap:final")
     if [row["loc"] for row in old] != [row["loc"] for row in new]:
@@ -1976,19 +2001,29 @@ def audit_sitemap(before: str, final: str, target_urls: set[str], audit: Audit) 
     seen = Counter(row["loc"] for row in new)
     if any(count != 1 for count in seen.values()):
         audit.error("sitemap_duplicates", SITEMAP, f"duplicate URLs={sum(count-1 for count in seen.values() if count>1)}")
+    target_urls = set(target_dates)
     if not target_urls.issubset(seen):
         audit.error("sitemap_target_missing", SITEMAP, f"missing={len(target_urls-set(seen))}")
     for old_row, new_row in zip(old, new):
         url = new_row["loc"]
         if url in target_urls:
-            if new_row["lastmod"] != MODIFIED_DATE:
-                audit.error("sitemap_target_lastmod", SITEMAP, f"{url}: {new_row['lastmod']}")
+            expected_date = target_dates[url]
+            if new_row["lastmod"] != expected_date:
+                audit.error(
+                    "sitemap_target_lastmod",
+                    SITEMAP,
+                    f"{url}: sitemap={new_row['lastmod']}, page={expected_date}",
+                )
             for key in ("loc", "changefreq", "priority"):
                 if old_row[key] != new_row[key]:
                     audit.error("sitemap_target_contract", SITEMAP, f"{url}: {key} changed")
         elif old_row != new_row:
             audit.error("sitemap_nontarget_changed", SITEMAP, f"{url}: {old_row} -> {new_row}")
-    audit.observations["sitemap"] = {"urls": len(new), "target_urls": len(target_urls), "target_lastmod": MODIFIED_DATE}
+    audit.observations["sitemap"] = {
+        "urls": len(new),
+        "target_urls": len(target_urls),
+        "target_lastmod_dates": dict(Counter(target_dates.values())),
+    }
 
 
 def manifest_of_sources(values: Mapping[str, str]) -> str:
@@ -2087,8 +2122,16 @@ def run(root: Path, common: Path, projection_script: Path | None) -> Audit:
         "guidance_context_ownership_pages": metrics.guidance_context_ownership_pages,
         "ownership_samples": metrics.ownership_samples,
     }
-    target_urls = {expected_url(category, row.slug) for category, row in targets.values()}
-    audit_sitemap(before[SITEMAP], final[SITEMAP], target_urls, audit)
+    expected_target_urls = {
+        expected_url(category, row.slug) for category, row in targets.values()
+    }
+    if set(metrics.modified_by_url) != expected_target_urls:
+        audit.error(
+            "modified_date_scope",
+            "all-details",
+            f"actual={len(metrics.modified_by_url)}, expected={len(expected_target_urls)}",
+        )
+    audit_sitemap(before[SITEMAP], final[SITEMAP], metrics.modified_by_url, audit)
 
     post_manifest = repository_manifest(root)
     post_source_sha = sha256_file(common / SOURCE_NAME)
