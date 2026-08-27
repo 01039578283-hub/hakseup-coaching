@@ -150,6 +150,80 @@ def _take_source_sentences(
     return selected
 
 
+def _rebalance_math_source_copy(
+    record: base.Record,
+    sections: list[dict[str, object]],
+    authored: list[str],
+) -> None:
+    """Make the visible math article source-led instead of template-led.
+
+    The source workbook already contains substantially different copy for every
+    locality.  The earlier generator appended that copy after a larger shared
+    scaffold, so the page-level signal was still dominated by repeated prose.
+    This helper assigns every safe source paragraph to the most relevant
+    section and retains only the minimum generated bridge copy needed for a
+    coherent article.  No new school, center, or operating claim is inferred.
+    """
+
+    content_sections = sections[:5]
+    if not content_sections:
+        return
+    section_terms = (
+        ("학습", "학생", "상담", "현재", "기초", "습관"),
+        ("개념", "풀이", "문제", "오답", "이해", "계산"),
+        ("학교", "시험", "내신", "학년", "과제", "진도"),
+        ("복습", "과제", "관리", "계획", "오답", "습관"),
+        ("기초", "이해", "설명", "풀이", "개념", "학습"),
+    )
+    buckets: list[list[str]] = [[] for _ in content_sections]
+    ordered_authored = sorted(
+        authored,
+        key=lambda paragraph: base.stable_number(
+            record.key, f"middle-math-source-order|{paragraph}"
+        ),
+    )
+    for paragraph in ordered_authored:
+        candidates = [index for index, bucket in enumerate(buckets) if len(bucket) < 2]
+        if not candidates:
+            candidates = list(range(len(buckets)))
+        selected = max(
+            candidates,
+            key=lambda index: (
+                sum(paragraph.count(term) for term in section_terms[index]),
+                -len(buckets[index]),
+                base.stable_number(
+                    record.key,
+                    f"middle-math-source-section-{index}|{paragraph}",
+                ),
+            ),
+        )
+        buckets[selected].append(paragraph)
+
+    for index, section in enumerate(content_sections):
+        existing = section.get("paragraphs", [])
+        if not isinstance(existing, list):
+            raise TypeError("section paragraphs must be a list")
+        generated = [
+            str(paragraph)
+            for paragraph in existing
+            if str(paragraph) not in authored
+        ]
+        authored_here = buckets[index]
+        fallback_count = 1 if authored_here else 2
+        ranked_generated = sorted(
+            generated,
+            key=lambda paragraph: base.stable_number(
+                record.key,
+                f"middle-math-bridge-{index}|{paragraph}",
+            ),
+        )[:fallback_count]
+        if base.stable_number(record.key, f"middle-math-order-{index}") % 2:
+            merged = [*ranked_generated, *authored_here]
+        else:
+            merged = [*authored_here, *ranked_generated]
+        section["paragraphs"] = merged
+
+
 def _subject_values(subject: str) -> dict[str, object]:
     if subject == "math":
         return {
@@ -708,9 +782,9 @@ def configure(subject: str) -> ModuleType:
                 useful_terms=("수학", "개념", "문제", "풀이", "학습", "학생", "오답", "시험", "상담"),
                 blocked_terms=("영어", "국어", "초등", "고등", "고교"),
                 excluded_school_names=excluded_schools,
-                limit=8,
+                limit=12,
             )
-            distribute_source_paragraphs(sections, authored)
+            _rebalance_math_source_copy(record, sections, authored)
         return answer, sections
 
     def build_faqs(record: base.Record) -> list[tuple[str, str]]:

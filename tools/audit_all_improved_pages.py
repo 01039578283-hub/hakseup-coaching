@@ -13,7 +13,6 @@ from urllib.parse import unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TODAY = date.today().isoformat()
 CATEGORIES = (
     "초등학생학원",
     "중학생학원",
@@ -164,8 +163,16 @@ def main() -> int:
                 errors.append(f"{category}/{slug}: {type(exc).__name__}: {exc}")
 
         expected_published = "2026-07-23" if category in GRADE_CATEGORIES else "2026-08-13"
-        if modified_dates != {TODAY}:
+        if len(modified_dates) != 1:
             errors.append(f"{category}: modified={sorted(modified_dates)}")
+        else:
+            modified_value = next(iter(modified_dates))
+            try:
+                modified_date = date.fromisoformat(modified_value)
+                if modified_date > date.today():
+                    errors.append(f"{category}: future modified={modified_value}")
+            except ValueError:
+                errors.append(f"{category}: invalid modified={modified_value}")
         if published_dates != {expected_published}:
             errors.append(f"{category}: published={sorted(published_dates)}")
         faq_total = 371 * FAQ_COUNT.get(category, 5)
@@ -196,6 +203,7 @@ def main() -> int:
             "unique_titles": len(set(titles)),
             "unique_faq_questions": len(set(faq_questions)),
             "unique_faq_answers": len(set(faq_answers)),
+            "date_modified": next(iter(modified_dates)) if len(modified_dates) == 1 else sorted(modified_dates),
         }
 
     output = {
