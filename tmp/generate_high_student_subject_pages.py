@@ -12,7 +12,13 @@ from zipfile import ZipFile
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ZIP_PATH = Path.home() / "Desktop" / "학습코칭.kr 추가 원고" / "고등학생학원.zip"
+ZIP_PATH = (
+    ROOT.parent
+    / "참고자료"
+    / "사용한 원고"
+    / "학습코칭.kr 추가 원고"
+    / "고등학생학원.zip"
+)
 BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
 SITE_NAME = "학습코칭 학원 안내"
 CATEGORY = "고등학생학원"
@@ -317,6 +323,27 @@ def normalize_slug(value: str) -> str:
     return re.sub(r"[\s-]+", "", value)
 
 
+def extract_balanced_section(source: str, class_name: str) -> str:
+    """Return one complete section even when it contains nested sections."""
+    opening = re.search(
+        rf'<section\b(?=[^>]*class=["\'][^"\']*\b{re.escape(class_name)}\b)[^>]*>',
+        source,
+        re.I,
+    )
+    if not opening:
+        return ""
+    depth = 0
+    for token in re.finditer(r'</?section\b[^>]*>', source[opening.start() :], re.I):
+        value = token.group(0)
+        if value.startswith("</"):
+            depth -= 1
+            if depth == 0:
+                return source[opening.start() : opening.start() + token.end()]
+        elif not value.rstrip().endswith("/>"):
+            depth += 1
+    return ""
+
+
 def extract_target_schools(snippet: str, level: str) -> list[str]:
     card = re.search(
         rf'<article class="wawa-school-card is-{re.escape(level)}">(.*?)</article>',
@@ -350,8 +377,7 @@ def extract_source_pages() -> dict[str, dict]:
         rep_match = re.search(r'<img[^>]+class="[^"]*generated-hidden-image[^"]*"[^>]+src="([^"]+)"', page)
         if not rep_match:
             rep_match = re.search(r'<meta property="og:image" content="([^"]+)"', page)
-        snippet_match = re.search(r'(<section class="wawa-center-snippet".*?</section>)', page, re.S)
-        snippet = snippet_match.group(1) if snippet_match else ""
+        snippet = extract_balanced_section(page, "wawa-center-snippet")
         result[normalize_slug(source_slug)] = {
             "region": region,
             "city": city,
