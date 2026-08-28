@@ -119,7 +119,14 @@ def main() -> int:
                 webpage = node_of(nodes, "WebPage")
                 article = node_of(nodes, "Article")
                 faq = node_of(nodes, "FAQPage")
-                modified_dates.update((str(webpage.get("dateModified")), str(article.get("dateModified"))))
+                webpage_modified = str(webpage.get("dateModified"))
+                article_modified = str(article.get("dateModified"))
+                if webpage_modified != article_modified:
+                    errors.append(
+                        f"{category}/{slug}: WebPage/Article modified mismatch "
+                        f"{webpage_modified}/{article_modified}"
+                    )
+                modified_dates.update((webpage_modified, article_modified))
                 published_dates.add(str(article.get("datePublished")))
 
                 visible_questions = [plain(value) for value in re.findall(
@@ -163,10 +170,10 @@ def main() -> int:
                 errors.append(f"{category}/{slug}: {type(exc).__name__}: {exc}")
 
         expected_published = "2026-07-23" if category in GRADE_CATEGORIES else "2026-08-13"
-        if len(modified_dates) != 1:
-            errors.append(f"{category}: modified={sorted(modified_dates)}")
-        else:
-            modified_value = next(iter(modified_dates))
+        # A scoped release legitimately produces more than one modification
+        # date inside a category.  Validate each page's paired dates and every
+        # distinct value instead of requiring a category-wide timestamp.
+        for modified_value in modified_dates:
             try:
                 modified_date = date.fromisoformat(modified_value)
                 if modified_date > date.today():

@@ -16,7 +16,22 @@ from urllib.parse import quote
 from openpyxl import load_workbook
 from PIL import Image
 
-from source_copy_utils import distribute_source_paragraphs, source_paragraphs, source_theme
+try:
+    from source_copy_utils import (
+        VERIFIED_SCHOOL_SOURCE_CORRECTIONS,
+        distribute_source_paragraphs,
+        normalize_location_note,
+        source_paragraphs,
+        source_theme,
+    )
+except ModuleNotFoundError:  # package import
+    from .source_copy_utils import (
+        VERIFIED_SCHOOL_SOURCE_CORRECTIONS,
+        distribute_source_paragraphs,
+        normalize_location_note,
+        source_paragraphs,
+        source_theme,
+    )
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -120,6 +135,10 @@ def school_values(*values: object) -> list[str]:
         if not text:
             continue
         if "모든 고등학교" in text or "상담 확인 필요" in text:
+            continue
+        verified = VERIFIED_SCHOOL_SOURCE_CORRECTIONS.get(text)
+        if verified:
+            result.extend(verified)
             continue
         text = re.sub(r"[\s,，./|·;]+", "·", text)
         # A few source cells join two complete school names without a separator.
@@ -426,7 +445,7 @@ def make_records(workbook_path: Path) -> list[Record]:
                 legal_name=compact(center.get("교육지원청명칭")),
                 registration=compact(center.get("교육지원청 등록번호")),
                 address=address,
-                location_note=compact(center.get("위치안내")).replace("\x08", ""),
+                location_note=normalize_location_note(center.get("위치안내")),
                 tuition_url=compact(center.get("센터 교습비")),
                 english_grades=tuple(english_grades),
                 math_grades=tuple(math_grades),

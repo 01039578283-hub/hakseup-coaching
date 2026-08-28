@@ -39,6 +39,11 @@ from pathlib import Path, PurePosixPath
 from typing import Iterable, Mapping, Sequence
 from urllib.parse import unquote
 
+try:
+    from source_copy_utils import VERIFIED_SCHOOL_SOURCE_CORRECTIONS
+except ModuleNotFoundError:  # package import, e.g. tools.add_school_manuscripts
+    from .source_copy_utils import VERIFIED_SCHOOL_SOURCE_CORRECTIONS
+
 
 RELEASE_DATE = "2026-08-27"
 SCHOOL_CSV_NAME = "타깃학교.csv"
@@ -92,8 +97,8 @@ EXPECTED_LEVEL_STATS = {
         "provided_rows": 306,
         "missing_rows": 63,
         "coverage_rows": 2,
-        "raw_names": 912,
-        "deduped_names": 910,
+        "raw_names": 943,
+        "deduped_names": 941,
     },
 }
 EXPECTED_PAGE_COUNT = 2_968
@@ -103,7 +108,7 @@ EXPECTED_GROUP_STATES = {
     "coverage": 8,
     "missing": 612,
 }
-EXPECTED_NAMED_CHIPS = 8_336
+EXPECTED_NAMED_CHIPS = 8_460
 
 JSON_RE = re.compile(
     r'(<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>)(.*?)(</script>)',
@@ -808,6 +813,12 @@ def _source_header(headers: Iterable[str | None], hint: str) -> str:
 
 
 def _split_school_field(raw: str) -> tuple[tuple[str, ...], int]:
+    # Never infer school boundaries from whitespace.  Only the six source
+    # literals independently confirmed across twelve high-school rows are
+    # corrected.
+    if raw.strip() in VERIFIED_SCHOOL_SOURCE_CORRECTIONS:
+        names = VERIFIED_SCHOOL_SOURCE_CORRECTIONS[raw.strip()]
+        return names, len(names)
     tokens = tuple(token.strip() for token in SCHOOL_SPLIT_RE.split(raw.strip()) if token.strip())
     names = tuple(dict.fromkeys(tokens))
     return names, len(tokens)
@@ -2107,6 +2118,37 @@ def _transform_page(
     config: CategoryConfig,
     row: SchoolSourceRow,
 ) -> tuple[str, dict]:
+    # The two high-student coverage pages received a later, deliberately
+    # cautious clarification: the broad source phrase is retained, but the
+    # page does not turn it into a current per-school availability claim.
+    # Preserve that audited refinement instead of letting this school-block
+    # projector overwrite it during an unrelated source correction.
+    if (
+        config.directory == "고등학생학원"
+        and row.levels["high"].state == "coverage"
+        and "현재 연결된 센터 정보에는 개별 고등학교명" in source
+    ):
+        canonical = _canonical(source, rel)
+        _, schema = _json_document(source, rel)
+        block = _extract_block(source, rel)
+        expected_states = [
+            (level, row.levels[level].state) for level in config.levels
+        ]
+        if _extract_group_states(block) != expected_states:
+            raise PlanError(f"보존 coverage state mismatch: {rel}")
+        expected_chips = _expected_chips(row, config.levels)
+        if _extract_chip_names(block) != expected_chips:
+            raise PlanError(f"보존 coverage chip mismatch: {rel}")
+        _assert_unique_html_ids(source, rel)
+        _assert_unique_graph_ids(schema, rel)
+        return source, {
+            "canonical": canonical,
+            "groups": expected_states,
+            "chips": len(expected_chips),
+            "correction_mode": _correction_mode(config, row.locality),
+            "heading": _heading(config, row),
+        }
+
     baseline = _remove_school_block(source, rel)
     if baseline.count(START_MARKER) or baseline.count(END_MARKER):
         raise PlanError(f"orphan school marker가 있습니다: {rel}")

@@ -257,9 +257,18 @@ def main() -> None:
             r"범위 확인일과 1차 학습 완료일을 구분합니다\.",
             flow,
         )
-        if school_exam_matches and school_exam_matches != [
+        allowed_school_exam_references = {
             high_refresh.school_exam_reference(context)
-        ]:
+        }
+        if context.school_state == "provided":
+            allowed_school_exam_references.add(
+                f"{context.locality}의 {', '.join(context.schools)} 시험 준비에서는 "
+                "범위 확인일과 1차 학습 완료일을 구분합니다."
+            )
+        if any(
+            value not in allowed_school_exam_references
+            for value in school_exam_matches
+        ):
             errors.append(f"{slug}: unverified school exam reference")
         wrong_heading, correct_heading = high_refresh.corrected_heading_phrase(context)
         if wrong_heading != correct_heading and wrong_heading in page:

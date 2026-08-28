@@ -51,6 +51,22 @@ EXPECTED_BASELINE_SHA256 = (
     "fdf0f33d37b722517667609e8e0e4ca360fbbd808605b21e0394849ed1f0edb0"
 )
 EXPECTED_NATIONAL_DEPTHS = {0: 1, 1: 13, 2: 76, 3: 371, 4: 1_113}
+VERIFIED_SCHOOL_SOURCE_CORRECTIONS = {
+    "성사고 화수고": ("성사고", "화수고"),
+    "진접고 오남고": ("진접고", "오남고"),
+    "상동고 상일고 상원고 중흥고 중원고": (
+        "상동고", "상일고", "상원고", "중흥고", "중원고"
+    ),
+    "비전고 한광고 한광여고 평택여고": (
+        "비전고", "한광고", "한광여고", "평택여고"
+    ),
+    "충북고 운호고 충북여고 산남고": (
+        "충북고", "운호고", "충북여고", "산남고"
+    ),
+    "장성고 포고 포여고 유성여고": (
+        "장성고", "포고", "포여고", "유성여고"
+    ),
+}
 DETAIL_DEPTHS = {3, 4}
 REQUIRED_DETAIL_TYPES = {
     "EducationalOrganization",
@@ -383,7 +399,11 @@ def normalize_neighborhood(value: str) -> str:
 
 
 def split_csv_list(value: str) -> list[str]:
-    return [part.strip() for part in (value or "").split(",") if part.strip()]
+    text = re.sub(r"\s+", " ", value or "").strip()
+    verified = VERIFIED_SCHOOL_SOURCE_CORRECTIONS.get(text)
+    if verified:
+        return list(verified)
+    return [part.strip() for part in text.split(",") if part.strip()]
 
 
 def center_records(findings: Findings) -> dict[tuple[str, str, str], dict[str, str]]:

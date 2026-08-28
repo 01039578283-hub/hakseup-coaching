@@ -89,13 +89,22 @@ EXPECTED_GROUPS = 3710
 EXPECTED_PROVIDED_GROUPS = 3090
 EXPECTED_COVERAGE_GROUPS = 8
 EXPECTED_MISSING_GROUPS = 612
-EXPECTED_NAMED_OCCURRENCES = 8336
+EXPECTED_NAMED_OCCURRENCES = 8460
 EXPECTED_SITEMAP_URLS = 4743
 EXPECTED_COMPACTED_LOCALITIES = 14
 EXPECTED_LEVEL_SOURCE = {
     "elementary": {"named_rows": 297, "missing": 74, "coverage": 0, "deduped": 640},
     "middle": {"named_rows": 318, "missing": 53, "coverage": 0, "deduped": 854},
-    "high": {"named_rows": 306, "missing": 63, "coverage": 2, "deduped": 910},
+    "high": {"named_rows": 306, "missing": 63, "coverage": 2, "deduped": 941},
+}
+
+FUSED_SCHOOL_SOURCE_CORRECTIONS = {
+    "성사고 화수고": ("성사고", "화수고"),
+    "진접고 오남고": ("진접고", "오남고"),
+    "상동고 상일고 상원고 중흥고 중원고": ("상동고", "상일고", "상원고", "중흥고", "중원고"),
+    "비전고 한광고 한광여고 평택여고": ("비전고", "한광고", "한광여고", "평택여고"),
+    "충북고 운호고 충북여고 산남고": ("충북고", "운호고", "충북여고", "산남고"),
+    "장성고 포고 포여고 유성여고": ("장성고", "포고", "포여고", "유성여고"),
 }
 
 MAX_PARAGRAPH_DF = 34
@@ -200,6 +209,8 @@ def split_school_source(raw: str) -> tuple[str, ...]:
     text = norm(raw)
     if not text or text == GENERIC_HIGH:
         return ()
+    if text in FUSED_SCHOOL_SOURCE_CORRECTIONS:
+        return FUSED_SCHOOL_SOURCE_CORRECTIONS[text]
     result: list[str] = []
     for part in re.split(r"\s*[,/.]+\s*", text):
         token = norm(part)
@@ -2162,6 +2173,20 @@ def self_test() -> None:
     assert split_school_source("나곡중/보라중/상갈중") == ("나곡중", "보라중", "상갈중")
     assert split_school_source("쌍용초.미라초.") == ("쌍용초", "미라초")
     assert split_school_source("서현중, 경덕중, 서현중") == ("서현중", "경덕중")
+    assert split_school_source("성사고 화수고") == ("성사고", "화수고")
+    assert split_school_source("진접고 오남고") == ("진접고", "오남고")
+    assert split_school_source("상동고 상일고 상원고 중흥고 중원고") == (
+        "상동고", "상일고", "상원고", "중흥고", "중원고"
+    )
+    assert split_school_source("비전고 한광고 한광여고 평택여고") == (
+        "비전고", "한광고", "한광여고", "평택여고"
+    )
+    assert split_school_source("충북고 운호고 충북여고 산남고") == (
+        "충북고", "운호고", "충북여고", "산남고"
+    )
+    assert split_school_source("장성고 포고 포여고 유성여고") == (
+        "장성고", "포고", "포여고", "유성여고"
+    )
     assert split_school_source(GENERIC_HIGH) == ()
     assert source_state("") == "missing"
     assert source_state(GENERIC_HIGH) == "coverage"

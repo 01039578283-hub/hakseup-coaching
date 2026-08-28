@@ -24,6 +24,11 @@ from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
+try:
+    from source_copy_utils import VERIFIED_SCHOOL_SOURCE_CORRECTIONS
+except ModuleNotFoundError:  # package import
+    from .source_copy_utils import VERIFIED_SCHOOL_SOURCE_CORRECTIONS
+
 
 DEFAULT_ROOT = Path(__file__).resolve().parents[1]
 CATEGORY = "고등학생학원"
@@ -387,8 +392,17 @@ def split_school_names(value: str) -> tuple[str, ...]:
 
 
 def school_mismatch(flow: str, context: Context) -> bool:
-    if corrected_school_copy(context) in clean(flow):
+    plain_flow = clean(flow)
+    normalized_flow = re.sub(r"\s*[·,]\s*", "·", clean(flow))
+    normalized_expected = re.sub(
+        r"\s*[·,]\s*", "·", corrected_school_copy(context)
+    )
+    if normalized_expected in normalized_flow:
         return False
+    if any(
+        fused in plain_flow for fused in VERIFIED_SCHOOL_SOURCE_CORRECTIONS
+    ):
+        return True
     match = re.search(
         r"[^<>.!?]{0,80}?자료에 기재된 학교는 (?P<names>[^<>.!?]{1,160}?)(?=이며,)",
         flow,
@@ -411,11 +425,9 @@ def school_mismatch(flow: str, context: Context) -> bool:
     }
     invalid = listed_tokens - tokens
     missing = tokens - listed_tokens
-    return (
-        context.school_state == "provided" and bool(invalid or missing)
-    ) or (
-        context.school_state in {"missing", "coverage"} and bool(names)
-    )
+    if context.school_state == "provided":
+        return bool(invalid or missing)
+    return context.school_state in {"missing", "coverage"} and bool(names)
 
 
 def school_boundary(context: Context) -> str:
@@ -4225,8 +4237,7 @@ def transform(context: Context, center_snippet: str) -> Plan:
     match = FLOW_RE.search(context.before)
     if not match:
         raise ValueError(f"{context.path}: subject-copy-flow missing")
-    already_updated = MARKER in match.group(2)
-    needs_school_fix = False if already_updated else school_mismatch(match.group(2), context)
+    needs_school_fix = school_mismatch(match.group(2), context)
     legacy_method = legacy_method_from_flow(match.group(2), context)
     intended_method = method_for_secondary_challenge(context)
     rewritten, replacements, school_flow_fixes, keyword_reductions = rewrite_flow(
@@ -4324,9 +4335,8 @@ def validate(plans: list[Plan], root: Path) -> list[str]:
         relative = plan.context.path.relative_to(root).as_posix()
         old_flow = FLOW_RE.search(before)
         new_flow = FLOW_RE.search(after)
-        already_updated = bool(old_flow and MARKER in old_flow.group(2))
         needs_school_fix = bool(
-            old_flow and not already_updated and school_mismatch(old_flow.group(2), plan.context)
+            old_flow and school_mismatch(old_flow.group(2), plan.context)
         )
         for label, regex in (
             ("school", SCHOOL_RE),

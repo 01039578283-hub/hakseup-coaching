@@ -10,10 +10,18 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import quote, urljoin
 
-from finalize_national_details import (
-    center_directory_identity as dereferenceable_center_identity,
-    postal_geography,
-)
+try:
+    from finalize_national_details import (
+        center_directory_identity as dereferenceable_center_identity,
+        postal_geography,
+    )
+    from source_copy_utils import VERIFIED_SCHOOL_SOURCE_CORRECTIONS
+except ModuleNotFoundError:  # package import
+    from .finalize_national_details import (
+        center_directory_identity as dereferenceable_center_identity,
+        postal_geography,
+    )
+    from .source_copy_utils import VERIFIED_SCHOOL_SOURCE_CORRECTIONS
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -82,9 +90,13 @@ def pick(seed: str, namespace: str, values: list[str]) -> str:
 
 
 def split_csv_list(value: str) -> list[str]:
+    text = re.sub(r"\s+", " ", value or "").strip()
+    verified = VERIFIED_SCHOOL_SOURCE_CORRECTIONS.get(text)
+    if verified:
+        return list(verified)
     return [
         part.strip()
-        for part in (value or "").split(",")
+        for part in text.split(",")
         if part.strip() and part.strip() != "지역내 모든 고등학교 가능"
     ]
 

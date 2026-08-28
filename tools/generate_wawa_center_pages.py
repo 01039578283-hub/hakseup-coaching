@@ -11,6 +11,17 @@ from datetime import date
 from pathlib import Path
 from urllib.parse import quote
 
+try:
+    from source_copy_utils import (
+        VERIFIED_SCHOOL_SOURCE_CORRECTIONS,
+        normalize_location_note,
+    )
+except ModuleNotFoundError:  # package import
+    from .source_copy_utils import (
+        VERIFIED_SCHOOL_SOURCE_CORRECTIONS,
+        normalize_location_note,
+    )
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DESKTOP = Path.home() / "Desktop"
@@ -80,7 +91,11 @@ def unique(values: list[str]) -> list[str]:
 
 
 def split_values(value: object) -> list[str]:
-    return [compact(item) for item in re.split(r"[,/\n]+", str(value or "")) if compact(item)]
+    text = compact(value)
+    verified = VERIFIED_SCHOOL_SOURCE_CORRECTIONS.get(text)
+    if verified:
+        return list(verified)
+    return [compact(item) for item in re.split(r"[,/\n]+", text) if compact(item)]
 
 
 def short_name(title: str) -> str:
@@ -225,7 +240,7 @@ def build_profiles() -> list[dict]:
                 "slug": short_name(title),
                 "region": compact(first.get("지역")), "city": compact(first.get("시or구")),
                 "locality": primary, "localities": localities,
-                "address": compact(first.get("센터 주소")), "location_note": compact(first.get("위치안내")),
+                "address": compact(first.get("센터 주소")), "location_note": normalize_location_note(first.get("위치안내")),
                 "tuition_url": compact(first.get("센터 교습비")),
                 "registration_name": compact(first.get("교육지원청명칭")),
                 "registration_number": compact(first.get("교육지원청 등록번호")),
