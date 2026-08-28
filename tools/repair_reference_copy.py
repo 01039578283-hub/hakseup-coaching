@@ -75,31 +75,124 @@ LOCATION_CENTER_PROFILES = {
     "하안동": "철산점",
     "호평동": "호평점",
 }
-FUSED_SCHOOLS = VERIFIED_SCHOOL_SOURCE_CORRECTIONS
+_CROSS_LEVEL_TOKEN = "오현초호매실중"
+FUSED_SCHOOLS = {
+    **VERIFIED_SCHOOL_SOURCE_CORRECTIONS,
+    # Materialized HTML contains the first two names as one atomic token even
+    # though the complete CSV cell also includes three comma-delimited schools.
+    _CROSS_LEVEL_TOKEN: ("오현초", "호매실중"),
+}
+
+# Exact locality/level projections.  Keeping the level boundary here prevents
+# the elementary school 오현초 from being presented as a middle school.
+SCHOOL_CORRECTIONS_BY_LOCALITY = {
+    "성사동": {
+        "elementary": FUSED_SCHOOLS["성라초 성사초"],
+        "middle": FUSED_SCHOOLS["화수중 성사중 원당중"],
+        "high": FUSED_SCHOOLS["성사고 화수고"],
+    },
+    "주교동": {
+        "elementary": FUSED_SCHOOLS["성라초 성사초"],
+        "middle": FUSED_SCHOOLS["화수중 성사중 원당중"],
+        "high": FUSED_SCHOOLS["성사고 화수고"],
+    },
+    "진접읍": {
+        "elementary": FUSED_SCHOOLS["해밀초 화봉초"],
+        "middle": FUSED_SCHOOLS["풍양중 주곡중"],
+        "high": FUSED_SCHOOLS["진접고 오남고"],
+    },
+    "부천상동": {
+        "elementary": FUSED_SCHOOLS["석천초 상인초"],
+        "middle": FUSED_SCHOOLS["석천중 상동중 상일중 부인중"],
+        "high": FUSED_SCHOOLS["상동고 상일고 상원고 중흥고 중원고"],
+    },
+    **{
+        locality: {
+            "elementary": FUSED_SCHOOLS["이화초 가내초 자란초"],
+            "middle": FUSED_SCHOOLS["비전중 한광중 한광여중 평택여중 소사벌중"],
+            "high": FUSED_SCHOOLS["비전고 한광고 한광여고 평택여고"],
+        }
+        for locality in ("비전동", "소사벌", "죽백동", "동삭동")
+    },
+    **{
+        locality: {
+            "middle": FUSED_SCHOOLS["수곡중 산남중"],
+            "high": FUSED_SCHOOLS["충북고 운호고 충북여고 산남고"],
+        }
+        for locality in ("산남동", "수곡동")
+    },
+    **{
+        locality: {"middle": FUSED_SCHOOLS["학남중 강북중"]}
+        for locality in ("도남동", "국우동", "도남지구")
+    },
+    **{
+        locality: {
+            "elementary": FUSED_SCHOOLS["양덕초 양서초 장흥초"],
+            "middle": FUSED_SCHOOLS["양덕중 장흥중 대도중 환호여중"],
+            "high": FUSED_SCHOOLS["장성고 포고 포여고 유성여고"],
+        }
+        for locality in ("양덕동", "장량동")
+    },
+    "호매실": {
+        "elementary": ("오현초",),
+        "middle": ("호매실중", "능실중", "영신중", "고색중"),
+    },
+    "수원금곡동": {
+        "elementary": ("오현초",),
+        "middle": ("호매실중", "능실중", "영신중", "고색중"),
+    },
+}
+
+
+def _school_names(levels: dict[str, tuple[str, ...]]) -> tuple[str, ...]:
+    return tuple(dict.fromkeys(name for names in levels.values() for name in names))
+
+
 SCHOOL_LOCALITIES = {
-    "성사동": FUSED_SCHOOLS["성사고 화수고"],
-    "주교동": FUSED_SCHOOLS["성사고 화수고"],
-    "진접읍": FUSED_SCHOOLS["진접고 오남고"],
-    "부천상동": FUSED_SCHOOLS["상동고 상일고 상원고 중흥고 중원고"],
-    "비전동": FUSED_SCHOOLS["비전고 한광고 한광여고 평택여고"],
-    "소사벌": FUSED_SCHOOLS["비전고 한광고 한광여고 평택여고"],
-    "죽백동": FUSED_SCHOOLS["비전고 한광고 한광여고 평택여고"],
-    "동삭동": FUSED_SCHOOLS["비전고 한광고 한광여고 평택여고"],
-    "산남동": FUSED_SCHOOLS["충북고 운호고 충북여고 산남고"],
-    "수곡동": FUSED_SCHOOLS["충북고 운호고 충북여고 산남고"],
-    "양덕동": FUSED_SCHOOLS["장성고 포고 포여고 유성여고"],
-    "장량동": FUSED_SCHOOLS["장성고 포고 포여고 유성여고"],
+    locality: _school_names(levels)
+    for locality, levels in SCHOOL_CORRECTIONS_BY_LOCALITY.items()
 }
-SCHOOL_NATIONAL_SLUGS = {"부천상동": "부천-상동"}
+SCHOOL_NATIONAL_SLUGS = {
+    "부천상동": "부천-상동",
+    "수원금곡동": "수원-금곡동",
+}
+SCHOOL_CENTER_LOCALITIES = {
+    "원당점": ("성사동", "주교동"),
+    "진접점": ("진접읍",),
+    "상동점": ("부천상동",),
+    "비전점": ("비전동", "소사벌", "죽백동", "동삭동"),
+    "산남점": ("산남동", "수곡동"),
+    "대구도남점": ("도남동", "국우동", "도남지구"),
+    "양덕점": ("양덕동", "장량동"),
+    "서수원점": ("호매실", "수원금곡동"),
+}
 SCHOOL_CENTER_PROFILES = {
-    "원당점": FUSED_SCHOOLS["성사고 화수고"],
-    "진접점": FUSED_SCHOOLS["진접고 오남고"],
-    "상동점": FUSED_SCHOOLS["상동고 상일고 상원고 중흥고 중원고"],
-    "비전점": FUSED_SCHOOLS["비전고 한광고 한광여고 평택여고"],
-    "산남점": FUSED_SCHOOLS["충북고 운호고 충북여고 산남고"],
-    "양덕점": FUSED_SCHOOLS["장성고 포고 포여고 유성여고"],
+    profile: tuple(
+        dict.fromkeys(
+            name
+            for locality in localities
+            for name in SCHOOL_LOCALITIES[locality]
+        )
+    )
+    for profile, localities in SCHOOL_CENTER_LOCALITIES.items()
 }
-SCHOOL_PAGE_CATEGORIES = (
+NEW_SCHOOL_PAGE_CATEGORIES = (
+    "초등학생학원",
+    "중학생학원",
+    "중등수학학원",
+    "중등영어학원",
+    "고등학생학원",
+    "영수학원",
+)
+NEW_LEVELS_BY_CATEGORY = {
+    "초등학생학원": ("elementary", "middle"),
+    "중학생학원": ("elementary", "middle"),
+    "중등수학학원": ("middle",),
+    "중등영어학원": ("middle",),
+    "고등학생학원": ("elementary", "middle"),
+    "영수학원": ("elementary", "middle"),
+}
+HIGH_SCHOOL_PAGE_CATEGORIES = (
     "고등수학학원",
     "고등영어학원",
     "고등학생학원",
@@ -107,6 +200,11 @@ SCHOOL_PAGE_CATEGORIES = (
     "중학생학원",
     "초등학생학원",
 )
+SOURCE_CHIP_CATEGORIES = {
+    "elementary": ("초등학생학원", "영수학원"),
+    "middle": ("중학생학원", "중등수학학원", "중등영어학원", "영수학원"),
+    "high": ("고등학생학원", "고등수학학원", "고등영어학원", "영수학원"),
+}
 
 JSONLD_RE = re.compile(
     r'(<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>)(.*?)(</script>)',
@@ -118,6 +216,18 @@ CANONICAL_RE = re.compile(
 )
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.I | re.S)
 H1_RE = re.compile(r"<h1\b[^>]*>(.*?)</h1>", re.I | re.S)
+META_DESCRIPTION_RE = re.compile(
+    r'<meta\b(?=[^>]*\bname=["\']description["\'])[^>]*\bcontent=["\']([^"\']*)',
+    re.I | re.S,
+)
+OG_TITLE_RE = re.compile(
+    r'<meta\b(?=[^>]*\bproperty=["\']og:title["\'])[^>]*\bcontent=["\']([^"\']*)',
+    re.I | re.S,
+)
+TWITTER_TITLE_RE = re.compile(
+    r'<meta\b(?=[^>]*\bname=["\']twitter:title["\'])[^>]*\bcontent=["\']([^"\']*)',
+    re.I | re.S,
+)
 URL_BLOCK_RE = re.compile(r"<url>.*?</url>", re.S)
 LOC_RE = re.compile(r"<loc>(.*?)</loc>", re.S)
 LASTMOD_RE = re.compile(r"(<lastmod>)(.*?)(</lastmod>)", re.S)
@@ -217,6 +327,85 @@ def rewrite_jsonld(source: str, bump_date: bool) -> tuple[str, int, int]:
     return JSONLD_RE.sub(replace, source), scripts, changed
 
 
+SCHOOL_CARD_RE = re.compile(
+    r'<(?P<tag>article|section)\b'
+    r'(?=[^>]*\bwawa-school-card\b)'
+    r'(?=[^>]*\bis-(?P<level>elementary|middle)\b)'
+    r'[^>]*>.*?</(?P=tag)>',
+    re.I | re.S,
+)
+PILLS_RE = re.compile(
+    r'(<div\b(?=[^>]*\bwawa-pills\b)[^>]*>)(.*?)(</div>)',
+    re.I | re.S,
+)
+
+
+def repair_cross_level_cards(source: str) -> tuple[str, int]:
+    """Move 오현초 into the elementary card and keep 호매실중 in middle.
+
+    The malformed source joins one elementary and one middle-school name.  A
+    flat replacement would create a new factual error by labelling 오현초 as a
+    middle school, so the visual school cards are repaired with level context.
+    """
+
+    if _CROSS_LEVEL_TOKEN not in html.unescape(source):
+        return source, 0
+    total = 0
+
+    def replace_card(match: re.Match[str]) -> str:
+        nonlocal total
+        block = match.group(0)
+        level = match.group("level").lower()
+        if level == "middle" and _CROSS_LEVEL_TOKEN in block:
+            block, count = re.subn(
+                re.escape(_CROSS_LEVEL_TOKEN),
+                "호매실중",
+                block,
+            )
+            total += count
+            return block
+        if level != "elementary" or "오현초" in html.unescape(block):
+            return block
+
+        def append_chip(pills: re.Match[str]) -> str:
+            nonlocal total
+            contents = pills.group(2)
+            if "data-school-level" in block:
+                chip = (
+                    '<span class="wawa-pill is-elementary" '
+                    'data-source-school="오현초">오현초</span>'
+                )
+            else:
+                chip = '<span class="wawa-pill">오현초</span>'
+            total += 1
+            return pills.group(1) + contents + chip + pills.group(3)
+
+        return PILLS_RE.sub(append_chip, block, count=1)
+
+    return SCHOOL_CARD_RE.sub(replace_card, source), total
+
+
+def repair_cross_level_elementary_guidance(
+    path: Path,
+    source: str,
+) -> tuple[str, int]:
+    """Add the moved elementary name to the two national elementary leaves."""
+
+    if "초등영수학원" not in path.parts or path.parent.parent.name not in {
+        "호매실",
+        "수원-금곡동",
+    }:
+        return source, 0
+    total = 0
+    for pattern, replacement in (
+        (r"능실초, 금호초(?!, 오현초)", "능실초, 금호초, 오현초"),
+        (r"능실초·금호초(?!·오현초)", "능실초·금호초·오현초"),
+    ):
+        source, count = re.subn(pattern, replacement, source)
+        total += count
+    return source, total
+
+
 def split_school_spans(source: str) -> tuple[str, int]:
     total = 0
     for fused, names in FUSED_SCHOOLS.items():
@@ -230,7 +419,14 @@ def split_school_spans(source: str) -> tuple[str, int]:
             nonlocal total
             total += 1
             parts: list[str] = []
-            for name in names:
+            selected_names = names
+            if fused == _CROSS_LEVEL_TOKEN:
+                opening_classes = html.unescape(match.group(1))
+                if "is-middle" in opening_classes:
+                    selected_names = ("호매실중",)
+                elif "is-elementary" in opening_classes:
+                    selected_names = ("오현초",)
+            for name in selected_names:
                 opening = match.group(1).replace(fused, name)
                 parts.append(opening + html.escape(name) + match.group(2))
             return "".join(parts)
@@ -261,7 +457,14 @@ def first(pattern: re.Pattern[str], source: str) -> str:
 
 
 def validate_page(before: str, after: str, path: Path) -> int:
-    for label, pattern in (("title", TITLE_RE), ("h1", H1_RE), ("canonical", CANONICAL_RE)):
+    for label, pattern in (
+        ("title", TITLE_RE),
+        ("h1", H1_RE),
+        ("canonical", CANONICAL_RE),
+        ("meta description", META_DESCRIPTION_RE),
+        ("og:title", OG_TITLE_RE),
+        ("twitter:title", TWITTER_TITLE_RE),
+    ):
         if first(pattern, before) != first(pattern, after):
             raise RepairError(f"{path}: {label} changed")
     if before.count("<section") != after.count("<section") or before.count("</section>") != after.count("</section>"):
@@ -284,6 +487,18 @@ def validate_page(before: str, after: str, path: Path) -> int:
 def transform_page(path: Path, force_modified: bool = False) -> PagePlan:
     before = path.read_text(encoding="utf-8", errors="strict")
     after, location_changes = replace_location_notes(before)
+    after, cross_card_changes = repair_cross_level_cards(after)
+    after, cross_guidance_changes = repair_cross_level_elementary_guidance(
+        path,
+        after,
+    )
+    if (
+        path.parent.parent.name in {"중학생학원", "중등수학학원", "중등영어학원"}
+        or "중등영수학원" in path.parts
+    ):
+        # These are middle-only documents; prose and schema should never gain
+        # the elementary-school name merely because the source cell was fused.
+        after = after.replace(_CROSS_LEVEL_TOKEN, "호매실중")
     after, span_changes = split_school_spans(after)
     had_fused_school = any(fused in html.unescape(after) for fused in FUSED_SCHOOLS)
     after, scripts, schema_changes = rewrite_jsonld(
@@ -306,7 +521,13 @@ def transform_page(path: Path, force_modified: bool = False) -> PagePlan:
         before=before,
         after=after,
         location_changes=location_changes,
-        school_changes=span_changes + school_text_changes + int(had_fused_school and schema_changes > 0),
+        school_changes=(
+            cross_card_changes
+            + cross_guidance_changes
+            + span_changes
+            + school_text_changes
+            + int(had_fused_school and schema_changes > 0)
+        ),
         jsonld_scripts=scripts,
     )
 
@@ -366,13 +587,24 @@ def validate_location_coverage(plans: dict[Path, PagePlan], expected: set[Path])
             raise RepairError(f"{path}: corrected location note missing")
 
 
+def school_page_categories(levels: dict[str, tuple[str, ...]]) -> tuple[str, ...]:
+    categories: set[str] = set()
+    if set(levels) & {"elementary", "middle"}:
+        categories.update(NEW_SCHOOL_PAGE_CATEGORIES)
+    if "high" in levels:
+        categories.update(HIGH_SCHOOL_PAGE_CATEGORIES)
+    return tuple(sorted(categories))
+
+
 def validate_school_coverage(plans: dict[Path, PagePlan], root: Path) -> None:
-    for locality, names in SCHOOL_LOCALITIES.items():
+    for locality, levels in SCHOOL_CORRECTIONS_BY_LOCALITY.items():
+        names = SCHOOL_LOCALITIES[locality]
+        categories = school_page_categories(levels)
         national_slug = SCHOOL_NATIONAL_SLUGS.get(locality, locality)
-        matching = [
-            root / "과목별학원" / category / locality / "index.html"
-            for category in SCHOOL_PAGE_CATEGORIES
-        ]
+        subject_pages = {
+            category: root / "과목별학원" / category / locality / "index.html"
+            for category in categories
+        }
         parents = [
             path
             for path in (root / "전국학원").glob(f"*/*/{national_slug}/index.html")
@@ -380,28 +612,43 @@ def validate_school_coverage(plans: dict[Path, PagePlan], root: Path) -> None:
         ]
         if len(parents) != 1:
             raise RepairError(f"{locality}: national parent count={len(parents)}")
-        matching.extend(
-            [
-                parents[0],
-                *(parents[0].parent / child / "index.html" for child in (
-                    "초등영수학원",
-                    "중등영수학원",
-                    "고등영수학원",
-                )),
-            ]
-        )
-        if len(matching) != 10:
-            raise RepairError(f"{locality}: school page count={len(matching)}, expected=10")
-        for path in matching:
+        national_pages = [
+            parents[0],
+            *(parents[0].parent / child / "index.html" for child in (
+                "초등영수학원",
+                "중등영수학원",
+                "고등영수학원",
+            )),
+        ]
+        expected_count = len(categories) + 4
+        if len(subject_pages) + len(national_pages) != expected_count:
+            raise RepairError(
+                f"{locality}: school page count={len(subject_pages) + len(national_pages)}, "
+                f"expected={expected_count}"
+            )
+        for category, path in subject_pages.items():
+            expected_names: list[str] = []
+            if category in NEW_SCHOOL_PAGE_CATEGORIES:
+                for level in NEW_LEVELS_BY_CATEGORY[category]:
+                    expected_names.extend(levels.get(level, ()))
+            if category in HIGH_SCHOOL_PAGE_CATEGORIES:
+                expected_names.extend(levels.get("high", ()))
+            text = html.unescape(plans[path].after)
+            if not all(name in text for name in expected_names):
+                raise RepairError(f"{path}: separated school names missing")
+        for path in national_pages:
             text = html.unescape(plans[path].after)
             if not all(name in text for name in names):
                 raise RepairError(f"{path}: separated school names missing")
-        for category in ("고등수학학원", "고등영어학원", "고등학생학원", "영수학원"):
-            page = root / "과목별학원" / category / locality / "index.html"
-            text = html.unescape(plans[page].after)
-            for name in names:
-                if f'data-source-school="{name}"' not in text:
-                    raise RepairError(f"{page}: school source chip missing {name}")
+        for level, level_names in levels.items():
+            for category in SOURCE_CHIP_CATEGORIES[level]:
+                if category not in categories:
+                    continue
+                page = root / "과목별학원" / category / locality / "index.html"
+                text = html.unescape(plans[page].after)
+                for name in level_names:
+                    if f'data-source-school="{name}"' not in text:
+                        raise RepairError(f"{page}: school source chip missing {name}")
     for profile, names in SCHOOL_CENTER_PROFILES.items():
         page = root / "과목별학원" / "와와학습코칭센터" / profile / "index.html"
         text = html.unescape(plans[page].after)
@@ -411,11 +658,11 @@ def validate_school_coverage(plans: dict[Path, PagePlan], root: Path) -> None:
 
 def expected_school_paths(root: Path) -> set[Path]:
     result: set[Path] = set()
-    for locality in SCHOOL_LOCALITIES:
+    for locality, levels in SCHOOL_CORRECTIONS_BY_LOCALITY.items():
         national_slug = SCHOOL_NATIONAL_SLUGS.get(locality, locality)
         result.update(
             root / "과목별학원" / category / locality / "index.html"
-            for category in SCHOOL_PAGE_CATEGORIES
+            for category in school_page_categories(levels)
         )
         parents = [
             path
@@ -437,8 +684,8 @@ def expected_school_paths(root: Path) -> set[Path]:
         root / "과목별학원" / "와와학습코칭센터" / profile / "index.html"
         for profile in SCHOOL_CENTER_PROFILES
     )
-    if len(result) != 126:
-        raise RepairError(f"school target cardinality={len(result)}, expected=126")
+    if len(result) != 202:
+        raise RepairError(f"school target cardinality={len(result)}, expected=202")
     missing = sorted(path for path in result if not path.is_file())
     if missing:
         raise RepairError(f"school target missing: {missing[:5]}")
@@ -508,6 +755,10 @@ def run(root: Path, apply: bool) -> dict[str, Any]:
     location_paths = expected_location_paths(root)
     school_paths = expected_school_paths(root)
     target_paths = location_paths | school_paths
+    if len(target_paths) != 340:
+        raise RepairError(
+            f"combined target cardinality={len(target_paths)}, expected=340"
+        )
     plans = {
         path: transform_page(path, force_modified=path in target_paths)
         for path in paths

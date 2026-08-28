@@ -89,22 +89,46 @@ EXPECTED_GROUPS = 3710
 EXPECTED_PROVIDED_GROUPS = 3090
 EXPECTED_COVERAGE_GROUPS = 8
 EXPECTED_MISSING_GROUPS = 612
-EXPECTED_NAMED_OCCURRENCES = 8460
+EXPECTED_NAMED_OCCURRENCES = 8636
 EXPECTED_SITEMAP_URLS = 4743
 EXPECTED_COMPACTED_LOCALITIES = 14
 EXPECTED_LEVEL_SOURCE = {
-    "elementary": {"named_rows": 297, "missing": 74, "coverage": 0, "deduped": 640},
-    "middle": {"named_rows": 318, "missing": 53, "coverage": 0, "deduped": 854},
+    "elementary": {"named_rows": 297, "missing": 74, "coverage": 0, "deduped": 658},
+    "middle": {"named_rows": 318, "missing": 53, "coverage": 0, "deduped": 889},
     "high": {"named_rows": 306, "missing": 63, "coverage": 2, "deduped": 941},
 }
 
 FUSED_SCHOOL_SOURCE_CORRECTIONS = {
+    "성라초 성사초": ("성라초", "성사초"),
+    "화수중 성사중 원당중": ("화수중", "성사중", "원당중"),
     "성사고 화수고": ("성사고", "화수고"),
+    "해밀초 화봉초": ("해밀초", "화봉초"),
+    "풍양중 주곡중": ("풍양중", "주곡중"),
     "진접고 오남고": ("진접고", "오남고"),
+    "석천초 상인초": ("석천초", "상인초"),
+    "석천중 상동중 상일중 부인중": ("석천중", "상동중", "상일중", "부인중"),
     "상동고 상일고 상원고 중흥고 중원고": ("상동고", "상일고", "상원고", "중흥고", "중원고"),
+    "이화초 가내초 자란초": ("이화초", "가내초", "자란초"),
+    "비전중 한광중 한광여중 평택여중 소사벌중": (
+        "비전중", "한광중", "한광여중", "평택여중", "소사벌중"
+    ),
     "비전고 한광고 한광여고 평택여고": ("비전고", "한광고", "한광여고", "평택여고"),
+    "오현초호매실중, 능실중, 영신중, 고색중": (
+        "오현초", "호매실중", "능실중", "영신중", "고색중"
+    ),
+    "수곡중 산남중": ("수곡중", "산남중"),
     "충북고 운호고 충북여고 산남고": ("충북고", "운호고", "충북여고", "산남고"),
+    "학남중 강북중": ("학남중", "강북중"),
+    "양덕초 양서초 장흥초": ("양덕초", "양서초", "장흥초"),
+    "양덕중 장흥중 대도중 환호여중": ("양덕중", "장흥중", "대도중", "환호여중"),
     "장성고 포고 포여고 유성여고": ("장성고", "포고", "포여고", "유성여고"),
+}
+
+CROSS_LEVEL_SCHOOL_SOURCE_CORRECTIONS = {
+    "오현초호매실중, 능실중, 영신중, 고색중": {
+        "elementary_additions": ("오현초",),
+        "middle": ("호매실중", "능실중", "영신중", "고색중"),
+    },
 }
 
 MAX_PARAGRAPH_DF = 34
@@ -199,7 +223,7 @@ def slugify(value: str) -> str:
     return re.sub(r"\s+", "", norm(value))
 
 
-def split_school_source(raw: str) -> tuple[str, ...]:
+def split_school_source(raw: str, level: str | None = None) -> tuple[str, ...]:
     """Split only the delimiters that occur in the authoritative field.
 
     Suffix inference is forbidden: it was the source of the historic
@@ -209,6 +233,9 @@ def split_school_source(raw: str) -> tuple[str, ...]:
     text = norm(raw)
     if not text or text == GENERIC_HIGH:
         return ()
+    cross_level = CROSS_LEVEL_SCHOOL_SOURCE_CORRECTIONS.get(text)
+    if cross_level and level == "middle":
+        return tuple(cross_level["middle"])
     if text in FUSED_SCHOOL_SOURCE_CORRECTIONS:
         return FUSED_SCHOOL_SOURCE_CORRECTIONS[text]
     result: list[str] = []
@@ -233,6 +260,31 @@ class SchoolLevelSource:
     raw: str
     state: str
     schools: tuple[str, ...]
+
+
+def apply_cross_level_school_correction(
+    levels: Mapping[str, SchoolLevelSource],
+) -> dict[str, SchoolLevelSource]:
+    """Independently project exact cross-level source tokens by school suffix."""
+
+    result = dict(levels)
+    middle = result["middle"]
+    correction = CROSS_LEVEL_SCHOOL_SOURCE_CORRECTIONS.get(middle.raw)
+    if not correction:
+        return result
+    elementary = result["elementary"]
+    if elementary.state != "provided":
+        raise AssertionError("cross-level elementary source must be provided")
+    additions = tuple(correction["elementary_additions"])
+    elementary_schools = tuple(dict.fromkeys((*elementary.schools, *additions)))
+    if len(elementary_schools) != len(elementary.schools) + len(additions):
+        raise AssertionError("cross-level elementary additions must be unique")
+    result["elementary"] = SchoolLevelSource(
+        elementary.raw,
+        elementary.state,
+        elementary_schools,
+    )
+    return result
 
 
 @dataclass(frozen=True)
@@ -300,16 +352,20 @@ def load_source(common: Path, audit: Audit) -> tuple[list[SourceRow], str]:
         for level, column in LEVEL_COLUMN.items():
             cell = norm(row[column])
             state = source_state(cell)
-            schools = split_school_source(cell)
+            schools = split_school_source(cell, level=level)
+            levels[level] = SchoolLevelSource(cell, state, schools)
+        levels = apply_cross_level_school_correction(levels)
+        for level, source in levels.items():
+            state = source.state
+            schools = source.schools
             if state == "provided" and not schools:
-                audit.error("source_token_empty", path, f"row={number}, level={level}, raw={cell!r}")
+                audit.error("source_token_empty", path, f"row={number}, level={level}, raw={source.raw!r}")
             if state != "provided" and schools:
                 audit.error("source_state_tokens", path, f"row={number}, level={level}")
             expected_suffix = {"elementary": ("초", "초등학교"), "middle": ("중", "중학교"), "high": ("고", "고등학교")}[level]
             for school in schools:
                 if not school.endswith(expected_suffix):
                     audit.error("source_school_suffix", path, f"row={number}, level={level}, school={school}")
-            levels[level] = SchoolLevelSource(cell, state, schools)
             level_metrics[level][f"{state}_rows"] += 1
             level_metrics[level]["deduped"] += len(schools)
         result.append(
@@ -337,6 +393,21 @@ def load_source(common: Path, audit: Audit) -> tuple[list[SourceRow], str]:
     all_names = {school for row in result for src in row.levels.values() for school in src.schools}
     if "창원중앙여고" not in all_names or "창원중" in all_names or "앙여고" in all_names:
         audit.error("source_token_integrity", path, "창원중앙여고 token integrity failed")
+    cross_rows = [
+        row
+        for row in result
+        if row.levels["middle"].raw in CROSS_LEVEL_SCHOOL_SOURCE_CORRECTIONS
+    ]
+    if len(cross_rows) != 2 or any(
+        "오현초" not in row.levels["elementary"].schools
+        or "오현초" in row.levels["middle"].schools
+        or "호매실중" not in row.levels["middle"].schools
+        or "오현초호매실중" in {
+            school for source in row.levels.values() for school in source.schools
+        }
+        for row in cross_rows
+    ):
+        audit.error("source_cross_level_integrity", path, "오현초/호매실중 학제 교정 무결성 실패")
     compacted = [row.source_locality for row in result if row.source_locality != row.locality]
     if len(compacted) != EXPECTED_COMPACTED_LOCALITIES:
         audit.error(
@@ -2173,6 +2244,28 @@ def self_test() -> None:
     assert split_school_source("나곡중/보라중/상갈중") == ("나곡중", "보라중", "상갈중")
     assert split_school_source("쌍용초.미라초.") == ("쌍용초", "미라초")
     assert split_school_source("서현중, 경덕중, 서현중") == ("서현중", "경덕중")
+    new_exact = {
+        "성라초 성사초": ("성라초", "성사초"),
+        "화수중 성사중 원당중": ("화수중", "성사중", "원당중"),
+        "해밀초 화봉초": ("해밀초", "화봉초"),
+        "풍양중 주곡중": ("풍양중", "주곡중"),
+        "석천초 상인초": ("석천초", "상인초"),
+        "석천중 상동중 상일중 부인중": ("석천중", "상동중", "상일중", "부인중"),
+        "이화초 가내초 자란초": ("이화초", "가내초", "자란초"),
+        "비전중 한광중 한광여중 평택여중 소사벌중": (
+            "비전중", "한광중", "한광여중", "평택여중", "소사벌중"
+        ),
+        "수곡중 산남중": ("수곡중", "산남중"),
+        "학남중 강북중": ("학남중", "강북중"),
+        "양덕초 양서초 장흥초": ("양덕초", "양서초", "장흥초"),
+        "양덕중 장흥중 대도중 환호여중": ("양덕중", "장흥중", "대도중", "환호여중"),
+        "오현초호매실중, 능실중, 영신중, 고색중": (
+            "오현초", "호매실중", "능실중", "영신중", "고색중"
+        ),
+    }
+    for raw, names in new_exact.items():
+        assert FUSED_SCHOOL_SOURCE_CORRECTIONS[raw] == names
+        assert split_school_source(raw) == names
     assert split_school_source("성사고 화수고") == ("성사고", "화수고")
     assert split_school_source("진접고 오남고") == ("진접고", "오남고")
     assert split_school_source("상동고 상일고 상원고 중흥고 중원고") == (
@@ -2187,6 +2280,23 @@ def self_test() -> None:
     assert split_school_source("장성고 포고 포여고 유성여고") == (
         "장성고", "포고", "포여고", "유성여고"
     )
+    cross_raw = "오현초호매실중, 능실중, 영신중, 고색중"
+    assert split_school_source(cross_raw, level="middle") == (
+        "호매실중", "능실중", "영신중", "고색중"
+    )
+    projected = apply_cross_level_school_correction(
+        {
+            "elementary": SchoolLevelSource("능실초, 금호초", "provided", ("능실초", "금호초")),
+            "middle": SchoolLevelSource(
+                cross_raw,
+                "provided",
+                split_school_source(cross_raw, level="middle"),
+            ),
+            "high": SchoolLevelSource("호매실고", "provided", ("호매실고",)),
+        }
+    )
+    assert projected["elementary"].schools == ("능실초", "금호초", "오현초")
+    assert projected["middle"].schools == ("호매실중", "능실중", "영신중", "고색중")
     assert split_school_source(GENERIC_HIGH) == ()
     assert source_state("") == "missing"
     assert source_state(GENERIC_HIGH) == "coverage"

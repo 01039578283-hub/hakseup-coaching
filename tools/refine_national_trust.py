@@ -31,6 +31,8 @@ BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
 ROOT_ORGANIZATION_ID = f"{BASE_URL}/#organization"
 CENTER_DIRECTORY_ROOT = ROOT / "과목별학원" / "와와학습코칭센터"
 DATA_REVIEW_DATE = "2026-08-27"
+CROSS_LEVEL_SCHOOL_SOURCE = "오현초호매실중, 능실중, 영신중, 고색중"
+CROSS_LEVEL_ELEMENTARY_SCHOOL = "오현초"
 
 JSON_LD_RE = re.compile(
     r'(<script\s+type=["\']application/ld\+json["\'][^>]*>)(.*?)(</script>)',
@@ -101,6 +103,11 @@ def split_csv_list(value: str) -> list[str]:
     ]
 
 
+def has_cross_level_school_source(center: dict[str, str]) -> bool:
+    value = re.sub(r"\s+", " ", center.get("타깃학교\n(중)", "")).strip()
+    return value == CROSS_LEVEL_SCHOOL_SOURCE
+
+
 def load_centers() -> dict[tuple[str, str, str], dict[str, str]]:
     with REFERENCE_CSV.open(encoding="utf-8-sig", newline="") as handle:
         rows = list(csv.DictReader(handle))
@@ -150,6 +157,15 @@ def context_for(
     schools: list[str] = []
     if grade_column:
         schools = split_csv_list(center.get(grade_column, ""))
+        if has_cross_level_school_source(center):
+            if grade == "초등" and CROSS_LEVEL_ELEMENTARY_SCHOOL not in schools:
+                schools.append(CROSS_LEVEL_ELEMENTARY_SCHOOL)
+            elif grade == "중등":
+                schools = [
+                    school
+                    for school in schools
+                    if school != CROSS_LEVEL_ELEMENTARY_SCHOOL
+                ]
     else:
         for column in ("타깃학교\n(초)", "타깃학교\n(중)", "타깃학교\n(고)"):
             for school in split_csv_list(center.get(column, "")):

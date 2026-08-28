@@ -131,7 +131,8 @@ def with_josa(value: str, consonant: str, vowel: str) -> str:
 def school_values(*values: object) -> list[str]:
     result: list[str] = []
     for raw in values:
-        text = compact(raw)
+        raw_text = str(raw or "").strip()
+        text = compact(raw_text)
         if not text:
             continue
         if "모든 고등학교" in text or "상담 확인 필요" in text:
@@ -140,14 +141,10 @@ def school_values(*values: object) -> list[str]:
         if verified:
             result.extend(verified)
             continue
-        text = re.sub(r"[\s,，./|·;]+", "·", text)
-        # A few source cells join two complete school names without a separator.
-        text = re.sub(
-            r"([가-힣A-Za-z0-9]{2,}?)([초중고])(?=[가-힣A-Za-z0-9]{2,}(?:초|중|고)(?:·|$))",
-            r"\1\2·",
-            text,
-        )
-        for token in re.split(r"[·]+", text):
+        # Outside the exact, reviewed manifest, split only punctuation and
+        # line-break delimiters that are present in the source.  Whitespace
+        # and school-name suffixes are never sufficient evidence of a boundary.
+        for token in re.split(r"[,，./|·;\r\n]+", raw_text):
             token = compact(token)
             if not token or "모든 고등학교" in token or "상담 확인 필요" in token:
                 continue

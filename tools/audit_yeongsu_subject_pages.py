@@ -32,8 +32,48 @@ TARGET = ROOT / "과목별학원" / "영수학원"
 DEFAULT_COMMON = ROOT.parent / "참고자료" / "공통자료"
 FACT_CSV_NAME = "센터정보 정리.csv"
 BASE_URL = "https://xn--ru4bi8s1tac0p.kr"
+BASE_HOST = (urlsplit(BASE_URL).hostname or "").lower()
 DETAIL_COUNT = 371
 SIMILARITY_LIMIT = 0.75
+
+# These source cells lost explicit delimiters.  Keep this allowlist exact:
+# whitespace is not a generally safe school-name delimiter, and the final
+# entry repairs one elementary name fused to the first middle-school name.
+SCHOOL_SOURCE_CORRECTIONS: dict[str, tuple[str, ...]] = {
+    "성라초 성사초": ("성라초", "성사초"),
+    "화수중 성사중 원당중": ("화수중", "성사중", "원당중"),
+    "성사고 화수고": ("성사고", "화수고"),
+    "해밀초 화봉초": ("해밀초", "화봉초"),
+    "풍양중 주곡중": ("풍양중", "주곡중"),
+    "진접고 오남고": ("진접고", "오남고"),
+    "석천초 상인초": ("석천초", "상인초"),
+    "석천중 상동중 상일중 부인중": ("석천중", "상동중", "상일중", "부인중"),
+    "상동고 상일고 상원고 중흥고 중원고": (
+        "상동고", "상일고", "상원고", "중흥고", "중원고"
+    ),
+    "이화초 가내초 자란초": ("이화초", "가내초", "자란초"),
+    "비전중 한광중 한광여중 평택여중 소사벌중": (
+        "비전중", "한광중", "한광여중", "평택여중", "소사벌중"
+    ),
+    "비전고 한광고 한광여고 평택여고": (
+        "비전고", "한광고", "한광여고", "평택여고"
+    ),
+    "수곡중 산남중": ("수곡중", "산남중"),
+    "충북고 운호고 충북여고 산남고": (
+        "충북고", "운호고", "충북여고", "산남고"
+    ),
+    "학남중 강북중": ("학남중", "강북중"),
+    "양덕초 양서초 장흥초": ("양덕초", "양서초", "장흥초"),
+    "양덕중 장흥중 대도중 환호여중": (
+        "양덕중", "장흥중", "대도중", "환호여중"
+    ),
+    "장성고 포고 포여고 유성여고": (
+        "장성고", "포고", "포여고", "유성여고"
+    ),
+    "오현초호매실중, 능실중, 영신중, 고색중": (
+        "오현초", "호매실중", "능실중", "영신중", "고색중"
+    ),
+}
 
 REQUIRED_DETAIL_TYPES = {
     "EducationalOrganization",
@@ -270,7 +310,11 @@ def visible_text(source: str) -> str:
 
 
 def split_csv_list(value: str) -> tuple[str, ...]:
-    return tuple(part.strip() for part in re.split(r"[,，]", value or "") if part.strip())
+    return tuple(
+        part.strip()
+        for part in re.split(r"[,，./|·;\r\n]+", value or "")
+        if part.strip()
+    )
 
 
 def normalize_slug(value: str) -> str:
@@ -285,18 +329,13 @@ def school_values(*values: str) -> tuple[str, ...]:
             continue
         if "모든 고등학교" in text or "상담 확인 필요" in text:
             continue
-        text = re.sub(r"[\s,，./|·;]+", "·", text)
-        text = re.sub(
-            r"([가-힣A-Za-z0-9]{2,}?)([초중고])(?=[가-힣A-Za-z0-9]{2,}(?:초|중|고)(?:·|$))",
-            r"\1\2·",
-            text,
-        )
-        for token in re.split(r"[·]+", text):
+        corrected = SCHOOL_SOURCE_CORRECTIONS.get(text)
+        tokens = corrected if corrected is not None else split_csv_list(text)
+        for token in tokens:
             token = normalize(token)
             if not token or "모든 고등학교" in token or "상담 확인 필요" in token:
                 continue
-            if re.search(r"(?:초등학교|중학교|고등학교|초|중|고)$", token):
-                result.append(token)
+            result.append(token)
     return tuple(dict.fromkeys(result))
 
 
@@ -599,13 +638,19 @@ def resource_paths(attr: dict[str, str]) -> list[str]:
 
 
 def resolve_resource(page: Path, value: str) -> Path | None:
-    split = urlsplit(html.unescape(value))
-    if split.scheme or split.netloc or value.startswith("data:"):
+    raw_value = html.unescape(value).strip()
+    if raw_value.startswith("data:"):
         return None
+    split = urlsplit(raw_value)
     raw = unquote(split.path)
     if not raw:
         return None
-    candidate = ROOT / raw.lstrip("/") if raw.startswith("/") else page.parent / raw
+    if split.scheme or split.netloc:
+        if split.scheme.lower() != "https" or split.netloc.lower() != BASE_HOST:
+            return None
+        candidate = ROOT / raw.lstrip("/")
+    else:
+        candidate = ROOT / raw.lstrip("/") if raw.startswith("/") else page.parent / raw
     try:
         return candidate.resolve()
     except OSError:
@@ -776,20 +821,17 @@ def check_detail_schema(
     for node in nodes:
         value = node.get("mentions", [])
         mentions.extend(value if isinstance(value, list) else [value] if value else [])
-    mention_blob = normalize(" ".join(nested_strings(mentions)))
     mentioned_schools = set(nested_typed_names(mentions, "EducationalOrganization"))
-    unexpected_mentions = mentioned_schools - set(fact.schools)
-    if unexpected_mentions:
+    expected_schools = set(fact.schools)
+    if mentioned_schools != expected_schools:
         audit.error(
-            "school_mentions_not_whitelisted",
+            "school_mentions_mismatch",
             page,
-            f"mentions의 비허용 학교: {sorted(unexpected_mentions)}",
+            f"missing={sorted(expected_schools-mentioned_schools)}, extra={sorted(mentioned_schools-expected_schools)}",
         )
     for school in fact.schools:
         if school not in visible:
             audit.error("school_missing_visible", page, f"CSV 타깃학교가 화면에 없습니다: {school}")
-        if school not in mention_blob:
-            audit.error("school_missing_mentions", page, f"CSV 타깃학교가 mentions에 없습니다: {school}")
 
     detail_lists = nodes_of_type(nodes, "ItemList")
     url_lists = [
@@ -801,16 +843,37 @@ def check_detail_schema(
             if isinstance(item_list.get("itemListElement", []), list)
         )
     ]
-    if len(url_lists) != 1:
-        audit.error("detail_itemlist_url_count", page, f"URL 기반 관련 ItemList={len(url_lists)}, 예상=1")
-    else:
-        entries = url_lists[0].get("itemListElement", [])
+    expected_url_list_ids = {canonical + "#related", canonical + "#local-study-network"}
+    actual_url_list_ids = [normalize(item_list.get("@id", "")) for item_list in url_lists]
+    if len(actual_url_list_ids) != 2 or set(actual_url_list_ids) != expected_url_list_ids:
+        audit.error(
+            "detail_itemlist_url_ids",
+            page,
+            f"actual={actual_url_list_ids}, expected={sorted(expected_url_list_ids)}",
+        )
+    for item_list in url_lists:
+        entries = item_list.get("itemListElement", [])
         if not isinstance(entries, list) or not entries:
-            audit.error("detail_itemlist_empty", page, "상세 페이지 ItemList가 비어 있습니다")
+            audit.error(
+                "detail_itemlist_empty",
+                page,
+                f"ItemList가 비어 있습니다: {normalize(item_list.get('@id', ''))}",
+            )
         else:
+            if item_list.get("numberOfItems") != len(entries):
+                audit.error(
+                    "detail_itemlist_count",
+                    page,
+                    f"numberOfItems={item_list.get('numberOfItems')!r}, actual={len(entries)}: "
+                    f"{normalize(item_list.get('@id', ''))}",
+                )
             for entry in entries:
                 if not isinstance(entry, dict) or not item_url(entry):
-                    audit.error("detail_itemlist_entry", page, "ItemList 항목 URL이 없습니다")
+                    audit.error(
+                        "detail_itemlist_entry",
+                        page,
+                        f"ItemList 항목 URL이 없습니다: {normalize(item_list.get('@id', ''))}",
+                    )
                     break
     return shown_faq
 
@@ -849,28 +912,33 @@ def check_facts(
     if unexpected:
         audit.error("school_not_whitelisted", page, f"다른 지역 CSV 학교명 노출: {sorted(unexpected)[:12]}")
 
-    # School-specific UI must not smuggle in a name absent from this row even
-    # when that name happens not to occur anywhere else in the 371-row CSV.
-    structured_school_texts: list[str] = []
-    for match in re.finditer(r"<([a-z][a-z0-9]*)\b([^>]*)>", source, re.I | re.S):
-        classes = parse_attrs(match.group(2)).get("class", "").lower()
-        if "school" not in classes:
-            continue
-        closing = re.search(rf"</{match.group(1)}\s*>", source[match.end() :], re.I)
-        if closing:
-            structured_school_texts.append(
-                clean_fragment(source[match.end() : match.end() + closing.start()])
-            )
-    structured_blob = " ".join(structured_school_texts)
-    candidates = set(
-        re.findall(
-            r"(?<![가-힣A-Za-z0-9])([가-힣A-Za-z0-9·]{2,24}(?:초등학교|중학교|고등학교|초|중|고))(?![가-힣A-Za-z0-9])",
-            structured_blob,
+    # Compare only the two owned school-chip surfaces.  Scanning every class
+    # containing ``school`` also captures authored prose such as ``확인하고``.
+    source_school_values = [
+        normalize(attr.get("data-source-school", ""))
+        for attr in tags(source, "span")
+        if "data-source-school" in attr
+    ]
+    center_profile_values = [
+        value
+        for value in element_texts(
+            class_block(source, "center-profile-school-list"), "span"
         )
-    )
-    candidates -= {"기초", "최고", "도중", "집중", "비중", "초중고"}
-    if outside := candidates - set(fact.schools):
-        audit.error("school_ui_not_whitelisted", page, f"학교 UI의 비허용 이름: {sorted(outside)}")
+        if re.search(r"(?:초등학교|중학교|고등학교|초|중|고)$", value)
+    ]
+    expected_schools = set(fact.schools)
+    for code, values in (
+        ("school_source_chip_mismatch", source_school_values),
+        ("school_profile_chip_mismatch", center_profile_values),
+    ):
+        actual_schools = set(values)
+        duplicates = sorted(name for name, count in Counter(values).items() if count > 1)
+        if actual_schools != expected_schools or duplicates:
+            audit.error(
+                code,
+                page,
+                f"missing={sorted(expected_schools-actual_schools)}, extra={sorted(actual_schools-expected_schools)}, duplicates={duplicates}",
+            )
 
     for phrase in FORBIDDEN_AUTHORING_PHRASES + FORBIDDEN_SOURCE_ERRORS:
         found = (

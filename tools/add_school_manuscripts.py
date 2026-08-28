@@ -40,9 +40,15 @@ from typing import Iterable, Mapping, Sequence
 from urllib.parse import unquote
 
 try:
-    from source_copy_utils import VERIFIED_SCHOOL_SOURCE_CORRECTIONS
+    from source_copy_utils import (
+        CROSS_LEVEL_SCHOOL_SOURCE_CORRECTIONS,
+        VERIFIED_SCHOOL_SOURCE_CORRECTIONS,
+    )
 except ModuleNotFoundError:  # package import, e.g. tools.add_school_manuscripts
-    from .source_copy_utils import VERIFIED_SCHOOL_SOURCE_CORRECTIONS
+    from .source_copy_utils import (
+        CROSS_LEVEL_SCHOOL_SOURCE_CORRECTIONS,
+        VERIFIED_SCHOOL_SOURCE_CORRECTIONS,
+    )
 
 
 RELEASE_DATE = "2026-08-27"
@@ -83,15 +89,15 @@ EXPECTED_LEVEL_STATS = {
         "provided_rows": 297,
         "missing_rows": 74,
         "coverage_rows": 0,
-        "raw_names": 640,
-        "deduped_names": 640,
+        "raw_names": 658,
+        "deduped_names": 658,
     },
     "middle": {
         "provided_rows": 318,
         "missing_rows": 53,
         "coverage_rows": 0,
-        "raw_names": 857,
-        "deduped_names": 854,
+        "raw_names": 892,
+        "deduped_names": 889,
     },
     "high": {
         "provided_rows": 306,
@@ -108,7 +114,7 @@ EXPECTED_GROUP_STATES = {
     "coverage": 8,
     "missing": 612,
 }
-EXPECTED_NAMED_CHIPS = 8_460
+EXPECTED_NAMED_CHIPS = 8_636
 
 JSON_RE = re.compile(
     r'(<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>)(.*?)(</script>)',
@@ -813,9 +819,8 @@ def _source_header(headers: Iterable[str | None], hint: str) -> str:
 
 
 def _split_school_field(raw: str) -> tuple[tuple[str, ...], int]:
-    # Never infer school boundaries from whitespace.  Only the six source
-    # literals independently confirmed across twelve high-school rows are
-    # corrected.
+    # Never infer school boundaries from whitespace or suffixes.  Only exact,
+    # independently reviewed source literals are corrected.
     if raw.strip() in VERIFIED_SCHOOL_SOURCE_CORRECTIONS:
         names = VERIFIED_SCHOOL_SOURCE_CORRECTIONS[raw.strip()]
         return names, len(names)
@@ -832,12 +837,49 @@ def _parse_level(level: str, raw_value: str | None) -> LevelSource:
         if level != "high":
             raise PlanError(f"고등 외 학제에 coverage 문구가 있습니다: {level}: {raw}")
         return LevelSource(level, raw, "coverage", (), 0)
+    cross_level = CROSS_LEVEL_SCHOOL_SOURCE_CORRECTIONS.get(raw)
+    if cross_level:
+        if level != "middle":
+            raise PlanError(f"교차 학제 교정은 중등 원문에만 허용됩니다: {level}: {raw}")
+        names = tuple(cross_level["middle"])
+        return LevelSource(level, raw, "provided", names, len(names))
     names, raw_count = _split_school_field(raw)
     if not names:
         raise PlanError(f"학교 필드가 비어 있지 않지만 이름을 분리하지 못했습니다: {level}: {raw}")
     if any(name == COVERAGE_RAW for name in names):
         raise PlanError(f"coverage 문구와 학교명이 한 셀에 혼재합니다: {level}: {raw}")
     return LevelSource(level, raw, "provided", names, raw_count)
+
+
+def _apply_cross_level_school_correction(
+    levels: Mapping[str, LevelSource],
+) -> dict[str, LevelSource]:
+    """Move exact cross-level tokens to the school group matching the suffix."""
+
+    result = dict(levels)
+    middle = result["middle"]
+    correction = CROSS_LEVEL_SCHOOL_SOURCE_CORRECTIONS.get(middle.raw)
+    if not correction:
+        return result
+
+    elementary = result["elementary"]
+    if elementary.state != "provided":
+        raise PlanError(
+            "교차 학제 교정의 초등 원문은 provided 상태여야 합니다: "
+            f"{middle.raw}"
+        )
+    additions = tuple(correction["elementary_additions"])
+    elementary_names = tuple(dict.fromkeys((*elementary.names, *additions)))
+    if len(elementary_names) != len(elementary.names) + len(additions):
+        raise PlanError(f"교차 학제 초등 학교명 중복: {middle.raw}")
+    result["elementary"] = LevelSource(
+        elementary.level,
+        elementary.raw,
+        elementary.state,
+        elementary_names,
+        len(elementary_names),
+    )
+    return result
 
 
 def _load_sources(common_dir: Path) -> tuple[dict[str, SchoolSourceRow], bytes, dict]:
@@ -896,10 +938,12 @@ def _load_sources(common_dir: Path) -> tuple[dict[str, SchoolSourceRow], bytes, 
         locality = re.sub(r"\s+", "", source_locality)
         if locality in rows:
             raise PlanError(f"타깃학교 CSV 동네 중복: {locality}")
-        levels = {
-            level: _parse_level(level, raw_row.get(level_headers[level]))
-            for level in LEVEL_ORDER
-        }
+        levels = _apply_cross_level_school_correction(
+            {
+                level: _parse_level(level, raw_row.get(level_headers[level]))
+                for level in LEVEL_ORDER
+            }
+        )
         for level, source in levels.items():
             source_stats[level][f"{source.state}_rows"] += 1
             source_stats[level]["raw_names"] += source.raw_name_count

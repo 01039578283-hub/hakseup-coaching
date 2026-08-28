@@ -52,6 +52,27 @@ EXPECTED_BASELINE_SHA256 = (
 )
 EXPECTED_NATIONAL_DEPTHS = {0: 1, 1: 13, 2: 76, 3: 371, 4: 1_113}
 VERIFIED_SCHOOL_SOURCE_CORRECTIONS = {
+    "성라초 성사초": ("성라초", "성사초"),
+    "화수중 성사중 원당중": ("화수중", "성사중", "원당중"),
+    "해밀초 화봉초": ("해밀초", "화봉초"),
+    "풍양중 주곡중": ("풍양중", "주곡중"),
+    "석천초 상인초": ("석천초", "상인초"),
+    "석천중 상동중 상일중 부인중": (
+        "석천중", "상동중", "상일중", "부인중"
+    ),
+    "이화초 가내초 자란초": ("이화초", "가내초", "자란초"),
+    "비전중 한광중 한광여중 평택여중 소사벌중": (
+        "비전중", "한광중", "한광여중", "평택여중", "소사벌중"
+    ),
+    "수곡중 산남중": ("수곡중", "산남중"),
+    "학남중 강북중": ("학남중", "강북중"),
+    "양덕초 양서초 장흥초": ("양덕초", "양서초", "장흥초"),
+    "양덕중 장흥중 대도중 환호여중": (
+        "양덕중", "장흥중", "대도중", "환호여중"
+    ),
+    "오현초호매실중, 능실중, 영신중, 고색중": (
+        "오현초", "호매실중", "능실중", "영신중", "고색중"
+    ),
     "성사고 화수고": ("성사고", "화수고"),
     "진접고 오남고": ("진접고", "오남고"),
     "상동고 상일고 상원고 중흥고 중원고": (
@@ -67,6 +88,8 @@ VERIFIED_SCHOOL_SOURCE_CORRECTIONS = {
         "장성고", "포고", "포여고", "유성여고"
     ),
 }
+CROSS_LEVEL_SCHOOL_SOURCE = "오현초호매실중, 능실중, 영신중, 고색중"
+CROSS_LEVEL_ELEMENTARY_SCHOOL = "오현초"
 DETAIL_DEPTHS = {3, 4}
 REQUIRED_DETAIL_TYPES = {
     "EducationalOrganization",
@@ -1350,14 +1373,27 @@ def check_links_and_images(
 
 
 def school_columns(record: dict[str, str]) -> dict[str, list[str]]:
+    elementary = split_csv_list(record.get("타깃학교\n(초)", ""))
+    middle_source = re.sub(
+        r"\s+", " ", record.get("타깃학교\n(중)", "")
+    ).strip()
+    middle = split_csv_list(middle_source)
+    if middle_source == CROSS_LEVEL_SCHOOL_SOURCE:
+        if CROSS_LEVEL_ELEMENTARY_SCHOOL not in elementary:
+            elementary.append(CROSS_LEVEL_ELEMENTARY_SCHOOL)
+        middle = [
+            school
+            for school in middle
+            if school != CROSS_LEVEL_ELEMENTARY_SCHOOL
+        ]
     high = [
         value
         for value in split_csv_list(record.get("타깃학교\n(고)", ""))
         if not GENERIC_ALL_HIGH_SCHOOL_RE.fullmatch(value)
     ]
     return {
-        "elementary": split_csv_list(record.get("타깃학교\n(초)", "")),
-        "middle": split_csv_list(record.get("타깃학교\n(중)", "")),
+        "elementary": elementary,
+        "middle": middle,
         # This CSV value is a generic marketing assertion, not a verified
         # school name.  Treat it exactly like missing source data.
         "high": high,

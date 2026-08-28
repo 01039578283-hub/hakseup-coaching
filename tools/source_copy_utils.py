@@ -38,24 +38,54 @@ LOCATION_NOTE_CORRECTIONS = {
     ),
 }
 
-# These six high-school source literals occur in twelve locality rows.  They
-# are verified lists whose delimiters were lost in the source spreadsheet.
-# Keep the rule exact; whitespace is not a safe general school-name separator.
+# These exact source literals are verified lists whose delimiters were lost in
+# the source spreadsheet.  Keep the rule exact; whitespace and school suffixes
+# are not safe general delimiters (for example ``창원중앙여고`` must stay intact).
 VERIFIED_SCHOOL_SOURCE_CORRECTIONS = {
+    "성라초 성사초": ("성라초", "성사초"),
+    "화수중 성사중 원당중": ("화수중", "성사중", "원당중"),
     "성사고 화수고": ("성사고", "화수고"),
+    "해밀초 화봉초": ("해밀초", "화봉초"),
+    "풍양중 주곡중": ("풍양중", "주곡중"),
     "진접고 오남고": ("진접고", "오남고"),
+    "석천초 상인초": ("석천초", "상인초"),
+    "석천중 상동중 상일중 부인중": ("석천중", "상동중", "상일중", "부인중"),
     "상동고 상일고 상원고 중흥고 중원고": (
         "상동고", "상일고", "상원고", "중흥고", "중원고"
+    ),
+    "이화초 가내초 자란초": ("이화초", "가내초", "자란초"),
+    "비전중 한광중 한광여중 평택여중 소사벌중": (
+        "비전중", "한광중", "한광여중", "평택여중", "소사벌중"
     ),
     "비전고 한광고 한광여고 평택여고": (
         "비전고", "한광고", "한광여고", "평택여고"
     ),
+    "오현초호매실중, 능실중, 영신중, 고색중": (
+        "오현초", "호매실중", "능실중", "영신중", "고색중"
+    ),
+    "수곡중 산남중": ("수곡중", "산남중"),
     "충북고 운호고 충북여고 산남고": (
         "충북고", "운호고", "충북여고", "산남고"
     ),
+    "학남중 강북중": ("학남중", "강북중"),
+    "양덕초 양서초 장흥초": ("양덕초", "양서초", "장흥초"),
+    "양덕중 장흥중 대도중 환호여중": ("양덕중", "장흥중", "대도중", "환호여중"),
     "장성고 포고 포여고 유성여고": (
         "장성고", "포고", "포여고", "유성여고"
     ),
+}
+
+
+# One verified middle-school cell also contains an elementary-school token.
+# Consumers that retain source levels must apply this manifest after ordinary
+# exact token correction: ``오현초`` moves to elementary while the four
+# middle-school names remain in the middle group.  Flat, all-level consumers
+# may continue to use ``VERIFIED_SCHOOL_SOURCE_CORRECTIONS`` above.
+CROSS_LEVEL_SCHOOL_SOURCE_CORRECTIONS = {
+    "오현초호매실중, 능실중, 영신중, 고색중": {
+        "elementary_additions": ("오현초",),
+        "middle": ("호매실중", "능실중", "영신중", "고색중"),
+    },
 }
 
 
