@@ -8,3 +8,6 @@ Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+tools/reports/title-suffix-plan.json
+tools/reports/title-suffix-public-verification.json
