@@ -1,0 +1,66 @@
+/* Hub-only reading layout. Original directories and detail styles remain intact. */
+.hk-hub-page { padding-bottom:24px; }
+/* Directory search uses the native hidden attribute; card display rules must not override it. */
+.hk-hub-page [hidden] { display:none !important; }
+.hk-jump { width:min(1160px,calc(100% - 40px)); margin:8px auto 30px; display:flex; flex-wrap:wrap; gap:10px; }
+.hk-jump a { display:flex; align-items:center; justify-content:center; min-height:46px; padding:11px 18px; border:1px solid #c9b990; border-radius:12px; background:#fffdf7; color:#293b62; font-size:15px; font-weight:800; }
+.hk-jump a:hover { background:#f5ecd7; }
+.hk-content { width:min(1160px,calc(100% - 40px)); margin:52px auto; color:#172033; }
+.hk-content *, .hk-jump * { min-width:0; box-sizing:border-box; }
+.hk-content [id] { scroll-margin-top:155px; }
+.hk-intro { max-width:780px; margin-bottom:24px; }
+.hk-content .hk-kicker { margin:0 0 10px; color:#775315; font-size:13px; font-weight:850; letter-spacing:.08em; }
+.hk-content h2 { margin:0 0 16px; font-size:clamp(25px,3vw,33px); line-height:1.45; letter-spacing:-.035em; }
+.hk-content h3 { margin:0 0 16px; font-size:22px; line-height:1.5; letter-spacing:-.025em; }
+.hk-content p { margin:0 0 15px; font-size:16px; line-height:1.85; color:#344158; overflow-wrap:anywhere; }
+.hk-content p:last-child { margin-bottom:0; }
+.hk-lessons { display:grid; gap:18px; }
+.hk-lesson { display:grid; grid-template-columns:48px minmax(0,1fr); gap:22px; padding:30px; border:1px solid #ded4c3; border-radius:22px; background:#fffdf9; }
+.hk-number { color:#8a651e; font-size:21px; font-weight:800; }
+.hk-lesson-copy { max-width:830px; }
+.hk-centers, .hk-faq, .hk-reading { margin-top:48px; }
+.hk-center-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.hk-center { display:flex; flex-direction:column; align-items:flex-start; padding:24px; border:1px solid #ded4c3; border-radius:20px; background:#fffdf9; }
+.hk-center h3 { font-size:20px; }
+.hk-content .hk-region { color:#775315; font-size:13px; font-weight:800; }
+.hk-content .hk-registration { color:#596579; font-size:13px; }
+.hk-center a, .hk-reading a { display:flex; align-items:center; min-height:46px; padding-block:8px; color:#263f79; font-size:15px; font-weight:800; text-decoration:underline; text-underline-offset:4px; }
+.hk-center a { margin-top:auto; }
+.hk-photos { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:24px; }
+.hk-photos figure { margin:0; border:1px solid #ded4c3; border-radius:18px; overflow:hidden; background:#fffdf9; }
+.hk-photos img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:contain; background:#f0eadf; }
+.hk-photos figcaption { padding:14px 16px; font-size:14px; line-height:1.7; color:#536076; }
+.hk-content .hk-photo-note { margin-top:12px; font-size:14px; color:#536076; }
+.hk-faq-list { display:grid; gap:10px; }
+.hk-faq details { border:1px solid #ded4c3; border-radius:15px; background:#fffdf9; }
+.hk-faq summary { cursor:pointer; padding:18px 22px; min-height:56px; font-size:16px; line-height:1.65; font-weight:800; overflow-wrap:anywhere; }
+.hk-faq details[open] summary { color:#263f79; }
+.hk-faq details p { padding:0 22px 22px; }
+.hk-reading { padding:27px; background:#f7eddb; border:1px solid #d9c9a8; border-radius:20px; }
+.hk-reading-links { display:flex; flex-wrap:wrap; gap:10px 28px; }
+.hk-hub-page :is(a,summary,input,button):focus-visible { outline:3px solid #3357a4; outline-offset:4px; }
+@media(max-width:700px) {
+ .hk-hub-page { padding-bottom:90px; }
+ .hk-jump,.hk-content { width:calc(100% - 28px); }
+ .hk-jump { gap:7px; margin-bottom:24px; }
+ .hk-jump a { flex:1 1 88px; padding:10px 6px; font-size:14px; }
+ .hk-content { margin-block:36px; }
+ .hk-content [id] { scroll-margin-top:190px; }
+ .hk-content h2 { font-size:25px; }
+ .hk-content h3 { font-size:20px; }
+ .hk-lesson { grid-template-columns:1fr; gap:8px; padding:22px 18px; border-radius:18px; }
+ .hk-number { font-size:16px; }
+ .hk-center-grid,.hk-photos { grid-template-columns:1fr; }
+ .hk-center { padding:22px 18px; }
+ .hk-centers,.hk-faq,.hk-reading { margin-top:34px; }
+ .hk-faq summary { padding:17px 18px; }
+ .hk-faq details p { padding:0 18px 20px; }
+ .hk-reading { padding:22px 18px; }
+ .hk-reading-links { display:grid; gap:7px; }
+ .hk-hub-page .floating-actions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; width:auto; left:10px; right:10px; bottom:10px; }
+ .hk-hub-page .floating-actions a { min-width:0; width:100%; min-height:48px; padding:10px 4px; border-radius:13px; gap:4px; font-size:14px; }
+ .hk-hub-page .floating-actions .fab-text { font-size:14px; }
+ .hk-hub-page .floating-actions .fab-icon { font-size:14px; }
+ .hk-hub-page .floating-actions .pulse-effect { animation:none; }
+}
+@media(prefers-reduced-motion:reduce) { .hk-hub-page { scroll-behavior:auto; } }
