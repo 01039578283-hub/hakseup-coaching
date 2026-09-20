@@ -1,0 +1,8 @@
+{
+  "base": "http://127.0.0.1:8832",
+  "checks": 987,
+  "contentPages": 237,
+  "assets": 746,
+  "previewOnlyWindowsMimeWarnings": 386,
+  "errors": []
+}
