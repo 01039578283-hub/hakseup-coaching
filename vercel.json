@@ -41,5 +41,7 @@
       "destination": "/학습가이드",
       "permanent": true
     }
-  ]
+  ],
+  "buildCommand": "node wawa-analytics-build.mjs wawa-03 .",
+  "outputDirectory": "."
 }
