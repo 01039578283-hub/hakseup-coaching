@@ -57,3 +57,27 @@
 
 - [지점에서 학습 안내 찾기](https://xn--ru4bi8s1tac0p.kr/%EC%A7%80%EC%A0%90%EC%95%88%EB%82%B4/)
 - [전체 공개 페이지 사이트맵](https://xn--ru4bi8s1tac0p.kr/sitemap.xml)
+
+## 학년별 공부법과 작성 기준
+
+공통 공부 원리와 연습 해설은 학년별 공부법에서, 실제 수업 조건과 상담 준비는 지점 하위 페이지에서 확인합니다. 공부법 예시는 지점의 실제 학생 사례가 아닙니다.
+
+- [초3-영어-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%B4%883-%EC%98%81%EC%96%B4-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [초3-수학-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%B4%883-%EC%88%98%ED%95%99-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [초4-영어-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%B4%884-%EC%98%81%EC%96%B4-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [초4-수학-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%B4%884-%EC%88%98%ED%95%99-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [초5-영어-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%B4%885-%EC%98%81%EC%96%B4-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [초5-수학-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%B4%885-%EC%88%98%ED%95%99-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [초6-영어-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%B4%886-%EC%98%81%EC%96%B4-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [초6-수학-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%B4%886-%EC%88%98%ED%95%99-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [중1-영어-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%A4%911-%EC%98%81%EC%96%B4-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [중1-수학-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%A4%911-%EC%88%98%ED%95%99-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [중2-영어-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%A4%912-%EC%98%81%EC%96%B4-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [중2-수학-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%A4%912-%EC%88%98%ED%95%99-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [중3-영어-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%A4%913-%EC%98%81%EC%96%B4-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [중3-수학-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EC%A4%913-%EC%88%98%ED%95%99-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [고1-영어-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EA%B3%A01-%EC%98%81%EC%96%B4-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [고1-수학-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EA%B3%A01-%EC%88%98%ED%95%99-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [고2-영어-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EA%B3%A02-%EC%98%81%EC%96%B4-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [고2-수학-공부법](https://xn--ru4bi8s1tac0p.kr/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/%EA%B3%A02-%EC%88%98%ED%95%99-%EA%B3%B5%EB%B6%80%EB%B2%95/)
+- [안내 작성 기준](https://xn--ru4bi8s1tac0p.kr/%EC%95%88%EB%82%B4-%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80/)

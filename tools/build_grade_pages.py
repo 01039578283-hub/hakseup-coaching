@@ -284,6 +284,10 @@ def update_from_manifest():
         if i%1000==0:print(base.j({'renderedGradePages':i}),flush=True)
     enrich_parents(parents,records,centers)
     discover(manifest,info)
+    # Shared study guides and source-bound local preparation are the final
+    # editorial layer. Rebuilding the manuscripts must not restore old copy.
+    from refine_branch_guides import main as refine_branch_guides
+    refine_branch_guides()
     print(base.j({'newGradePages':len(records),'subjectHubs':len(parents),'availabilityCounts':dict(Counter(v['status'] for v in info.values())),'deploy':False}))
 
 

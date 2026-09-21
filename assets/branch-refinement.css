@@ -1,0 +1,11 @@
+/* Focused additions: retain existing navigation, imagery and mobile layout. */
+.hr-local-context{margin:22px 0;padding:22px;border:1px solid #cbd8c3;border-radius:16px;background:#f4f6ef}
+.hr-local-context h3{margin:0 0 16px}
+.hr-local-context .hc-facts{margin-top:18px}
+.hr-editorial{border-top:1px solid #dce3d5;padding-top:20px;padding-bottom:10px;line-height:1.8;font-size:14px;color:#4b5e50}
+.hr-editorial p{margin:0 0 6px}
+.hr-editorial a{display:inline-block;min-height:44px;padding:10px 0;color:#234f3c;text-decoration:underline;text-underline-offset:4px}
+#grade-study-guides .hc-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+#grade-study-guides .hc-links a{min-width:0}
+@media(max-width:720px){.hr-local-context{padding:18px}.hr-local-context .hc-facts>div{padding:16px}.hr-editorial{font-size:14px}#grade-study-guides .hc-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:360px){#grade-study-guides .hc-links{grid-template-columns:minmax(0,1fr)}}

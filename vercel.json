@@ -27,6 +27,12 @@
   ],
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "academy-site-2.vercel.app" }],
+      "destination": "https://xn--ru4bi8s1tac0p.kr/:path*",
+      "permanent": true
+    },
+    {
       "source": "/index.html",
       "destination": "/",
       "permanent": true
@@ -42,6 +48,6 @@
       "permanent": true
     }
   ],
-  "buildCommand": "node wawa-analytics-build.mjs wawa-03 .",
+  "buildCommand": "node wawa-analytics-build.mjs wawa-03 . && node seo-descriptions.mjs && node seo-metadata-consistency.mjs",
   "outputDirectory": "."
 }
