@@ -191,10 +191,22 @@ def public():
     class NoRedirect(HTTPRedirectHandler):
         def redirect_request(self,*a,**k):return None
     op=build_opener(NoRedirect);sample='/지점안내/서울/명일점/명일동수학학원/고1/';variants=[]
-    for u in [DOMAIN+quote(sample.rstrip('/'),safe='/'),DOMAIN+quote(sample+'index.html',safe='/'),DOMAIN.replace('https:','http:')+quote(sample,safe='/'),'https://academy-site-2.vercel.app'+quote(sample,safe='/')+'?ref=qa',DOMAIN+'/not-an-existing-release-page/']:
+    destination=DOMAIN+quote(sample,safe='/')
+    cases=[(DOMAIN+quote(sample.rstrip('/'),safe='/'),308,destination),
+           (DOMAIN+quote(sample+'index.html',safe='/'),308,destination),
+           (DOMAIN.replace('https:','http:')+quote(sample,safe='/'),308,destination),
+           (DOMAIN+'/not-an-existing-release-page/',404,None)]
+    for p in ['/', '/지점안내/', sample, '/학습가이드/고1-수학-공부법/', '/robots.txt']:
+        suffix=quote(p,safe='/')+'?ref=qa&from=naver'
+        cases.append(('https://academy-site-2.vercel.app'+suffix,308,DOMAIN+suffix))
+    for u,expected_status,expected_location in cases:
         try:
-            with op.open(u,timeout=35) as res:variants.append({'url':u,'status':res.status,'location':res.headers.get('Location')})
-        except HTTPError as ex:variants.append({'url':u,'status':ex.code,'location':ex.headers.get('Location')})
+            with op.open(u,timeout=35) as res:variant={'url':u,'status':res.status,'location':res.headers.get('Location')}
+        except HTTPError as ex:variant={'url':u,'status':ex.code,'location':ex.headers.get('Location')}
+        actual_location=urljoin(u,variant['location']) if variant['location'] else None
+        variant['ok']=variant['status']==expected_status and actual_location==expected_location
+        variant['expectedLocation']=expected_location
+        variants.append(variant)
     assets=set()
     for p in selected:
         d=html.parse(str(file_for(p)));assets.update(unquote(urlsplit(u).path) for u in d.xpath('//meta[@property="og:image"]/@content'))
@@ -205,7 +217,7 @@ def public():
     with ThreadPoolExecutor(max_workers=6) as pool:images=list(pool.map(asset,sorted(assets)))
     report={'checkedAt':datetime.now().astimezone().isoformat(),'pages':len(results),'passed':sum(v['ok'] for v in results),'errors':[v for v in results if not v['ok']],'feeds':feeds,'variants':variants,'images':len(images),'imageErrors':[v for v in images if not v['ok']]}
     output('public-audit.json',report);print(json.dumps(report,ensure_ascii=False,indent=2))
-    return len(report['errors'])+len(report['imageErrors'])+sum(not v['matchesLocal'] for v in feeds)+sum(v['status']!=(404 if '/not-an-existing-' in v['url'] else 308) for v in variants)
+    return len(report['errors'])+len(report['imageErrors'])+sum(not v['matchesLocal'] for v in feeds)+sum(not v['ok'] for v in variants)
 
 
 if __name__=='__main__':

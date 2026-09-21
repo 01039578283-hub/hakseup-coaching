@@ -27,9 +27,9 @@
   ],
   "redirects": [
     {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "academy-site-2.vercel.app" }],
-      "destination": "https://xn--ru4bi8s1tac0p.kr/:path*",
+      "source": "/:path(.*)",
+      "has": [{ "type": "host", "value": "academy-site-2\\.vercel\\.app" }],
+      "destination": "https://xn--ru4bi8s1tac0p.kr/:path",
       "permanent": true
     },
     {
