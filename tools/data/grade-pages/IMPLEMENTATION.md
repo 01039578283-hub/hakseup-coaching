@@ -11,7 +11,7 @@
 - 개설 학년: 6,277개 확인, 35개 조건 확인, 366개 목록 미표시. 뒤의 401개는 학습 안내와 개설 사실을 명확히 구분하고 해당 학년 Service를 생성하지 않음.
 - 실제 EducationalOrganization/LocalBusiness @id는 지점 URL을 사용. 학년 페이지 WebPage/Article/FAQPage/BreadcrumbList/ItemList는 각 페이지 주소에 귀속. 확인된 수업만 Service를 생성.
 - canonical/og:url/제목/설명과 첫 답변을 대조. Article abstract는 보이는 첫 요약과 동일. datePublished/dateModified는 실제 생성일, 단순 빌드 시 날짜를 갱신하지 않음.
-- 이미지: 대표(숨김) → 본문(전체 표시) → 검증된 지점 지도. 기존 자산 재사용. ALT는 학년별 페이지명 + 대표이미지/본문/지도.
+- 이미지: 상단 첫 요약 다음, GRADE LEARNING 바로 위에 대표(숨김) → 본문(전체 표시) → 검증된 지점 지도 순으로 배치. 기존 자산 재사용. ALT는 학년별 페이지명 + 대표이미지/본문/지도. 이미지 접기·자르기 없음.
 - 내부 링크는 과목 부모, 실제 지점, 같은 동네·같은 학년의 다른 과목, 앞뒤 학년으로 4~5개. 모든 학년을 모든 글에 반복 나열하지 않음.
 - 사이트맵 전체 12,373 URL, RSS 최근 50개(새 학년 글 30개 전체 본문 포함), llms 탐색 안내 갱신. robots 기존 정책 유지.
 

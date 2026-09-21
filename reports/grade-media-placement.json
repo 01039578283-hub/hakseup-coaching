@@ -1,0 +1,10 @@
+{
+  "baseline": "6b9c159a0967a611422e726eb56f18c8de90d488",
+  "gradePages": 6678,
+  "unexpectedPageChanges": [],
+  "allowedChanges": [
+    "Move center-images before GRADE LEARNING",
+    "Reorder corresponding schema section arrays"
+  ],
+  "status": "PASS"
+}

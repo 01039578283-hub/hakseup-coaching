@@ -122,6 +122,7 @@ def render(c, r, lookup, center_graph):
     description=f'{r["title"]} 학습 안내. {p["summary"]}, {checks[0]["summary"]}, '+(f'{c["routeName"]}의 개설 조건과 상담 준비를 확인하세요.' if state=='confirmed' else f'{c["routeName"]}의 학년 개설 여부를 먼저 확인하세요.')
     body=base.hero(c['region']+' · '+c['district']+' / '+c['routeName']+' / '+grade_name(grade),e(r['title']),lead,
                    [('학년별 공부 방법','#grade-focus'),('지점·개설 조건','#grade-center'),('다른 학년 보기',r['parentPath']+'#grade-pages')])
+    body+=subject.subject_media(c,r['title'])
     body+='<article class="hs-article hg-article" aria-label="'+e(r['title'])+' 학습 안내">'
     body+=section('grade-focus',p['title'],f'<p>{e(p["explanation"])}</p><ol class="hc-steps">'+''.join(f'<li><strong>{e(a)}</strong><p>{e(b)}</p></li>' for a,b in p['steps'])+'</ol>','GRADE LEARNING')
     body+=section('practice-example','직접 해볼 짧은 연습',
@@ -157,7 +158,6 @@ def render(c, r, lookup, center_graph):
             child=lookup[(locality,name,GRADES[neighbor])]
             related.append((child['title'],child['path']))
     body+=section('related-pages','이어서 볼 학년·과목 안내',buttons(related),'RELATED LEARNING')
-    body+=subject.subject_media(c,r['title'])
     org=copy.deepcopy(next(n for n in center_graph if n.get('@id')==url(r['branchPath'])+'#center'))
     # Do not imply a course is offered for an unlisted or pending grade.
     service=None

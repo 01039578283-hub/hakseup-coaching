@@ -94,6 +94,10 @@ def audit():
         for node in doc.xpath('//article[@class="hs-article hg-article"]//p'):
             val=subject.norm(node.text_content())
             if len(val)>=50 and grade.digest(val) in r['sourceParagraphHashes']:source_copies.append(path)
+        media=doc.xpath('//main/section[@id="center-images"]')
+        learning=doc.xpath('//main/article[@class="hs-article hg-article"]')
+        check(len(media)==1 and len(learning)==1 and media[0].getnext() is learning[0],path,'Primary media must immediately precede grade article')
+        check(len(learning)==1 and len(learning[0])>0 and learning[0][0].get('id')=='grade-focus',path,'GRADE LEARNING must start the grade article')
         images=doc.xpath('//*[@id="center-images"]//img')
         check(len(images)==3,path,'Primary media count')
         for img,key,suffix in zip(images,['representative','body','map'],['대표이미지','본문','지도']):
@@ -133,6 +137,8 @@ def audit():
         if content:
             d=html.fromstring(content)
             check(all(v.startswith(('https://','tel:','sms:')) for v in d.xpath('//@href|//@src')),'RSS relative URLs',item.findtext('link'))
+            media=d.xpath('.//*[@id="center-images"]')
+            check(len(media)==1 and media[0].getnext() is not None and media[0].getnext().xpath('./section[1]/@id')==['grade-focus'],'RSS media placement',item.findtext('link'))
     check('Sitemap: '+base.DOMAIN+'/sitemap.xml' in (ROOT/'robots.txt').read_text(encoding='utf-8'),'robots sitemap')
     check('동네별 과목과 학년 학습 안내' in (ROOT/'llms.txt').read_text(encoding='utf-8'),'llms guide')
     result={'result':'FAIL' if errors else 'PASS','gradeArticles':len(records),'subjectHubs':len(parents),
@@ -159,6 +165,9 @@ def http(origin, paths, assets, public=False):
                     for selector in ['string(//title)','string(//main)','string(//link[@rel="canonical"]/@href)']:
                         if subject.norm(doc.xpath(selector))!=subject.norm(expected.xpath(selector)):return(path,'Deployed content mismatch',selector)
                     if doc.xpath('//meta[@name="robots"]/@content')!=['index,follow']:return(path,'Robots')
+                    if doc.xpath('//*[@id="grade-focus"]'):
+                        media=doc.xpath('//*[@id="center-images"]')
+                        if len(media)!=1 or media[0].getnext() is None or media[0].getnext().xpath('./section[1]/@id')!=['grade-focus']:return(path,'Deployed media placement')
                     if public and len(doc.xpath('//script[contains(@src,"wawa-visit-collector") and @data-site="wawa-03"]'))!=1:return(path,'Analytics integration')
                 elif data.replace(b'\r\n',b'\n')!=local.read_bytes().replace(b'\r\n',b'\n'):return(path,'Different static bytes')
         except Exception as ex:return(path,str(ex))
