@@ -1,0 +1,25 @@
+{
+  "result": "PASS",
+  "gradeArticles": 6678,
+  "subjectHubs": 742,
+  "titles": 6678,
+  "descriptions": 6678,
+  "H1s": 6678,
+  "FAQPairs": 26712,
+  "sitemapUrls": 12373,
+  "RSSItems": 50,
+  "assets": 365,
+  "availability": {
+    "unlisted": 366,
+    "confirmed": 6277,
+    "pending": 35
+  },
+  "sourceParagraphCopies": 0,
+  "sourceErrorsReplaced": 7,
+  "sourceMappingReviews": 221,
+  "learningTextCharacters": {
+    "min": 1249,
+    "max": 1391
+  },
+  "errors": []
+}

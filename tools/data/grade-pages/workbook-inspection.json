@@ -1,0 +1,1580 @@
+[
+  {
+    "file": "초3 영어학원.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 370,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A104",
+            "expected": "부천 중동",
+            "title": "부천시 중동 와와학습코칭센터 초3 영어 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "금곡동 초3 영어학원 와와학습코칭센터 서수원점 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A162",
+            "expected": "용인 중동",
+            "title": "경기 용인시 기흥구 중동 초3 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A202",
+            "expected": "봉담2지구",
+            "title": "봉담3지구 초3 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A207",
+            "expected": "화성태안",
+            "title": "경기 화성시 태안읍 와와학습코칭센터 초3 영어학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A243",
+            "expected": "다정동",
+            "title": "세종시 새롬동 와와학습코칭센터 초3 영어·수학 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 초3 영어학원 와와학습코칭센터 초등 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 초3 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 초3 영어학원 와와학습코칭센터 영어 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A322",
+            "expected": "양정동",
+            "title": "거제시 수월동 와와학습코칭센터 초3 영어·수학 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A324",
+            "expected": "경산사동",
+            "title": "경산시 사동 초등 3학년 영어학원, 와와학습코칭센터 영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A340",
+            "expected": "수완지구",
+            "title": "광주 광산구 수완동 와와학습코칭센터 초3 영어 학습 안내",
+            "foundInBody": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "초3 수학학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 371,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A100",
+            "expected": "부천 상동",
+            "title": "부천시 원미구 상동 초3 수학학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A108",
+            "expected": "성남 금곡동",
+            "title": "금곡동 와와학습코칭센터 초3 수학·영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "수원시 금곡동 초등 3학년 수학학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A202",
+            "expected": "봉담2지구",
+            "title": "봉담3지구 와와학습코칭센터 초3 수학학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A207",
+            "expected": "화성태안",
+            "title": "경기 화성시 태안읍 와와학습코칭센터 초3 수학·영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "당진시 읍내동 초3 수학학원 초등 3학년 맞춤 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "유천동 와와학습코칭센터 초3 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 와와학습코칭센터 초3 수학·기초 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 초3 수학학원 와와학습코칭센터 수학·영어·국어·영수 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A324",
+            "expected": "경산사동",
+            "title": "경산시 사동 초3 수학학원 맞춤 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A353",
+            "expected": "전주 장동",
+            "title": "완주군 장동 초3 수학학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A359",
+            "expected": "강릉교동",
+            "title": "강릉시 교동 초3 수학학원 수업 안내",
+            "foundInBody": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "초4 영어학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 371,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A100",
+            "expected": "부천 상동",
+            "title": "부천시 상동 와와학습코칭센터 초등 4학년 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A104",
+            "expected": "부천 중동",
+            "title": "부천시 중동 와와학습코칭센터 초4 영어·수학·국어·영수 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A162",
+            "expected": "용인 중동",
+            "title": "용인시 기흥구 중동 초4 영어학원 와와학습코칭센터 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A202",
+            "expected": "봉담2지구",
+            "title": "화성시 봉담3지구 초등 4학년 와와학습코칭센터 영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A207",
+            "expected": "화성태안",
+            "title": "화성시 태안동 와와학습코칭센터 초등 4학년 영어학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A215",
+            "expected": "인천 갈산동",
+            "title": "인천 부평구 갈산동 초4 영어·수학 학습 안내 | 와와학습코칭센터 인천삼산점",
+            "foundInBody": false
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "당진시 읍내동 와와학습코칭센터 초4 영어·기초 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A266",
+            "expected": "대구 장기동",
+            "title": "대구 달서구 장기동 초등 4학년 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 초4 영어·수학 학습 안내 (영어, 수학, 국어·영수)",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 초4 영어학원, 와와학습코칭센터 삼산점 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 와와학습코칭센터 초등 4학년 영어 학습 안내",
+            "foundInBody": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "초4 수학학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 371,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A100",
+            "expected": "부천 상동",
+            "title": "부천시 상동 초등 4학년 수학학원 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A108",
+            "expected": "성남 금곡동",
+            "title": "경기 성남시 금곡동 초4 수학학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "수원시 권선구 금곡동 와와학습코칭센터 초4 수학·영수 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A162",
+            "expected": "용인 중동",
+            "title": "용인 수지구 중동 초4 수학학원 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A202",
+            "expected": "봉담2지구",
+            "title": "봉담3지구 초4 수학학원 와와학습코칭센터 봉담점 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A207",
+            "expected": "화성태안",
+            "title": "화성시 태안읍 와와학습코칭센터 초등4학년 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A215",
+            "expected": "인천 갈산동",
+            "title": "인천 부평구 갈산동 와와학습코칭센터 초등 4학년 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "당진시 읍내동 초4 수학학원 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A266",
+            "expected": "대구 장기동",
+            "title": "대구 달서구 장기동 와와학습코칭센터 초등 4학년 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 초등 4학년 수학학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 초4 수학학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A324",
+            "expected": "경산사동",
+            "title": "경산시 사동 와와학습코칭센터 초등 4학년 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A353",
+            "expected": "전주 장동",
+            "title": "완주군 장동 와와학습코칭센터 초4 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A359",
+            "expected": "강릉교동",
+            "title": "강릉시 교동 와와학습코칭센터 초4 수학 학습 안내",
+            "foundInBody": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "초5 영어학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 371,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A104",
+            "expected": "부천 중동",
+            "title": "부천시 중동 초등 5학년 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "수원 권선구 금곡동 초등 5학년 영어학원 수업 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A162",
+            "expected": "용인 중동",
+            "title": "용인시 중동 와와학습코칭센터 초등5학년 영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A202",
+            "expected": "봉담2지구",
+            "title": "경기 화성시 봉담3지구 초등5학년 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A207",
+            "expected": "화성태안",
+            "title": "경기 화성시 태안읍 와와학습코칭센터 초5 영어 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A215",
+            "expected": "인천 갈산동",
+            "title": "인천 부평구 갈산동 초등 5학년 영어학원 와와학습코칭센터 인천삼산점 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A248",
+            "expected": "천안 백석동",
+            "title": "충청 천안시 백석동 초5 영어학원 추천, 와와학습코칭센터 불당점 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A266",
+            "expected": "대구 장기동",
+            "title": "대구 달서구 장기동 초5 영어학원 와와학습코칭센터 영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 초등 5학년 영어학원 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 초등 5학년 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 초등5학년 영어·수학 학습 안내 (와와학습코칭센터 좌동점)",
+            "foundInBody": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "초5 수학학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 371,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A100",
+            "expected": "부천 상동",
+            "title": "부천시 상동 초등 5학년 수학 학습 안내 | 와와학습코칭센터 상동점",
+            "foundInBody": false
+          },
+          {
+            "cell": "A104",
+            "expected": "부천 중동",
+            "title": "부천시 중동 와와학습코칭센터 초5 수학·영어·국어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A108",
+            "expected": "성남 금곡동",
+            "title": "성남시 금곡동 와와학습코칭센터 초5 수학·영어·국어·영수 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "수원시 금곡동 와와학습코칭센터 초등 5학년 수학·영어·국어(영수) 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A202",
+            "expected": "봉담2지구",
+            "title": "화성시 봉담3지구 초5 수학학원 수업·코칭 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A207",
+            "expected": "화성태안",
+            "title": "화성시 태안읍 와와학습코칭센터 초등 5학년 수학 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A215",
+            "expected": "인천 갈산동",
+            "title": "부평구 갈산동 초등 5학년 수학학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "당진시 읍내동 초등 5학년 수학학원 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A266",
+            "expected": "대구 장기동",
+            "title": "대구 달서구 장기동 초등 5학년 수학학원: 와와학습코칭센터 대구장기점 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 초등 5학년 수학학원 수업 안내(영어·국어·영수 포함)",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 초등5학년 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 와와학습코칭센터 초등5학년 수학 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A324",
+            "expected": "경산사동",
+            "title": "경산시 사동 와와학습코칭센터 초등 5학년 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A353",
+            "expected": "전주 장동",
+            "title": "완주군 장동 초5 수학학원 수학·영어·국어(영수) 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A359",
+            "expected": "강릉교동",
+            "title": "강릉시 교동 초5 수학학원 와와학습코칭센터 수학 학습 안내",
+            "foundInBody": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "초6 영어학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 371,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A100",
+            "expected": "부천 상동",
+            "title": "부천시 상동 초6 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A108",
+            "expected": "성남 금곡동",
+            "title": "금곡동 와와학습코칭센터 초6 영어·내신 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "수원시 금곡동 와와학습코칭센터 초등6학년 영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A162",
+            "expected": "용인 중동",
+            "title": "용인시 중동 초6 영어학원 | 와와학습코칭센터 용인백현점 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A202",
+            "expected": "봉담2지구",
+            "title": "화성시 봉담3지구 와와학습코칭센터 초등6학년 영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A207",
+            "expected": "화성태안",
+            "title": "화성시 태안읍 와와학습코칭센터 초등 6학년 영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A215",
+            "expected": "인천 갈산동",
+            "title": "인천 부평구 갈산동 초등6학년 영어학원 초6 맞춤 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "당진시 읍내동 초6 영어학원 와와학습코칭센터 당진중앙점 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A248",
+            "expected": "천안 백석동",
+            "title": "충청 천안시 서북구 백석동 초6 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A266",
+            "expected": "대구 장기동",
+            "title": "대구 달서구 장기동 초등6학년 영어학원 초6 영어·영수 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 초6 영어학원 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 초등 6학년 영어·수학·국어·영수 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "해운대구 중동 초6 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A324",
+            "expected": "경산사동",
+            "title": "경산시 사동 와와학습코칭센터 초등 6학년 영어·수학 학습 안내",
+            "foundInBody": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "초6 수학학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 371,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A100",
+            "expected": "부천 상동",
+            "title": "부천시 상동 와와학습코칭센터 초6 수학·영어·국어·영수 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A104",
+            "expected": "부천 중동",
+            "title": "부천시 중동 와와학습코칭센터 초6 수학 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A108",
+            "expected": "성남 금곡동",
+            "title": "성남시 금곡동 초6 수학학원 와와학습코칭센터 영어·수학·국어·영수 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "수원시 금곡동 와와학습코칭센터 초등 6학년 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A202",
+            "expected": "봉담2지구",
+            "title": "화성시 봉담3지구 와와학습코칭센터 초등6학년 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "당진시 읍내동 초6 수학학원 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A266",
+            "expected": "대구 장기동",
+            "title": "대구 달서구 장기동 와와학습코칭센터 초6 수학·영어·국어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 초등 6학년 수학학원 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 초등 6학년 수학학원 학습 코칭 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 초등6학년 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A324",
+            "expected": "경산사동",
+            "title": "경산시 사동 와와학습코칭센터 초6 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A359",
+            "expected": "강릉교동",
+            "title": "강릉시 교동 초등 6학년 수학학원 학습 안내",
+            "foundInBody": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "중1 영어학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 2140,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 371,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A104",
+            "expected": "부천 중동",
+            "title": "부천시 중동 와와학습코칭센터 중1 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "금곡동 와와학습코칭센터 중1 영어 학습 안내 (수원)",
+            "foundInBody": false
+          },
+          {
+            "cell": "A202",
+            "expected": "봉담2지구",
+            "title": "봉담3지구 중1 영어학원 와와학습코칭센터 영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A207",
+            "expected": "화성태안",
+            "title": "화성시 태안읍 중1 영어학원 와와학습코칭센터 수업 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A215",
+            "expected": "인천 갈산동",
+            "title": "인천 부평구 갈산동 중1 영어학원 와와학습코칭센터 인천삼산점 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "충청 당진시 읍내동 중1 영어·국어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A266",
+            "expected": "대구 장기동",
+            "title": "대구 달서구 장기동 중1 영어학원: 와와학습코칭센터 맞춤 수업 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 중1 영어학원, 영어·수학·국어 영수 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 중1 영어학원 와와학습코칭센터 삼산점 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "해운대구 중동 중1 영어학원 맞춤 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A324",
+            "expected": "경산사동",
+            "title": "경산시 사동 중1 영어학원 | 와와학습코칭센터 영어·수학·국어 영수 학습 안내",
+            "foundInBody": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "중1 수학학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 2140,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 369,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A100",
+            "expected": "부천 상동",
+            "title": "상동 와와학습코칭센터 중1 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A104",
+            "expected": "부천 중동",
+            "title": "부천시 중동 중1 수학학원 와와학습코칭센터 중동점 수학 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A108",
+            "expected": "성남 금곡동",
+            "title": "금곡동 와와학습코칭센터 중1 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A162",
+            "expected": "용인 중동",
+            "title": "경기도 용인시 중동 중1 수학학원 와와학습코칭센터 수학 내신·오답 코칭 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A202",
+            "expected": "봉담2지구",
+            "title": "봉담3지구 중1 수학학원 와와학습코칭센터 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A215",
+            "expected": "인천 갈산동",
+            "title": "인천 부평구 갈산동 중1 수학학원 수업 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "당진시 읍내동 와와학습코칭센터 중1 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A249",
+            "expected": "신불당",
+            "title": "불당동 와와학습코칭센터 중1 수학학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A266",
+            "expected": "대구 장기동",
+            "title": "대구 달서구 장기동 중1 수학학원 와와학습코칭센터 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 중1 수학학원 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 중1 수학학원: 개념부터 내신 오답까지",
+            "foundInBody": false
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 중1 수학학원 와와학습코칭센터(좌동점) 학습 안내",
+            "foundInBody": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "중2 영어학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 371,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A100",
+            "expected": "부천 상동",
+            "title": "부천시 상동 중2 영어학원 와와학습코칭센터 상동점 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A104",
+            "expected": "부천 중동",
+            "title": "부천시 중동 와와학습코칭센터 중2 영어학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A108",
+            "expected": "성남 금곡동",
+            "title": "성남시 금곡동 와와학습코칭센터 중2 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "금곡동 와와학습코칭센터 중2 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A162",
+            "expected": "용인 중동",
+            "title": "용인시 중동 와와학습코칭센터 중2 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A215",
+            "expected": "인천 갈산동",
+            "title": "인천 부평구 갈산동 중2 영어·수학 학습 안내 (영어·국어·영수)",
+            "foundInBody": false
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "당진시 읍내동 와와학습코칭센터 중2 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 중2 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 와와학습코칭센터 중2 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 중2 영어학원 와와학습코칭센터 수업 안내",
+            "foundInBody": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "중2 수학학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 370,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A100",
+            "expected": "부천 상동",
+            "title": "부천시 상동 와와학습코칭센터 중2 수학·영어 내신 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A104",
+            "expected": "부천 중동",
+            "title": "부천시 중동 중2 수학학원 와와학습코칭센터 맞춤 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A108",
+            "expected": "성남 금곡동",
+            "title": "금곡동 중2 수학학원 수업 안내 | 경기 성남시 와와학습코칭센터",
+            "foundInBody": false
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "수원시 금곡동 중2 수학학원 와와학습코칭센터 서수원점 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A215",
+            "expected": "인천 갈산동",
+            "title": "인천 부평구 갈산동 중2 수학학원 와와학습코칭센터 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "당진시 읍내동 중2 수학학원, 영수·국어까지 함께 잡는 학습 코칭",
+            "foundInBody": false
+          },
+          {
+            "cell": "A248",
+            "expected": "천안 백석동",
+            "title": "천안시 백석동 중2 수학학원 와와학습코칭센터 불당점 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A266",
+            "expected": "대구 장기동",
+            "title": "대구 달서구 장기동 와와학습코칭센터 중2 수학학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 와와학습코칭센터 중2 수학·영어 내신 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 중2 수학학원 수업·코칭 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 중2 수학학원 맞춤 학습 안내",
+            "foundInBody": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "중3 영어학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 370,
+        "uniqueTitles": 370,
+        "anomalies": [
+          {
+            "cell": "A97",
+            "value": "#ERROR!"
+          }
+        ],
+        "mappingChecks": [
+          {
+            "cell": "A100",
+            "expected": "부천 상동",
+            "title": "부천시 상동 중3 영어학원 와와학습코칭센터 영어·수학 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A104",
+            "expected": "부천 중동",
+            "title": "부천시 중동 중3 영어·수학 내신 대비 학습 안내 | 와와학습코칭센터 중동점",
+            "foundInBody": false
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "수원시 금곡동 중3 영어학원 와와학습코칭센터 서수원점 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A207",
+            "expected": "화성태안",
+            "title": "화성시 태안읍 중3 영어학원 와와학습코칭센터 영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "당진시 읍내동 중3 영어학원 와와학습코칭센터 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A248",
+            "expected": "천안 백석동",
+            "title": "충남 천안시 서북구 백석동 중3 영어학원 와와학습코칭센터 수업 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A266",
+            "expected": "대구 장기동",
+            "title": "대구 달서구 장기동 와와학습코칭센터 중3 영어학원·내신 대비 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 중3 영어학원 와와학습코칭센터 내신·문법·독해 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 해운대 중3 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A324",
+            "expected": "경산사동",
+            "title": "경산시 사동 중3 영어학원 와와학습코칭센터 영어 학습 안내",
+            "foundInBody": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "중3 수학학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 371,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A104",
+            "expected": "부천 중동",
+            "title": "부천시 중동 중3 수학학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "금곡동 와와학습코칭센터 중3 수학·내신 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A162",
+            "expected": "용인 중동",
+            "title": "용인시 중동 와와학습코칭센터 중3 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A207",
+            "expected": "화성태안",
+            "title": "화성시 태안읍 와와학습코칭센터 중3 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "충청 당진시 읍내동 와와학습코칭센터 중3 맞춤 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A266",
+            "expected": "대구 장기동",
+            "title": "대구 달서구 장기동 와와학습코칭센터 중3 수학·내신 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 중3 수학학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 중3 수학학원 와와학습코칭센터 삼산점 수업 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A316",
+            "expected": "화명신도시",
+            "title": "화명동 와와학습코칭센터 중3 수학 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 와와학습코칭센터 중3 수학학원 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A324",
+            "expected": "경산사동",
+            "title": "경산시 사동 와와학습코칭센터 중3 수학·내신 학습 안내",
+            "foundInBody": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "고1 영어학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 371,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A100",
+            "expected": "부천 상동",
+            "title": "부천시 상동 와와학습코칭센터 고1 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "수원시 금곡동 와와학습코칭센터 고1 영어·영수(영어·수학) 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A151",
+            "expected": "부산동",
+            "title": "부산 ○○구 ○○동 고1 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A164",
+            "expected": "흥덕마을",
+            "title": "용인시 기흥구 흥덕동 와와학습코칭센터 고1 영어·수학 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A207",
+            "expected": "화성태안",
+            "title": "화성시 태안읍 고1 영어학원 와와학습코칭센터 영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "충청 당진시 읍내동 와와학습코칭센터 고1 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A248",
+            "expected": "천안 백석동",
+            "title": "천안시 백석동 고1 영어학원 와와학습코칭센터 영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A266",
+            "expected": "대구 장기동",
+            "title": "대구 달서구 장기동 고1 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구광역시 달서구 유천동 고1 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 고1 영어학원 와와학습코칭센터 삼산점 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 와와학습코칭센터 고1 영어학원 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A359",
+            "expected": "강릉교동",
+            "title": "강릉시 교동 고1 영어학원 와와학습코칭센터 영어·수학 학습 안내",
+            "foundInBody": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "고1 수학학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 371,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A100",
+            "expected": "부천 상동",
+            "title": "부천시 상동 고1 수학학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "수원시 권선구 금곡동 와와학습코칭센터 고1 영어·수학·국어·영수 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A207",
+            "expected": "화성태안",
+            "title": "경기 화성시 태안읍 고1 수학학원 수업·코칭 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A230",
+            "expected": "도안신도시",
+            "title": "대전 서구 도안동 고1 수학학원 와와학습코칭센터 도안점 수학 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "당진시 읍내동 고1 수학학원 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A266",
+            "expected": "대구 장기동",
+            "title": "대구 달서구 장기동 와와학습코칭센터 고1 수학·영어·국어·영수 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 고1 수학학원 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 고1 수학학원 수학·영어·국어·영어독해 맞춤 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 고1 수학학원 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A324",
+            "expected": "경산사동",
+            "title": "경산시 사동 와와학습코칭센터 고1 수학학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A359",
+            "expected": "강릉교동",
+            "title": "강릉시 교동 와와학습코칭센터 고1 수학 학습 안내",
+            "foundInBody": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "고2 영어학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 371,
+        "uniqueTitles": 370,
+        "anomalies": [],
+        "mappingChecks": [
+          {
+            "cell": "A104",
+            "expected": "부천 중동",
+            "title": "부천시 중동 와와학습코칭센터 고2 영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A108",
+            "expected": "성남 금곡동",
+            "title": "금곡동 와와학습코칭센터 고2 영어·수학·국어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "수원시 금곡동 와와학습코칭센터 고2 영어·수학 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A162",
+            "expected": "용인 중동",
+            "title": "용인시 중동 와와학습코칭센터 고2 영어학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A207",
+            "expected": "화성태안",
+            "title": "화성시 태안읍 고2 영어학원: 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A215",
+            "expected": "인천 갈산동",
+            "title": "인천 부평구 갈산동 고2 영어학원 와와학습코칭센터 인천삼산점 영어·수학·국어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A230",
+            "expected": "도안신도시",
+            "title": "대전 서구 도안동 고2 영어학원, 와와학습코칭센터 영어·내신 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "당진시 읍내동 와와학습코칭센터 고2 영어·수학·국어·영수 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A266",
+            "expected": "대구 장기동",
+            "title": "장기동 와와학습코칭센터 고2 영어·수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A278",
+            "expected": "대구 유천동",
+            "title": "대구 달서구 유천동 고2 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 고2 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": true
+          },
+          {
+            "cell": "A320",
+            "expected": "해운대 중동",
+            "title": "부산 해운대구 중동 고2 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A324",
+            "expected": "경산사동",
+            "title": "경산시 사동 고2 영어학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A343",
+            "expected": "신창지구",
+            "title": "광주 광산구 신창점 와와학습코칭센터 고2 영어학습 안내",
+            "foundInBody": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "고2 수학학원 원고.xlsx",
+    "sheets": [
+      {
+        "name": "Sheet1",
+        "rows": 371,
+        "cols": 1,
+        "manuscripts": 365,
+        "uniqueTitles": 365,
+        "anomalies": [
+          {
+            "cell": "A140",
+            "value": "#ERROR!"
+          },
+          {
+            "cell": "A210",
+            "value": "#ERROR!"
+          },
+          {
+            "cell": "A240",
+            "value": "#ERROR!"
+          },
+          {
+            "cell": "A274",
+            "value": "#ERROR!"
+          },
+          {
+            "cell": "A304",
+            "value": "#ERROR!"
+          },
+          {
+            "cell": "A310",
+            "value": "#ERROR!"
+          }
+        ],
+        "mappingChecks": [
+          {
+            "cell": "A100",
+            "expected": "부천 상동",
+            "title": "부천시 상동 와와학습코칭센터 고2 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A104",
+            "expected": "부천 중동",
+            "title": "부천시 중동 고2 수학학원 학습 안내 (영어·수학·국어·영수 코칭)",
+            "foundInBody": false
+          },
+          {
+            "cell": "A115",
+            "expected": "여수동",
+            "title": "성남시 야탑동 고2 수학학원 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A121",
+            "expected": "수원 금곡동",
+            "title": "수원시 금곡동 고2 수학학원 와와학습코칭센터 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A207",
+            "expected": "화성태안",
+            "title": "경기 화성시 태안읍 와와학습코칭센터 고2 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A215",
+            "expected": "인천 갈산동",
+            "title": "인천 부평구 갈산동 와와학습코칭센터 고2 수학·영어 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A241",
+            "expected": "당진 읍내동",
+            "title": "당진시 읍내동 와와학습코칭센터 고2 수학·영어·국어·영수 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A303",
+            "expected": "울산 삼산동",
+            "title": "울산 남구 삼산동 고2 수학학원 | 영어·수학·국어·영수 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A324",
+            "expected": "경산사동",
+            "title": "경산시 사동 와와학습코칭센터 고2 수학 학습 안내",
+            "foundInBody": false
+          },
+          {
+            "cell": "A359",
+            "expected": "강릉교동",
+            "title": "강릉시 교동 고2 수학학원 와와학습코칭센터 수학 학습 안내",
+            "foundInBody": false
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,33 @@
+/* Nine grade choices and readable examples, scoped to new branch guides. */
+.hg-grade-groups{display:grid;grid-template-columns:1.2fr 1fr .8fr;gap:20px;align-items:start}
+.hg-grade-groups>section{min-width:0;padding:20px;background:#f4f5ef;border:1px solid #d5ddcc;border-radius:16px}
+.hg-grade-groups h3{font-size:19px;margin:0 0 14px}
+.hg-grade-links{display:grid;gap:10px}
+.hg-grade-links a{display:flex;flex-direction:column;gap:5px;min-width:0;min-height:70px;padding:14px 16px;background:white;border:1px solid #d1dac9;border-radius:12px;text-decoration:none;color:#224b35;line-height:1.55}
+.hg-grade-links a span{font-size:13px;color:#485747;word-break:keep-all;overflow-wrap:anywhere}
+.hg-grade-links a:hover{border-color:#385b40;background:#e9efdf}
+.hg-grade-links a:focus-visible{outline:3px solid #366449;outline-offset:3px}
+.hg-example,.hg-record{padding:26px;background:#f3f2e7;border:1px solid #d7d8c6;border-radius:18px;margin:22px 0}
+.hg-example-label{color:#34563c;font-size:14px;font-weight:750;letter-spacing:.05em}
+.hg-example h3,.hg-record h3{font-size:20px;margin:22px 0 12px}
+.hg-example p:last-child{margin-bottom:0}
+.hg-checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.hg-checks .hs-practice{margin:0;min-width:0}
+.hg-record ol{padding-left:24px;line-height:1.95}
+.hg-status{padding:18px 20px;border-radius:12px;border:1px solid #c7d7bc;background:#edf3e8;line-height:1.8}
+.hg-status strong{display:block;margin-bottom:4px}
+.hg-status-pending,.hg-status-unlisted{background:#fbf4e7;border-color:#dac495;color:#554222}
+.hg-article p{overflow-wrap:anywhere;word-break:keep-all}
+@media(max-width:720px){
+ .hg-grade-groups{grid-template-columns:minmax(0,1fr);gap:16px}
+ .hg-grade-groups>section{padding:18px}
+ .hg-grade-links{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hg-grade-links a{padding:13px;min-height:83px}
+ .hg-grade-links a strong{font-size:17px}
+ .hg-grade-links a span{font-size:13px}
+ .hg-checks{grid-template-columns:minmax(0,1fr)}
+ .hg-example,.hg-record{padding:20px}
+ .hg-example h3,.hg-record h3{font-size:19px}
+ .hg-status{padding:16px;font-size:16px}
+}
+@media(max-width:360px){.hg-grade-links{grid-template-columns:minmax(0,1fr)}.hg-grade-links a{min-height:68px}}

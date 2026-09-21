@@ -470,6 +470,11 @@ def main():
     centers=json.loads((DATA/'centers.json').read_text(encoding='utf-8'))['centers']
     learning_pages();directories(centers);branch_pages(centers);hub_upgrades(centers)
     nav=unify_navigation();discovery()
+    # Keep owner-requested neighborhood children and hub relationships intact
+    # when the base directory is regenerated later.
+    if (ROOT/'tools/data/subject-pages/manifest.json').exists():
+        from build_subject_pages import update_from_manifest
+        update_from_manifest()
     print(j({'centers':len(centers),'regions':len({c['region'] for c in centers}),'contentPages':len(EDITORIAL),'navigationPages':nav}))
 
 

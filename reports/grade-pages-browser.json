@@ -1,0 +1,29 @@
+{
+  "date": "2026-09-21",
+  "result": "PASS",
+  "origin": "http://127.0.0.1:8850",
+  "viewports": [
+    {"width": 320, "height": 740, "horizontalOverflow": false, "bodyFontPx": 16, "gradeButtonMinHeightPx": 79},
+    {"width": 390, "height": 844, "horizontalOverflow": false, "leadFontPx": 17, "gradeButtonMinHeightPx": 99},
+    {"width": 1280, "height": 900, "horizontalOverflow": false}
+  ],
+  "interactions": {
+    "mobileMenuOpen": true,
+    "searchBySchool": "명일중학교 -> 1 result, 명일점",
+    "searchReset": "193 centers restored",
+    "searchByBranchAndNavigate": true,
+    "branchToSubjectNavigation": true,
+    "subjectToGradeNavigation": true,
+    "highSchoolMathFaqOpen": true,
+    "nineGradeButtonsPresentAfterFinalRegeneration": true,
+    "unlistedElementaryGradeNoticeVisible": true
+  },
+  "images": {
+    "representativeHidden": true,
+    "bodyAndMapUnfolded": true,
+    "bodyImage320pxViewport": {"width": 265, "height": 4622},
+    "mapImage320pxViewport": {"width": 265, "height": 287}
+  },
+  "viewportOverrideReset": true,
+  "notes": "Actual in-app browser DOM, screenshots and clicks. A fresh preview URL was used after regeneration to discard the in-progress cached parent document. No content/image truncation added."
+}

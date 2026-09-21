@@ -1,0 +1,27 @@
+/* Branch learning guides share the existing header and visual system. */
+/* Section margin already accounts for the header; do not add the legacy offset. */
+html:has(>body.hc-page){scroll-padding-top:0}
+.hs-article{display:block;min-width:0}
+.hs-article .hc-wrap{max-width:920px}
+.hs-article .hc-section p{max-width:76ch}
+.hs-practice{margin:24px 0;padding:24px 26px;background:#edf2e6;border:1px solid #c9d6bd;border-radius:16px}
+.hs-practice h3{font-size:20px;margin-bottom:14px}
+.hs-practice p:last-child{margin-bottom:0}
+.hs-grade-summary{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline;font-size:20px;color:#224b35}
+#neighborhood-pages .hc-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+#neighborhood-pages .hc-links a{min-width:0;min-height:52px}
+#subject-location p{max-width:80ch}
+.hs-article .hc-card{padding:23px}
+@media(max-width:720px){
+ .hs-practice{padding:20px;margin:20px 0}
+ .hs-practice h3{font-size:19px}
+ .hs-grade-summary{font-size:18px;line-height:1.7}
+ #neighborhood-pages .hc-links{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #neighborhood-pages .hc-links a{font-size:15px;gap:8px;padding:12px;line-height:1.65}
+ .hs-article .hc-card{padding:20px}
+ .hs-article .hc-section h2{font-size:24px}
+}
+@media(max-width:380px){
+ #neighborhood-pages .hc-links{grid-template-columns:minmax(0,1fr)}
+ .hs-article .hc-section h2{font-size:23px}
+}

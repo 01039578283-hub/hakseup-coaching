@@ -61,7 +61,7 @@ def audit():
                     if [v['position'] for v in items]!=list(range(1,len(items)+1)) or items[-1]['item']!=url(path):errors.append((path,'Breadcrumb'))
                 if node.get('@type')=='ItemList' and 'numberOfItems' in node and node['numberOfItems']!=len(node['itemListElement']):errors.append((path,'ItemList'))
         nav=doc.xpath('//header[contains(@class,"hc-header")]//div[@class="hc-desktop-menu"]/a/@href')
-        if nav!=[p for _,p in MENU]:errors.append((path,'Shared navigation'))
+        if [unquote(p) for p in nav]!=[p for _,p in MENU]:errors.append((path,'Shared navigation'))
         for el in doc.xpath('//*[@href or @src]'):
             ref=el.get('href') or el.get('src')
             if ref.startswith(('tel:','sms:','mailto:','data:')):continue
