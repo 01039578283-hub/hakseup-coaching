@@ -1,6 +1,13 @@
-tmp/
+.git/
+.public-release/
+.env*
+node_modules/
 tools/
-CHAT_HISTORY_*.md
-PROJECT_HANDOFF.md
-README.md
 reports/
+outputs/
+work/
+tmp/
+*.xlsx
+*.xls
+*.csv
+*.zip

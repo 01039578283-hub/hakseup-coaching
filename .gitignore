@@ -11,3 +11,10 @@ yarn-error.log*
 
 tools/reports/title-suffix-plan.json
 tools/reports/title-suffix-public-verification.json
+/.public-release/
+
+# Isolated public release: never commit derived output or private inputs.
+.public-release/
+node_modules/
+.env*
+tools/data/
