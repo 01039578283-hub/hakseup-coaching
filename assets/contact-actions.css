@@ -1,0 +1,102 @@
+/* One shared mobile contact layout; existing destinations and colors remain. */
+@media (max-width: 900px) {
+  html {
+    --contact-clearance: calc(6.5rem + env(safe-area-inset-bottom, 0px));
+    scroll-padding-bottom: var(--contact-clearance);
+  }
+
+  body:has(.floating-actions, .hc-contact) {
+    padding-bottom: var(--contact-clearance);
+  }
+
+  body:has(.floating-actions, .hc-contact) :is(.floating-actions, .hc-contact) {
+    position: fixed;
+    inset: auto 0 0;
+    transform: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    margin: 0;
+    padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));
+    box-sizing: border-box;
+    border: 0;
+    border-top: 1px solid #ccd7df;
+    border-radius: 0;
+    background: #fff;
+    box-shadow: 0 -3px 14px #162c4114;
+    z-index: 35;
+  }
+
+  body:has(.floating-actions, .hc-contact) :is(.floating-actions, .hc-contact) a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+    min-width: 0;
+    min-height: 3rem;
+    padding: 8px 6px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    font-size: .875rem;
+    line-height: 1.35;
+    text-align: center;
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+
+  body:has(.floating-actions, .hc-contact) .floating-actions .fab-text {
+    font-size: .875rem;
+    line-height: 1.35;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  body:has(.floating-actions, .hc-contact) .floating-actions .fab-icon {
+    flex: 0 0 auto;
+    font-size: 1rem;
+  }
+
+  body:has(.floating-actions, .hc-contact) :is(a, button, input, select, textarea, summary, [tabindex], [id]) {
+    scroll-margin-bottom: var(--contact-clearance);
+  }
+
+  body:has(.floating-actions, .hc-contact) :is(.floating-actions, .hc-contact) a:focus-visible {
+    outline: 3px solid #111827;
+    outline-offset: 2px;
+  }
+}
+
+@media (max-width: 360px) {
+  body:has(.floating-actions, .hc-contact) .floating-actions .fab-icon {
+    display: none;
+  }
+}
+
+/* Short or heavily magnified screens keep the actions in document flow. */
+@media (max-width: 900px) and (max-height: 480px), (max-width: 280px) {
+  html {
+    --contact-clearance: 1rem;
+  }
+
+  body:has(.floating-actions, .hc-contact) :is(.floating-actions, .hc-contact) {
+    position: static;
+    inset: auto;
+    width: min(480px, calc(100% - 24px));
+    margin: 16px auto;
+    padding: 6px;
+    border: 1px solid #ccd7df;
+    border-radius: 12px;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 220px) {
+  body:has(.floating-actions, .hc-contact) :is(.floating-actions, .hc-contact) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,21 @@
+.neighborhood-navigation{padding:20px;background:#fff;border-bottom:1px solid #d9e5df;color:#172d24}
+.neighborhood-navigation *,.directory-area-shortcuts *,.branch-neighborhood-overviews *{box-sizing:border-box}
+.neighborhood-navigation-inner{max-width:1120px;width:100%;margin:0 auto}
+.neighborhood-navigation-title{font-size:16px;font-weight:700;margin:0 0 12px}
+.neighborhood-navigation-links,.branch-neighborhood-overviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:10px}
+.neighborhood-navigation-links a,.branch-neighborhood-overviews a{display:flex;flex-direction:column;justify-content:center;min-height:68px;border:1px solid #d9e5df;border-radius:10px;padding:12px 14px;background:#f5f8f6;text-decoration:none;color:#172d24;line-height:1.5;overflow-wrap:anywhere}
+.neighborhood-navigation-links strong,.branch-neighborhood-overviews strong{font-size:15px}
+.neighborhood-navigation-links small,.branch-neighborhood-overviews small{font-size:13px;color:#446253;margin-top:3px}
+.neighborhood-navigation-links a:hover,.branch-neighborhood-overviews a:hover{border-color:#35694f;background:#eaf2ed}
+.neighborhood-navigation a:focus-visible,.directory-area-shortcuts a:focus-visible,.branch-neighborhood-overviews a:focus-visible{outline:3px solid #35694f;outline-offset:3px}
+.directory-area-shortcuts{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px}
+.directory-area-shortcuts a{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 12px;border:1px solid #d9e5df;border-radius:8px;text-decoration:none;color:#172d24;background:#f5f8f6;font-size:14px;font-weight:700}
+.directory-area-shortcuts small{font-size:12px;color:#446253}
+.branch-neighborhood-overviews{margin-top:16px}
+#subject-local-directory,.subject-region-group{scroll-margin-top:100px}
+#subject-local-directory .subject-search{display:flex;align-items:stretch;gap:8px;width:min(100%,360px);min-width:0}
+#subject-local-directory .subject-search input{flex:1;width:0;min-width:0;min-height:44px}
+#subject-local-directory .subject-search button{min-width:68px;min-height:44px;padding:8px;border:1px solid #35694f;border-radius:8px;background:#f5f8f6;color:#172d24;font-size:14px;cursor:pointer}
+#subject-local-directory .subject-search button[hidden]{display:none}
+#subject-local-directory .subject-search button:focus-visible{outline:3px solid #35694f;outline-offset:3px}
+@media(max-width:520px){.neighborhood-navigation{padding:16px 14px}.neighborhood-navigation-links{grid-template-columns:1fr}.neighborhood-navigation-links a{min-height:62px;padding:10px 12px}}

@@ -4,7 +4,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-const root=path.dirname(fileURLToPath(import.meta.url));
+const projectRoot=path.dirname(fileURLToPath(import.meta.url));
+const rootOption=process.argv.find(arg=>arg.startsWith('--root='));
+const root=rootOption?path.resolve(projectRoot,rootOption.slice(7)):projectRoot;
 const decode=(s)=>s.replace(/&(?:amp|quot|apos|lt|gt|#39);/g,m=>({'&amp;':'&','&quot;':'"','&apos;':"'",'&#39;':"'",'&lt;':'<','&gt;':'>'}[m]));
 const attr=(tag,name)=>decode(tag.match(new RegExp('\\b'+name+'\\s*=\\s*(["\'])([\\s\\S]*?)\\1','i'))?.[2]||'');
 export function transform(html){
@@ -22,7 +24,7 @@ export function transform(html){
         if(!n||typeof n!=='object')return;
         if(Array.isArray(n)){n.forEach(visit);return;}
         const types=Array.isArray(n['@type'])?n['@type']:[n['@type']];
-        if(types.some(t=>['WebPage','CollectionPage','Article'].includes(t)) && (same(n.url)||same(n['@id'])||same(n.mainEntityOfPage?.['@id'])) && n.description!==description){n.description=description;dirty=true;changedNodes++;}
+        if(types.some(t=>['WebPage','CollectionPage','Article','ContactPage'].includes(t)) && (same(n.url)||same(n['@id'])||same(n.mainEntityOfPage?.['@id'])) && n.description!==description){n.description=description;dirty=true;changedNodes++;}
         Object.values(n).forEach(visit);
       }
       visit(value);

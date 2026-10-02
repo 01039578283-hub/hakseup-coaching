@@ -1,0 +1,35 @@
+/* Reviewed course facts and preparation links; scoped to the local summary. */
+.local-page-reviewed .subject-local-hero{padding:36px 0}
+.local-page-reviewed .subject-local-hero h1{font-size:clamp(30px,4.5vw,48px);margin:16px 0 18px;line-height:1.25}
+.local-page-reviewed .subject-hero-answer{font-size:18px;line-height:1.75;margin:0 0 16px}
+.local-page-reviewed .subject-hero-tags{margin-top:18px}
+.local-page-reviewed .hc-hero{padding:36px 0}
+.local-page-summary{font-family:"Pretendard Local","Malgun Gothic",sans-serif;color:#24332f;background:#f6f5ef;padding:28px 0 34px;border-block:1px solid #dedfd5;line-height:1.7;overflow-wrap:anywhere}
+.local-page-summary *{box-sizing:border-box}
+.local-page-summary .local-summary-inner{width:min(1040px,calc(100% - 48px));margin-inline:auto}
+.local-page-summary h2{font-size:clamp(23px,3vw,30px);line-height:1.4;color:#152c26;letter-spacing:-.035em;margin:0 0 18px;word-break:keep-all;overflow-wrap:anywhere}
+.local-page-summary h3{font-size:18px;line-height:1.5;margin:0 0 8px;color:#152c26}
+.local-page-summary .local-summary-kicker{font-size:13px;font-weight:800;color:#556953;margin:0 0 8px}
+.local-page-summary .local-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0}
+.local-page-summary .local-facts>div{padding:16px 18px;background:#fff;border:1px solid #dedfd5;border-radius:12px;min-width:0}
+.local-page-summary dt{font-size:14px;color:#59675b;font-weight:700;margin:0 0 5px}
+.local-page-summary dd{font-size:17px;font-weight:700;margin:0;color:#24332f;line-height:1.6}
+.local-page-summary dd small{display:block;font-size:14px;font-weight:400;margin-top:3px;color:#59675b}
+.local-page-summary a{color:#16483d;text-decoration:underline;text-underline-offset:3px}
+.local-page-summary .local-inline-link{display:inline-flex;align-items:center;min-height:44px}
+.local-page-summary .local-note{font-size:14px;color:#59675b;margin:14px 0 0}
+.local-page-summary .local-role-content{margin-top:24px}
+.local-page-summary .local-course-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.local-page-summary .local-course-groups>div{min-width:0;background:#fff;padding:16px;border:1px solid #dedfd5;border-radius:12px}
+.local-page-summary .local-grade-links{display:flex;flex-wrap:wrap;gap:8px}
+.local-page-summary .local-grade-links a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:52px;padding:8px 12px;border:1px solid #cdd8ce;border-radius:8px;text-decoration:none;font-size:16px;font-weight:700;background:#f7faf6}
+.local-page-summary .local-preparation-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:0;margin:0;list-style:none;counter-reset:prep}
+.local-page-summary .local-preparation-list li{background:#fff;border:1px solid #dedfd5;border-radius:12px;padding:16px;min-width:0;counter-increment:prep}
+.local-page-summary .local-preparation-list h3::before{content:counter(prep) ". ";color:#556953}
+.local-page-summary .local-preparation-list p{font-size:16px;line-height:1.7;margin:0}
+.local-page-summary .local-summary-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.local-page-summary .local-summary-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;max-width:100%;padding:10px 16px;border:1px solid #b7c7ba;border-radius:9px;font-size:15px;font-weight:700;text-decoration:none;background:#fff;line-height:1.5}
+.local-page-summary .local-summary-actions a:first-child{background:#19382f;color:#fff;border-color:#19382f}
+.local-page-summary a:hover{filter:brightness(.94)}
+.local-page-summary a:focus-visible{outline:3px solid #bd8d39;outline-offset:3px}
+@media(max-width:720px){.local-page-summary{padding:24px 0 28px}.local-page-summary .local-summary-inner{width:calc(100% - 40px)}.local-page-summary .local-course-groups,.local-page-summary .local-preparation-list{grid-template-columns:1fr}.local-page-summary .local-facts{grid-template-columns:1fr}.local-page-summary .local-summary-actions{display:grid;grid-template-columns:1fr}.local-page-summary .local-summary-actions a{justify-content:flex-start}.local-page-summary dd{font-size:16px}}

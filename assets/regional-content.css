@@ -1,0 +1,14 @@
+.regional-editorial{font-family:inherit;line-height:1.8;overflow-wrap:anywhere}
+.regional-editorial p{line-height:1.85}
+.regional-editorial ul,.regional-editorial ol{padding-left:1.4rem}
+.regional-editorial li+li{margin-top:.5rem}
+.regional-content-faq{margin:.8rem 0;border:1px solid #d7dfeb;border-radius:12px;background:#fff;overflow:hidden;color:#182842}
+.regional-content-faq summary{padding:1rem 1.1rem;cursor:pointer;font-weight:700;line-height:1.6;min-height:44px}
+.regional-content-faq p{padding:0 1.1rem 1rem;margin:0;line-height:1.85}
+.regional-content-links{display:flex;flex-wrap:wrap;gap:.7rem;margin:1rem 0}
+.regional-content-links a{display:block;max-width:100%;padding:.65rem 1rem;border:1px solid #d7dfeb;border-radius:10px;background:#fff;color:#174f9b;font-weight:700}
+.regional-editorial .wawa-school-card{padding:1rem;margin:.8rem 0}
+.subject-page-toc.regional-editorial ol{display:block}
+.subject-page-toc.regional-editorial li{list-style:decimal}
+.subject-page-toc.regional-editorial a{display:inline;line-height:1.7}
+@media(max-width:480px){.regional-content-faq summary{padding:.9rem}.regional-content-faq p{padding:0 .9rem .9rem}.regional-editorial h2{font-size:1.35rem;line-height:1.5}}

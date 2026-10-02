@@ -1,0 +1,28 @@
+.regional-page-reviewed .subject-local-hero,.regional-page-reviewed .hc-hero,.regional-page-reviewed .generated-page-hero{padding-top:32px;padding-bottom:24px}
+.regional-page-facts{background:#f2f7f5;border-top:1px solid #d9e5df;border-bottom:1px solid #d9e5df;color:#172d24;padding:28px 20px}
+.regional-facts-inner{width:100%;max-width:1120px;margin:0 auto;box-sizing:border-box}
+.regional-page-facts *{box-sizing:border-box}
+.regional-purpose{margin:0 0 8px;font-size:14px;font-weight:700;color:#35694f}
+.regional-page-facts h2{font-size:clamp(22px,2.6vw,30px);line-height:1.4;margin:0 0 12px;letter-spacing:-.035em;word-break:keep-all;overflow-wrap:anywhere}
+.regional-local-answer{font-size:16px;line-height:1.75;margin:0 0 20px;word-break:keep-all;overflow-wrap:anywhere}
+.regional-facts-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 16px}
+.regional-facts-grid>div{min-width:0;background:#fff;border:1px solid #d9e5df;border-radius:12px;padding:16px}
+.regional-facts-grid dt{font-size:14px;font-weight:700;color:#35694f;margin:0 0 8px}
+.regional-facts-grid dd{margin:0;font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere}
+.regional-facts-grid small{display:block;font-size:14px;line-height:1.6;color:#52675b;margin-top:6px}
+.regional-facts-grid a{color:#245a42;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:44px}
+.regional-note{font-size:14px;line-height:1.7;color:#52675b;margin:12px 0 0;word-break:keep-all;overflow-wrap:anywhere}
+.regional-course-notes{background:#fff7e8;border-left:3px solid #af7b26;padding:12px 16px;font-size:15px;line-height:1.7}
+.regional-course-notes p{margin:6px 0 0}
+.regional-preparation{margin-top:20px}
+.regional-page-facts h3{font-size:17px;line-height:1.5;margin:0 0 8px}
+.regional-preparation p,.regional-school-list p{font-size:15px;line-height:1.75;margin:0;word-break:keep-all;overflow-wrap:anywhere}
+.regional-schools{margin-top:16px;border-top:1px solid #d9e5df;border-bottom:1px solid #d9e5df}
+.regional-schools summary{font-size:15px;font-weight:700;padding:14px 4px;min-height:48px;cursor:pointer}
+.regional-school-list{padding:6px 4px 12px}
+.regional-schools>.regional-note{padding:0 4px 14px}
+.regional-next-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.regional-next-links a{min-height:44px;max-width:100%;display:inline-flex;align-items:center;justify-content:center;border:1px solid #b4cdbd;border-radius:8px;padding:10px 14px;background:white;color:#245a42;font-size:15px;line-height:1.5;text-decoration:none;word-break:keep-all;overflow-wrap:anywhere}
+.regional-next-links a:hover{background:#e5efe9}
+.regional-page-facts a:focus-visible,.regional-schools summary:focus-visible{outline:3px solid #397954;outline-offset:3px}
+@media(max-width:720px){.regional-page-reviewed .subject-local-hero,.regional-page-reviewed .hc-hero,.regional-page-reviewed .generated-page-hero{padding-top:24px;padding-bottom:20px}.regional-page-facts{padding:24px 20px}.regional-facts-grid{grid-template-columns:1fr}.regional-next-links{display:grid;grid-template-columns:1fr}.regional-next-links a{justify-content:flex-start}}
