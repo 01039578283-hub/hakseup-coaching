@@ -1,0 +1,38 @@
+/* Homepage coaching explanations; native HTML links, table and FAQ. */
+.hc-coaching-section{scroll-margin-top:96px}
+.hc-coaching-section .hc-coach-note{font-size:14px;line-height:1.8;color:#536359}
+.hc-coach-process{border-top:1px solid #d8dfd7;padding-top:28px;scroll-margin-top:96px}
+.hc-coach-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding:0;margin:28px 0;list-style:none}
+.hc-coach-flow li{padding:22px;border:1px solid #d6dfd6;border-radius:16px;background:#fff;min-width:0}
+.hc-coach-step{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#e7f0e7;color:#23503d;font-size:13px;font-weight:800;margin-bottom:14px}
+.hc-coaching-section .hc-coach-term{font-size:13px;font-weight:800;color:#42624f;margin:0 0 10px;line-height:1.8}
+.hc-coach-flow h4{font-size:18px;line-height:1.6;margin:0 0 12px;color:#19382f;word-break:keep-all;overflow-wrap:anywhere}
+.hc-coach-flow li>p:last-child{font-size:15px;line-height:1.85;margin:0;color:#4b5e51}
+.hc-coach-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;margin:28px 0 16px;line-height:1.85;background:#fff;border:1px solid #d1dbd1;border-radius:14px;overflow:hidden;font-size:16px}
+.hc-coach-table caption{text-align:left;font-size:14px;color:#526253;padding:0 0 12px}
+.hc-coach-table-label{width:17%}
+.hc-coach-table th,.hc-coach-table td{text-align:left;vertical-align:top;padding:17px 20px;border-right:1px solid #dce3da;border-bottom:1px solid #dce3da;word-break:keep-all;overflow-wrap:anywhere}
+.hc-coach-table thead th{background:#19382f;color:#fff;font-weight:750;font-size:16px}
+.hc-coach-table tbody th{font-size:15px;font-weight:750;color:#294939;background:#f2f6ef}
+.hc-coach-table td:last-child{background:#fbfcf6}
+.hc-coach-table tr>:last-child{border-right:0}
+.hc-coach-table tbody tr:last-child>*{border-bottom:0}
+.hc-coach-aside{border-left:4px solid #45694e;background:#edf2e8;padding:22px 24px;margin:24px 0;border-radius:0 12px 12px 0}
+.hc-coach-aside h3{font-size:19px}
+.hc-coach-aside p:last-child{margin-bottom:0}
+.hc-coach-practice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin:28px 0}
+.hc-coach-practice{padding:28px;background:#fff;border:1px solid #d7dfd4;border-radius:18px;min-width:0;display:flex;flex-direction:column}
+.hc-coach-practice h3{font-size:22px}
+.hc-coach-practice ol,.hc-coach-dialogue-steps{padding-left:22px;margin:12px 0 20px}
+.hc-coach-practice li,.hc-coach-dialogue-steps li{padding-left:4px;margin-bottom:12px;line-height:1.85;font-size:16px}
+.hc-coach-practice .hc-links{margin-top:auto}
+.hc-coach-example{background:#f2f6ed;border-radius:12px;padding:18px;margin:4px 0 22px;font-size:15px;line-height:1.85}
+.hc-coach-example p:first-child{margin-bottom:8px}.hc-coach-example p:last-child{margin-bottom:0}
+.hc-coach-dialogue{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;align-items:center;padding-top:24px;margin-top:20px}
+.hc-coach-dialogue .hc-figure img{border:1px solid #dce3d8;background:#fff}
+.hc-coach-consult{margin-top:36px;padding:28px 32px;background:#eaf0e5;border:1px solid #d6dfcf;border-radius:16px}
+.hc-coaching-section a:focus-visible{outline:3px solid #006b85;outline-offset:4px}
+.hc-coaching-section figure,.hc-coaching-section :is(div,li,article){min-width:0}
+@media(max-width:1000px){.hc-coach-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.hc-coach-table th,.hc-coach-table td{padding:15px}.hc-coach-dialogue{gap:24px}}
+@media(max-width:700px){.hc-coach-practice-grid,.hc-coach-dialogue{grid-template-columns:1fr}.hc-coach-practice{padding:22px}.hc-coach-consult{padding:24px}.hc-coach-table{font-size:15px}.hc-coach-table th,.hc-coach-table td{padding:12px 10px}.hc-coach-table-label{width:20%}.hc-coach-table thead th{font-size:15px}}
+@media(max-width:440px){.hc-coach-flow{grid-template-columns:1fr;gap:12px}.hc-coach-flow li{padding:20px}.hc-coach-table{font-size:14px;line-height:1.8}.hc-coach-table th,.hc-coach-table td{padding:10px 8px;word-break:normal;overflow-wrap:anywhere}.hc-coach-table thead th,.hc-coach-table tbody th{font-size:14px}.hc-coach-table-label{width:20%}.hc-coach-aside{padding:20px}.hc-coach-practice h3{font-size:20px}.hc-coach-dialogue{gap:16px}}

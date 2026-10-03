@@ -3,7 +3,7 @@
   "createdAt": "2026-10-02T16:13:57.696904+09:00",
   "sitemapPages": 12753,
   "files": {
-    "index.html": "56663cc340553f30b9b75a5cbe3bafc82733ab55d25f3aeb070609dc44896d71",
+    "index.html": "83713d29cad9608e1ee41c77f4dc9b4f71f2f321e7c6bd6ee4402bb63ce428c7",
     "llms.txt": "a6646e6f44e2b3be02d75ea311996cee1e50f2dc86a1a5f810616a14b4efb4df",
     "robots.txt": "85e823e81c1ecd6468c3265d701dc37a6d9f0dea5596ff142bcfa7363a138c91",
     "rss.xml": "448dccb879e0df7e8eb72d31f996b61e77a79055a1a068626f9aeb82443c47a1",
@@ -23,6 +23,7 @@
     "assets/education-information.css": "571d4790b9f0ed9fe360cbc7a6554ea13b4f56c7d137791a79fc9658928055f7",
     "assets/education-information.js": "e6d9b6484a4a12a0d9d93df624619888394246a5f00b27517f5c9dbec244fa88",
     "assets/favicon.png": "b23f505bd58d2fd18690566ae2baa23f6e7c748939e4ca4a0e4a14cdb4ded8eb",
+    "assets/home-coaching.css": "1feff12fd8e6fe9ce4de1b1bae6d033dc7044593817d5c475595ddfaf96e7338",
     "assets/home-content-directory.css": "dff805a379403ce7a344f42483bff0d312599b9999b1d48bd11ba536d2778a89",
     "assets/hub-classroom-1.webp": "ba1837387b76c44c63dd5f1eba63794357b610d04b1cca15ce8e82c5ea9e8395",
     "assets/hub-classroom-2.webp": "b4259858c1021298040826050e2acc069bb48b732272d2df8de481ffd8634c13",
@@ -62,6 +63,7 @@
     "assets/coaching-program/video-coaching.webp": "1a626878fe806d968d0daa50a21f923947a19df8084b1c46fa7862b190503751",
     "assets/coaching-program/video-exam.webp": "658264293daa13c38fe9f1c0588ddf1eb9c19e2fc8880d9e1ab0d9631d1ce95c",
     "assets/coaching-program/video-student.webp": "5e793b5579caa72ebf3fea3d85b8644d8fc7607b36d7fcbf92bf9645dfa0af22",
+    "assets/coaching-program/wawa-classroom-reference.webp": "81c4414ac3ceda1f186a4a94fbaab6459b5dc636c7cc4acc2be4abb3d10e19e8",
     "assets/common-representatives/00090b0a2a3d48243e55.gif": "00090b0a2a3d48243e55a31334e846cb359125ab08dd2fa640bb79749c171553",
     "assets/common-representatives/008b99c79130ed8f9660.gif": "008b99c79130ed8f9660c7acc0acab5d8d2d86337fd379940e350b2be5a1863c",
     "assets/common-representatives/0107151557237146a782.gif": "0107151557237146a782eb9d5e9639ab73944773442d006917a4133dbe672577",
@@ -15207,7 +15209,7 @@
     "학습가이드/해설에서-독립풀이로/index.html": "e4ddbddf5df11d348d387d9a8e9022b74f3fff280e467897516c4feb0420b6df"
   },
   "textSha256": {
-    "index.html": "33d32cdb603095fe9b11a1b115243e868c656ebe0fa7a6eb2db40bf6dba97d13",
+    "index.html": "fabeb98219b27996d8b733f86dbe5b42ca62fdea03a0c4edda62899989374a12",
     "llms.txt": "a6646e6f44e2b3be02d75ea311996cee1e50f2dc86a1a5f810616a14b4efb4df",
     "robots.txt": "85e823e81c1ecd6468c3265d701dc37a6d9f0dea5596ff142bcfa7363a138c91",
     "rss.xml": "448dccb879e0df7e8eb72d31f996b61e77a79055a1a068626f9aeb82443c47a1",
@@ -27988,8 +27990,9 @@
     "학습가이드/학습-부담-조율/index.html": "42f089dd768ab99b08a758c54266b1bb13858b74db0902dc5736c9ff2032a39c",
     "학습가이드/학습-질문-만들기/index.html": "5663a0d0025beac3976605f75af2938795536c0be83aa25766ada1c9b54c17f5",
     "학습가이드/학원-수업-비교/index.html": "2f888753d7a564fc9a329159298053802c38a259063dafb307b52431f83b8c0f",
-    "학습가이드/해설에서-독립풀이로/index.html": "e4ddbddf5df11d348d387d9a8e9022b74f3fff280e467897516c4feb0420b6df"
+    "학습가이드/해설에서-독립풀이로/index.html": "e4ddbddf5df11d348d387d9a8e9022b74f3fff280e467897516c4feb0420b6df",
+    "assets/home-coaching.css": "1feff12fd8e6fe9ce4de1b1bae6d033dc7044593817d5c475595ddfaf96e7338"
   },
-  "reviewedAt": "2026-10-03T00:08:33.719537+00:00",
-  "publicFiles": 15202
+  "reviewedAt": "2026-10-03T03:28:30.130216+00:00",
+  "publicFiles": 15204
 }
