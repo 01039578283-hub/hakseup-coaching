@@ -3,6 +3,33 @@
   "trailingSlash": true,
   "headers": [
     {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/crawl-support/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
       "source": "/rss.xml",
       "headers": [
         {
@@ -11,16 +38,7 @@
         },
         {
           "key": "Cache-Control",
-          "value": "public, max-age=3600"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
+          "value": "public, max-age=0, must-revalidate"
         }
       ]
     }
@@ -50,6 +68,11 @@
     {
       "source": "/학습관리",
       "destination": "/학습가이드",
+      "permanent": true
+    },
+    {
+      "source": "/선생님찾기/다산점\\(W\\+\\)/",
+      "destination": "https://xn--ru4bi8s1tac0p.kr/%EC%84%A0%EC%83%9D%EB%8B%98%EC%B0%BE%EA%B8%B0/%EB%8B%A4%EC%82%B0%EC%A0%90%28W%2B%29/",
       "permanent": true
     }
   ],

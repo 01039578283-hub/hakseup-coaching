@@ -1,0 +1,14 @@
+/* Visible full-width media with progressive original-image enlargement. */
+.hc-media-stack{display:block;line-height:0;width:100%;}
+main .hc-media-stack img{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;border-radius:0!important;margin:0!important;}
+.hc-media-zoom{display:block;cursor:zoom-in;color:inherit;min-height:0!important;padding:0!important;border:0!important;background:none!important;overflow:visible!important;}
+.hc-media-zoom:focus-visible{outline:3px solid #9b7535;outline-offset:5px;}
+.hc-image-note{line-height:1.7;font-size:.95rem;color:#4e5c54;margin:.8rem 0 0;}
+.hc-image-note a{display:inline!important;padding:0!important;min-height:0!important;border:0!important;background:none!important;text-decoration:underline!important;}
+.hc-consult-tasks{border-top:1px solid #dce3dc;margin-top:1.2rem;padding-top:1rem;}
+.hc-consult-tasks dl{display:grid;gap:.8rem;margin:1rem 0;}.hc-consult-tasks dl>div{padding:.85rem;border:1px solid #dce3dc;border-radius:12px;background:#fff;}.hc-consult-tasks dt{font-weight:700;color:#19382f}.hc-consult-tasks dd{margin:.4rem 0 0;line-height:1.7;}
+.hc-merged-information{margin:1rem 0;padding-top:.5rem;}.hc-merged-information h3{margin:.8rem 0;}.hc-retained-anchor{display:block;scroll-margin-top:100px;}
+dialog.hc-image-dialog{max-width:calc(100vw - 24px);width:1120px;max-height:calc(100dvh - 24px);padding:0;border:1px solid #dce3dc;border-radius:14px;background:#fffcf5;color:#19382f;}
+dialog.hc-image-dialog::backdrop{background:rgba(13,31,26,.78);}.hc-image-dialog-header{position:sticky;top:0;background:#fffcf5;display:flex;align-items:center;gap:1rem;padding:10px 14px;border-bottom:1px solid #dce3dc;z-index:2;}.hc-image-dialog-header p{flex:1;margin:0;font-size:.95rem;}.hc-image-dialog button{font:inherit;min-width:64px;min-height:48px;border-radius:10px;border:1px solid #cbd5cc;background:#fff;color:#19382f;cursor:pointer;}.hc-image-dialog-body{overflow:auto;padding:8px;max-height:calc(100dvh - 115px);}.hc-image-dialog img{display:block;width:auto;max-width:none;height:auto;margin:auto;}.hc-image-dialog-status{font-size:.9rem;padding:0 16px;}.hc-image-dialog a{color:#19382f;text-decoration:underline;}body:has(dialog.hc-image-dialog[open]){overflow:hidden;}
+@media(max-width:720px){.hc-image-dialog-header{gap:.5rem}.hc-image-dialog-header p{font-size:.85rem;}.hc-consult-tasks dl{grid-template-columns:1fr}}
+@media print{.hc-image-note,dialog.hc-image-dialog{display:none!important;}}
