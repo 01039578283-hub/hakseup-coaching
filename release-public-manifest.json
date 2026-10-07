@@ -3,6 +3,8 @@
   "createdAt": "2026-10-02T16:13:57.696904+09:00",
   "sitemapPages": 12783,
   "files": {
+    "assets/site-favicon.png": "cc1e7d6513e54389515f80b56963cd8e5ad9d8b33501a519ca5ced5485902a1c",
+    "assets/site-apple-touch-icon.png": "a81c9222ee1e682d8cad6ef5f7ebde4078c2feb35503b555d6bcbf84acee995d",
     "assets/branch-grades.css": "15278e020f94b10c55042f355c3eb7e50db0d4d7be7e5096d94bbb7c8d5d497b",
     "assets/branch-journeys.css": "e888ec0277b6ccabe6896daa7e3d76e4bd438130d045e40d68fb166888c81a20",
     "assets/branch-refinement.css": "bb0cb7eb3aeea074b818088ad481ffab603b97039d4265cedc077dbd39ea02d7",

@@ -1,0 +1,9 @@
+{
+  "domain": "학습코칭.kr",
+  "outputDirectory": ".public-release",
+  "previousBuildCommand": "node release-public-build.mjs && node wawa-analytics-build.mjs wawa-03 .public-release && node seo-descriptions.mjs --root=.public-release && node seo-metadata-consistency.mjs --root=.public-release",
+  "assets": {
+    "assets/site-favicon.png": "cc1e7d6513e54389515f80b56963cd8e5ad9d8b33501a519ca5ced5485902a1c",
+    "assets/site-apple-touch-icon.png": "a81c9222ee1e682d8cad6ef5f7ebde4078c2feb35503b555d6bcbf84acee995d"
+  }
+}

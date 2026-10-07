@@ -76,6 +76,6 @@
       "permanent": true
     }
   ],
-  "buildCommand": "node release-public-build.mjs && node wawa-analytics-build.mjs wawa-03 .public-release && node seo-descriptions.mjs --root=.public-release && node seo-metadata-consistency.mjs --root=.public-release",
+  "buildCommand": "node favicon-build.mjs",
   "outputDirectory": ".public-release"
 }
