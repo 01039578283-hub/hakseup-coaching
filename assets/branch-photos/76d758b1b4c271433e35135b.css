@@ -1,0 +1,10 @@
+/* Branch photos remain in their original bottom sections. */
+[data-branch-photo-gallery]{margin:40px auto;padding:28px 20px;max-width:1180px;box-sizing:border-box;border:1px solid #dce5e1;border-radius:20px;background:#f7faf8;color:#17372f}
+[data-branch-photo-gallery] h2{font-size:clamp(22px,3vw,30px);line-height:1.4;margin:0 0 14px}
+[data-branch-photo-gallery] p{line-height:1.8;margin:10px 0 20px}
+[data-branch-photo-gallery] .branch-photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+[data-branch-photo-gallery] figure{margin:0;min-width:0}
+[data-branch-photo-gallery] img{display:block;width:100%;max-width:100%;height:auto;max-height:none;aspect-ratio:auto;object-fit:contain;border-radius:12px;background:#eef3f0}
+[data-branch-photo-gallery] figcaption{font-size:14px;line-height:1.7;color:#465e57;margin-top:10px}
+[data-branch-photo-gallery] .branch-photo-grid:has(>figure:only-child){grid-template-columns:minmax(0,1fr);max-width:860px;margin-inline:auto}
+@media(max-width:650px){[data-branch-photo-gallery]{margin:28px 14px;padding:22px 16px;border-radius:16px}[data-branch-photo-gallery] .branch-photo-grid{grid-template-columns:minmax(0,1fr);gap:20px}}
