@@ -85,12 +85,12 @@
       "permanent": true
     },
     {
-      "source": "/%ED%95%99%EC%8A%B5%EA%B4%80%EB%A6%AC/:path*",
+      "source": "/%ED%95%99%EC%8A%B5%EA%B4%80%EB%A6%AC/",
       "destination": "/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/",
       "permanent": true
     },
     {
-      "source": "/학습관리/:path*",
+      "source": "/학습관리/",
       "destination": "/학습가이드/",
       "permanent": true
     }
