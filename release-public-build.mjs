@@ -24,7 +24,13 @@ if(fs.existsSync(output)) {
       if(entry.isSymbolicLink()) throw Error('Output symlink is not allowed');
       const full=path.join(dir,entry.name);
       if(entry.isDirectory())inspect(full);
-      else if(!selected.has(path.relative(output,full).replaceAll('\\','/')))throw Error('Unexpected existing output '+full);
+      else if(!selected.has(path.relative(output,full).replaceAll('\\','/'))) {
+        // Only deterministic, content-addressed CSS from the final quality stage
+        // may survive a repeated build outside the reviewed snapshot manifest.
+        const relative=path.relative(output,full).replaceAll('\\','/');
+        const generated=relative.match(/^assets\/search-quality-cache\/([a-f0-9]{64})\.css$/);
+        if(!generated||digest(fs.readFileSync(full))!==generated[1])throw Error('Unexpected existing output '+full);
+      }
     }
   }
   inspect(output);

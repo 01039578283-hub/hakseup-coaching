@@ -41,6 +41,15 @@
           "value": "public, max-age=0, must-revalidate"
         }
       ]
+    },
+    {
+      "source": "/assets/search-quality-cache/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -66,16 +75,26 @@
       "permanent": true
     },
     {
-      "source": "/학습관리",
-      "destination": "/학습가이드",
-      "permanent": true
-    },
-    {
       "source": "/%EC%84%A0%EC%83%9D%EB%8B%98%EC%B0%BE%EA%B8%B0/%EB%8B%A4%EC%82%B0%EC%A0%90\\(W\\+\\)/",
       "destination": "https://xn--ru4bi8s1tac0p.kr/%EC%84%A0%EC%83%9D%EB%8B%98%EC%B0%BE%EA%B8%B0/%EB%8B%A4%EC%82%B0%EC%A0%90%28W%2B%29/",
       "permanent": true
+    },
+    {
+      "source": "/favicon.ico",
+      "destination": "/assets/site-favicon.png",
+      "permanent": true
+    },
+    {
+      "source": "/%ED%95%99%EC%8A%B5%EA%B4%80%EB%A6%AC/:path*",
+      "destination": "/%ED%95%99%EC%8A%B5%EA%B0%80%EC%9D%B4%EB%93%9C/",
+      "permanent": true
+    },
+    {
+      "source": "/학습관리/:path*",
+      "destination": "/학습가이드/",
+      "permanent": true
     }
   ],
-  "buildCommand": "node favicon-build.mjs",
+  "buildCommand": "node favicon-build.mjs && node search-quality-build.mjs",
   "outputDirectory": ".public-release"
 }
