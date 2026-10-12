@@ -105,9 +105,12 @@ for(const file of files){
   }
   s=s.replace(/<aside\b[^>]*\bid="editorial-note"[^>]*>[\s\S]*?<\/aside>/g,()=>{changes.push('information-note');return '<aside class="hr-editorial hc-wrap" id="editorial-note"><p>지점 정보는 제공된 센터 자료를 기준으로 안내합니다. 기재된 개설 학년과 현재 모집 상황은 다를 수 있으니, 희망 학년·과목의 수강 가능 여부와 방문 위치를 상담에서 확인해 주세요.</p><a href="/%EC%95%88%EB%82%B4-%EC%9E%91%EC%84%B1%EA%B8%B0%EC%A4%80/">학원 정보 확인 안내</a></aside>'});
   if(g){s=s.replaceAll(g.oldH1,g.newH1);const oldTitle=inner(before,nodes(before).find(n=>n.tag==='title')),newTitle=oldTitle.replace(g.subject+'학원',g.subject+' 학습 준비');s=s.replaceAll(oldTitle,newTitle);const newDesc=g.description.replace(g.subject+'학원 안내는',g.subject+' 학습 준비는');s=s.replaceAll(g.description,newDesc);}
-  s=s.replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi,(all,at,label)=>{const a=attrs(at),target=urlPath(a.href||''),g=config.unknownGrades[target];if(g&&plain(label)===g.oldH1){changes.push('grade-link-label');return `<a${at}>${esc(g.newH1)}</a>`;}if(target==='/안내-작성기준/'&&/작성|편집/.test(plain(label))){changes.push('information-link-label');return `<a${at}>학원 정보 확인 안내</a>`;}return all;});
   if(changes.length)s=s.replace('</head>',marker+'</head>');
  }
+ // Course cards append a learning focus to their title; preserve that useful
+ // detail while updating the linked page's role, including on repeated runs.
+ s=s.replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi,(all,at,label)=>{const a=attrs(at),target=urlPath(a.href||''),g=config.unknownGrades[target];if(g&&label.includes(g.oldH1)){changes.push('grade-link-label');return `<a${at}>${label.replaceAll(g.oldH1,esc(g.newH1))}</a>`;}if(target==='/안내-작성기준/'&&/작성|편집/.test(plain(label))){changes.push('information-link-label');return `<a${at}>학원 정보 확인 안내</a>`;}return all;});
+ if(changes.length&&!s.includes(marker))s=s.replace('</head>',marker+'</head>');
  const contentChanged=s.includes(marker),recorded=[sitemapDates.get(page)||'',config.knownModifiedDates?.[page]||''].sort().at(-1)||null;
  const modified=contentChanged?config.modifiedDate:photoPaths.has(page)?[config.photoModifiedDate,recorded||''].sort().at(-1):recorded;
  if(modified)dates.set(page,modified);
@@ -115,6 +118,8 @@ for(const file of files){
   const value=JSON.parse(json);let changed=false;
   function walk(v){if(!v||typeof v!=='object')return;if(!Array.isArray(v)){
    if(v.publishingPrinciples&&urlPath(v.publishingPrinciples)==='/안내-작성기준/'){delete v.publishingPrinciples;changed=true;}
+   const linked=config.unknownGrades[urlPath(v.url||(typeof v.item==='string'?v.item:'')||v['@id']||'')];
+   if(linked&&typeof v.name==='string'&&v.name.includes(linked.oldH1)){v.name=v.name.replaceAll(linked.oldH1,linked.newH1);changed=true;}
    if(modified&&v.dateModified&&urlPath(v.url||v['@id']||'')===page&&v.dateModified<modified){v.dateModified=modified;changed=true;}
   }Object.values(v).forEach(walk)}walk(value);return changed?all.replace(json,JSON.stringify(value)):all;
  });
