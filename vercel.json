@@ -183,6 +183,6 @@
       "permanent": true
     }
   ],
-  "buildCommand": "node favicon-build.mjs && node search-quality-build.mjs && node kakaomap-build.mjs",
+  "buildCommand": "node favicon-build.mjs && node search-quality-build.mjs && node kakaomap-build.mjs && node media-placement-build.mjs",
   "outputDirectory": ".public-release"
 }
