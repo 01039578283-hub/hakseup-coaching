@@ -63,6 +63,15 @@
           "value": "noindex, follow"
         }
       ]
+    },
+    {
+      "source": "/e1338a129e052e968b4be4eed2c47fb4.txt",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -183,6 +192,6 @@
       "permanent": true
     }
   ],
-  "buildCommand": "node favicon-build.mjs && node search-quality-build.mjs && node kakaomap-build.mjs && node media-placement-build.mjs",
+  "buildCommand": "node favicon-build.mjs && node search-quality-build.mjs && node kakaomap-build.mjs && node media-placement-build.mjs && node seo-geo-build.mjs --report=.seo-geo-report.json",
   "outputDirectory": ".public-release"
 }

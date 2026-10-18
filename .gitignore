@@ -18,3 +18,5 @@ tools/reports/title-suffix-public-verification.json
 node_modules/
 .env*
 tools/data/
+.seo-geo-report.json
+.indexnow-state.json
