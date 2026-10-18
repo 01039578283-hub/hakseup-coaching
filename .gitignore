@@ -23,3 +23,4 @@ tools/data/
 .local-content-report.json
 .content-refinement-report.json
 .page-roles-report.json
+.learning-levels-report.json

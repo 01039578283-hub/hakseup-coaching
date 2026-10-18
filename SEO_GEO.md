@@ -8,7 +8,7 @@ school-reference duplicates with a link to the complete retained explanation.
 Repeated subject/grade lists, masked teacher names and separate school regions are
 valid information and must not be removed as automatic duplicates.
 
-Build the reviewed snapshot through all stages in `vercel.json`. The final
+Build the reviewed snapshot through all stages in `vercel.json`. The
 `seo-geo-build.mjs` stage has no network calls and adds no browser JavaScript.
 Run it with `--dry-run` for inspection, or `--report=PRIVATE_PATH.json` to record
 final page hashes. Dates represent this editorial revision, never the build clock.
@@ -49,17 +49,17 @@ Its `.local-content-report.json` records that intermediate output. Validate ever
 new profile anchor against the source page, and every added schema citation
 against the corresponding visible link. The source workbooks remain unchanged.
 
-The final `content-refinement-build.mjs` stage consolidates exact repeated
+The `content-refinement-build.mjs` stage consolidates exact repeated
 school lists and course qualifications. Subject-grade facts, distinct teachers,
 images, maps and visible source dates remain intact. Shared qualifications must
 retain explicit subject scope. FAQ changes must match visible answers and keep
 the full school reference list in the main body. Missing operating information
 must remain unconfirmed; preparation examples are not availability claims.
-Use `.content-refinement-report.json` as the final hash and IndexNow report.
+Its `.content-refinement-report.json` records intermediate hashes.
 `release-build.mjs` runs every existing stage in that order and stops on failure;
 the short Vercel entry point avoids its 256-character build-command limit.
 
-The final `page-roles-build.mjs` stage revises existing editorial paragraphs,
+The `page-roles-build.mjs` stage revises existing editorial paragraphs,
 without adding sections, styles, scripts or links. Neighborhood pages explain
 the next course-selection decision; subject guides prepare student evidence;
 branch and subject pages interpret their own listed grades; grade pages connect
@@ -67,6 +67,18 @@ their local school references to student-provided records. Center profiles turn
 published teaching viewpoints into consultation questions, never confirmed
 assignments or operating claims. Similarity screening excludes common navigation
 and fact tables: its values are not search-engine duplicate/indexing scores.
-Use `.page-roles-report.json` as the final hash and IndexNow report. Preserve
+Its `.page-roles-report.json` records intermediate hashes. Preserve
 every other paragraph, all original links/IDs, source dates, FAQ/schema answers,
 teacher/curriculum blocks and image/map tags in the production comparison.
+
+The final `learning-levels-build.mjs` stage replaces the exact common prompt in
+existing curriculum entries with a link to grouped elementary/middle/high English
+or mathematics questions. Its six groups use 18 reviewed rows of the supplied
+curriculum workbook, with source target/sequence/task and authored questions.
+Render one group per relevant school band and subject within each existing
+preparation area. Native disclosures include their full content in initial HTML.
+Keep learning examples distinct from actual classes, enrollment or teacher
+assignment, and retain the optional-activity boundary for grade 1/2 English.
+Existing grade tasks, curriculum links, local facts, images/maps, teacher records,
+FAQ and earlier role-specific prose remain intact. Use
+`.learning-levels-report.json` as the final hash and IndexNow report.
