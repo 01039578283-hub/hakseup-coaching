@@ -1,0 +1,4386 @@
+{
+  "version": "20261018-local-v1",
+  "modifiedDate": "2026-10-18",
+  "rssBuildDate": "Sun, 18 Oct 2026 00:00:00 +0900",
+  "sources": {
+    "curriculum": {
+      "name": "초중고_학년과목별_공부커리큘럼_기초표준심화.xlsx",
+      "sha256": "5108e16abf94137cfd85b2d996281da55a6a259c0561dac41c790b4b7ac55058"
+    },
+    "teachers": {
+      "name": "교사 프로필.xlsx",
+      "sha256": "b64e270952dd8857f304dc737671c3587dba98253bc6d9b55ddd769bf2772da1"
+    }
+  },
+  "courses": {
+    "초1|영어": {
+      "grade": "초1",
+      "subject": "영어",
+      "applies": "2022 개정",
+      "scope": "정규 교과 밖의 선택 활동 예시",
+      "focus": "정규 교과 밖의 선택 활동: 노래·그림으로 친숙한 영어 소리 접하기",
+      "order": "듣고 반응하기 → 그림과 소리 연결 → 간단한 인사 놀이",
+      "task": "원하는 학생만 짧은 노래·인사 활동에 참여하기",
+      "school": "학교 정규 영어의 선행 필수 과정이 아님. 흥미·수준에 따라 선택",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "별책2 초등 편제 / 별책14 영어는 초3~4부터",
+      "sheet": "초등과목",
+      "row": 7
+    },
+    "초1|수학": {
+      "grade": "초1",
+      "subject": "수학",
+      "applies": "2022 개정",
+      "scope": "초1~2 학년군 범위의 운영 예시",
+      "focus": "수 세기와 수의 합성·분해, 덧셈·뺄셈 기초, 모양·비교·규칙",
+      "order": "구체물로 수 익히기 → 수식 연결 → 생활 문제 → 설명하기",
+      "task": "수와 그림을 연결하고 계산한 방법을 말하기",
+      "school": "학년군 성취기준을 실제 교과서의 학년·학기·진도에 대응",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책8 내용 체계·성취기준",
+      "sheet": "초등과목",
+      "row": 8
+    },
+    "초2|영어": {
+      "grade": "초2",
+      "subject": "영어",
+      "applies": "2022 개정",
+      "scope": "정규 교과 밖의 선택 활동 예시",
+      "focus": "정규 교과 밖의 선택 활동: 친숙한 낱말 듣기·말하기와 문자 탐색",
+      "order": "듣기 놀이 → 쉬운 낱말 말하기 → 관심 있는 글자 찾기",
+      "task": "그림을 보고 친숙한 낱말을 말하며 듣고 반응하기",
+      "school": "학교 정규 영어의 선행 필수 과정이 아님. 흥미·수준에 따라 선택",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "별책2 초등 편제 / 별책14 영어는 초3~4부터",
+      "sheet": "초등과목",
+      "row": 12
+    },
+    "초2|수학": {
+      "grade": "초2",
+      "subject": "수학",
+      "applies": "2022 개정",
+      "scope": "초1~2 학년군 범위의 운영 예시",
+      "focus": "자릿값, 덧셈·뺄셈, 곱셈 의미와 구구, 길이·시간, 표·그래프",
+      "order": "자릿값·계산 확인 → 묶음과 곱셈 → 측정 → 자료 분류",
+      "task": "곱셈식을 생활 장면과 연결하고 자료를 표로 정리하기",
+      "school": "학년군 성취기준을 실제 교과서의 학년·학기·진도에 대응",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책8 내용 체계·성취기준",
+      "sheet": "초등과목",
+      "row": 13
+    },
+    "초3|영어": {
+      "grade": "초3",
+      "subject": "영어",
+      "applies": "2022 개정",
+      "scope": "초3~4 학년군 범위의 운영 예시",
+      "focus": "알파벳·소리와 철자, 쉬운 단어·문장, 인사·소개·지시 표현",
+      "order": "듣고 반응 → 소리·철자 연결 → 쉬운 문장 읽기 → 소개하기",
+      "task": "그림·상황에 맞는 쉬운 표현으로 묻고 답하기",
+      "school": "학년군 성취기준을 실제 교과서의 학년·학기·진도에 대응",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책14 내용 체계·성취기준",
+      "sheet": "초등과목",
+      "row": 17
+    },
+    "초3|수학": {
+      "grade": "초3",
+      "subject": "수학",
+      "applies": "2022 개정",
+      "scope": "초3~4 학년군 범위의 운영 예시",
+      "focus": "덧셈·뺄셈, 곱셈·나눗셈, 분수·소수 기초, 길이·시간·측정",
+      "order": "연산 원리 → 그림으로 분수·소수 → 측정 → 문장제 설명",
+      "task": "나눗셈의 몫·나머지를 설명하고 측정 결과 비교하기",
+      "school": "학년군 성취기준을 실제 교과서의 학년·학기·진도에 대응",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책8 내용 체계·성취기준",
+      "sheet": "초등과목",
+      "row": 18
+    },
+    "초4|영어": {
+      "grade": "초4",
+      "subject": "영어",
+      "applies": "2022 개정",
+      "scope": "초3~4 학년군 범위의 운영 예시",
+      "focus": "쉬운 문장의 주요 정보, 주변 사람·사물 소개, 묻고 답하기",
+      "order": "단어·문장 읽기 → 정보 확인 → 대화 → 보고 쓰기",
+      "task": "짧은 대화의 주요 정보를 찾고 쉬운 문장으로 답하기",
+      "school": "학년군 성취기준을 실제 교과서의 학년·학기·진도에 대응",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책14 내용 체계·성취기준",
+      "sheet": "초등과목",
+      "row": 22
+    },
+    "초4|수학": {
+      "grade": "초4",
+      "subject": "수학",
+      "applies": "2022 개정",
+      "scope": "초3~4 학년군 범위의 운영 예시",
+      "focus": "큰 수, 곱셈·나눗셈, 분수·소수 덧셈·뺄셈, 도형·각도·그래프",
+      "order": "자릿값·계산 → 분수·소수 원리 → 도형 성질 → 자료 해석",
+      "task": "분수 계산의 이유를 그림으로 설명하고 그래프 읽기",
+      "school": "학년군 성취기준을 실제 교과서의 학년·학기·진도에 대응",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책8 내용 체계·성취기준",
+      "sheet": "초등과목",
+      "row": 23
+    },
+    "초5|영어": {
+      "grade": "초5",
+      "subject": "영어",
+      "applies": "2022 개정",
+      "scope": "초5~6 학년군 범위의 운영 예시",
+      "focus": "일상 주제의 세부·중심 정보, 경험·감정, 간단한 글의 구성",
+      "order": "문장 읽기 → 세부 정보 → 연결 표현 → 경험 말하기·쓰기",
+      "task": "일상 주제 글에서 정보를 찾고 자신의 경험 표현하기",
+      "school": "학년군 성취기준을 실제 교과서의 학년·학기·진도에 대응",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책14 내용 체계·성취기준",
+      "sheet": "초등과목",
+      "row": 27
+    },
+    "초5|수학": {
+      "grade": "초5",
+      "subject": "수학",
+      "applies": "2022 개정",
+      "scope": "초5~6 학년군 범위의 운영 예시",
+      "focus": "혼합 계산, 약수·배수, 약분·통분, 분수·소수 곱셈, 도형·측정·평균",
+      "order": "계산·약수배수 → 분수 연결 → 곱셈 원리 → 도형·자료 적용",
+      "task": "약분·통분의 이유를 설명하고 계산·단위를 함께 점검하기",
+      "school": "학년군 성취기준을 실제 교과서의 학년·학기·진도에 대응",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책8 내용 체계·성취기준",
+      "sheet": "초등과목",
+      "row": 28
+    },
+    "초6|영어": {
+      "grade": "초6",
+      "subject": "영어",
+      "applies": "2022 개정",
+      "scope": "초5~6 학년군 범위의 운영 예시",
+      "focus": "중심 내용·사건 순서, 경험·계획·의견, 목적에 맞는 간단한 글",
+      "order": "정보·순서 찾기 → 요약 → 경험·계획 말하기 → 짧은 글쓰기",
+      "task": "내용을 순서대로 설명하고 목적에 맞는 짧은 글 완성하기",
+      "school": "학년군 성취기준을 실제 교과서의 학년·학기·진도에 대응",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책14 내용 체계·성취기준",
+      "sheet": "초등과목",
+      "row": 32
+    },
+    "초6|수학": {
+      "grade": "초6",
+      "subject": "수학",
+      "applies": "2022 개정",
+      "scope": "초5~6 학년군 범위의 운영 예시",
+      "focus": "분수·소수 나눗셈, 비·비율·비례, 입체도형, 원의 넓이·부피·그래프",
+      "order": "계산 원리 → 비율 관계 → 도형·단위 → 종합 문장제",
+      "task": "비율을 여러 표현으로 바꾸고 나눗셈·단위를 설명하기",
+      "school": "학년군 성취기준을 실제 교과서의 학년·학기·진도에 대응",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책8 내용 체계·성취기준",
+      "sheet": "초등과목",
+      "row": 33
+    },
+    "중1|영어": {
+      "grade": "중1",
+      "subject": "영어",
+      "applies": "2022 개정",
+      "scope": "학교 이수 범위에 맞춘 학년별 예시",
+      "focus": "기초 문장 구조와 어휘, 친숙한 글·대화의 정보, 소개·경험 표현",
+      "order": "기초 문장 확인 → 교과서 읽기·듣기 → 문장 변형 → 표현",
+      "task": "교과서 상황을 바꿔 묻고 답하며 짧은 문장 쓰기",
+      "school": "교과서·실제 단원 순서·학교 평가 계획 확인",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책14 내용 체계·성취기준",
+      "sheet": "중등과목",
+      "row": 7
+    },
+    "중1|수학": {
+      "grade": "중1",
+      "subject": "수학",
+      "applies": "2022 개정",
+      "scope": "학교 이수 범위에 맞춘 학년별 예시",
+      "focus": "소인수분해, 정수·유리수, 문자·일차방정식, 좌표·도형, 자료",
+      "order": "수·연산 → 문자·방정식 → 좌표·기하 → 통계적 탐구",
+      "task": "식과 그림을 연결하고 문제 상황에 맞는 방정식 세우기",
+      "school": "교과서·실제 단원 순서·학교 평가 계획 확인",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책8 내용 체계·성취기준",
+      "sheet": "중등과목",
+      "row": 8
+    },
+    "중2|영어": {
+      "grade": "중2",
+      "subject": "영어",
+      "applies": "2022 개정",
+      "scope": "학교 이수 범위에 맞춘 학년별 예시",
+      "focus": "문장 확장, 글의 중심·논리 관계, 경험·계획·의견, 요약·쓰기",
+      "order": "문장 성분 → 연결·수식 구조 → 문단 이해 → 요약·쓰기",
+      "task": "문법을 새 문장에 적용하고 지문의 근거로 요약하기",
+      "school": "교과서·실제 단원 순서·학교 평가 계획 확인",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책14 내용 체계·성취기준",
+      "sheet": "중등과목",
+      "row": 13
+    },
+    "중2|수학": {
+      "grade": "중2",
+      "subject": "수학",
+      "applies": "2022 개정",
+      "scope": "학교 이수 범위에 맞춘 학년별 예시",
+      "focus": "순환소수·식 계산, 부등식·연립방정식, 일차함수, 도형·확률",
+      "order": "식 계산 → 방정식·부등식 → 함수 → 도형의 논증·확률",
+      "task": "함수·방정식의 관계와 도형 성질의 근거 설명하기",
+      "school": "교과서·실제 단원 순서·학교 평가 계획 확인",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책8 내용 체계·성취기준",
+      "sheet": "중등과목",
+      "row": 14
+    },
+    "중3|영어": {
+      "grade": "중3",
+      "subject": "영어",
+      "applies": "2015 개정",
+      "scope": "학교 이수 범위에 맞춘 학년별 예시",
+      "focus": "2015 교육과정의 교과서 읽기·듣기·말하기·쓰기, 복합 문장 이해",
+      "order": "문장 구조 정리 → 지문 논리 → 변형·서술형 → 고등 독해 준비",
+      "task": "교과서 표현을 다른 상황에 적용하고 글의 근거 설명하기",
+      "school": "교과서·실제 단원 순서·학교 평가 계획 확인 / 2027년부터는 2022 개정 범위로 다시 검토",
+      "source": "https://www.moe.go.kr/boardCnts/view.do?boardID=141&boardSeq=60747&lev=0&m=040401&opType=N&page=5&s=moe&searchType=S",
+      "sourceSection": "2015 별책14 내용 체계·성취기준",
+      "sheet": "중등과목",
+      "row": 19
+    },
+    "중3|수학": {
+      "grade": "중3",
+      "subject": "수학",
+      "applies": "2015 개정",
+      "scope": "학교 이수 범위에 맞춘 학년별 예시",
+      "focus": "제곱근·실수, 인수분해·이차방정식·이차함수, 삼각비·원·통계",
+      "order": "수·식 정리 → 방정식·함수 → 기하 → 자료와 고등 연결",
+      "task": "이차함수·방정식의 관계를 설명하고 도형·자료 문제 풀기",
+      "school": "교과서·실제 단원 순서·학교 평가 계획 확인 / 2027년부터는 2022 개정 범위로 다시 검토",
+      "source": "https://www.moe.go.kr/boardCnts/view.do?boardID=141&boardSeq=60747&lev=0&m=040401&opType=N&page=5&s=moe&searchType=S",
+      "sourceSection": "2015 별책8 내용 체계·성취기준",
+      "sheet": "중등과목",
+      "row": 20
+    },
+    "고1|영어": {
+      "grade": "고1",
+      "subject": "영어",
+      "applies": "2022 개정",
+      "scope": "공통과목 범위의 운영 예시",
+      "focus": "공통영어1·2: 정보·논리·의도 이해, 다양한 상황의 표현",
+      "order": "어휘·문장 구조 → 교과서 이해 → 듣기·요약 → 말하기·쓰기",
+      "task": "지문의 구조를 정리하고 자기 말로 요약·의견 표현하기",
+      "school": "입학 연도별 공통과목 편제와 교과서·평가 계획 확인",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책14 공통·선택 과목",
+      "sheet": "고등과목",
+      "row": 7
+    },
+    "고1|수학": {
+      "grade": "고1",
+      "subject": "수학",
+      "applies": "2022 개정",
+      "scope": "공통과목 범위의 운영 예시",
+      "focus": "공통수학1·2: 다항식·방정식·경우의 수·행렬, 도형·집합·함수",
+      "order": "수·식 보완 → 단원 개념 → 유형·서술형 → 관계·조건 비교",
+      "task": "문제 조건을 식·그림·그래프로 바꾸고 풀이 설명하기",
+      "school": "입학 연도별 공통과목 편제와 교과서·평가 계획 확인",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책8 공통·선택 과목",
+      "sheet": "고등과목",
+      "row": 8
+    },
+    "고2|영어": {
+      "grade": "고2",
+      "subject": "영어",
+      "applies": "2022 개정",
+      "scope": "실제 선택·이수 과목에 따른 예시",
+      "focus": "2022 선택과목 예: 영어Ⅰ·Ⅱ, 영어 독해와 작문",
+      "order": "선이수·개설 확인 → 어휘·구문 → 논리·추론 → 요약·쓰기",
+      "task": "복합 문장을 분석하고 글의 목적·논리를 근거로 설명하기",
+      "school": "현재 이수·응시 과목, 학기 편제, 선이수 관계 확인",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책14 공통·선택 과목",
+      "sheet": "고등과목",
+      "row": 13
+    },
+    "고2|수학": {
+      "grade": "고2",
+      "subject": "수학",
+      "applies": "2022 개정",
+      "scope": "실제 선택·이수 과목에 따른 예시",
+      "focus": "2022 선택과목 예: 대수, 미적분Ⅰ, 확률과 통계, 기하",
+      "order": "선이수·학교 편제 → 과목 개념 → 유형·논증 → 종합 적용",
+      "task": "선택과목 문제의 조건·그래프·풀이를 연결해 설명하기",
+      "school": "현재 이수·응시 과목, 학기 편제, 선이수 관계 확인",
+      "source": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&boardSeq=93458&lev=0",
+      "sourceSection": "2022 별책8 공통·선택 과목",
+      "sheet": "고등과목",
+      "row": 14
+    },
+    "고3|영어": {
+      "grade": "고3",
+      "subject": "영어",
+      "applies": "2015 개정",
+      "scope": "실제 선택·이수 과목에 따른 예시",
+      "focus": "2015 선택과목 범위와 수능 대비: 어휘·구문·독해·듣기·표현",
+      "order": "취약 구문 → 글의 논리·추론 → 듣기 → 종합 과제·재점검",
+      "task": "근거와 논리로 답을 선택하고 놓친 듣기 표현 재확인하기",
+      "school": "현재 이수·응시 과목, 학기 편제, 선이수 관계 확인 / 2027년부터는 2022 개정 범위로 다시 검토",
+      "source": "https://www.moe.go.kr/boardCnts/view.do?boardID=141&boardSeq=60747&lev=0&m=040401&opType=N&page=5&s=moe&searchType=S",
+      "sourceSection": "2015 별책14 공통·선택 과목",
+      "sheet": "고등과목",
+      "row": 19
+    },
+    "고3|수학": {
+      "grade": "고3",
+      "subject": "수학",
+      "applies": "2015 개정",
+      "scope": "실제 선택·이수 과목에 따른 예시",
+      "focus": "2015 과목: 수학Ⅰ·Ⅱ, 확률과 통계·미적분·기하 등 실제 이수·응시 범위",
+      "order": "과목 범위 → 취약 개념 → 조건·유형 비교 → 종합·오답 재풀이",
+      "task": "틀린 문제의 조건과 첫 접근을 설명하고 유사 문제 해결하기",
+      "school": "현재 이수·응시 과목, 학기 편제, 선이수 관계 확인 / 2027년부터는 2022 개정 범위로 다시 검토",
+      "source": "https://www.moe.go.kr/boardCnts/view.do?boardID=141&boardSeq=60747&lev=0&m=040401&opType=N&page=5&s=moe&searchType=S",
+      "sourceSection": "2015 별책8 공통·선택 과목",
+      "sheet": "고등과목",
+      "row": 20
+    }
+  },
+  "centers": {
+    "/지점안내/충북/가경점/": {
+      "branch": "가경점",
+      "teacherPage": "/선생님찾기/가경점/",
+      "teachers": [
+        {
+          "name": "윤*석",
+          "focus": "핵심 표현 정리",
+          "reflection": "배운 내용 분류하기",
+          "anchor": "teacher-981",
+          "sourceRow": 981
+        },
+        {
+          "name": "이*백",
+          "focus": "내용 분류하기",
+          "reflection": "배운 내용 분류하기",
+          "anchor": "teacher-982",
+          "sourceRow": 982
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/인천/루원시티점/": {
+      "branch": "루원시티점",
+      "teacherPage": "/선생님찾기/루원시티점/",
+      "teachers": [
+        {
+          "name": "정*영",
+          "focus": "풀이 과정 기록",
+          "reflection": "다음 학습 연결",
+          "anchor": "teacher-999",
+          "sourceRow": 999
+        },
+        {
+          "name": "이*선",
+          "focus": "개념 사이 연결",
+          "reflection": "다음 학습 연결",
+          "anchor": "teacher-1000",
+          "sourceRow": 1000
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/갈매점/": {
+      "branch": "갈매점",
+      "teacherPage": "/선생님찾기/갈매점/",
+      "teachers": [
+        {
+          "name": "박*명",
+          "focus": "스스로 문제 만들기",
+          "reflection": "짧은 회상 활동",
+          "anchor": "teacher-128",
+          "sourceRow": 128
+        },
+        {
+          "name": "이*환",
+          "focus": "자기 언어로 설명",
+          "reflection": "과정에 표시하기",
+          "anchor": "teacher-129",
+          "sourceRow": 129
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/갈산점/": {
+      "branch": "갈산점",
+      "teacherPage": "/선생님찾기/갈산점/",
+      "teachers": [
+        {
+          "name": "조*수",
+          "focus": "다른 사람에게 설명",
+          "reflection": "학습 시작 기록",
+          "anchor": "teacher-413",
+          "sourceRow": 413
+        },
+        {
+          "name": "김*희",
+          "focus": "학습 순서 설계",
+          "reflection": "학습 시작 기록",
+          "anchor": "teacher-414",
+          "sourceRow": 414
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/서울/은평점/": {
+      "branch": "은평점",
+      "teacherPage": "/선생님찾기/은평점/",
+      "teachers": [
+        {
+          "name": "김*희",
+          "focus": "풀이 과정 기록",
+          "reflection": "학습 분량 되돌아보기",
+          "anchor": "teacher-807",
+          "sourceRow": 807
+        },
+        {
+          "name": "윤*나",
+          "focus": "개념 사이 연결",
+          "reflection": "학습 분량 되돌아보기",
+          "anchor": "teacher-808",
+          "sourceRow": 808
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/대구/대구장기점/": {
+      "branch": "대구장기점",
+      "teacherPage": "/선생님찾기/대구장기점/",
+      "teachers": [
+        {
+          "name": "김*수",
+          "focus": "다른 사람에게 설명",
+          "reflection": "피드백 한 가지 적용",
+          "anchor": "teacher-573",
+          "sourceRow": 573
+        },
+        {
+          "name": "김*진",
+          "focus": "학습 순서 설계",
+          "reflection": "피드백 한 가지 적용",
+          "anchor": "teacher-574",
+          "sourceRow": 574
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/강원/강릉교동점/": {
+      "branch": "강릉교동점",
+      "teacherPage": "/선생님찾기/강릉교동점/",
+      "teachers": [
+        {
+          "name": "심*우",
+          "focus": "자기 언어로 설명",
+          "reflection": "설명 전후 비교",
+          "anchor": "teacher-1",
+          "sourceRow": 1
+        },
+        {
+          "name": "홍*호",
+          "focus": "질문을 구체화",
+          "reflection": "설명 전후 비교",
+          "anchor": "teacher-2",
+          "sourceRow": 2
+        }
+      ],
+      "profilesCount": 2
+    },
+    "/지점안내/충북/복대점/": {
+      "branch": "복대점",
+      "teacherPage": "/선생님찾기/복대점/",
+      "teachers": [
+        {
+          "name": "양*영",
+          "focus": "과제 분량 조절",
+          "reflection": "배운 내용 분류하기",
+          "anchor": "teacher-975",
+          "sourceRow": 975
+        },
+        {
+          "name": "이*선",
+          "focus": "핵심 내용 요약",
+          "reflection": "배운 내용 분류하기",
+          "anchor": "teacher-976",
+          "sourceRow": 976
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/충북/개신점/": {
+      "branch": "개신점",
+      "teacherPage": "/선생님찾기/개신점/",
+      "teachers": [
+        {
+          "name": "피*순",
+          "focus": "스스로 문제 만들기",
+          "reflection": "단계별 시간 살피기",
+          "anchor": "teacher-960",
+          "sourceRow": 960
+        },
+        {
+          "name": "황*영",
+          "focus": "자기 언어로 설명",
+          "reflection": "배운 내용 분류하기",
+          "anchor": "teacher-961",
+          "sourceRow": 961
+        }
+      ],
+      "profilesCount": 9
+    },
+    "/지점안내/강원/단구점/": {
+      "branch": "단구점",
+      "teacherPage": "/선생님찾기/단구점/",
+      "teachers": [
+        {
+          "name": "김*태",
+          "focus": "오답 원인 구분",
+          "reflection": "설명 전후 비교",
+          "anchor": "teacher-3",
+          "sourceRow": 3
+        },
+        {
+          "name": "김*영",
+          "focus": "문제 조건 읽기",
+          "reflection": "설명 전후 비교",
+          "anchor": "teacher-4",
+          "sourceRow": 4
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/부산/사직점/": {
+      "branch": "사직점",
+      "teacherPage": "/선생님찾기/사직점/",
+      "teachers": [
+        {
+          "name": "이*우",
+          "focus": "변형 문제 살피기",
+          "reflection": "교재 없이 확인",
+          "anchor": "teacher-690",
+          "sourceRow": 690
+        },
+        {
+          "name": "조*민",
+          "focus": "선택 근거 말하기",
+          "reflection": "교재 없이 확인",
+          "anchor": "teacher-691",
+          "sourceRow": 691
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/경북/사동점/": {
+      "branch": "사동점",
+      "teacherPage": "/선생님찾기/사동점/",
+      "teachers": [
+        {
+          "name": "이*진",
+          "focus": "오답 원인 구분",
+          "reflection": "피드백 한 가지 적용",
+          "anchor": "teacher-547",
+          "sourceRow": 547
+        },
+        {
+          "name": "이*은",
+          "focus": "문제 조건 읽기",
+          "reflection": "피드백 한 가지 적용",
+          "anchor": "teacher-548",
+          "sourceRow": 548
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/탄벌점/": {
+      "branch": "탄벌점",
+      "teacherPage": "/선생님찾기/탄벌점/",
+      "teachers": [
+        {
+          "name": "허*란",
+          "focus": "학습 목표 대화",
+          "reflection": "짧은 회상 활동",
+          "anchor": "teacher-120",
+          "sourceRow": 120
+        },
+        {
+          "name": "이*희",
+          "focus": "진행 과정 기록",
+          "reflection": "짧은 회상 활동",
+          "anchor": "teacher-121",
+          "sourceRow": 121
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경남/석동점/": {
+      "branch": "석동점",
+      "teacherPage": "/선생님찾기/석동점/",
+      "teachers": [
+        {
+          "name": "장*효",
+          "focus": "내용 분류하기",
+          "reflection": "낯선 표현 표시",
+          "anchor": "teacher-534",
+          "sourceRow": 534
+        },
+        {
+          "name": "신*호",
+          "focus": "마지막 풀이 검토",
+          "reflection": "낯선 표현 표시",
+          "anchor": "teacher-535",
+          "sourceRow": 535
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/대구/침산점/": {
+      "branch": "침산점",
+      "teacherPage": "/선생님찾기/침산점/",
+      "teachers": [
+        {
+          "name": "구*영",
+          "focus": "짧은 집중 구간",
+          "reflection": "짧은 설명 녹여 쓰기",
+          "anchor": "teacher-590",
+          "sourceRow": 590
+        },
+        {
+          "name": "김*경",
+          "focus": "과제 분량 조절",
+          "reflection": "짧은 설명 녹여 쓰기",
+          "anchor": "teacher-591",
+          "sourceRow": 591
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/경기/고잔점/": {
+      "branch": "고잔점",
+      "teacherPage": "/선생님찾기/고잔점/",
+      "teachers": [
+        {
+          "name": "류*희",
+          "focus": "핵심 내용 요약",
+          "reflection": "재도전 전 확인",
+          "anchor": "teacher-336",
+          "sourceRow": 336
+        },
+        {
+          "name": "배*리",
+          "focus": "기초 개념 재확인",
+          "reflection": "재도전 전 확인",
+          "anchor": "teacher-337",
+          "sourceRow": 337
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경남/거제수월점/": {
+      "branch": "거제수월점",
+      "teacherPage": "/선생님찾기/거제수월점/",
+      "teachers": [
+        {
+          "name": "정*용",
+          "focus": "개념 사이 연결",
+          "reflection": "낯선 표현 표시",
+          "anchor": "teacher-520",
+          "sourceRow": 520
+        },
+        {
+          "name": "이*태",
+          "focus": "익숙한 예시 활용",
+          "reflection": "낯선 표현 표시",
+          "anchor": "teacher-521",
+          "sourceRow": 521
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/서울/마포점/": {
+      "branch": "마포점",
+      "teacherPage": "/선생님찾기/마포점/",
+      "teachers": [
+        {
+          "name": "선*도",
+          "focus": "진행 과정 기록",
+          "reflection": "비교 기준 먼저 정하기",
+          "anchor": "teacher-761",
+          "sourceRow": 761
+        },
+        {
+          "name": "양*호",
+          "focus": "표와 그림 정리",
+          "reflection": "비교 기준 먼저 정하기",
+          "anchor": "teacher-762",
+          "sourceRow": 762
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/인천/구월점/": {
+      "branch": "구월점",
+      "teacherPage": "/선생님찾기/구월점/",
+      "teachers": [
+        {
+          "name": "조*원",
+          "focus": "수정 과정 익히기",
+          "reflection": "이전 기록 다시 읽기",
+          "anchor": "teacher-852",
+          "sourceRow": 852
+        },
+        {
+          "name": "조*정",
+          "focus": "핵심 표현 정리",
+          "reflection": "이전 기록 다시 읽기",
+          "anchor": "teacher-853",
+          "sourceRow": 853
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/대전/관저점/": {
+      "branch": "관저점",
+      "teacherPage": "/선생님찾기/관저점/",
+      "teachers": [
+        {
+          "name": "한*민",
+          "focus": "과제 분량 조절",
+          "reflection": "실수 점검표 만들기",
+          "anchor": "teacher-655",
+          "sourceRow": 655
+        },
+        {
+          "name": "김*훈",
+          "focus": "핵심 내용 요약",
+          "reflection": "실수 점검표 만들기",
+          "anchor": "teacher-656",
+          "sourceRow": 656
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/대전/관평점/": {
+      "branch": "관평점",
+      "teacherPage": "/선생님찾기/관평점/",
+      "teachers": [
+        {
+          "name": "문*은",
+          "focus": "작은 목표 설정",
+          "reflection": "교재 없이 확인",
+          "anchor": "teacher-677",
+          "sourceRow": 677
+        },
+        {
+          "name": "김*훈",
+          "focus": "복습 간격 조절",
+          "reflection": "교재 없이 확인",
+          "anchor": "teacher-678",
+          "sourceRow": 678
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/광명점/": {
+      "branch": "광명점",
+      "teacherPage": "/선생님찾기/광명점/",
+      "teachers": [
+        {
+          "name": "박*영",
+          "focus": "짧은 집중 구간",
+          "reflection": "짧은 회상 활동",
+          "anchor": "teacher-110",
+          "sourceRow": 110
+        },
+        {
+          "name": "홍*현",
+          "focus": "과제 분량 조절",
+          "reflection": "짧은 회상 활동",
+          "anchor": "teacher-111",
+          "sourceRow": 111
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/서울/광장점/": {
+      "branch": "광장점",
+      "teacherPage": "/선생님찾기/광장점/",
+      "teachers": [
+        {
+          "name": "임*영",
+          "focus": "학습 전후 비교",
+          "reflection": "어려움의 변화 기록",
+          "anchor": "teacher-735",
+          "sourceRow": 735
+        },
+        {
+          "name": "라*진",
+          "focus": "스스로 문제 만들기",
+          "reflection": "어려움의 변화 기록",
+          "anchor": "teacher-736",
+          "sourceRow": 736
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/경기/범박점/": {
+      "branch": "범박점",
+      "teacherPage": "/선생님찾기/범박점/",
+      "teachers": [
+        {
+          "name": "박*은",
+          "focus": "마지막 풀이 검토",
+          "reflection": "조건 바꾸어 보기",
+          "anchor": "teacher-215",
+          "sourceRow": 215
+        },
+        {
+          "name": "이*호",
+          "focus": "학습 목표 대화",
+          "reflection": "조건 바꾸어 보기",
+          "anchor": "teacher-216",
+          "sourceRow": 216
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/경기/인창점/": {
+      "branch": "인창점",
+      "teacherPage": "/선생님찾기/인창점/",
+      "teachers": [
+        {
+          "name": "윤*인",
+          "focus": "과제 난도 조절",
+          "reflection": "짧은 회상 활동",
+          "anchor": "teacher-124",
+          "sourceRow": 124
+        },
+        {
+          "name": "이*염",
+          "focus": "다른 사람에게 설명",
+          "reflection": "짧은 회상 활동",
+          "anchor": "teacher-125",
+          "sourceRow": 125
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/교하점/": {
+      "branch": "교하점",
+      "teacherPage": "/선생님찾기/교하점/",
+      "teachers": [
+        {
+          "name": "황*하",
+          "focus": "자료 정돈하기",
+          "reflection": "중간 점검 질문",
+          "anchor": "teacher-443",
+          "sourceRow": 443
+        },
+        {
+          "name": "김*호",
+          "focus": "과제 난도 조절",
+          "reflection": "중간 점검 질문",
+          "anchor": "teacher-444",
+          "sourceRow": 444
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/기흥구청점/": {
+      "branch": "기흥구청점",
+      "teacherPage": "/선생님찾기/기흥구청점/",
+      "teachers": [
+        {
+          "name": "지 *",
+          "focus": "과제 난도 조절",
+          "reflection": "유사 과제 연결",
+          "anchor": "teacher-380",
+          "sourceRow": 380
+        },
+        {
+          "name": "김*연",
+          "focus": "다른 사람에게 설명",
+          "reflection": "유사 과제 연결",
+          "anchor": "teacher-381",
+          "sourceRow": 381
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/미금점/": {
+      "branch": "미금점",
+      "teacherPage": "/선생님찾기/미금점/",
+      "teachers": [
+        {
+          "name": "김*만",
+          "focus": "표와 그림 정리",
+          "reflection": "질문 순서 정하기",
+          "anchor": "teacher-250",
+          "sourceRow": 250
+        },
+        {
+          "name": "김*기",
+          "focus": "자료 정돈하기",
+          "reflection": "질문 순서 정하기",
+          "anchor": "teacher-251",
+          "sourceRow": 251
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/서울/구산점/": {
+      "branch": "구산점",
+      "teacherPage": "/선생님찾기/구산점/",
+      "teachers": [
+        {
+          "name": "김*영",
+          "focus": "비슷한 내용 비교",
+          "reflection": "학습 분량 되돌아보기",
+          "anchor": "teacher-810",
+          "sourceRow": 810
+        },
+        {
+          "name": "조*정",
+          "focus": "학습 시간 배분",
+          "reflection": "학습 분량 되돌아보기",
+          "anchor": "teacher-811",
+          "sourceRow": 811
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/대구/칠곡점/": {
+      "branch": "칠곡점",
+      "teacherPage": "/선생님찾기/칠곡점/",
+      "teachers": [
+        {
+          "name": "장*선",
+          "focus": "핵심 표현 정리",
+          "reflection": "짧은 설명 녹여 쓰기",
+          "anchor": "teacher-597",
+          "sourceRow": 597
+        },
+        {
+          "name": "이**내",
+          "focus": "내용 분류하기",
+          "reflection": "짧은 설명 녹여 쓰기",
+          "anchor": "teacher-598",
+          "sourceRow": 598
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/대구/대구도남점/": {
+      "branch": "대구도남점",
+      "teacherPage": "/선생님찾기/대구도남점/",
+      "teachers": [
+        {
+          "name": "박*우",
+          "focus": "진행 과정 기록",
+          "reflection": "짧은 설명 녹여 쓰기",
+          "anchor": "teacher-601",
+          "sourceRow": 601
+        },
+        {
+          "name": "박*현",
+          "focus": "표와 그림 정리",
+          "reflection": "짧은 설명 녹여 쓰기",
+          "anchor": "teacher-602",
+          "sourceRow": 602
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/영통구청점/": {
+      "branch": "영통구청점",
+      "teacherPage": "/선생님찾기/영통구청점/",
+      "teachers": [
+        {
+          "name": "최*정",
+          "focus": "변형 문제 살피기",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-306",
+          "sourceRow": 306
+        },
+        {
+          "name": "이*길",
+          "focus": "선택 근거 말하기",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-307",
+          "sourceRow": 307
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/호매실점/": {
+      "branch": "호매실점",
+      "teacherPage": "/선생님찾기/호매실점/",
+      "teachers": [
+        {
+          "name": "김*한",
+          "focus": "자기 언어로 설명",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-289",
+          "sourceRow": 289
+        },
+        {
+          "name": "김*섭",
+          "focus": "질문을 구체화",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-290",
+          "sourceRow": 290
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/단대점/": {
+      "branch": "단대점",
+      "teacherPage": "/선생님찾기/단대점/",
+      "teachers": [
+        {
+          "name": "김*선",
+          "focus": "익숙한 예시 활용",
+          "reflection": "자기 평가 기준",
+          "anchor": "teacher-265",
+          "sourceRow": 265
+        },
+        {
+          "name": "강*수",
+          "focus": "비슷한 내용 비교",
+          "reflection": "자기 평가 기준",
+          "anchor": "teacher-266",
+          "sourceRow": 266
+        }
+      ],
+      "profilesCount": 8
+    },
+    "/지점안내/경기/금릉점/": {
+      "branch": "금릉점",
+      "teacherPage": "/선생님찾기/금릉점/",
+      "teachers": [
+        {
+          "name": "김*미",
+          "focus": "스스로 이해 점검",
+          "reflection": "중간 점검 질문",
+          "anchor": "teacher-429",
+          "sourceRow": 429
+        },
+        {
+          "name": "권*원",
+          "focus": "짧은 집중 구간",
+          "reflection": "중간 점검 질문",
+          "anchor": "teacher-430",
+          "sourceRow": 430
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/세교점/": {
+      "branch": "세교점",
+      "teacherPage": "/선생님찾기/세교점/",
+      "teachers": [
+        {
+          "name": "이*열",
+          "focus": "개념 사이 연결",
+          "reflection": "유사 과제 연결",
+          "anchor": "teacher-360",
+          "sourceRow": 360
+        },
+        {
+          "name": "김*운",
+          "focus": "익숙한 예시 활용",
+          "reflection": "유사 과제 연결",
+          "anchor": "teacher-361",
+          "sourceRow": 361
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/신곡점/": {
+      "branch": "신곡점",
+      "teacherPage": "/선생님찾기/신곡점/",
+      "teachers": [
+        {
+          "name": "오*자",
+          "focus": "학습 목표 대화",
+          "reflection": "학습 시작 기록",
+          "anchor": "teacher-408",
+          "sourceRow": 408
+        },
+        {
+          "name": "홍*다",
+          "focus": "진행 과정 기록",
+          "reflection": "학습 시작 기록",
+          "anchor": "teacher-409",
+          "sourceRow": 409
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/산본점/": {
+      "branch": "산본점",
+      "teacherPage": "/선생님찾기/산본점/",
+      "teachers": [
+        {
+          "name": "고*정",
+          "focus": "문제 조건 읽기",
+          "reflection": "과정에 표시하기",
+          "anchor": "teacher-132",
+          "sourceRow": 132
+        },
+        {
+          "name": "문*옥",
+          "focus": "작은 목표 설정",
+          "reflection": "과정에 표시하기",
+          "anchor": "teacher-133",
+          "sourceRow": 133
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/서울/종암점/": {
+      "branch": "종암점",
+      "teacherPage": "/선생님찾기/종암점/",
+      "teachers": [
+        {
+          "name": "백*림",
+          "focus": "변형 문제 살피기",
+          "reflection": "작은 예외 찾기",
+          "anchor": "teacher-786",
+          "sourceRow": 786
+        },
+        {
+          "name": "정*라",
+          "focus": "선택 근거 말하기",
+          "reflection": "작은 예외 찾기",
+          "anchor": "teacher-787",
+          "sourceRow": 787
+        }
+      ],
+      "profilesCount": 8
+    },
+    "/지점안내/경기/명지대역점/": {
+      "branch": "명지대역점",
+      "teacherPage": "/선생님찾기/명지대역점/",
+      "teachers": [
+        {
+          "name": "김*우",
+          "focus": "핵심 표현 정리",
+          "reflection": "학습 시작 기록",
+          "anchor": "teacher-405",
+          "sourceRow": 405
+        },
+        {
+          "name": "정*원",
+          "focus": "내용 분류하기",
+          "reflection": "학습 시작 기록",
+          "anchor": "teacher-406",
+          "sourceRow": 406
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/서울/가좌점/": {
+      "branch": "가좌점",
+      "teacherPage": "/선생님찾기/가좌점/",
+      "teachers": [
+        {
+          "name": "박*미",
+          "focus": "오답 원인 구분",
+          "reflection": "작은 예외 찾기",
+          "anchor": "teacher-771",
+          "sourceRow": 771
+        },
+        {
+          "name": "정*화",
+          "focus": "문제 조건 읽기",
+          "reflection": "작은 예외 찾기",
+          "anchor": "teacher-772",
+          "sourceRow": 772
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/울산/남외점/": {
+      "branch": "남외점",
+      "teacherPage": "/선생님찾기/남외점/",
+      "teachers": [
+        {
+          "name": "김*희",
+          "focus": "개념 사이 연결",
+          "reflection": "이전 기록 다시 읽기",
+          "anchor": "teacher-840",
+          "sourceRow": 840
+        },
+        {
+          "name": "김*대",
+          "focus": "익숙한 예시 활용",
+          "reflection": "이전 기록 다시 읽기",
+          "anchor": "teacher-841",
+          "sourceRow": 841
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/서울/내발산점/": {
+      "branch": "내발산점",
+      "teacherPage": "/선생님찾기/내발산점/",
+      "teachers": [
+        {
+          "name": "전*영",
+          "focus": "과제 분량 조절",
+          "reflection": "어려움의 변화 기록",
+          "anchor": "teacher-719",
+          "sourceRow": 719
+        },
+        {
+          "name": "김*인",
+          "focus": "핵심 내용 요약",
+          "reflection": "어려움의 변화 기록",
+          "anchor": "teacher-720",
+          "sourceRow": 720
+        }
+      ],
+      "profilesCount": 8
+    },
+    "/지점안내/경기/오산대역점/": {
+      "branch": "오산대역점",
+      "teacherPage": "/선생님찾기/오산대역점/",
+      "teachers": [
+        {
+          "name": "김*미",
+          "focus": "질문을 구체화",
+          "reflection": "유사 과제 연결",
+          "anchor": "teacher-354",
+          "sourceRow": 354
+        },
+        {
+          "name": "유*래",
+          "focus": "오답 원인 구분",
+          "reflection": "유사 과제 연결",
+          "anchor": "teacher-355",
+          "sourceRow": 355
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/대구/알파시티점/": {
+      "branch": "알파시티점",
+      "teacherPage": "/선생님찾기/알파시티점/",
+      "teachers": [
+        {
+          "name": "지*영",
+          "focus": "익숙한 예시 활용",
+          "reflection": "과제 선택 이유",
+          "anchor": "teacher-617",
+          "sourceRow": 617
+        },
+        {
+          "name": "남*욱",
+          "focus": "비슷한 내용 비교",
+          "reflection": "과제 선택 이유",
+          "anchor": "teacher-618",
+          "sourceRow": 618
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/대전/지족점/": {
+      "branch": "지족점",
+      "teacherPage": "/선생님찾기/지족점/",
+      "teachers": [
+        {
+          "name": "라*영",
+          "focus": "다른 사람에게 설명",
+          "reflection": "실수 점검표 만들기",
+          "anchor": "teacher-669",
+          "sourceRow": 669
+        },
+        {
+          "name": "원*연",
+          "focus": "학습 순서 설계",
+          "reflection": "실수 점검표 만들기",
+          "anchor": "teacher-670",
+          "sourceRow": 670
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/제주/노형점/": {
+      "branch": "노형점",
+      "teacherPage": "/선생님찾기/노형점/",
+      "teachers": [
+        {
+          "name": "김*레",
+          "focus": "표와 그림 정리",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-922",
+          "sourceRow": 922
+        },
+        {
+          "name": "박*하",
+          "focus": "자료 정돈하기",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-923",
+          "sourceRow": 923
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/인천/논현점/": {
+      "branch": "논현점",
+      "teacherPage": "/선생님찾기/논현점/",
+      "teachers": [
+        {
+          "name": "이*현",
+          "focus": "스스로 이해 점검",
+          "reflection": "이전 기록 다시 읽기",
+          "anchor": "teacher-845",
+          "sourceRow": 845
+        },
+        {
+          "name": "이*호",
+          "focus": "짧은 집중 구간",
+          "reflection": "이전 기록 다시 읽기",
+          "anchor": "teacher-846",
+          "sourceRow": 846
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/경기/다산점/": {
+      "branch": "다산점",
+      "teacherPage": "/선생님찾기/다산점/",
+      "teachers": [
+        {
+          "name": "강*리",
+          "focus": "자기 언어로 설명",
+          "reflection": "작은 과제 선택",
+          "anchor": "teacher-161",
+          "sourceRow": 161
+        },
+        {
+          "name": "엄*진",
+          "focus": "질문을 구체화",
+          "reflection": "작은 과제 선택",
+          "anchor": "teacher-162",
+          "sourceRow": 162
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/세종/새롬점/": {
+      "branch": "새롬점",
+      "teacherPage": "/선생님찾기/새롬점/",
+      "teachers": [
+        {
+          "name": "한*욱",
+          "focus": "내용 분류하기",
+          "reflection": "학습 분량 되돌아보기",
+          "anchor": "teacher-822",
+          "sourceRow": 822
+        },
+        {
+          "name": "이*림",
+          "focus": "마지막 풀이 검토",
+          "reflection": "학습 분량 되돌아보기",
+          "anchor": "teacher-823",
+          "sourceRow": 823
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/강원/원주시청점/": {
+      "branch": "원주시청점",
+      "teacherPage": "/선생님찾기/원주시청점/",
+      "teachers": [
+        {
+          "name": "김*훈",
+          "focus": "개념 사이 연결",
+          "reflection": "설명 전후 비교",
+          "anchor": "teacher-8",
+          "sourceRow": 8
+        },
+        {
+          "name": "김*라",
+          "focus": "익숙한 예시 활용",
+          "reflection": "설명 전후 비교",
+          "anchor": "teacher-9",
+          "sourceRow": 9
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/울산/삼산점/": {
+      "branch": "삼산점",
+      "teacherPage": "/선생님찾기/삼산점/",
+      "teachers": [
+        {
+          "name": "하*선",
+          "focus": "자료 정돈하기",
+          "reflection": "학습 분량 되돌아보기",
+          "anchor": "teacher-827",
+          "sourceRow": 827
+        },
+        {
+          "name": "감*훈",
+          "focus": "과제 난도 조절",
+          "reflection": "학습 분량 되돌아보기",
+          "anchor": "teacher-828",
+          "sourceRow": 828
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/서울/당산점/": {
+      "branch": "당산점",
+      "teacherPage": "/선생님찾기/당산점/",
+      "teachers": [
+        {
+          "name": "신*애",
+          "focus": "오답 원인 구분",
+          "reflection": "학습 분량 되돌아보기",
+          "anchor": "teacher-803",
+          "sourceRow": 803
+        },
+        {
+          "name": "이*희",
+          "focus": "문제 조건 읽기",
+          "reflection": "학습 분량 되돌아보기",
+          "anchor": "teacher-804",
+          "sourceRow": 804
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/충남/당진중앙점/": {
+      "branch": "당진중앙점",
+      "teacherPage": "/선생님찾기/당진중앙점/",
+      "teachers": [
+        {
+          "name": "최*경",
+          "focus": "학습 전후 비교",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-927",
+          "sourceRow": 927
+        },
+        {
+          "name": "임*효",
+          "focus": "스스로 문제 만들기",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-928",
+          "sourceRow": 928
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/대구/진천점/": {
+      "branch": "진천점",
+      "teacherPage": "/선생님찾기/진천점(모두)/",
+      "teachers": [
+        {
+          "name": "김*혁",
+          "focus": "질문을 구체화",
+          "reflection": "짧은 설명 녹여 쓰기",
+          "anchor": "teacher-578",
+          "sourceRow": 578
+        },
+        {
+          "name": "정*운",
+          "focus": "오답 원인 구분",
+          "reflection": "짧은 설명 녹여 쓰기",
+          "anchor": "teacher-579",
+          "sourceRow": 579
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/대구/반월당점/": {
+      "branch": "반월당점",
+      "teacherPage": "/선생님찾기/반월당점/",
+      "teachers": [
+        {
+          "name": "김*정",
+          "focus": "진행 과정 기록",
+          "reflection": "과제 선택 이유",
+          "anchor": "teacher-633",
+          "sourceRow": 633
+        },
+        {
+          "name": "김*솔",
+          "focus": "표와 그림 정리",
+          "reflection": "과제 선택 이유",
+          "anchor": "teacher-634",
+          "sourceRow": 634
+        }
+      ],
+      "profilesCount": 8
+    },
+    "/지점안내/경기/시흥대야점/": {
+      "branch": "시흥대야점",
+      "teacherPage": "/선생님찾기/시흥대야점/",
+      "teachers": [
+        {
+          "name": "윤*원",
+          "focus": "스스로 문제 만들기",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-320",
+          "sourceRow": 320
+        },
+        {
+          "name": "최*수",
+          "focus": "자기 언어로 설명",
+          "reflection": "재도전 전 확인",
+          "anchor": "teacher-321",
+          "sourceRow": 321
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/경기/주엽점/": {
+      "branch": "주엽점",
+      "teacherPage": "/선생님찾기/주엽점/",
+      "teachers": [
+        {
+          "name": "김*춘",
+          "focus": "학습 시간 배분",
+          "reflection": "예시 두 가지 비교",
+          "anchor": "teacher-75",
+          "sourceRow": 75
+        },
+        {
+          "name": "권*윤",
+          "focus": "공부 시작 습관",
+          "reflection": "예시 두 가지 비교",
+          "anchor": "teacher-76",
+          "sourceRow": 76
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/덕이점/": {
+      "branch": "덕이점",
+      "teacherPage": "/선생님찾기/덕이점/",
+      "teachers": [
+        {
+          "name": "이*진",
+          "focus": "다른 사람에게 설명",
+          "reflection": "예시 두 가지 비교",
+          "anchor": "teacher-93",
+          "sourceRow": 93
+        },
+        {
+          "name": "안*수",
+          "focus": "학습 순서 설계",
+          "reflection": "예시 두 가지 비교",
+          "anchor": "teacher-94",
+          "sourceRow": 94
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/경기/하남풍산점/": {
+      "branch": "하남풍산점",
+      "teacherPage": "/선생님찾기/하남풍산점/",
+      "teachers": [
+        {
+          "name": "최*재",
+          "focus": "다른 사람에게 설명",
+          "reflection": "설명 순서 바꾸기",
+          "anchor": "teacher-477",
+          "sourceRow": 477
+        },
+        {
+          "name": "유*나",
+          "focus": "학습 순서 설계",
+          "reflection": "설명 순서 바꾸기",
+          "anchor": "teacher-478",
+          "sourceRow": 478
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/다산도농점/": {
+      "branch": "다산도농점",
+      "teacherPage": "/선생님찾기/다산도농점/",
+      "teachers": [
+        {
+          "name": "박*행",
+          "focus": "학습 순서 설계",
+          "reflection": "작은 과제 선택",
+          "anchor": "teacher-190",
+          "sourceRow": 190
+        },
+        {
+          "name": "최 *",
+          "focus": "학습 전후 비교",
+          "reflection": "작은 과제 선택",
+          "anchor": "teacher-191",
+          "sourceRow": 191
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/대전/태평점/": {
+      "branch": "태평점",
+      "teacherPage": "/선생님찾기/태평점/",
+      "teachers": [
+        {
+          "name": "변*은",
+          "focus": "비슷한 내용 비교",
+          "reflection": "교재 없이 확인",
+          "anchor": "teacher-682",
+          "sourceRow": 682
+        },
+        {
+          "name": "황*지",
+          "focus": "학습 시간 배분",
+          "reflection": "교재 없이 확인",
+          "anchor": "teacher-683",
+          "sourceRow": 683
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/대전/도안점/": {
+      "branch": "도안점",
+      "teacherPage": "/선생님찾기/도안점/",
+      "teachers": [
+        {
+          "name": "허 *",
+          "focus": "수정 과정 익히기",
+          "reflection": "실수 점검표 만들기",
+          "anchor": "teacher-660",
+          "sourceRow": 660
+        },
+        {
+          "name": "전*재",
+          "focus": "핵심 표현 정리",
+          "reflection": "실수 점검표 만들기",
+          "anchor": "teacher-661",
+          "sourceRow": 661
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/서울/돈암점/": {
+      "branch": "돈암점",
+      "teacherPage": "/선생님찾기/돈암점/",
+      "teachers": [
+        {
+          "name": "박*영",
+          "focus": "스스로 이해 점검",
+          "reflection": "작은 예외 찾기",
+          "anchor": "teacher-781",
+          "sourceRow": 781
+        },
+        {
+          "name": "박*태",
+          "focus": "짧은 집중 구간",
+          "reflection": "작은 예외 찾기",
+          "anchor": "teacher-782",
+          "sourceRow": 782
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/동백점/": {
+      "branch": "동백점",
+      "teacherPage": "/선생님찾기/동백점/",
+      "teachers": [
+        {
+          "name": "이*욱",
+          "focus": "공부 시작 습관",
+          "reflection": "유사 과제 연결",
+          "anchor": "teacher-364",
+          "sourceRow": 364
+        },
+        {
+          "name": "이*애",
+          "focus": "스스로 이해 점검",
+          "reflection": "유사 과제 연결",
+          "anchor": "teacher-365",
+          "sourceRow": 365
+        }
+      ],
+      "profilesCount": 8
+    },
+    "/지점안내/경기/비전점/": {
+      "branch": "비전점",
+      "teacherPage": "/선생님찾기/비전점/",
+      "teachers": [
+        {
+          "name": "이*화",
+          "focus": "오답 원인 구분",
+          "reflection": "설명 순서 바꾸기",
+          "anchor": "teacher-451",
+          "sourceRow": 451
+        },
+        {
+          "name": "정*진",
+          "focus": "문제 조건 읽기",
+          "reflection": "설명 순서 바꾸기",
+          "anchor": "teacher-452",
+          "sourceRow": 452
+        }
+      ],
+      "profilesCount": 10
+    },
+    "/지점안내/서울/동소문점/": {
+      "branch": "동소문점",
+      "teacherPage": "/선생님찾기/동소문점/",
+      "teachers": [
+        {
+          "name": "김*하",
+          "focus": "개념 사이 연결",
+          "reflection": "작은 예외 찾기",
+          "anchor": "teacher-776",
+          "sourceRow": 776
+        },
+        {
+          "name": "김*아",
+          "focus": "익숙한 예시 활용",
+          "reflection": "작은 예외 찾기",
+          "anchor": "teacher-777",
+          "sourceRow": 777
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/인천/동춘점/": {
+      "branch": "동춘점",
+      "teacherPage": "/선생님찾기/동춘점/",
+      "teachers": [
+        {
+          "name": "박*안",
+          "focus": "비슷한 내용 비교",
+          "reflection": "두 풀이 비교하기",
+          "anchor": "teacher-874",
+          "sourceRow": 874
+        },
+        {
+          "name": "고*정",
+          "focus": "학습 시간 배분",
+          "reflection": "두 풀이 비교하기",
+          "anchor": "teacher-875",
+          "sourceRow": 875
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/경기/동탄목동점/": {
+      "branch": "동탄목동점",
+      "teacherPage": "/선생님찾기/동탄목동점/",
+      "teachers": [
+        {
+          "name": "배*영",
+          "focus": "핵심 표현 정리",
+          "reflection": "완료 기준 정하기",
+          "anchor": "teacher-501",
+          "sourceRow": 501
+        },
+        {
+          "name": "안*기",
+          "focus": "내용 분류하기",
+          "reflection": "완료 기준 정하기",
+          "anchor": "teacher-502",
+          "sourceRow": 502
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/운정점/": {
+      "branch": "운정점",
+      "teacherPage": "/선생님찾기/운정점/",
+      "teachers": [
+        {
+          "name": "서*규",
+          "focus": "개념 사이 연결",
+          "reflection": "중간 점검 질문",
+          "anchor": "teacher-424",
+          "sourceRow": 424
+        },
+        {
+          "name": "박*혜",
+          "focus": "익숙한 예시 활용",
+          "reflection": "중간 점검 질문",
+          "anchor": "teacher-425",
+          "sourceRow": 425
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/충남/두정점/": {
+      "branch": "두정점",
+      "teacherPage": "/선생님찾기/두정점/",
+      "teachers": [
+        {
+          "name": "정*리",
+          "focus": "핵심 내용 요약",
+          "reflection": "단계별 시간 살피기",
+          "anchor": "teacher-944",
+          "sourceRow": 944
+        },
+        {
+          "name": "최*호",
+          "focus": "기초 개념 재확인",
+          "reflection": "단계별 시간 살피기",
+          "anchor": "teacher-945",
+          "sourceRow": 945
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경북/두호점/": {
+      "branch": "두호점",
+      "teacherPage": "/선생님찾기/두호점/",
+      "teachers": [
+        {
+          "name": "이*수",
+          "focus": "학습 시간 배분",
+          "reflection": "피드백 한 가지 적용",
+          "anchor": "teacher-555",
+          "sourceRow": 555
+        },
+        {
+          "name": "김*정",
+          "focus": "공부 시작 습관",
+          "reflection": "피드백 한 가지 적용",
+          "anchor": "teacher-556",
+          "sourceRow": 556
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/대전/둔산점/": {
+      "branch": "둔산점",
+      "teacherPage": "/선생님찾기/둔산점/",
+      "teachers": [
+        {
+          "name": "송*정",
+          "focus": "비슷한 내용 비교",
+          "reflection": "실수 점검표 만들기",
+          "anchor": "teacher-650",
+          "sourceRow": 650
+        },
+        {
+          "name": "이*나",
+          "focus": "학습 시간 배분",
+          "reflection": "실수 점검표 만들기",
+          "anchor": "teacher-651",
+          "sourceRow": 651
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/서울/염창점/": {
+      "branch": "염창점",
+      "teacherPage": "/선생님찾기/염창점/",
+      "teachers": [
+        {
+          "name": "최*명",
+          "focus": "마지막 풀이 검토",
+          "reflection": "어려움의 변화 기록",
+          "anchor": "teacher-727",
+          "sourceRow": 727
+        },
+        {
+          "name": "송*식",
+          "focus": "학습 목표 대화",
+          "reflection": "어려움의 변화 기록",
+          "anchor": "teacher-728",
+          "sourceRow": 728
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/서울/신방화점/": {
+      "branch": "신방화점",
+      "teacherPage": "/선생님찾기/신방화점/",
+      "teachers": [
+        {
+          "name": "조*균",
+          "focus": "자료 정돈하기",
+          "reflection": "어려움의 변화 기록",
+          "anchor": "teacher-731",
+          "sourceRow": 731
+        },
+        {
+          "name": "전*규",
+          "focus": "과제 난도 조절",
+          "reflection": "어려움의 변화 기록",
+          "anchor": "teacher-732",
+          "sourceRow": 732
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/마두점/": {
+      "branch": "마두점",
+      "teacherPage": "/선생님찾기/마두점/",
+      "teachers": [
+        {
+          "name": "구*홍",
+          "focus": "학습 순서 설계",
+          "reflection": "다음 질문 남기기",
+          "anchor": "teacher-62",
+          "sourceRow": 62
+        },
+        {
+          "name": "송*규",
+          "focus": "학습 전후 비교",
+          "reflection": "다음 질문 남기기",
+          "anchor": "teacher-63",
+          "sourceRow": 63
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/경기/장기점/": {
+      "branch": "장기점",
+      "teacherPage": "/선생님찾기/장기점/",
+      "teachers": [
+        {
+          "name": "오*석",
+          "focus": "익숙한 예시 활용",
+          "reflection": "과정에 표시하기",
+          "anchor": "teacher-137",
+          "sourceRow": 137
+        },
+        {
+          "name": "김*진",
+          "focus": "비슷한 내용 비교",
+          "reflection": "과정에 표시하기",
+          "anchor": "teacher-138",
+          "sourceRow": 138
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/대구/수성만촌점/": {
+      "branch": "수성만촌점",
+      "teacherPage": "/선생님찾기/수성만촌점/",
+      "teachers": [
+        {
+          "name": "김*지",
+          "focus": "문제 조건 읽기",
+          "reflection": "과제 선택 이유",
+          "anchor": "teacher-612",
+          "sourceRow": 612
+        },
+        {
+          "name": "이*은",
+          "focus": "작은 목표 설정",
+          "reflection": "과제 선택 이유",
+          "anchor": "teacher-613",
+          "sourceRow": 613
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/센트럴점/": {
+      "branch": "센트럴점",
+      "teacherPage": "/선생님찾기/센트럴점/",
+      "teachers": [
+        {
+          "name": "우*희",
+          "focus": "기초 개념 재확인",
+          "reflection": "설명 순서 바꾸기",
+          "anchor": "teacher-465",
+          "sourceRow": 465
+        },
+        {
+          "name": "권*원",
+          "focus": "변형 문제 살피기",
+          "reflection": "설명 순서 바꾸기",
+          "anchor": "teacher-466",
+          "sourceRow": 466
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/망포점/": {
+      "branch": "망포점",
+      "teacherPage": "/선생님찾기/망포점/",
+      "teachers": [
+        {
+          "name": "지*성",
+          "focus": "짧은 집중 구간",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-302",
+          "sourceRow": 302
+        },
+        {
+          "name": "김*미",
+          "focus": "과제 분량 조절",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-303",
+          "sourceRow": 303
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/서울/명일점/": {
+      "branch": "명일점",
+      "teacherPage": "/선생님찾기/명일점/",
+      "teachers": [
+        {
+          "name": "조*형",
+          "focus": "풀이 과정 기록",
+          "reflection": "어려움의 변화 기록",
+          "anchor": "teacher-711",
+          "sourceRow": 711
+        },
+        {
+          "name": "원*주",
+          "focus": "개념 사이 연결",
+          "reflection": "어려움의 변화 기록",
+          "anchor": "teacher-712",
+          "sourceRow": 712
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/경기/목감점/": {
+      "branch": "목감점",
+      "teacherPage": "/선생님찾기/목감점(모두)/",
+      "teachers": [
+        {
+          "name": "장*석",
+          "focus": "오답 원인 구분",
+          "reflection": "재도전 전 확인",
+          "anchor": "teacher-323",
+          "sourceRow": 323
+        },
+        {
+          "name": "박*해",
+          "focus": "문제 조건 읽기",
+          "reflection": "재도전 전 확인",
+          "anchor": "teacher-324",
+          "sourceRow": 324
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/경기/산내점/": {
+      "branch": "산내점",
+      "teacherPage": "/선생님찾기/산내점/",
+      "teachers": [
+        {
+          "name": "홍*민",
+          "focus": "기초 개념 재확인",
+          "reflection": "중간 점검 질문",
+          "anchor": "teacher-433",
+          "sourceRow": 433
+        },
+        {
+          "name": "최*모",
+          "focus": "변형 문제 살피기",
+          "reflection": "중간 점검 질문",
+          "anchor": "teacher-434",
+          "sourceRow": 434
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/서울/목동점/": {
+      "branch": "목동점",
+      "teacherPage": "/선생님찾기/목동점/",
+      "teachers": [
+        {
+          "name": "양*직",
+          "focus": "학습 순서 설계",
+          "reflection": "작은 예외 찾기",
+          "anchor": "teacher-798",
+          "sourceRow": 798
+        },
+        {
+          "name": "김*영",
+          "focus": "학습 전후 비교",
+          "reflection": "작은 예외 찾기",
+          "anchor": "teacher-799",
+          "sourceRow": 799
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/미사점/": {
+      "branch": "미사점",
+      "teacherPage": "/선생님찾기/미사점/",
+      "teachers": [
+        {
+          "name": "김*미",
+          "focus": "내용 분류하기",
+          "reflection": "설명 순서 바꾸기",
+          "anchor": "teacher-470",
+          "sourceRow": 470
+        },
+        {
+          "name": "김*욱",
+          "focus": "마지막 풀이 검토",
+          "reflection": "설명 순서 바꾸기",
+          "anchor": "teacher-471",
+          "sourceRow": 471
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/서울/삼각산점/": {
+      "branch": "삼각산점",
+      "teacherPage": "/선생님찾기/삼각산점/",
+      "teachers": [
+        {
+          "name": "이*영",
+          "focus": "비슷한 내용 비교",
+          "reflection": "어려움의 변화 기록",
+          "anchor": "teacher-714",
+          "sourceRow": 714
+        },
+        {
+          "name": "임*균",
+          "focus": "학습 시간 배분",
+          "reflection": "어려움의 변화 기록",
+          "anchor": "teacher-715",
+          "sourceRow": 715
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/강원/혁신점/": {
+      "branch": "혁신점",
+      "teacherPage": "/선생님찾기/혁신점/",
+      "teachers": [
+        {
+          "name": "최*승",
+          "focus": "스스로 이해 점검",
+          "reflection": "설명 전후 비교",
+          "anchor": "teacher-13",
+          "sourceRow": 13
+        },
+        {
+          "name": "이*웅",
+          "focus": "짧은 집중 구간",
+          "reflection": "설명 전후 비교",
+          "anchor": "teacher-14",
+          "sourceRow": 14
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/울산/복산점/": {
+      "branch": "복산점",
+      "teacherPage": "/선생님찾기/복산점/",
+      "teachers": [
+        {
+          "name": "박*규",
+          "focus": "작은 목표 설정",
+          "reflection": "이전 기록 다시 읽기",
+          "anchor": "teacher-837",
+          "sourceRow": 837
+        },
+        {
+          "name": "나*화",
+          "focus": "복습 간격 조절",
+          "reflection": "이전 기록 다시 읽기",
+          "anchor": "teacher-838",
+          "sourceRow": 838
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/경기/반달점/": {
+      "branch": "반달점",
+      "teacherPage": "/선생님찾기/반달점/",
+      "teachers": [
+        {
+          "name": "김*연",
+          "focus": "마지막 풀이 검토",
+          "reflection": "질문 순서 정하기",
+          "anchor": "teacher-247",
+          "sourceRow": 247
+        },
+        {
+          "name": "박*민",
+          "focus": "학습 목표 대화",
+          "reflection": "질문 순서 정하기",
+          "anchor": "teacher-248",
+          "sourceRow": 248
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/대전/반석점/": {
+      "branch": "반석점",
+      "teacherPage": "/선생님찾기/반석점/",
+      "teachers": [
+        {
+          "name": "오*화",
+          "focus": "질문을 구체화",
+          "reflection": "교재 없이 확인",
+          "anchor": "teacher-674",
+          "sourceRow": 674
+        },
+        {
+          "name": "김*경",
+          "focus": "오답 원인 구분",
+          "reflection": "교재 없이 확인",
+          "anchor": "teacher-675",
+          "sourceRow": 675
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/경기/반송점/": {
+      "branch": "반송점",
+      "teacherPage": "/선생님찾기/반송점/",
+      "teachers": [
+        {
+          "name": "이*림",
+          "focus": "풀이 과정 기록",
+          "reflection": "완료 기준 정하기",
+          "anchor": "teacher-487",
+          "sourceRow": 487
+        },
+        {
+          "name": "송*우",
+          "focus": "개념 사이 연결",
+          "reflection": "완료 기준 정하기",
+          "anchor": "teacher-488",
+          "sourceRow": 488
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/부산/반여점/": {
+      "branch": "반여점",
+      "teacherPage": "/선생님찾기/반여점/",
+      "teachers": [
+        {
+          "name": "안*민",
+          "focus": "자기 언어로 설명",
+          "reflection": "어려움의 변화 기록",
+          "anchor": "teacher-705",
+          "sourceRow": 705
+        },
+        {
+          "name": "김*도",
+          "focus": "질문을 구체화",
+          "reflection": "어려움의 변화 기록",
+          "anchor": "teacher-706",
+          "sourceRow": 706
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/경기/배곧점/": {
+      "branch": "배곧점",
+      "teacherPage": "/선생님찾기/배곧점/",
+      "teachers": [
+        {
+          "name": "김*윤",
+          "focus": "익숙한 예시 활용",
+          "reflection": "재도전 전 확인",
+          "anchor": "teacher-329",
+          "sourceRow": 329
+        },
+        {
+          "name": "정 *",
+          "focus": "비슷한 내용 비교",
+          "reflection": "재도전 전 확인",
+          "anchor": "teacher-330",
+          "sourceRow": 330
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/대전/송촌점/": {
+      "branch": "송촌점",
+      "teacherPage": "/선생님찾기/송촌점/",
+      "teachers": [
+        {
+          "name": "김*민",
+          "focus": "작은 목표 설정",
+          "reflection": "실수 점검표 만들기",
+          "anchor": "teacher-645",
+          "sourceRow": 645
+        },
+        {
+          "name": "이*채",
+          "focus": "복습 간격 조절",
+          "reflection": "실수 점검표 만들기",
+          "anchor": "teacher-646",
+          "sourceRow": 646
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/별내점/": {
+      "branch": "별내점",
+      "teacherPage": "/선생님찾기/별내점/",
+      "teachers": [
+        {
+          "name": "이*재",
+          "focus": "개념 사이 연결",
+          "reflection": "작은 과제 선택",
+          "anchor": "teacher-168",
+          "sourceRow": 168
+        },
+        {
+          "name": "김*영",
+          "focus": "익숙한 예시 활용",
+          "reflection": "작은 과제 선택",
+          "anchor": "teacher-169",
+          "sourceRow": 169
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/별내중앙점/": {
+      "branch": "별내중앙점",
+      "teacherPage": "/선생님찾기/별내중앙점(모두)/",
+      "teachers": [
+        {
+          "name": "이*석",
+          "focus": "짧은 집중 구간",
+          "reflection": "조건 바꾸어 보기",
+          "anchor": "teacher-206",
+          "sourceRow": 206
+        },
+        {
+          "name": "박*욱",
+          "focus": "과제 분량 조절",
+          "reflection": "조건 바꾸어 보기",
+          "anchor": "teacher-207",
+          "sourceRow": 207
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/병점점/": {
+      "branch": "병점점",
+      "teacherPage": "/선생님찾기/병점점/",
+      "teachers": [
+        {
+          "name": "원*림",
+          "focus": "학습 전후 비교",
+          "reflection": "완료 기준 정하기",
+          "anchor": "teacher-511",
+          "sourceRow": 511
+        },
+        {
+          "name": "김*웅",
+          "focus": "스스로 문제 만들기",
+          "reflection": "완료 기준 정하기",
+          "anchor": "teacher-512",
+          "sourceRow": 512
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/보라점/": {
+      "branch": "보라점",
+      "teacherPage": "/선생님찾기/보라점/",
+      "teachers": [
+        {
+          "name": "김*웅",
+          "focus": "수정 과정 익히기",
+          "reflection": "유사 과제 연결",
+          "anchor": "teacher-372",
+          "sourceRow": 372
+        },
+        {
+          "name": "이*훈",
+          "focus": "핵심 표현 정리",
+          "reflection": "유사 과제 연결",
+          "anchor": "teacher-373",
+          "sourceRow": 373
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/대구/복현점/": {
+      "branch": "복현점",
+      "teacherPage": "/선생님찾기/복현점/",
+      "teachers": [
+        {
+          "name": "오*연",
+          "focus": "학습 순서 설계",
+          "reflection": "짧은 설명 녹여 쓰기",
+          "anchor": "teacher-606",
+          "sourceRow": 606
+        },
+        {
+          "name": "권*정",
+          "focus": "학습 전후 비교",
+          "reflection": "짧은 설명 녹여 쓰기",
+          "anchor": "teacher-607",
+          "sourceRow": 607
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/경기/봉담점/": {
+      "branch": "봉담점",
+      "teacherPage": "/선생님찾기/봉담점/",
+      "teachers": [
+        {
+          "name": "김*길",
+          "focus": "문제 조건 읽기",
+          "reflection": "낯선 표현 표시",
+          "anchor": "teacher-516",
+          "sourceRow": 516
+        },
+        {
+          "name": "문*린",
+          "focus": "작은 목표 설정",
+          "reflection": "낯선 표현 표시",
+          "anchor": "teacher-517",
+          "sourceRow": 517
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/충남/쌍용점/": {
+      "branch": "쌍용점",
+      "teacherPage": "/선생님찾기/쌍용점/",
+      "teachers": [
+        {
+          "name": "강*구",
+          "focus": "핵심 표현 정리",
+          "reflection": "단계별 시간 살피기",
+          "anchor": "teacher-949",
+          "sourceRow": 949
+        },
+        {
+          "name": "김*옥",
+          "focus": "내용 분류하기",
+          "reflection": "단계별 시간 살피기",
+          "anchor": "teacher-950",
+          "sourceRow": 950
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/대구/이시아폴리스점/": {
+      "branch": "이시아폴리스점",
+      "teacherPage": "/선생님찾기/이시아폴리스점/",
+      "teachers": [
+        {
+          "name": "김*수",
+          "focus": "비슷한 내용 비교",
+          "reflection": "짧은 설명 녹여 쓰기",
+          "anchor": "teacher-586",
+          "sourceRow": 586
+        },
+        {
+          "name": "이*은",
+          "focus": "학습 시간 배분",
+          "reflection": "짧은 설명 녹여 쓰기",
+          "anchor": "teacher-587",
+          "sourceRow": 587
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/충북/칠금점/": {
+      "branch": "칠금점",
+      "teacherPage": "/선생님찾기/칠금점/",
+      "teachers": [
+        {
+          "name": "박*수",
+          "focus": "진행 과정 기록",
+          "reflection": "배운 내용 분류하기",
+          "anchor": "teacher-985",
+          "sourceRow": 985
+        },
+        {
+          "name": "노*영",
+          "focus": "표와 그림 정리",
+          "reflection": "배운 내용 분류하기",
+          "anchor": "teacher-986",
+          "sourceRow": 986
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/인천/부평점/": {
+      "branch": "부평점",
+      "teacherPage": "/선생님찾기/부평점/",
+      "teachers": [
+        {
+          "name": "김*람",
+          "focus": "진행 과정 기록",
+          "reflection": "이전 기록 다시 읽기",
+          "anchor": "teacher-857",
+          "sourceRow": 857
+        },
+        {
+          "name": "최*식",
+          "focus": "표와 그림 정리",
+          "reflection": "이전 기록 다시 읽기",
+          "anchor": "teacher-858",
+          "sourceRow": 858
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/부발점/": {
+      "branch": "부발점",
+      "teacherPage": "/선생님찾기/부발점/",
+      "teachers": [
+        {
+          "name": "강*주",
+          "focus": "질문을 구체화",
+          "reflection": "중간 점검 질문",
+          "anchor": "teacher-418",
+          "sourceRow": 418
+        },
+        {
+          "name": "김*정",
+          "focus": "오답 원인 구분",
+          "reflection": "중간 점검 질문",
+          "anchor": "teacher-419",
+          "sourceRow": 419
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/경기/오산점/": {
+      "branch": "오산점",
+      "teacherPage": "/선생님찾기/오산점/",
+      "teachers": [
+        {
+          "name": "이*석",
+          "focus": "학습 순서 설계",
+          "reflection": "재도전 전 확인",
+          "anchor": "teacher-350",
+          "sourceRow": 350
+        },
+        {
+          "name": "송*섭",
+          "focus": "학습 전후 비교",
+          "reflection": "재도전 전 확인",
+          "anchor": "teacher-351",
+          "sourceRow": 351
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/상동점/": {
+      "branch": "상동점",
+      "teacherPage": "/선생님찾기/상동점/",
+      "teachers": [
+        {
+          "name": "김*준",
+          "focus": "작은 목표 설정",
+          "reflection": "질문 순서 정하기",
+          "anchor": "teacher-229",
+          "sourceRow": 229
+        },
+        {
+          "name": "박*숙",
+          "focus": "복습 간격 조절",
+          "reflection": "질문 순서 정하기",
+          "anchor": "teacher-230",
+          "sourceRow": 230
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/경기/중동점/": {
+      "branch": "중동점",
+      "teacherPage": "/선생님찾기/중동점/",
+      "teachers": [
+        {
+          "name": "최*민",
+          "focus": "스스로 문제 만들기",
+          "reflection": "조건 바꾸어 보기",
+          "anchor": "teacher-224",
+          "sourceRow": 224
+        },
+        {
+          "name": "최*리",
+          "focus": "자기 언어로 설명",
+          "reflection": "질문 순서 정하기",
+          "anchor": "teacher-225",
+          "sourceRow": 225
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/사우점/": {
+      "branch": "사우점",
+      "teacherPage": "/선생님찾기/사우점/",
+      "teachers": [
+        {
+          "name": "이*길",
+          "focus": "짧은 집중 구간",
+          "reflection": "과정에 표시하기",
+          "anchor": "teacher-142",
+          "sourceRow": 142
+        },
+        {
+          "name": "김 *",
+          "focus": "과제 분량 조절",
+          "reflection": "과정에 표시하기",
+          "anchor": "teacher-143",
+          "sourceRow": 143
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/충남/불당점/": {
+      "branch": "불당점",
+      "teacherPage": "/선생님찾기/불당점/",
+      "teachers": [
+        {
+          "name": "신*은",
+          "focus": "표와 그림 정리",
+          "reflection": "단계별 시간 살피기",
+          "anchor": "teacher-954",
+          "sourceRow": 954
+        },
+        {
+          "name": "정*라",
+          "focus": "자료 정돈하기",
+          "reflection": "단계별 시간 살피기",
+          "anchor": "teacher-955",
+          "sourceRow": 955
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/경기/비산점/": {
+      "branch": "비산점",
+      "teacherPage": "/선생님찾기/비산점/",
+      "teachers": [
+        {
+          "name": "김*철",
+          "focus": "핵심 표현 정리",
+          "reflection": "재도전 전 확인",
+          "anchor": "teacher-341",
+          "sourceRow": 341
+        },
+        {
+          "name": "서*희",
+          "focus": "내용 분류하기",
+          "reflection": "재도전 전 확인",
+          "anchor": "teacher-342",
+          "sourceRow": 342
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/경남/상남점/": {
+      "branch": "상남점",
+      "teacherPage": "/선생님찾기/상남점/",
+      "teachers": [
+        {
+          "name": "백*승",
+          "focus": "스스로 이해 점검",
+          "reflection": "낯선 표현 표시",
+          "anchor": "teacher-525",
+          "sourceRow": 525
+        },
+        {
+          "name": "박*선",
+          "focus": "짧은 집중 구간",
+          "reflection": "낯선 표현 표시",
+          "anchor": "teacher-526",
+          "sourceRow": 526
+        }
+      ],
+      "profilesCount": 9
+    },
+    "/지점안내/충북/산남점/": {
+      "branch": "산남점",
+      "teacherPage": "/선생님찾기/산남점/",
+      "teachers": [
+        {
+          "name": "양*영",
+          "focus": "익숙한 예시 활용",
+          "reflection": "배운 내용 분류하기",
+          "anchor": "teacher-969",
+          "sourceRow": 969
+        },
+        {
+          "name": "이*선",
+          "focus": "비슷한 내용 비교",
+          "reflection": "배운 내용 분류하기",
+          "anchor": "teacher-970",
+          "sourceRow": 970
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/광주/첨단점/": {
+      "branch": "첨단점",
+      "teacherPage": "/선생님찾기/첨단점/",
+      "teachers": [
+        {
+          "name": "조*라",
+          "focus": "학습 순서 설계",
+          "reflection": "두 풀이 비교하기",
+          "anchor": "teacher-894",
+          "sourceRow": 894
+        },
+        {
+          "name": "임*룡",
+          "focus": "학습 전후 비교",
+          "reflection": "두 풀이 비교하기",
+          "anchor": "teacher-895",
+          "sourceRow": 895
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/동탄호수점/": {
+      "branch": "동탄호수점",
+      "teacherPage": "/선생님찾기/동탄호수점/",
+      "teachers": [
+        {
+          "name": "이*정",
+          "focus": "스스로 이해 점검",
+          "reflection": "완료 기준 정하기",
+          "anchor": "teacher-493",
+          "sourceRow": 493
+        },
+        {
+          "name": "신*대",
+          "focus": "짧은 집중 구간",
+          "reflection": "완료 기준 정하기",
+          "anchor": "teacher-494",
+          "sourceRow": 494
+        }
+      ],
+      "profilesCount": 8
+    },
+    "/지점안내/인천/인천삼산점/": {
+      "branch": "인천삼산점",
+      "teacherPage": "/선생님찾기/인천삼산점/",
+      "teachers": [
+        {
+          "name": "허*영",
+          "focus": "다른 사람에게 설명",
+          "reflection": "이전 기록 다시 읽기",
+          "anchor": "teacher-861",
+          "sourceRow": 861
+        },
+        {
+          "name": "이*주",
+          "focus": "학습 순서 설계",
+          "reflection": "이전 기록 다시 읽기",
+          "anchor": "teacher-862",
+          "sourceRow": 862
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/원흥점/": {
+      "branch": "원흥점",
+      "teacherPage": "/선생님찾기/원흥점/",
+      "teachers": [
+        {
+          "name": "이*희",
+          "focus": "비슷한 내용 비교",
+          "reflection": "다음 질문 남기기",
+          "anchor": "teacher-42",
+          "sourceRow": 42
+        },
+        {
+          "name": "박*현",
+          "focus": "학습 시간 배분",
+          "reflection": "다음 질문 남기기",
+          "anchor": "teacher-43",
+          "sourceRow": 43
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/삼송점/": {
+      "branch": "삼송점",
+      "teacherPage": "/선생님찾기/삼송점/",
+      "teachers": [
+        {
+          "name": "최*희",
+          "focus": "짧은 집중 구간",
+          "reflection": "다음 질문 남기기",
+          "anchor": "teacher-46",
+          "sourceRow": 46
+        },
+        {
+          "name": "허*숙",
+          "focus": "과제 분량 조절",
+          "reflection": "다음 질문 남기기",
+          "anchor": "teacher-47",
+          "sourceRow": 47
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/경기/수진점/": {
+      "branch": "수진점",
+      "teacherPage": "/선생님찾기/수진점/",
+      "teachers": [
+        {
+          "name": "조*영",
+          "focus": "과제 난도 조절",
+          "reflection": "자기 평가 기준",
+          "anchor": "teacher-284",
+          "sourceRow": 284
+        },
+        {
+          "name": "김*현",
+          "focus": "다른 사람에게 설명",
+          "reflection": "자기 평가 기준",
+          "anchor": "teacher-285",
+          "sourceRow": 285
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/광주/치평점/": {
+      "branch": "치평점",
+      "teacherPage": "/선생님찾기/치평점/",
+      "teachers": [
+        {
+          "name": "조*희",
+          "focus": "학습 시간 배분",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-907",
+          "sourceRow": 907
+        },
+        {
+          "name": "이*조",
+          "focus": "공부 시작 습관",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-908",
+          "sourceRow": 908
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/서울/상암점/": {
+      "branch": "상암점",
+      "teacherPage": "/선생님찾기/상암점/",
+      "teachers": [
+        {
+          "name": "이*임",
+          "focus": "핵심 표현 정리",
+          "reflection": "비교 기준 먼저 정하기",
+          "anchor": "teacher-757",
+          "sourceRow": 757
+        },
+        {
+          "name": "오*라",
+          "focus": "내용 분류하기",
+          "reflection": "비교 기준 먼저 정하기",
+          "anchor": "teacher-758",
+          "sourceRow": 758
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/대구/신월성점/": {
+      "branch": "신월성점",
+      "teacherPage": "/선생님찾기/신월성점/",
+      "teachers": [
+        {
+          "name": "이*무",
+          "focus": "내용 분류하기",
+          "reflection": "피드백 한 가지 적용",
+          "anchor": "teacher-566",
+          "sourceRow": 566
+        },
+        {
+          "name": "이*언",
+          "focus": "마지막 풀이 검토",
+          "reflection": "피드백 한 가지 적용",
+          "anchor": "teacher-567",
+          "sourceRow": 567
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/경기/상현점/": {
+      "branch": "상현점",
+      "teacherPage": "/선생님찾기/상현점/",
+      "teachers": [
+        {
+          "name": "김*영",
+          "focus": "문제 조건 읽기",
+          "reflection": "학습 시작 기록",
+          "anchor": "teacher-388",
+          "sourceRow": 388
+        },
+        {
+          "name": "이*슬",
+          "focus": "작은 목표 설정",
+          "reflection": "학습 시작 기록",
+          "anchor": "teacher-389",
+          "sourceRow": 389
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/전북/서신점/": {
+      "branch": "서신점",
+      "teacherPage": "/선생님찾기/서신점/",
+      "teachers": [
+        {
+          "name": "김*연",
+          "focus": "마지막 풀이 검토",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-919",
+          "sourceRow": 919
+        },
+        {
+          "name": "조*준",
+          "focus": "학습 목표 대화",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-920",
+          "sourceRow": 920
+        }
+      ],
+      "profilesCount": 3
+    },
+    "/지점안내/경기/이충점/": {
+      "branch": "이충점",
+      "teacherPage": "/선생님찾기/이충점/",
+      "teachers": [
+        {
+          "name": "박*호",
+          "focus": "스스로 이해 점검",
+          "reflection": "설명 순서 바꾸기",
+          "anchor": "teacher-461",
+          "sourceRow": 461
+        },
+        {
+          "name": "최 *",
+          "focus": "짧은 집중 구간",
+          "reflection": "설명 순서 바꾸기",
+          "anchor": "teacher-462",
+          "sourceRow": 462
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/강원/석사점/": {
+      "branch": "석사점",
+      "teacherPage": null,
+      "teachers": [],
+      "profilesCount": 0
+    },
+    "/지점안내/광주/선운점/": {
+      "branch": "선운점",
+      "teacherPage": "/선생님찾기/선운점/",
+      "teachers": [
+        {
+          "name": "이*선",
+          "focus": "질문을 구체화",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-898",
+          "sourceRow": 898
+        },
+        {
+          "name": "권*연",
+          "focus": "오답 원인 구분",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-899",
+          "sourceRow": 899
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/신봉점/": {
+      "branch": "신봉점",
+      "teacherPage": "/선생님찾기/신봉점/",
+      "teachers": [
+        {
+          "name": "백*곤",
+          "focus": "핵심 내용 요약",
+          "reflection": "학습 시작 기록",
+          "anchor": "teacher-400",
+          "sourceRow": 400
+        },
+        {
+          "name": "박*아",
+          "focus": "기초 개념 재확인",
+          "reflection": "학습 시작 기록",
+          "anchor": "teacher-401",
+          "sourceRow": 401
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/원당점/": {
+      "branch": "원당점",
+      "teacherPage": "/선생님찾기/원당점/",
+      "teachers": [
+        {
+          "name": "최*혜",
+          "focus": "학습 전후 비교",
+          "reflection": "설명 전후 비교",
+          "anchor": "teacher-31",
+          "sourceRow": 31
+        },
+        {
+          "name": "박*원",
+          "focus": "스스로 문제 만들기",
+          "reflection": "설명 전후 비교",
+          "anchor": "teacher-32",
+          "sourceRow": 32
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/대구/이곡점/": {
+      "branch": "이곡점",
+      "teacherPage": "/선생님찾기/이곡점/",
+      "teachers": [
+        {
+          "name": "전*효",
+          "focus": "변형 문제 살피기",
+          "reflection": "피드백 한 가지 적용",
+          "anchor": "teacher-562",
+          "sourceRow": 562
+        },
+        {
+          "name": "박*서",
+          "focus": "선택 근거 말하기",
+          "reflection": "피드백 한 가지 적용",
+          "anchor": "teacher-563",
+          "sourceRow": 563
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/소하점/": {
+      "branch": "소하점",
+      "teacherPage": "/선생님찾기/소하점/",
+      "teachers": [
+        {
+          "name": "이*철",
+          "focus": "수정 과정 익히기",
+          "reflection": "짧은 회상 활동",
+          "anchor": "teacher-116",
+          "sourceRow": 116
+        },
+        {
+          "name": "김*나",
+          "focus": "핵심 표현 정리",
+          "reflection": "짧은 회상 활동",
+          "anchor": "teacher-117",
+          "sourceRow": 117
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/인천/웰카운티점/": {
+      "branch": "웰카운티점",
+      "teacherPage": "/선생님찾기/웰카운티점/",
+      "teachers": [
+        {
+          "name": "김*헌",
+          "focus": "핵심 내용 요약",
+          "reflection": "두 풀이 비교하기",
+          "anchor": "teacher-880",
+          "sourceRow": 880
+        },
+        {
+          "name": "지*정",
+          "focus": "기초 개념 재확인",
+          "reflection": "두 풀이 비교하기",
+          "anchor": "teacher-881",
+          "sourceRow": 881
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/인천/송도점/": {
+      "branch": "송도점",
+      "teacherPage": "/선생님찾기/송도점/",
+      "teachers": [
+        {
+          "name": "김*언",
+          "focus": "자기 언어로 설명",
+          "reflection": "두 풀이 비교하기",
+          "anchor": "teacher-865",
+          "sourceRow": 865
+        },
+        {
+          "name": "김*정",
+          "focus": "질문을 구체화",
+          "reflection": "두 풀이 비교하기",
+          "anchor": "teacher-866",
+          "sourceRow": 866
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/울산/송정점/": {
+      "branch": "송정점",
+      "teacherPage": "/선생님찾기/송정점/",
+      "teachers": [
+        {
+          "name": "임*권",
+          "focus": "학습 순서 설계",
+          "reflection": "학습 분량 되돌아보기",
+          "anchor": "teacher-830",
+          "sourceRow": 830
+        },
+        {
+          "name": "박*민",
+          "focus": "학습 전후 비교",
+          "reflection": "학습 분량 되돌아보기",
+          "anchor": "teacher-831",
+          "sourceRow": 831
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/전북/송천점/": {
+      "branch": "송천점",
+      "teacherPage": "/선생님찾기/송천점/",
+      "teachers": [
+        {
+          "name": "김*수",
+          "focus": "기초 개념 재확인",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-913",
+          "sourceRow": 913
+        },
+        {
+          "name": "최*용",
+          "focus": "변형 문제 살피기",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-914",
+          "sourceRow": 914
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/대구/수성2가점/": {
+      "branch": "수성2가점",
+      "teacherPage": "/선생님찾기/수성2가점/",
+      "teachers": [
+        {
+          "name": "서*윤",
+          "focus": "스스로 이해 점검",
+          "reflection": "과제 선택 이유",
+          "anchor": "teacher-621",
+          "sourceRow": 621
+        },
+        {
+          "name": "김*환",
+          "focus": "짧은 집중 구간",
+          "reflection": "과제 선택 이유",
+          "anchor": "teacher-622",
+          "sourceRow": 622
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/광주/수완점/": {
+      "branch": "수완점",
+      "teacherPage": "/선생님찾기/수완점/",
+      "teachers": [
+        {
+          "name": "남*주",
+          "focus": "핵심 표현 정리",
+          "reflection": "두 풀이 비교하기",
+          "anchor": "teacher-885",
+          "sourceRow": 885
+        },
+        {
+          "name": "박*현",
+          "focus": "내용 분류하기",
+          "reflection": "두 풀이 비교하기",
+          "anchor": "teacher-886",
+          "sourceRow": 886
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/서수원점/": {
+      "branch": "서수원점",
+      "teacherPage": "/선생님찾기/서수원점/",
+      "teachers": [
+        {
+          "name": "정*아",
+          "focus": "작은 목표 설정",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-293",
+          "sourceRow": 293
+        },
+        {
+          "name": "장*우",
+          "focus": "복습 간격 조절",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-294",
+          "sourceRow": 294
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/대구/대구역점/": {
+      "branch": "대구역점",
+      "teacherPage": "/선생님찾기/대구역점/",
+      "teachers": [
+        {
+          "name": "박*아",
+          "focus": "기초 개념 재확인",
+          "reflection": "과제 선택 이유",
+          "anchor": "teacher-625",
+          "sourceRow": 625
+        },
+        {
+          "name": "배*선",
+          "focus": "변형 문제 살피기",
+          "reflection": "과제 선택 이유",
+          "anchor": "teacher-626",
+          "sourceRow": 626
+        }
+      ],
+      "profilesCount": 8
+    },
+    "/지점안내/서울/금천점/": {
+      "branch": "금천점",
+      "teacherPage": "/선생님찾기/금천점/",
+      "teachers": [
+        {
+          "name": "김*숙",
+          "focus": "풀이 과정 기록",
+          "reflection": "비교 기준 먼저 정하기",
+          "anchor": "teacher-743",
+          "sourceRow": 743
+        },
+        {
+          "name": "오*훈",
+          "focus": "개념 사이 연결",
+          "reflection": "비교 기준 먼저 정하기",
+          "anchor": "teacher-744",
+          "sourceRow": 744
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/풍동점/": {
+      "branch": "풍동점",
+      "teacherPage": "/선생님찾기/풍동점/",
+      "teachers": [
+        {
+          "name": "유*종",
+          "focus": "진행 과정 기록",
+          "reflection": "다음 질문 남기기",
+          "anchor": "teacher-57",
+          "sourceRow": 57
+        },
+        {
+          "name": "남*숙",
+          "focus": "표와 그림 정리",
+          "reflection": "다음 질문 남기기",
+          "anchor": "teacher-58",
+          "sourceRow": 58
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/대구/율하점/": {
+      "branch": "율하점",
+      "teacherPage": "/선생님찾기/율하점/",
+      "teachers": [
+        {
+          "name": "김*경",
+          "focus": "복습 간격 조절",
+          "reflection": "짧은 설명 녹여 쓰기",
+          "anchor": "teacher-582",
+          "sourceRow": 582
+        },
+        {
+          "name": "황*정",
+          "focus": "풀이 과정 기록",
+          "reflection": "짧은 설명 녹여 쓰기",
+          "anchor": "teacher-583",
+          "sourceRow": 583
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/서울/신도림점/": {
+      "branch": "신도림점",
+      "teacherPage": "/선생님찾기/신도림점/",
+      "teachers": [
+        {
+          "name": "김*나",
+          "focus": "질문을 구체화",
+          "reflection": "비교 기준 먼저 정하기",
+          "anchor": "teacher-738",
+          "sourceRow": 738
+        },
+        {
+          "name": "박*현",
+          "focus": "오답 원인 구분",
+          "reflection": "비교 기준 먼저 정하기",
+          "anchor": "teacher-739",
+          "sourceRow": 739
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/충남/신방점/": {
+      "branch": "신방점",
+      "teacherPage": "/선생님찾기/신방점/",
+      "teachers": [
+        {
+          "name": "허*희",
+          "focus": "학습 시간 배분",
+          "reflection": "단계별 시간 살피기",
+          "anchor": "teacher-939",
+          "sourceRow": 939
+        },
+        {
+          "name": "안*아",
+          "focus": "공부 시작 습관",
+          "reflection": "단계별 시간 살피기",
+          "anchor": "teacher-940",
+          "sourceRow": 940
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/서울/마포2호점/": {
+      "branch": "마포2호점",
+      "teacherPage": "/선생님찾기/마포2호점/",
+      "teachers": [
+        {
+          "name": "심*신",
+          "focus": "다른 사람에게 설명",
+          "reflection": "비교 기준 먼저 정하기",
+          "anchor": "teacher-765",
+          "sourceRow": 765
+        },
+        {
+          "name": "한*곤",
+          "focus": "학습 순서 설계",
+          "reflection": "비교 기준 먼저 정하기",
+          "anchor": "teacher-766",
+          "sourceRow": 766
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/경기/신중동점/": {
+      "branch": "신중동점",
+      "teacherPage": "/선생님찾기/신중동점/",
+      "teachers": [
+        {
+          "name": "김*훈",
+          "focus": "공부 시작 습관",
+          "reflection": "질문 순서 정하기",
+          "anchor": "teacher-236",
+          "sourceRow": 236
+        },
+        {
+          "name": "박*원",
+          "focus": "스스로 이해 점검",
+          "reflection": "질문 순서 정하기",
+          "anchor": "teacher-237",
+          "sourceRow": 237
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/광주/신창점/": {
+      "branch": "신창점",
+      "teacherPage": "/선생님찾기/신창점/",
+      "teachers": [
+        {
+          "name": "김*정",
+          "focus": "진행 과정 기록",
+          "reflection": "두 풀이 비교하기",
+          "anchor": "teacher-889",
+          "sourceRow": 889
+        },
+        {
+          "name": "양*철",
+          "focus": "표와 그림 정리",
+          "reflection": "두 풀이 비교하기",
+          "anchor": "teacher-890",
+          "sourceRow": 890
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/운정호수점/": {
+      "branch": "운정호수점",
+      "teacherPage": "/선생님찾기/운정호수점/",
+      "teachers": [
+        {
+          "name": "신*민",
+          "focus": "내용 분류하기",
+          "reflection": "중간 점검 질문",
+          "anchor": "teacher-438",
+          "sourceRow": 438
+        },
+        {
+          "name": "김*수",
+          "focus": "마지막 풀이 검토",
+          "reflection": "중간 점검 질문",
+          "anchor": "teacher-439",
+          "sourceRow": 439
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/야탑점/": {
+      "branch": "야탑점",
+      "teacherPage": "/선생님찾기/야탑점/",
+      "teachers": [
+        {
+          "name": "박*현",
+          "focus": "마지막 풀이 검토",
+          "reflection": "자기 평가 기준",
+          "anchor": "teacher-279",
+          "sourceRow": 279
+        },
+        {
+          "name": "김*태",
+          "focus": "학습 목표 대화",
+          "reflection": "자기 평가 기준",
+          "anchor": "teacher-280",
+          "sourceRow": 280
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경북/양덕점/": {
+      "branch": "양덕점",
+      "teacherPage": "/선생님찾기/양덕점/",
+      "teachers": [
+        {
+          "name": "김*은",
+          "focus": "짧은 집중 구간",
+          "reflection": "피드백 한 가지 적용",
+          "anchor": "teacher-558",
+          "sourceRow": 558
+        },
+        {
+          "name": "김*섭",
+          "focus": "과제 분량 조절",
+          "reflection": "피드백 한 가지 적용",
+          "anchor": "teacher-559",
+          "sourceRow": 559
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/흥덕점/": {
+      "branch": "흥덕점",
+      "teacherPage": "/선생님찾기/흥덕점/",
+      "teachers": [
+        {
+          "name": "박*현",
+          "focus": "학습 목표 대화",
+          "reflection": "유사 과제 연결",
+          "anchor": "teacher-376",
+          "sourceRow": 376
+        },
+        {
+          "name": "이*우",
+          "focus": "진행 과정 기록",
+          "reflection": "유사 과제 연결",
+          "anchor": "teacher-377",
+          "sourceRow": 377
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/영천점/": {
+      "branch": "영천점",
+      "teacherPage": "/선생님찾기/영천점/",
+      "teachers": [
+        {
+          "name": "박*균",
+          "focus": "질문을 구체화",
+          "reflection": "완료 기준 정하기",
+          "anchor": "teacher-482",
+          "sourceRow": 482
+        },
+        {
+          "name": "최*진",
+          "focus": "오답 원인 구분",
+          "reflection": "완료 기준 정하기",
+          "anchor": "teacher-483",
+          "sourceRow": 483
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/영통점/": {
+      "branch": "영통점",
+      "teacherPage": "/선생님찾기/영통점/",
+      "teachers": [
+        {
+          "name": "오*혁",
+          "focus": "익숙한 예시 활용",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-297",
+          "sourceRow": 297
+        },
+        {
+          "name": "강*영",
+          "focus": "비슷한 내용 비교",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-298",
+          "sourceRow": 298
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경북/옥계점/": {
+      "branch": "옥계점",
+      "teacherPage": "/선생님찾기/옥계점/",
+      "teachers": [
+        {
+          "name": "신*철",
+          "focus": "풀이 과정 기록",
+          "reflection": "피드백 한 가지 적용",
+          "anchor": "teacher-551",
+          "sourceRow": 551
+        },
+        {
+          "name": "이*정",
+          "focus": "개념 사이 연결",
+          "reflection": "피드백 한 가지 적용",
+          "anchor": "teacher-552",
+          "sourceRow": 552
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/옥길점/": {
+      "branch": "옥길점",
+      "teacherPage": "/선생님찾기/옥길점/",
+      "teachers": [
+        {
+          "name": "박*정",
+          "focus": "선택 근거 말하기",
+          "reflection": "조건 바꾸어 보기",
+          "anchor": "teacher-211",
+          "sourceRow": 211
+        },
+        {
+          "name": "최*열",
+          "focus": "수정 과정 익히기",
+          "reflection": "조건 바꾸어 보기",
+          "anchor": "teacher-212",
+          "sourceRow": 212
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경북/정평점/": {
+      "branch": "정평점",
+      "teacherPage": "/선생님찾기/정평점/",
+      "teachers": [
+        {
+          "name": "박*원",
+          "focus": "과제 난도 조절",
+          "reflection": "낯선 표현 표시",
+          "anchor": "teacher-540",
+          "sourceRow": 540
+        },
+        {
+          "name": "김*진",
+          "focus": "다른 사람에게 설명",
+          "reflection": "낯선 표현 표시",
+          "anchor": "teacher-541",
+          "sourceRow": 541
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/경기/옥정점/": {
+      "branch": "옥정점",
+      "teacherPage": "/선생님찾기/옥정점/",
+      "teachers": [
+        {
+          "name": "장*규",
+          "focus": "학습 목표 대화",
+          "reflection": "재도전 전 확인",
+          "anchor": "teacher-344",
+          "sourceRow": 344
+        },
+        {
+          "name": "김*현",
+          "focus": "진행 과정 기록",
+          "reflection": "재도전 전 확인",
+          "anchor": "teacher-345",
+          "sourceRow": 345
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/부산/동래점/": {
+      "branch": "동래점",
+      "teacherPage": "/선생님찾기/동래점/",
+      "teachers": [
+        {
+          "name": "김*성",
+          "focus": "스스로 이해 점검",
+          "reflection": "교재 없이 확인",
+          "anchor": "teacher-685",
+          "sourceRow": 685
+        },
+        {
+          "name": "박*근",
+          "focus": "짧은 집중 구간",
+          "reflection": "교재 없이 확인",
+          "anchor": "teacher-686",
+          "sourceRow": 686
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/서울/제기점/": {
+      "branch": "제기점",
+      "teacherPage": "/선생님찾기/제기점/",
+      "teachers": [
+        {
+          "name": "김*현",
+          "focus": "핵심 내용 요약",
+          "reflection": "비교 기준 먼저 정하기",
+          "anchor": "teacher-752",
+          "sourceRow": 752
+        },
+        {
+          "name": "이*박",
+          "focus": "기초 개념 재확인",
+          "reflection": "비교 기준 먼저 정하기",
+          "anchor": "teacher-753",
+          "sourceRow": 753
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/용인백현점/": {
+      "branch": "용인백현점",
+      "teacherPage": "/선생님찾기/용인백현점(모두)/",
+      "teachers": [
+        {
+          "name": "엄*용",
+          "focus": "스스로 문제 만들기",
+          "reflection": "유사 과제 연결",
+          "anchor": "teacher-384",
+          "sourceRow": 384
+        },
+        {
+          "name": "이*환",
+          "focus": "자기 언어로 설명",
+          "reflection": "학습 시작 기록",
+          "anchor": "teacher-385",
+          "sourceRow": 385
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/운양점/": {
+      "branch": "운양점",
+      "teacherPage": "/선생님찾기/운양점/",
+      "teachers": [
+        {
+          "name": "이*연",
+          "focus": "변형 문제 살피기",
+          "reflection": "과정에 표시하기",
+          "anchor": "teacher-146",
+          "sourceRow": 146
+        },
+        {
+          "name": "전*민",
+          "focus": "선택 근거 말하기",
+          "reflection": "과정에 표시하기",
+          "anchor": "teacher-147",
+          "sourceRow": 147
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/경기/운정중앙점/": {
+      "branch": "운정중앙점",
+      "teacherPage": "/선생님찾기/운정중앙점/",
+      "teachers": [
+        {
+          "name": "김*경",
+          "focus": "학습 전후 비교",
+          "reflection": "중간 점검 질문",
+          "anchor": "teacher-447",
+          "sourceRow": 447
+        },
+        {
+          "name": "고*리",
+          "focus": "스스로 문제 만들기",
+          "reflection": "중간 점검 질문",
+          "anchor": "teacher-448",
+          "sourceRow": 448
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/서울/위례점/": {
+      "branch": "위례점",
+      "teacherPage": "/선생님찾기/위례점/",
+      "teachers": [
+        {
+          "name": "손*우",
+          "focus": "문제 조건 읽기",
+          "reflection": "자기 평가 기준",
+          "anchor": "teacher-260",
+          "sourceRow": 260
+        },
+        {
+          "name": "이*원",
+          "focus": "작은 목표 설정",
+          "reflection": "자기 평가 기준",
+          "anchor": "teacher-261",
+          "sourceRow": 261
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/이매점/": {
+      "branch": "이매점",
+      "teacherPage": "/선생님찾기/이매점/",
+      "teachers": [
+        {
+          "name": "신*호",
+          "focus": "다른 사람에게 설명",
+          "reflection": "질문 순서 정하기",
+          "anchor": "teacher-253",
+          "sourceRow": 253
+        },
+        {
+          "name": "이*영",
+          "focus": "학습 순서 설계",
+          "reflection": "질문 순서 정하기",
+          "anchor": "teacher-254",
+          "sourceRow": 254
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/경기/후곡점/": {
+      "branch": "후곡점",
+      "teacherPage": "/선생님찾기/후곡점/",
+      "teachers": [
+        {
+          "name": "전*라",
+          "focus": "학습 목표 대화",
+          "reflection": "예시 두 가지 비교",
+          "anchor": "teacher-88",
+          "sourceRow": 88
+        },
+        {
+          "name": "김*석",
+          "focus": "진행 과정 기록",
+          "reflection": "예시 두 가지 비교",
+          "anchor": "teacher-89",
+          "sourceRow": 89
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/장곡점/": {
+      "branch": "장곡점",
+      "teacherPage": "/선생님찾기/장곡점/",
+      "teachers": [
+        {
+          "name": "김*선",
+          "focus": "표와 그림 정리",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-314",
+          "sourceRow": 314
+        },
+        {
+          "name": "박*배",
+          "focus": "자료 정돈하기",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-315",
+          "sourceRow": 315
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/전북/전주혁신점/": {
+      "branch": "전주혁신점",
+      "teacherPage": "/선생님찾기/전주혁신점/",
+      "teachers": [
+        {
+          "name": "박*완",
+          "focus": "과제 분량 조절",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-911",
+          "sourceRow": 911
+        },
+        {
+          "name": "배*민",
+          "focus": "핵심 내용 요약",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-912",
+          "sourceRow": 912
+        }
+      ],
+      "profilesCount": 2
+    },
+    "/지점안내/경기/중산점/": {
+      "branch": "중산점",
+      "teacherPage": "/선생님찾기/중산점/",
+      "teachers": [
+        {
+          "name": "양*원",
+          "focus": "문제 조건 읽기",
+          "reflection": "예시 두 가지 비교",
+          "anchor": "teacher-68",
+          "sourceRow": 68
+        },
+        {
+          "name": "박*미",
+          "focus": "작은 목표 설정",
+          "reflection": "예시 두 가지 비교",
+          "anchor": "teacher-69",
+          "sourceRow": 69
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/경기/천천점/": {
+      "branch": "천천점",
+      "teacherPage": "/선생님찾기/천천점/",
+      "teachers": [
+        {
+          "name": "권*준",
+          "focus": "내용 분류하기",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-310",
+          "sourceRow": 310
+        },
+        {
+          "name": "성*제",
+          "focus": "마지막 풀이 검토",
+          "reflection": "핵심 문장 만들기",
+          "anchor": "teacher-311",
+          "sourceRow": 311
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/부산/좌동점/": {
+      "branch": "좌동점",
+      "teacherPage": "/선생님찾기/좌동점/",
+      "teachers": [
+        {
+          "name": "이*화",
+          "focus": "다른 사람에게 설명",
+          "reflection": "교재 없이 확인",
+          "anchor": "teacher-701",
+          "sourceRow": 701
+        },
+        {
+          "name": "김*석",
+          "focus": "학습 순서 설계",
+          "reflection": "교재 없이 확인",
+          "anchor": "teacher-702",
+          "sourceRow": 702
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/광주/진월점/": {
+      "branch": "진월점",
+      "teacherPage": "/선생님찾기/진월점/",
+      "teachers": [
+        {
+          "name": "강*형",
+          "focus": "풀이 과정 기록",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-903",
+          "sourceRow": 903
+        },
+        {
+          "name": "윤*우",
+          "focus": "개념 사이 연결",
+          "reflection": "확인 질문 직접 쓰기",
+          "anchor": "teacher-904",
+          "sourceRow": 904
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/서울/하계점/": {
+      "branch": "하계점",
+      "teacherPage": "/선생님찾기/하계점/",
+      "teachers": [
+        {
+          "name": "이*정",
+          "focus": "학습 시간 배분",
+          "reflection": "비교 기준 먼저 정하기",
+          "anchor": "teacher-747",
+          "sourceRow": 747
+        },
+        {
+          "name": "신*수",
+          "focus": "공부 시작 습관",
+          "reflection": "비교 기준 먼저 정하기",
+          "anchor": "teacher-748",
+          "sourceRow": 748
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/진접점/": {
+      "branch": "진접점",
+      "teacherPage": "/선생님찾기/진접점/",
+      "teachers": [
+        {
+          "name": "김*은",
+          "focus": "마지막 풀이 검토",
+          "reflection": "작은 과제 선택",
+          "anchor": "teacher-183",
+          "sourceRow": 183
+        },
+        {
+          "name": "박*건",
+          "focus": "학습 목표 대화",
+          "reflection": "작은 과제 선택",
+          "anchor": "teacher-184",
+          "sourceRow": 184
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/철산점/": {
+      "branch": "철산점",
+      "teacherPage": "/선생님찾기/철산점/",
+      "teachers": [
+        {
+          "name": "유*우",
+          "focus": "익숙한 예시 활용",
+          "reflection": "짧은 회상 활동",
+          "anchor": "teacher-105",
+          "sourceRow": 105
+        },
+        {
+          "name": "송*희",
+          "focus": "비슷한 내용 비교",
+          "reflection": "짧은 회상 활동",
+          "anchor": "teacher-106",
+          "sourceRow": 106
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/인천/청라점/": {
+      "branch": "청라점",
+      "teacherPage": "/선생님찾기/청라점/",
+      "teachers": [
+        {
+          "name": "유*호",
+          "focus": "질문을 구체화",
+          "reflection": "다음 학습 연결",
+          "anchor": "teacher-994",
+          "sourceRow": 994
+        },
+        {
+          "name": "안*국",
+          "focus": "오답 원인 구분",
+          "reflection": "다음 학습 연결",
+          "anchor": "teacher-995",
+          "sourceRow": 995
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/충북/충주용산점/": {
+      "branch": "충주용산점",
+      "teacherPage": "/선생님찾기/충주용산점/",
+      "teachers": [
+        {
+          "name": "정*영",
+          "focus": "학습 순서 설계",
+          "reflection": "배운 내용 분류하기",
+          "anchor": "teacher-990",
+          "sourceRow": 990
+        },
+        {
+          "name": "김*현",
+          "focus": "학습 전후 비교",
+          "reflection": "배운 내용 분류하기",
+          "anchor": "teacher-991",
+          "sourceRow": 991
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/탄현점/": {
+      "branch": "탄현점",
+      "teacherPage": "/선생님찾기/탄현점/",
+      "teachers": [
+        {
+          "name": "이*정",
+          "focus": "수정 과정 익히기",
+          "reflection": "예시 두 가지 비교",
+          "anchor": "teacher-84",
+          "sourceRow": 84
+        },
+        {
+          "name": "김*순",
+          "focus": "핵심 표현 정리",
+          "reflection": "예시 두 가지 비교",
+          "anchor": "teacher-85",
+          "sourceRow": 85
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/충남/탕정점/": {
+      "branch": "탕정점",
+      "teacherPage": "/선생님찾기/탕정점(모두)/",
+      "teachers": [
+        {
+          "name": "안*영",
+          "focus": "작은 목표 설정",
+          "reflection": "단계별 시간 살피기",
+          "anchor": "teacher-933",
+          "sourceRow": 933
+        },
+        {
+          "name": "석*수",
+          "focus": "복습 간격 조절",
+          "reflection": "단계별 시간 살피기",
+          "anchor": "teacher-934",
+          "sourceRow": 934
+        }
+      ],
+      "profilesCount": 6
+    },
+    "/지점안내/경기/화정점/": {
+      "branch": "화정점",
+      "teacherPage": "/선생님찾기/화정점/",
+      "teachers": [
+        {
+          "name": "최*현",
+          "focus": "학습 목표 대화",
+          "reflection": "설명 전후 비교",
+          "anchor": "teacher-24",
+          "sourceRow": 24
+        },
+        {
+          "name": "김*일",
+          "focus": "진행 과정 기록",
+          "reflection": "설명 전후 비교",
+          "anchor": "teacher-25",
+          "sourceRow": 25
+        }
+      ],
+      "profilesCount": 7
+    },
+    "/지점안내/경기/퇴계원점/": {
+      "branch": "퇴계원점",
+      "teacherPage": "/선생님찾기/퇴계원점/",
+      "teachers": [
+        {
+          "name": "박*숙",
+          "focus": "작은 목표 설정",
+          "reflection": "조건 바꾸어 보기",
+          "anchor": "teacher-197",
+          "sourceRow": 197
+        },
+        {
+          "name": "황*석",
+          "focus": "복습 간격 조절",
+          "reflection": "조건 바꾸어 보기",
+          "anchor": "teacher-198",
+          "sourceRow": 198
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/평내점/": {
+      "branch": "평내점",
+      "teacherPage": "/선생님찾기/평내점/",
+      "teachers": [
+        {
+          "name": "변*애",
+          "focus": "학습 목표 대화",
+          "reflection": "과정에 표시하기",
+          "anchor": "teacher-152",
+          "sourceRow": 152
+        },
+        {
+          "name": "김*진",
+          "focus": "진행 과정 기록",
+          "reflection": "과정에 표시하기",
+          "anchor": "teacher-153",
+          "sourceRow": 153
+        }
+      ],
+      "profilesCount": 9
+    },
+    "/지점안내/경기/수지점/": {
+      "branch": "수지점",
+      "teacherPage": "/선생님찾기/수지점/",
+      "teachers": [
+        {
+          "name": "이*근",
+          "focus": "개념 사이 연결",
+          "reflection": "학습 시작 기록",
+          "anchor": "teacher-392",
+          "sourceRow": 392
+        },
+        {
+          "name": "김*영",
+          "focus": "익숙한 예시 활용",
+          "reflection": "학습 시작 기록",
+          "anchor": "teacher-393",
+          "sourceRow": 393
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/행신점/": {
+      "branch": "행신점",
+      "teacherPage": "/선생님찾기/행신점/",
+      "teachers": [
+        {
+          "name": "오*은",
+          "focus": "핵심 표현 정리",
+          "reflection": "다음 질문 남기기",
+          "anchor": "teacher-53",
+          "sourceRow": 53
+        },
+        {
+          "name": "최*기",
+          "focus": "내용 분류하기",
+          "reflection": "다음 질문 남기기",
+          "anchor": "teacher-54",
+          "sourceRow": 54
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/향남점/": {
+      "branch": "향남점",
+      "teacherPage": "/선생님찾기/향남점/",
+      "teachers": [
+        {
+          "name": "김*연",
+          "focus": "표와 그림 정리",
+          "reflection": "완료 기준 정하기",
+          "anchor": "teacher-506",
+          "sourceRow": 506
+        },
+        {
+          "name": "장*일",
+          "focus": "자료 정돈하기",
+          "reflection": "완료 기준 정하기",
+          "anchor": "teacher-507",
+          "sourceRow": 507
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/호평점/": {
+      "branch": "호평점",
+      "teacherPage": "/선생님찾기/호평점/",
+      "teachers": [
+        {
+          "name": "민*기",
+          "focus": "스스로 이해 점검",
+          "reflection": "작은 과제 선택",
+          "anchor": "teacher-173",
+          "sourceRow": 173
+        },
+        {
+          "name": "이*기",
+          "focus": "짧은 집중 구간",
+          "reflection": "작은 과제 선택",
+          "anchor": "teacher-174",
+          "sourceRow": 174
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/부산/화명점/": {
+      "branch": "화명점",
+      "teacherPage": "/선생님찾기/화명점/",
+      "teachers": [
+        {
+          "name": "최*미",
+          "focus": "학습 목표 대화",
+          "reflection": "교재 없이 확인",
+          "anchor": "teacher-696",
+          "sourceRow": 696
+        },
+        {
+          "name": "임*솔",
+          "focus": "진행 과정 기록",
+          "reflection": "교재 없이 확인",
+          "anchor": "teacher-697",
+          "sourceRow": 697
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/화성태안점/": {
+      "branch": "화성태안점",
+      "teacherPage": "/선생님찾기/화성태안점/",
+      "teachers": [
+        {
+          "name": "박*영",
+          "focus": "오답 원인 구분",
+          "reflection": "낯선 표현 표시",
+          "anchor": "teacher-515",
+          "sourceRow": 515
+        }
+      ],
+      "profilesCount": 1
+    },
+    "/지점안내/강원/후평점/": {
+      "branch": "후평점",
+      "teacherPage": "/선생님찾기/후평점/",
+      "teachers": [
+        {
+          "name": "김*환",
+          "focus": "핵심 내용 요약",
+          "reflection": "설명 전후 비교",
+          "anchor": "teacher-16",
+          "sourceRow": 16
+        },
+        {
+          "name": "조*구",
+          "focus": "기초 개념 재확인",
+          "reflection": "설명 전후 비교",
+          "anchor": "teacher-17",
+          "sourceRow": 17
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/서울/송파위례점/": {
+      "branch": "송파위례점",
+      "teacherPage": "/선생님찾기/송파위례점/",
+      "teachers": [
+        {
+          "name": "이*준",
+          "focus": "표와 그림 정리",
+          "reflection": "작은 예외 찾기",
+          "anchor": "teacher-794",
+          "sourceRow": 794
+        },
+        {
+          "name": "한*수",
+          "focus": "자료 정돈하기",
+          "reflection": "작은 예외 찾기",
+          "anchor": "teacher-795",
+          "sourceRow": 795
+        }
+      ],
+      "profilesCount": 4
+    },
+    "/지점안내/경기/다산지금점/": {
+      "branch": "다산지금점",
+      "teacherPage": "/선생님찾기/다산지금점/",
+      "teachers": [
+        {
+          "name": "김*혜",
+          "focus": "변형 문제 살피기",
+          "reflection": "작은 과제 선택",
+          "anchor": "teacher-178",
+          "sourceRow": 178
+        },
+        {
+          "name": "이*민",
+          "focus": "선택 근거 말하기",
+          "reflection": "작은 과제 선택",
+          "anchor": "teacher-179",
+          "sourceRow": 179
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/별가람점/": {
+      "branch": "별가람점",
+      "teacherPage": "/선생님찾기/별가람점/",
+      "teachers": [
+        {
+          "name": "김*희",
+          "focus": "익숙한 예시 활용",
+          "reflection": "조건 바꾸어 보기",
+          "anchor": "teacher-201",
+          "sourceRow": 201
+        },
+        {
+          "name": "이*훈",
+          "focus": "비슷한 내용 비교",
+          "reflection": "조건 바꾸어 보기",
+          "anchor": "teacher-202",
+          "sourceRow": 202
+        }
+      ],
+      "profilesCount": 5
+    },
+    "/지점안내/경기/옥길스타점/": {
+      "branch": "옥길스타점",
+      "teacherPage": "/선생님찾기/옥길스타점/",
+      "teachers": [
+        {
+          "name": "김*우",
+          "focus": "학습 순서 설계",
+          "reflection": "조건 바꾸어 보기",
+          "anchor": "teacher-222",
+          "sourceRow": 222
+        },
+        {
+          "name": "김*아",
+          "focus": "학습 전후 비교",
+          "reflection": "조건 바꾸어 보기",
+          "anchor": "teacher-223",
+          "sourceRow": 223
+        }
+      ],
+      "profilesCount": 2
+    },
+    "/지점안내/경기/위례창곡점/": {
+      "branch": "위례창곡점",
+      "teacherPage": "/선생님찾기/위례창곡점/",
+      "teachers": [
+        {
+          "name": "박*주",
+          "focus": "기초 개념 재확인",
+          "reflection": "자기 평가 기준",
+          "anchor": "teacher-273",
+          "sourceRow": 273
+        },
+        {
+          "name": "조*주",
+          "focus": "변형 문제 살피기",
+          "reflection": "자기 평가 기준",
+          "anchor": "teacher-274",
+          "sourceRow": 274
+        }
+      ],
+      "profilesCount": 6
+    }
+  }
+}

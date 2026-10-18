@@ -40,3 +40,12 @@ workflow. Official reference: https://searchadvisor.naver.com/guide/indexnow-faq
 Search Advisor crawl/index data, public HTTP eligibility, search impressions,
 rank and AI source citations are separate evidence. No markup or notification
 guarantees search position or AI citation.
+
+The final `local-content-build.mjs` stage enriches existing consultation areas
+from exact curriculum rows and teacher profiles already linked to each branch.
+It preserves source dates, branch facts, URLs and image/map positions. Unknown
+profiles and course availability must never be inferred from similar names.
+Use its final `.local-content-report.json`, rather than the preceding stage's
+report, for production hash validation and IndexNow comparison. Validate every
+new profile anchor against the source page, and every added schema citation
+against the corresponding visible link. The source workbooks remain unchanged.

@@ -20,3 +20,4 @@ node_modules/
 tools/data/
 .seo-geo-report.json
 .indexnow-state.json
+.local-content-report.json
