@@ -41,11 +41,18 @@ Search Advisor crawl/index data, public HTTP eligibility, search impressions,
 rank and AI source citations are separate evidence. No markup or notification
 guarantees search position or AI citation.
 
-The final `local-content-build.mjs` stage enriches existing consultation areas
+The `local-content-build.mjs` stage enriches existing consultation areas
 from exact curriculum rows and teacher profiles already linked to each branch.
 It preserves source dates, branch facts, URLs and image/map positions. Unknown
 profiles and course availability must never be inferred from similar names.
-Use its final `.local-content-report.json`, rather than the preceding stage's
-report, for production hash validation and IndexNow comparison. Validate every
+Its `.local-content-report.json` records that intermediate output. Validate every
 new profile anchor against the source page, and every added schema citation
 against the corresponding visible link. The source workbooks remain unchanged.
+
+The final `content-refinement-build.mjs` stage consolidates exact repeated
+school lists and course qualifications. Subject-grade facts, distinct teachers,
+images, maps and visible source dates remain intact. Shared qualifications must
+retain explicit subject scope. FAQ changes must match visible answers and keep
+the full school reference list in the main body. Missing operating information
+must remain unconfirmed; preparation examples are not availability claims.
+Use `.content-refinement-report.json` as the final hash and IndexNow report.
