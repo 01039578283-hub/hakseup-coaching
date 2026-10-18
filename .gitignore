@@ -22,3 +22,4 @@ tools/data/
 .indexnow-state.json
 .local-content-report.json
 .content-refinement-report.json
+.page-roles-report.json

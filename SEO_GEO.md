@@ -58,3 +58,15 @@ must remain unconfirmed; preparation examples are not availability claims.
 Use `.content-refinement-report.json` as the final hash and IndexNow report.
 `release-build.mjs` runs every existing stage in that order and stops on failure;
 the short Vercel entry point avoids its 256-character build-command limit.
+
+The final `page-roles-build.mjs` stage revises existing editorial paragraphs,
+without adding sections, styles, scripts or links. Neighborhood pages explain
+the next course-selection decision; subject guides prepare student evidence;
+branch and subject pages interpret their own listed grades; grade pages connect
+their local school references to student-provided records. Center profiles turn
+published teaching viewpoints into consultation questions, never confirmed
+assignments or operating claims. Similarity screening excludes common navigation
+and fact tables: its values are not search-engine duplicate/indexing scores.
+Use `.page-roles-report.json` as the final hash and IndexNow report. Preserve
+every other paragraph, all original links/IDs, source dates, FAQ/schema answers,
+teacher/curriculum blocks and image/map tags in the production comparison.
