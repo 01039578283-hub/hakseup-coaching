@@ -56,3 +56,5 @@ retain explicit subject scope. FAQ changes must match visible answers and keep
 the full school reference list in the main body. Missing operating information
 must remain unconfirmed; preparation examples are not availability claims.
 Use `.content-refinement-report.json` as the final hash and IndexNow report.
+`release-build.mjs` runs every existing stage in that order and stops on failure;
+the short Vercel entry point avoids its 256-character build-command limit.
