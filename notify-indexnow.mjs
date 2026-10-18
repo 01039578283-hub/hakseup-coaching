@@ -29,7 +29,9 @@ if(initialize){
  const urls=[...changed.map(p=>report.urls[p]),...removed.map(p=>state.urls[p])];
  for(const u of urls)if(new URL(u).origin!==config.base)throw Error('Unexpected notification origin');
  const receipts=[];
- if(dryRun){console.log(JSON.stringify({dryRun:true,changed:changed.length,removed:removed.length,wouldSubmit:urls.length,submitted:0}));process.exit(0)}
+ if(dryRun){
+  console.log(JSON.stringify({dryRun:true,changed:changed.length,removed:removed.length,wouldSubmit:urls.length,submitted:0}));
+ }else{
  for(let start=0;start<urls.length;start+=10000){
   const batch=urls.slice(start,start+10000);
   const response=await fetch('https://searchadvisor.naver.com/indexnow',{method:'POST',headers:{'Content-Type':'application/json; charset=utf-8'},body:JSON.stringify({host,key:config.key,keyLocation:config.base+'/'+config.key+'.txt',urlList:batch})});
@@ -38,4 +40,5 @@ if(initialize){
  }
  fs.writeFileSync(statePath,JSON.stringify({...state,pageHashes:report.pageHashes,urls:report.urls,notifications:[...state.notifications,...receipts]},null,2));
  console.log(JSON.stringify({submitted:urls.length,receipts:receipts.map(r=>({status:r.status,count:r.urls.length})),indexingConfirmed:false}));
+ }
 }
