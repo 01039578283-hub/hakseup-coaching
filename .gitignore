@@ -24,3 +24,4 @@ tools/data/
 .content-refinement-report.json
 .page-roles-report.json
 .learning-levels-report.json
+.navigation-refresh-report.json

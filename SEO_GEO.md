@@ -71,7 +71,7 @@ Its `.page-roles-report.json` records intermediate hashes. Preserve
 every other paragraph, all original links/IDs, source dates, FAQ/schema answers,
 teacher/curriculum blocks and image/map tags in the production comparison.
 
-The final `learning-levels-build.mjs` stage replaces the exact common prompt in
+The `learning-levels-build.mjs` stage replaces the exact common prompt in
 existing curriculum entries with a link to grouped elementary/middle/high English
 or mathematics questions. Its six groups use 18 reviewed rows of the supplied
 curriculum workbook, with source target/sequence/task and authored questions.
@@ -81,4 +81,19 @@ Keep learning examples distinct from actual classes, enrollment or teacher
 assignment, and retain the optional-activity boundary for grade 1/2 English.
 Existing grade tasks, curriculum links, local facts, images/maps, teacher records,
 FAQ and earlier role-specific prose remain intact. Use
-`.learning-levels-report.json` as the final hash and IndexNow report.
+`.learning-levels-report.json` as its intermediate report.
+
+The final `navigation-refresh-build.mjs` stage groups the six existing homepage
+directory cards into three reader purposes and adds school-stage shortcuts.
+Mapped detail pages receive an early table of contents linking to their actual
+facts, directions, preparation, FAQ and related materials. Existing subject
+tables of contents move intact into a native disclosure in the new guide.
+Existing branch hero shortcuts also move intact into that guide's secondary
+disclosure, avoiding two consecutive sets of navigation buttons.
+Keep all original page URLs, fact paragraphs, old anchor IDs, link destinations,
+image/map tags and relative image order. Never infer new branch facts from the
+navigation labels. Source verification dates remain unchanged; only the actual
+edited pages receive the 2026-10-27 editorial/sitemap date. The new stylesheet is
+content-addressed in the existing immutable CSS directory and adds no JavaScript.
+Use `.navigation-refresh-report.json` for final hashes. Validate every new anchor
+and branch link, initial HTML content, keyboard/mobile use and unchanged pages.

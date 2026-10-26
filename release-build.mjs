@@ -12,7 +12,8 @@ export const steps=[
  ['local-content-build.mjs','--report=.local-content-report.json'],
  ['content-refinement-build.mjs','--report=.content-refinement-report.json'],
  ['page-roles-build.mjs','--report=.page-roles-report.json'],
- ['learning-levels-build.mjs','--report=.learning-levels-report.json']
+ ['learning-levels-build.mjs','--report=.learning-levels-report.json'],
+ ['navigation-refresh-build.mjs','--report=.navigation-refresh-report.json']
 ];
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  for(const step of steps){
