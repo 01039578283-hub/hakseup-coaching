@@ -97,3 +97,30 @@ edited pages receive the 2026-10-27 editorial/sitemap date. The new stylesheet i
 content-addressed in the existing immutable CSS directory and adds no JavaScript.
 Use `.navigation-refresh-report.json` for final hashes. Validate every new anchor
 and branch link, initial HTML content, keyboard/mobile use and unchanged pages.
+# 2026-10-27: 미색인 동네 페이지의 구체적인 답변
+
+`local-answer-build.mjs` runs after the navigation stage. Its explicit, reviewed
+cohort is 73 neighborhood detail URLs appearing in Search Console's 2026-10-23
+"Crawled - currently not indexed" examples, plus their 24 actual branch pages.
+The other 25 examples are directory hubs and are outside this content change.
+Being in this report is a prioritization signal, not proof of a content defect.
+
+`local-answer-config.json` records the exact paths, branch mapping, public facts,
+workbook hash and source cells. `local-answer-notes.json` contains reviewed copy.
+The current center workbook takes precedence over the older summary CSV where
+they disagree; existing conditional or unconfirmed course status is retained.
+The source's internal marketing and staff instructions are not public copy.
+
+The stage replaces only bounded editorial text: the neighborhood's direct answer,
+branch-specific enrollment decisions, school-material checklists and consultation
+outcomes. Repeated school names in FAQ answers link to their retained reference
+list. Branch pages explain source-specific conditions and the record to keep
+after consultation. Visible FAQ answers and their JSON-LD stay identical.
+No URL, title, description, canonical, media, map, logo or existing link is removed.
+No new CSS or JavaScript is added. Unselected pages are byte-identical. The private
+build report lists every old/new text replacement for preservation validation.
+
+Release checks: all public URLs and referenced resources, source/media retention,
+all changed FAQ pairs, responsive branch and neighborhood samples, then the
+Git-linked preview and actual production domain. Deployment, eligibility for
+crawling, actual Google/Naver indexing and AI citations are separate results.
