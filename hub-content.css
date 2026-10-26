@@ -1,0 +1,13 @@
+/* Only the reviewed directory cards use these additions. Existing media stays intact. */
+.hch-card { cursor:default; }
+.hch-card h3 { margin:0 0 12px; font:inherit; font-size:24px; font-weight:800; line-height:1.4; }
+.hch-card h3 a { display:block; color:inherit; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:5px; }
+.hch-card .hch-address { font-size:15px; line-height:1.8; overflow-wrap:anywhere; }
+.hch-card .hch-address a { font-weight:800; text-decoration:underline; text-underline-offset:3px; }
+.hch-card .hub-child-list { display:flex; flex-wrap:wrap; gap:7px; }
+.hch-card .hub-child-list a { display:flex; align-items:center; min-height:44px; padding:9px 12px; border:1px solid #d9dfd7; border-radius:10px; color:#193d31; background:#f5f7ef; font-size:14px; font-weight:700; line-height:1.5; }
+.hch-card .hch-branch-links { display:flex; flex-wrap:wrap; gap:8px 16px; margin-top:12px; }
+.hch-card .hch-branch-links a { display:inline-flex; align-items:center; min-height:44px; color:#193d31; font-size:14px; text-decoration:underline; text-underline-offset:3px; }
+.hch-card a:focus-visible { outline:3px solid #426e59; outline-offset:4px; }
+.hub-insight-card a { color:#193d31; text-decoration:underline; text-underline-offset:4px; }
+@media(max-width:700px) { .hch-card h3 { font-size:22px; } .hch-card .hub-child-list a { padding:9px 10px; } }

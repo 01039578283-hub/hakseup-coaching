@@ -124,3 +124,40 @@ Release checks: all public URLs and referenced resources, source/media retention
 all changed FAQ pairs, responsive branch and neighborhood samples, then the
 Git-linked preview and actual production domain. Deployment, eligibility for
 crawling, actual Google/Naver indexing and AI citations are separate results.
+
+# 2026-10-27: previously excluded directory hubs
+
+`hub-content-build.mjs` runs last and changes only the 25 directory URLs in
+`hub-content-config.json`: one national, eight region and sixteen city/district
+hubs. This is the previously reviewed Google 2026-10-23 crawled-not-indexed
+cohort, not a new indexing inspection or a claim that content caused exclusion.
+
+Original whole-card anchors become accessible article cards with independent
+heading and child anchors. National cards link to every listed city/district;
+regional cards link their existing neighborhood previews; city cards link to
+their actual elementary/middle/high detail URLs and matched branch conditions
+and directions. These are literal initial-HTML links, with no new JavaScript.
+Existing directory destinations, titles, descriptions, canonical, course facts,
+all media, maps and other pages remain intact. Article card ordering still
+matches the existing ItemList. Related reading links go to the specific guide
+that their labels describe, instead of repeatedly linking to the guide index.
+
+The 16 city hubs reference 60 distinct branches. Printed addresses match both
+the current published branch facts and the center workbook's address column.
+`용인백현점(모두)` is the workbook's explicit name for the existing 용인백현점
+page; the exact address matches row 139. Do not silently generalize this alias.
+The source workbook hash and row references are recorded in the configuration.
+Regional notes distinguish same-named neighborhoods, shared branches and actual
+addresses (for example the Songpa directory's Wirye branch in Seongnam).
+Neighborhood counts are counts of this site's guidance pages, not inventories
+of every local academy or claims of current recruitment. Existing shared
+coaching descriptions are introduced as comparison questions rather than a
+promise that every branch offers an identical service.
+
+`.hub-content-report.json` is the final generated report. Compare initial HTML
+and ItemList/card order, verify every new child/branch/guide destination and
+source address, preserve all non-target HTML bytes and media assets, and check
+mobile/desktop views. The small added stylesheet uses the established immutable
+content-hash path; no original stylesheet is rewritten. Page and sitemap dates
+reflect these actual edits. Verify preview and production commit/domain/HTML
+separately from future crawling, indexing, rankings and AI citations.
